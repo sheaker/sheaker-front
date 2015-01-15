@@ -1,0 +1,15 @@
+{
+  "name": "sheaker",
+  "type": "project",
+  "description": "Gym Manager Website",
+  "require": {
+    "php": ">=5.4.0",
+
+    "silex/silex": "~1.2",
+    "doctrine/dbal": "2.5.*",
+    "monolog/monolog": "1.x"
+  },
+  "autoload": {
+    "psr-0": {"Sheaker": "src/"}
+  }
+}
