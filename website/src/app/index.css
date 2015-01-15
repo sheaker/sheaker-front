@@ -5,6 +5,108 @@
   padding: 0.2em 0;
 }
 
+/* Containers */
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+/* End Containers */
+
+/* Form */
+.form-signin, .form-signup {
+    max-width: 375px;
+    padding: 0px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signup .form-signup-heading,
+.form-signin .checkbox {
+    margin-bottom: 0px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control,
+.form-signup .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus,
+.form-signup .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-signup input#inputUsername {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputEmail {
+    margin-bottom: -1px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputPassword {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputConfirmPassword {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+/* End Form */
+
+/* NavBar */
+.navbar {
+    height: 50px;
+    width: auto;
+}
+
+.navbar-inverse {
+    background-color: #317A93;
+    border-color: #265c6e;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+}
+/* End NavBar */
+
 .thumbnail {
   height: 200px;
 }

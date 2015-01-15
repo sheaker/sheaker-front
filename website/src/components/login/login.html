@@ -1,0 +1,15 @@
+<div class="jumbotron col-md-4 text-center" ng-controller="LoginCtrl">
+    <p class="lead">
+        <font size = 10><span class="fa fa-user"></span></font>
+    </p>
+    <form class="form-signup">
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" ng-model="registerForm.username" placeholder="ID Client" required autofocus />
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" ng-model="registerForm.password" placeholder="Password" required />
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+</div>
