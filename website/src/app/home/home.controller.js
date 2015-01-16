@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-  .controller('MainCtrl', function ($scope) {
+  .controller('HomeCtrl', function ($scope) {
     $scope.awesomeThings = [
       {
         'title': 'AngularJS',

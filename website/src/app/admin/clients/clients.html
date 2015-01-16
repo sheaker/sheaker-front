@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div ng-include="'components/admin/navbar-account/navbar-account.html'"></div>
+      <div class="container-fluid">
+          <div ng-include="'components/admin/navbar-side/navbar-side.html'"></div>
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <div ng-include="'components/admin/navbar-clients/navbar-clients.html'"></div>
+              <div class="panel-heading">Search: <input ng-model="searchText"></div>
+              <div class="table-responsive">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th data-field="id">#</th>
+                              <th data-field="name">Name</th>
+                              <th data-field="lastname">Last Name</th>
+                              <th data-field="subscription">Subscription</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                          <tr ng-repeat="client in clientlist | filter:searchText">
+                              <td data-field="id">{{client.id}}</td>
+                              <td data-field="name">{{client.name}}</td>
+                              <td data-field="lastname">{{client.lastname}}</td>
+                              <td data-field="subscription">{{client.subscription}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>

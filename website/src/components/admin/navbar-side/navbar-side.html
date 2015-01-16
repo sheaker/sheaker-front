@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" ng-controller="NavbarSideCtrl">
+            <ul class="nav nav-sidebar">
+                <li ng-class="{active: isActive('/admin')}"><a href="#/admin"><span class="fa fa-home"></span> General</a></li>
+                <li ng-class="{active: isActive('/admin/setting-gym')}"><a href="#/admin/setting-gym"><span class="fa fa-cog"></span> Setting</a></li>
+            </ul>
+                    <ul class="nav nav-sidebar">
+                        <li ng-class="{active: isActive('/admin/clients')}"><a href="#/admin/clients"><span class="fa fa-users"></span> Clients</a></li>
+                        <li><a href="#/admin/clients"><span class="fa fa-thumbs-o-up"></span> Coach</a></li>
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        <li><a href="#/admin/clients"><span class="fa fa-calendar"></span>  Schedule</a></li>
+                        <li><a href="#/admin/clients"><span class="fa fa-area-chart"></span>  General Stats</a></li>
+                        <li><a href="#/admin/clients"><span class="fa fa-bullhorn"></span>  Notice</a></li>
+                    </ul>
+            <a class="navbar-brand" href="#/">
+                <span class="glyphicon glyphicon-share-alt"></span> Sheaker Website
+            </a>
+        </div>
+</div>
