@@ -68,6 +68,9 @@ $app['jwt'] = $app->share(function ($app) {
  * Register error handler
  */
 $app->error(function (\Exception $e, $code) use ($app) {
+    if ($app['debug'])
+        return;
+
     $app['monolog']->addError($e->getMessage());
     $app['monolog']->addError($e->getTraceAsString());
 

@@ -54,7 +54,7 @@ class UserRepository implements RepositoryInterface
      *
      * @param integer $id
      *
-     * @return \MusicBox\Entity\User|false An entity object if found, false otherwise.
+     * @return \Sheaker\Entity\User|false An entity object if found, false otherwise.
      */
     public function find($id)
     {
@@ -114,7 +114,7 @@ class UserRepository implements RepositoryInterface
      * @param array $userData
      *   The array of db data.
      *
-     * @return \MusicBox\Entity\User
+     * @return \Sheaker\Entity\User
      */
     protected function buildUser($userData)
     {

@@ -2,7 +2,7 @@
 
 namespace Sheaker\Repository;
 
-/*
+/**
  * Repository interface.
  *
  * "The Repository pattern just means putting a façade over your persistence
@@ -13,28 +13,28 @@ namespace Sheaker\Repository;
  */
 interface RepositoryInterface
 {
-    /*
+    /**
      * Saves the entity to the database.
      *
      * @param object $entity
      */
     public function save($entity);
 
-    /*
+    /**
      * Deletes the entity.
      *
      * @param integer $id
      */
     public function delete($id);
 
-    /*
+    /**
      * Returns the total number of entities.
      *
      * @return int The total number of entities.
      */
     public function getCount();
 
-    /*
+    /**
      * Returns an entity matching the supplied id.
      *
      * @param integer $id
@@ -43,7 +43,7 @@ interface RepositoryInterface
      */
     public function find($id);
 
-    /*
+    /**
      * Returns a collection of entities.
      *
      * @param integer $limit
