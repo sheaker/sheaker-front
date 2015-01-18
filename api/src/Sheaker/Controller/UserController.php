@@ -62,7 +62,7 @@ class UserController
         $oldToken = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
         $exp = ($oldToken['rememberMe']) ? time() + 60 * 60 * 24 * 360 : time() + 60 * 60 * 24; // expire in 1year or 24h
-        $newToken = $app['jwt']->createToken($request->headers->get('referer'), $exp,$oldToken['user']);
+        $newToken = $app['jwt']->createToken($request->headers->get('referer'), $exp, $oldToken['user']);
 
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }

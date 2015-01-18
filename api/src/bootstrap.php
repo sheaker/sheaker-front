@@ -5,7 +5,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Silex\Application;
 use Monolog\Logger;
 use Silex\Provider\DoctrineServiceProvider;
-use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -43,10 +42,6 @@ $app->register(new DoctrineServiceProvider(), [
         'user'     => $app['database.user'],
         'password' => $app['database.passwd'],
     ],
-]);
-
-$app->register(new SecurityServiceProvider(), [
-    'security.firewalls' => [],
 ]);
 
 $app->register(new MonologServiceProvider(), [
