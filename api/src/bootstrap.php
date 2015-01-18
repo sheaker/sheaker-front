@@ -3,7 +3,9 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Silex\Application;
+use Monolog\Logger;
 use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -25,7 +27,13 @@ if ($app['debug']) {
     require_once __DIR__ . '/../config/production.php';
 }
 
-/*
+$app['api.accessLevels'] = [
+    0 => 'client',
+    1 => 'modo',
+    2 => 'admin'
+];
+
+/**
  * Register service providers
  */
 $app->register(new DoctrineServiceProvider(), [
@@ -37,20 +45,31 @@ $app->register(new DoctrineServiceProvider(), [
     ],
 ]);
 
+$app->register(new SecurityServiceProvider(), [
+    'security.firewalls' => [],
+]);
+
 $app->register(new MonologServiceProvider(), [
-    'monolog.logfile' => $app['log.location'],
-    'monolog.level'   => $app['log.level'],
+    'monolog.logfile' => __DIR__ . '/../logs/application.log',
+    'monolog.level'   => Logger::WARNING,
     'monolog.name'    => 'api'
 ]);
 
-/*
+/**
  * Register repositories
  */
 $app['repository.user'] = $app->share(function ($app) {
     return new Sheaker\Repository\UserRepository($app['db']);
 });
 
-/*
+/**
+ * Register custom services
+ */
+$app['jwt'] = $app->share(function ($app) {
+    return new Sheaker\Service\JWT($app, $app['api.secretKey']);
+});
+
+/**
  * Register error handler
  */
 $app->error(function (\Exception $e, $code) use ($app) {

@@ -1,33 +1,14 @@
 <?php
 
-use Monolog\Logger;
-
-/*
-*
-* Database Connection
-*
-*/
+/**
+ * Database Connection
+ */
 $app['database.dbname'] = 'gymname';
 $app['database.host']   = '127.0.0.1';
 $app['database.user']   = 'root';
 $app['database.passwd'] = '';
 
-/*
-*
-* API
-*
-*/
+/**
+ * API
+ */
 $app['api.secretKey'] = '';
-$app['api.accessLevels'] = [
-    0 => 'user',
-    1 => 'modo',
-    2 => 'admin'
-];
-
-/*
-*
-* Log
-*
-*/
-$app['log.location'] = __DIR__ . '/../../logs/application.log';
-$app['log.level']    = Logger::WARNING;
