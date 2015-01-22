@@ -44,7 +44,7 @@ class User
      *
      * @var integer
      */
-    protected $access;
+    protected $userLevel;
 
     /**
      * When the user entity was born.
@@ -133,13 +133,13 @@ class User
         $this->mail = $mail;
     }
 
-    public function getAccess()
+    public function getUserLevel()
     {
-        return $this->access;
+        return $this->userLevel;
     }
-    public function setAccess($access)
+    public function setUserLevel($userLevel)
     {
-        $this->access = $access;
+        $this->userLevel = $userLevel;
     }
 
     public function getBirthDate()

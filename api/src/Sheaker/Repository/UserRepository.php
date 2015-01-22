@@ -58,7 +58,7 @@ class UserRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        $userData = $this->db->fetchAssoc('SELECT * FROM users WHERE id = ?', array($id));
+        $userData = $this->db->fetchAssoc('SELECT * FROM users u JOIN users_access ua ON ua.user_id = u.id WHERE id = ?', array($id));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
 
@@ -130,7 +130,7 @@ class UserRepository implements RepositoryInterface
         $user->setLastIP($userData['last_ip']);
         $user->setSubscriptionDate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['subscription_date']))));
         $user->setFailedLogins($userData['failed_logins']);
-        //$user->setAccess($userData['access']);
+        $user->setUserLevel($userData['user_level']);
 
         return $user;
     }

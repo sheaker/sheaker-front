@@ -6,6 +6,7 @@ use Silex\Application;
 use Monolog\Logger;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'production');
@@ -65,6 +66,16 @@ $app['jwt'] = $app->share(function ($app) {
 });
 
 /**
+ * Register before handler
+ */
+$app->before(function (Request $request) {
+    if (strpos($request->headers->get('Content-Type'), 'application/json') === 0) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
+});
+
+/**
  * Register error handler
  */
 $app->error(function (\Exception $e, $code) use ($app) {
@@ -76,6 +87,9 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
     return new JsonResponse(['error' => ['code' => $code, 'message' => $e->getMessage()]]);
 });
+
+// Black magic to handle OPTIONS with the API
+$app->match('{url}', function($url) use ($app) { return 'OK'; })->assert('url', '.*')->method('OPTIONS');
 
 require_once __DIR__ . '/routing.php';
 
