@@ -16,6 +16,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+
 /* End Containers */
 
 /* Vertical Center */
@@ -115,20 +116,21 @@ body {
 }
 /* End Form */
 
-/* Begin SideBar */
+/* Begin SubSideBar */
 /* Hide for mobile, show later */
-.sidebar {
+.subsidebar {
     display: none;
 }
 @media (min-width: 768px) {
-    .sidebar {
+    .subsidebar {
         font-size: 16px;
         position: fixed;
-        top: 51px;
+        top: 50px;
         bottom: 0;
         left: 0;
         z-index: 1000;
         display: block;
+        margin-left: 50px;
         padding-left: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -138,24 +140,71 @@ body {
 }
 
 /* Sidebar navigation */
+.nav-subsidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-left: -20px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    border-bottom: 2px solid #dbdbdb;
+}
+.nav-subsidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #7e7e7e;
+}
+
+.nav-subsidebar > .active > a,
+.nav-subsidebar > .active > a:hover,
+.nav-subsidebar > .active > a:focus {
+    color: #fff;
+    background-color: #7e7e7e;
+}
+/* End SideBar */
+
+/* Begin SideBar */
+/* Hide for mobile, show later */
+.sidebar {
+    display: none;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        width: 50px;
+        font-size: 30px;
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding-left: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #3a3a3a;
+        border-right: 0px solid #dbdbdb;
+    }
+}
+
+/* Sidebar navigation */
 .nav-sidebar {
     margin-right: -21px; /* 20px padding + 1px border */
     margin-left: -20px;
     padding-bottom: 5px;
-    padding-top: 5px;
-    border-bottom: 2px solid #dbdbdb;
+    padding-top: 0px;
+    border-bottom: 0px solid #dbdbdb;
 }
 .nav-sidebar > li > a {
-    padding-right: 20px;
-    padding-left: 20px;
+    color: #7e7e7e;
+    padding-right: 0px;
+    padding-left: 10px;
 }
 
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
     color: #fff;
-    background-color: #317A93;
+    color: #707070;
 }
+
 /* End SideBar */
 
 /* NavBar */
@@ -165,7 +214,7 @@ body {
 }
 
 .navbar-inverse {
-    background-color: #317A93;
+    background-color: #1a1a1a;
     border: 0px;
 }
 
