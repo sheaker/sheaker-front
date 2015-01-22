@@ -9,13 +9,5 @@ angular.module('sheaker')
         return false;
     };
 
-    $scope.today = function() {
-        $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-        $scope.dt = null;
-    };
-    
+    $scope.dt = new Date();
 });
