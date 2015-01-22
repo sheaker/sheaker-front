@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div ng-include="'components/navbar/navbar.html'"></div>
+    <div class="container">
+
+        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
+        <form class="form-signin" ng-submit="login()">
+            <div class="jumbotron">
+                <h1 class="form-signin-heading text-center"><span class="fa fa-user"></span></h1>
+                <br>
+                <input type="text" id="inputID" class="form-control" ng-model="loginForm.id" placeholder="ID Client" required autofocus />
+                <input type="password" id="inputPassword" class="form-control" ng-model="loginForm.password" placeholder="Password" required />
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

@@ -1,21 +1,21 @@
 <nav class="navbar navbar-static-top navbar-inverse navbar-fixed-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#/">
-        <span class="glyphicon glyphicon-home"></span> Gym-Name
-      </a>
-    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">
+                <span class="glyphicon glyphicon-home"></span> Gym-Name
+            </a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-      <ul class="nav navbar-nav">
-        <li ng-class="{active: isActive('/admin')}"><a href="#/admin">My account</a></li>
-        <!--<li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>-->
-      </ul>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav">
+                <li ng-hide="user" ng-class="{active: isActive('/login')}"><a href="#/login">Login</a></li>
+                <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">Profile</a></li>
+                <li ng-class="{active: isActive('/admin')}"><a href="#/admin" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
+            </ul>
 
-      <!--<ul class="nav navbar-nav navbar-right">
-        <li>Current date: {{ date | date:'yyyy-MM-dd' }}</li>
-    </ul>-->
+            <!--<ul class="nav navbar-nav navbar-right">
+                <li>Current date: {{ date | date:'yyyy-MM-dd' }}</li>
+            </ul>-->
+        </div>
     </div>
-  </div>
 </nav>
