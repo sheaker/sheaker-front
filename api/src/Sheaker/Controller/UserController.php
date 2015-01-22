@@ -32,11 +32,13 @@ class UserController
 
             $exp = ($rememberMe) ? time() + 60 * 60 * 24 * 360 : time() + 60 * 60 * 24; // expire in 1year or 24h
             $userToken = [
-                'id'         => $user->getId(),
-                'name'       => $user->getName(),
-                'lastname'   => $user->getLastname(),
-                'permission' => $app['api.accessLevels'][$user->getUserLevel()],
-                'rememberMe' => $rememberMe
+                'id'          => $user->getId(),
+                'name'        => $user->getName(),
+                'lastname'    => $user->getLastname(),
+                'permissions' => [
+                    $app['api.accessLevels'][$user->getUserLevel()]
+                ],
+                'rememberMe'  => $rememberMe
             ];
 
             $token = $app['jwt']->createToken($request->headers->get('referer'), $exp, $userToken);
