@@ -9,35 +9,59 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap'])
       })
       .when('/profil', {
           templateUrl: 'app/profil/profil.html',
-          controller: 'ProfilCtrl'
+          controller: 'ProfilCtrl',
+          access: {
+              loginRequired: true
+          }
       })
       .when('/admin', {
-          templateUrl: 'app/admin/home-admin/home-admin.html',
-          controller: 'HomeAdminCtrl'
+          templateUrl: 'app/admin/home/home.html',
+          controller: 'HomeAdminCtrl',
+          access: {
+              loginRequired: true
+          }
       })
       .when('/admin/setting-gym', {
           templateUrl: 'app/admin/setting-gym/setting-gym.html',
-          controller: 'SettingGymCtrl'
+          controller: 'SettingGymCtrl',
+          access: {
+              loginRequired: true
+          }
       })
       .when('/admin/clients', {
-          templateUrl: 'app/admin/clients/clients.html',
-          controller: 'ClientsCtrl'
+          templateUrl: 'app/admin/clients/clients/clients.html',
+          controller: 'ClientsCtrl',
+          access: {
+              loginRequired: true
+          }
       })
-      .when('/admin/add-client', {
-          templateUrl: 'app/admin/add-client/add-client.html',
-          controller: 'AddClientCtrl'
+      .when('/admin/clients/add', {
+          templateUrl: 'app/admin/clients/add/add.html',
+          controller: 'AddClientCtrl',
+          access: {
+              loginRequired: true
+          }
       })
-      .when('/admin/edit-client', {
-          templateUrl: 'app/admin/edit-client/edit-client.html',
-          controller: 'EditClientCtrl'
+      .when('/admin/clients/edit/:id?', {
+          templateUrl: 'app/admin/clients/edit/edit.html',
+          controller: 'EditClientCtrl',
+          access: {
+              loginRequired: true
+          }
       })
-      .when('/admin/charge-client', {
-          templateUrl: 'app/admin/charge-client/charge-client.html',
-          controller: 'ChargeClientCtrl'
+      .when('/admin/clients/charge/:id?', {
+          templateUrl: 'app/admin/clients/charge/charge.html',
+          controller: 'ChargeClientCtrl',
+          access: {
+              loginRequired: true
+          }
       })
-      .when('/admin/review-client', {
-          templateUrl: 'app/admin/review-client/review-client.html',
-          controller: 'ReviewClientCtrl'
+      .when('/admin/clients/review/:id?', {
+          templateUrl: 'app/admin/clients/review/review.html',
+          controller: 'ReviewClientCtrl',
+          access: {
+              loginRequired: true
+          }
       })
       .otherwise({
         redirectTo: '/'
