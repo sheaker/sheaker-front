@@ -244,9 +244,20 @@ body {
 }
 /* End Footer */
 
+.show-date {
+    margin-top : 15px;
+    margin-right: 50px;
+    color : #fff;
+}
+
 .thumbnail {
   height: 350px;
   overflow-y: auto;
+}
+
+.thumbnail-form {
+    height: 500px;
+    overflow-y: auto;
 }
 
 .thumbnail .pull-right {

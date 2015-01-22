@@ -4,7 +4,50 @@
           <div ng-include="'components/admin/navbar-side/navbar-side.html'"></div>
           <div ng-include="'components/admin/navbar-subside-client/navbar-subside-client.html'"></div>
           <div class="col-sm-8 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-
+              <h1 class="page-header">Add Client</h1>
+              <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                      <div class="thumbnail thumbnail-form">
+                          <font size="8"><span class="fa fa-list pull-right"></span></font>
+                          <div class="caption">
+                              <h2>General Information</h2>
+                              <div class="form-group">
+                                  <label for="InputName">Name</label>
+                                  <input type="text" class="form-control" id="InputName" placeholder="Name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="InputFirstName">First Name</label>
+                                  <input type="text" class="form-control" id="InputFirstName" placeholder="First Name">
+                              </div>
+                              <div class="radio">
+                                  <h5><b>Sex</b></h5>
+                                  <label>
+                                      <input type="radio" name="optionsRadios" id="optionMal" value="option1" checked>
+                                      Mal
+                                  </label>
+                              </div>
+                              <div class="radio">
+                                  <label>
+                                      <input type="radio" name="optionsRadios" id="optionFemal" value="option2">
+                                      Femal
+                                  </label>
+                              </div>
+                              <div class="form-group">
+                                  <label for="InputEmail">Email address</label>
+                                  <input type="email" class="form-control" id="InputEmail" placeholder="Enter email">
+                              </div>
+                              <h5><b>Birthday</b></h5>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                      </p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
       </div>
+  </div>
