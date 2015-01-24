@@ -1,5 +1,5 @@
 'use strict';
 
 angular.module('sheaker')
-  .controller('ChargeClientCtrl', function ($scope) {
-  });
+.controller('ChargeClientCtrl', function ($scope) {
+});
