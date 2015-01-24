@@ -40,6 +40,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     .when('/admin/clients', {
         templateUrl: 'app/admin/clients/clients/clients.html',
         controller: 'ClientsCtrl',
+        reloadOnSearch : false,
         access: {
             loginRequired: true,
             permissionsRequired: ['Modo', 'Admin'],
