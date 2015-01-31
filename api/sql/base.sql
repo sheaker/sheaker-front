@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.15-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-01-22 21:47:04 +0000
+# Temps de génération: 2015-01-31 02:43:47 +0000
 # ************************************************************
 
 
@@ -27,29 +27,29 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `lastname` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL DEFAULT '',
+  `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL DEFAULT '',
-  `birth_date` timestamp NULL DEFAULT NULL,
+  `birthdate` timestamp NULL DEFAULT NULL,
   `gender` tinyint(1) unsigned DEFAULT NULL,
   `last_seen` timestamp NULL DEFAULT NULL,
   `last_ip` varchar(15) NOT NULL DEFAULT '',
   `subscription_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `failed_logins` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`name`),
+  UNIQUE KEY `username` (`first_name`),
   UNIQUE KEY `email` (`mail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `name`, `lastname`, `password`, `mail`, `birth_date`, `gender`, `last_seen`, `last_ip`, `subscription_date`, `failed_logins`)
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `mail`, `birthdate`, `gender`, `last_seen`, `last_ip`, `subscription_date`, `failed_logins`)
 VALUES
 	(1,'user','','$2y$10$AHlCzRePTRmzTKmb.WbZROznKmHGCpnmjErwfs2NngcYHk1lnVqOG','user@user.user','2015-01-16 10:13:20',NULL,'2015-01-22 19:26:31','http://localhos','2015-01-02 18:43:59',0),
 	(2,'modo','','$2y$10$l9IQju8HMi30izZukfkml.ecV/fjLFs5wsEV/gVIiAU.CBfFAh3yK','modo@modo.modo','2015-01-16 10:13:20',NULL,'0000-00-00 00:00:00','127.0.0.1','2015-01-02 18:44:16',0),
-	(3,'admin','','$2y$10$sf1krqI89gRZQLo6L5E4aeTqaxa3DXCaZFKaBJ3/Xj2NlpfaZAOxq','admin@admin.admin','2015-01-16 10:13:20',NULL,'2015-01-22 22:20:26','http://localhos','2015-01-02 18:44:32',0);
+	(3,'admin','','$2y$10$sf1krqI89gRZQLo6L5E4aeTqaxa3DXCaZFKaBJ3/Xj2NlpfaZAOxq','admin@admin.admin','2015-01-16 10:13:20',NULL,'2015-01-25 03:25:54','http://127.0.0.','2015-01-02 18:44:32',0);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
