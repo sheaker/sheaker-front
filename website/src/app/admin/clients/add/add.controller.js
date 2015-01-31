@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($scope) {
+.controller('AddClientCtrl', function ($rootScope, $scope, User) {
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -35,4 +35,17 @@ angular.module('sheaker')
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
+
+    $scope.addUser = function () {
+        var newUser = new User($scope.formDatas);
+
+        newUser
+        .$save()
+        .then(function(data) {
+            $rootScope.alerts.push({type: 'success', msg: 'The new user have been created.'});
+        })
+        .catch(function(error) {
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
+        });
+    }
 });
