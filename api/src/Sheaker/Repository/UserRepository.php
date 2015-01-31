@@ -28,15 +28,15 @@ class UserRepository implements RepositoryInterface
     public function save($user)
     {
         $userData = array(
-            'name'          => $user->getName(),
-            'lastname'      => $user->getLastname(),
+            'first_name'    => $user->getFirstName(),
+            'last_name'     => $user->getLastName(),
             'password'      => $user->getPassword(),
             'mail'          => $user->getMail(),
-            'birth_date'    => $user->getBirthDate()->format('Y-m-d G:i:s'),
+            'birthdate'     => $user->getBirthdate()->format('Y-m-d G:i:s'),
             'gender'        => $user->getGender(),
-            'last_seen'     => $user->getLastSeen()->format('Y-m-d G:i:s'),
+            /*'last_seen'     => $user->getLastSeen()->format('Y-m-d G:i:s'),
             'last_ip'       => $user->getLastIP(),
-            'failed_logins' => $user->getFailedLogins()
+            'failed_logins' => $user->getFailedLogins()*/
         );
 
         if ($user->getId()) {
@@ -120,11 +120,11 @@ class UserRepository implements RepositoryInterface
     {
         $user = new User();
         $user->setId($userData['id']);
-        $user->setName($userData['name']);
-        $user->setLastname($userData['lastname']);
+        $user->setFirstName($userData['first_name']);
+        $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);
         $user->setMail($userData['mail']);
-        $user->setBirthDate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['birth_date']))));
+        $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['birthdate']))));
         $user->setGender($userData['gender']);
         $user->setLastSeen(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['last_seen']))));
         $user->setLastIP($userData['last_ip']);

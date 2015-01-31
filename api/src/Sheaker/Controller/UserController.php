@@ -61,4 +61,34 @@ class UserController
 
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }
+
+    public function createAction(Request $request, Application $app)
+    {
+        $newUser = [];
+        $newUser['firstName'] = $app->escape($request->get('firstName'));
+        $newUser['lastName']  = $app->escape($request->get('lastName'));
+        $newUser['mail']      = $app->escape($request->get('mail'));
+        $newUser['gender']    = $app->escape($request->get('gender'));
+        $newUser['birthdate'] = $app->escape($request->get('birthdate'));
+
+        foreach($newUser as $value) {
+            if (empty($value)) {
+                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
+            }
+        }
+
+        // @Todo: check if user already exist
+
+        $user = new User();
+        $user->setFirstName($newUser['firstName']);
+        $user->setLastName($newUser['lastName']);
+        $user->setMail($newUser['mail']);
+        $user->setGender($newUser['gender']);
+        $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($newUser['birthdate']))));
+        $app['repository.user']->save($user);
+
+        // @Todo: check if the save have been correctly done in the DB
+
+        return json_encode($user, JSON_NUMERIC_CHECK);
+    }
 }

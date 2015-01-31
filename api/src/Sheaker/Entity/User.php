@@ -12,18 +12,18 @@ class User
     protected $id;
 
     /**
-     * Name.
+     * First Name.
      *
      * @var string
      */
-    protected $name;
+    protected $firstName;
 
     /**
-     * Lastname.
+     * Last Name.
      *
      * @var string
      */
-    protected $lastname;
+    protected $lastName;
 
     /**
      * Password.
@@ -51,7 +51,7 @@ class User
      *
      * @var DateTime
      */
-    protected $birthDate;
+    protected $birthdate;
 
     /**
      * What kind of person is the user entity.
@@ -97,22 +97,22 @@ class User
         return $this->id = $id;
     }
 
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->firstName;
     }
-    public function setName($name)
+    public function setFirstName($firstName)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
     }
 
-    public function getLastname()
+    public function getLastName()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
-    public function setLastname($lastname)
+    public function setLastName($lastName)
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
     }
 
     public function getPassword()
@@ -142,13 +142,13 @@ class User
         $this->userLevel = $userLevel;
     }
 
-    public function getBirthDate()
+    public function getBirthdate()
     {
-        return $this->birthDate;
+        return $this->birthdate;
     }
-    public function setBirthDate(\DateTime $birthDate)
+    public function setBirthdate(\DateTime $birthdate)
     {
-        $this->birthDate = $birthDate;
+        $this->birthdate = $birthdate;
     }
 
     public function getGender()
