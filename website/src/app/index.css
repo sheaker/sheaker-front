@@ -249,12 +249,10 @@ body {
 
 .thumbnail {
   height: 350px;
-  overflow-y: auto;
 }
 
 .thumbnail-form {
     height: 500px;
-    overflow-y: auto;
 }
 
 .thumbnail .pull-right {

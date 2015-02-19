@@ -4,7 +4,7 @@
     <div ng-include="'components/admin/navbar/side/side.html'"></div>
     <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
 
-    <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+    <div class="col-lg-10 col-lg-offset-1 main">
         <h1 class="page-header">Add Client</h1>
             <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
             <form ng-submit="addUser()">
@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label for="InputBirthdate">Birthdate</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="InputBirthdate" datepicker-popup="{{format}}" ng-model="formDatas.birthdate"  is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                                    <input type="text" class="form-control" id="InputBirthdate" datepicker-popup="{{format}}" ng-model="formDatas.birthdate"  is-open="opened" min-date="'1930-01-01'" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>

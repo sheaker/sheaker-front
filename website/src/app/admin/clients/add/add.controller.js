@@ -21,6 +21,8 @@ angular.module('sheaker')
     };
     $scope.toggleMin();
 
+    $scope.maxDate = new Date();
+
     $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
