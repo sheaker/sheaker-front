@@ -3,34 +3,34 @@
     <div class="container-fluid">
         <div ng-include="'components/admin/navbar/side/side.html'"></div>
         <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
-            <div class="col-lg-10 col-lg-offset-1 main">
-              <div class="panel-heading">Search: <input ng-model="searchText"></div>
-              <div class="table-responsive">
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th data-field="id">#</th>
-                              <th data-field="name">Name</th>
-                              <th data-field="lastname">Last Name</th>
-                              <th data-field="subscription">Subscription</th>
-                              <th data-field="options">Options</th>
-                          </tr>
-                      </thead>
 
-                      <tbody>
-                          <tr ng-repeat="client in clientlist | filter:searchText">
-                              <td data-field="id">{{client.id}}</td>
-                              <td data-field="name">{{client.name}}</td>
-                              <td data-field="lastname">{{client.lastname}}</td>
-                              <td data-field="subscription">{{client.subscription}}</td>
-                              <td data-field="options"><a href="#/admin/clients/edit"><span class="fa fa-pencil-square-o"></span></a>
-                                  &nbsp&nbsp<a href="#/admin/clients/charge"><span class="fa fa-money"> </span></a>
-                                  &nbsp&nbsp<a href="#/admin/clients/review"><span class="fa fa-bar-chart"></span></a>
-                                  &nbsp&nbsp<a href="#/admin/clients"><span class="fa fa-trash"></span></a>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
+        <div class="col-lg-10 col-lg-offset-1 main">
+            <div class="panel-heading">Search: <input ng-model="searchText"></div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Last Name</th>
+                            <th>Subscription</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="client in clientlist">
+                            <td>{{ client.id }}</td>
+                            <td>{{ client.name }}</td>
+                            <td>{{ client.lastname }}</td>
+                            <td>{{ client.subscription }}</td>
+                            <td>
+                                <a href="#/admin/clients/edit"><span class="fa fa-pencil-square-o"></span></a>&nbsp&nbsp
+                                <a href="#/admin/clients/charge"><span class="fa fa-money"> </span></a>&nbsp&nbsp
+                                <a href="#/admin/clients/review"><span class="fa fa-bar-chart"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

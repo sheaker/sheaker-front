@@ -9,6 +9,11 @@ angular.module('sheaker')
             method: 'POST',
             url: API_URL + '/users/login',
             skipAuthorization: true
+        },
+        search: {
+            method: 'GET',
+            url: API_URL + '/users/search',
+            skipAuthorization: true
         }
     };
 
