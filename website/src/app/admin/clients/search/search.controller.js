@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ClientsCtrl', function ($scope, $location) {
+.controller('SearchClientCtrl', function ($scope, $location) {
 
-    if ($location.search().search)
+    if ($location.search().search) {
         $scope.searchText = $location.search().search;
+    }
 
-    $scope.$watch('searchText', function(newValue, oldValue) {
+    $scope.$watch('searchText', function(newValue) {
         $location.search('search', newValue);
     });
 

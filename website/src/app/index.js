@@ -37,9 +37,9 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
             permissionType: 'atLeastOne'
         }
     })
-    .when('/admin/clients', {
-        templateUrl: 'app/admin/clients/clients/clients.html',
-        controller: 'ClientsCtrl',
+    .when('/admin/clients/search', {
+        templateUrl: 'app/admin/clients/search/search.html',
+        controller: 'SearchClientCtrl',
         reloadOnSearch : false,
         access: {
             loginRequired: true,
