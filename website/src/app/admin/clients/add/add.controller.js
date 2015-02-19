@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($rootScope, $scope, User) {
+.controller('AddClientCtrl', function ($rootScope, $scope, $log, User) {
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -50,4 +50,18 @@ angular.module('sheaker')
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
         });
     }
+
+    $scope.status = {
+      isopen: false
+    };
+
+    $scope.toggled = function(open) {
+      $log.log('Dropdown is now: ', open);
+    };
+
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
 });

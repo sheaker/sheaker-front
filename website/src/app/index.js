@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt'])
+angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam'])
 .constant('API_URL', '//api.sheaker.perso.dev')
 .config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
     $routeProvider
