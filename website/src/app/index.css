@@ -273,8 +273,14 @@ body {
 }
 
 .thumbnail-form {
+    font-size: 20px;
     border: 0;
-    height: 500px;
+    height: 550px;
+    border-top: 1px solid #dbdbdb;
+}
+
+.thumbnail-form h2 {
+    margin-bottom: 50px;
 }
 
 .thumbnail .pull-right {
@@ -313,8 +319,13 @@ body {
     color: #2B88BB;
 }
 
+.color-grey {
+    color: #DCDCDC;
+}
+
 /* End color set */
 
 .title {
     margin-right: 20px;
+    margin-bottom: 20px;
 }
