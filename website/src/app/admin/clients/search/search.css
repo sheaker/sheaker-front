@@ -1,0 +1,14 @@
+.panel-heading {
+    font-size: 20px;
+    padding-top: 18px;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-radius: 20px 0 0 0;
+    border-left: 1px solid #dbdbdb;
+    border-top: 1px solid #dbdbdb;
+}
+
+.panel-heading > .search-field {
+    margin-left: 20px;
+}

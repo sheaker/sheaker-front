@@ -5,7 +5,7 @@
     <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
 
     <div class="col-lg-12 main">
-        <h1><span class="title color-green fa fa-user"></span>Add Client</h1>
+        <div class="title"><span class="color-green fa fa-user-plus"></span>Add Client</div>
             <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
             <form ng-submit="addUser()">
 

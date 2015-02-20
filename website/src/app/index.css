@@ -138,6 +138,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #fff;
+    font-weight: 600;
     /*border-right: 1px solid #dbdbdb;*/
 }
 
@@ -171,50 +172,6 @@ body {
     background-color: #fff;
 }
 
-/* End SideBar */
-
-/* Begin SideBar */
-/* Hide for mobile, show later */
-.sidebar {
-    display: none;
-}
-
-.sidebar {
-    width: 50px;
-    font-size: 30px;
-    position: fixed;
-    top: 50px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    padding-left: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #fff;
-    border-right: 1px solid #dbdbdb;
-}
-
-/* Sidebar navigation */
-.nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
-    margin-left: -20px;
-    padding-bottom: 5px;
-    padding-top: 0px;
-    border-bottom: 0px solid #dbdbdb;
-}
-.nav-sidebar > li > a {
-    padding-right: 0px;
-    padding-left: 10px;
-}
-
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-    background-color: #e1e1e1;
-}
-
-/* End SideBar */
 
 /* NavBar */
 .navbar {
@@ -312,6 +269,13 @@ body {
 /* End color set */
 
 .title {
+    font-size: 40px;
     margin-right: 20px;
     margin-bottom: 20px;
+    color: #4b4b4b;
+}
+
+.title > .fa {
+    margin-top: 20px;
+    margin-right: 20px;
 }
