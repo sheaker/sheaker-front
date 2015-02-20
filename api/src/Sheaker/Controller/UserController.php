@@ -33,7 +33,7 @@ class UserController
             $exp = ($rememberMe) ? time() + 60 * 60 * 24 * 360 : time() + 60 * 60 * 24; // expire in 1year or 24h
             $userToken = [
                 'id'          => $user->getId(),
-                'name'        => $user->getName(),
+                'name'        => $user->getFirstName(),
                 'lastname'    => $user->getLastname(),
                 'permissions' => [
                     $app['api.accessLevels'][$user->getUserLevel()]
