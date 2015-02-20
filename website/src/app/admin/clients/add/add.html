@@ -5,23 +5,11 @@
     <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
 
     <div class="col-lg-12 main">
-        <h1 class="page-header">Add Client</h1>
+        <h1><span class="title color-green fa fa-user"></span>Add Client</h1>
             <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
             <form ng-submit="addUser()">
 
-                <div class="col-lg-4" id="Camera">
-                    <div class="thumbnail thumbnail-form">
-                        <font size="8"><span class="fa fa fa-camera pull-right"></span></font>
-                        <h2>Camera</h2>
-                        <webcam on-stream="onStream(stream)"
-                        on-error="onError(err)"
-                        on-streaming="onSuccess()"
-                        video="your.video">
-                        </webcam>
-                    </div>
-                </div>  <!-- Camera end -->
-
-                <div class="col-lg-4" id="GeneralInformations">
+                <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
                     <div class="thumbnail thumbnail-form">
                         <font size="8"><span class="fa fa-list pull-right"></span></font>
                         <div class="caption">
@@ -66,7 +54,19 @@
                     </div>
                 </div> <!-- General informations end -->
 
-                <div class="col-lg-4" id="DetailsInformations">
+                <div class="col-lg-5" id="Camera">
+                    <div class="thumbnail thumbnail-form">
+                        <font size="8"><span class="fa fa fa-camera pull-right"></span></font>
+                        <h2>Camera</h2>
+                        <webcam on-stream="onStream(stream)"
+                        on-error="onError(err)"
+                        on-streaming="onSuccess()"
+                        video="your.video">
+                        </webcam>
+                    </div>
+                </div>  <!-- Camera end -->
+
+                <div class="col-lg-offset-2 col-lg-4" id="DetailsInformations">
                     <div class="thumbnail thumbnail-form">
                         <font size="8"><span class="fa fa-paperclip pull-right"></span></font>
                         <div class="caption">
