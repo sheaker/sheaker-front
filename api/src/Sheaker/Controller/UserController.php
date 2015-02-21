@@ -94,10 +94,12 @@ class UserController
             }
         }
 
+        $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
+
         $user = new User();
         $user->setFirstName($newUser['firstName']);
         $user->setLastName($newUser['lastName']);
-        $user->setPassword(password_hash('test', PASSWORD_DEFAULT));
+        $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
         $user->setMail($newUser['mail']);
         $user->setGender($newUser['gender']);
         $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($newUser['birthdate']))));
