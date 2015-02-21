@@ -71,7 +71,7 @@ class UserController
 
         $users = $app['repository.user']->findAll(50);
 
-        return json_encode(array_values($users));
+        return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
     public function createAction(Request $request, Application $app)
@@ -88,7 +88,7 @@ class UserController
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
 
-        foreach($newUser as $value) ii
+        foreach($newUser as $value) {
             if (empty($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
@@ -103,8 +103,6 @@ class UserController
         $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($newUser['birthdate']))));
         $app['repository.user']->save($user);
 
-        // @Todo: check if the save have been correctly done in the DB
-
-        return json_encode($user, JSON_NUMERIC_CHECK);
+        return json_encode(array_values($user), JSON_NUMERIC_CHECK);
     }
 }
