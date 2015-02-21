@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="InputBirthdate">Birthdate</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputBirthdate" datepicker-popup="{{format}}" ng-model="formDatas.birthdate"  is-open="opened" min-date="'1950-01-01'" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                                <input type="text" class="form-control" id="InputBirthdate" ng-model="formDatas.birthdate" ng-required="true" datepicker-mode="year" show-weeks="false" datepicker-popup="" is-open="opened" min-date="'1950-01-01'" max-date="dt" disabled>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>

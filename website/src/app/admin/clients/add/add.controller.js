@@ -2,42 +2,25 @@
 
 angular.module('sheaker')
 .controller('AddClientCtrl', function ($rootScope, $scope, $log, User) {
-    $scope.today = function() {
-        $scope.dt = new Date();
-    };
-    $scope.today();
 
-    $scope.clear = function () {
-        $scope.dt = null;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-    };
-
-    $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-
-    $scope.maxDate = new Date();
-
+    // Birthdate Calendar
     $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
 
         $scope.opened = true;
     };
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
+    $scope.dt = new Date();
+    $scope.status = {
+      isopen: false
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
-
+    // Submit new user to API
     $scope.addUser = function () {
         var newUser = new User($scope.formDatas);
 
@@ -51,17 +34,7 @@ angular.module('sheaker')
         });
     }
 
-    $scope.status = {
-      isopen: false
-    };
 
-    $scope.toggled = function(open) {
-      $log.log('Dropdown is now: ', open);
-    };
 
-    $scope.toggleDropdown = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
-    };
+
 });
