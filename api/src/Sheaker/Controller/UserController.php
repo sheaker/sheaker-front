@@ -64,22 +64,23 @@ class UserController
 
     public function listUsers(Request $request, Application $app)
     {
-        //$token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
-        // @Todo: use $token to check if it's an admin
+        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden.');
 
         $users = $app['repository.user']->findAll(50);
 
-        //print_r($users);
-        //$users = array();
-        //foreach($usersObj as $key => $value)
-        //{
-        //    $users[$key] = $value->objectToArray();
-        //}
         return json_encode(array_values($users));
     }
 
     public function createAction(Request $request, Application $app)
     {
+        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden.');
+
         $newUser = [];
         $newUser['firstName'] = $app->escape($request->get('firstName'));
         $newUser['lastName']  = $app->escape($request->get('lastName'));

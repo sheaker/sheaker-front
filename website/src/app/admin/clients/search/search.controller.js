@@ -12,7 +12,7 @@ angular.module('sheaker')
     });
 
     // Load the last 50 clients, order by ID desc
-    $scope.clientslist = User.query();
+    $scope.clientsList = User.query();
     // @Todo: load more clients on scroll
     // or in case of a search, if results are empty until API return nothing
 });
