@@ -62,6 +62,22 @@ class UserController
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }
 
+    public function listUsers(Request $request, Application $app)
+    {
+        //$token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        // @Todo: use $token to check if it's an admin
+
+        $users = $app['repository.user']->findAll(50);
+
+        //print_r($users);
+        //$users = array();
+        //foreach($usersObj as $key => $value)
+        //{
+        //    $users[$key] = $value->objectToArray();
+        //}
+        return json_encode(array_values($users));
+    }
+
     public function createAction(Request $request, Application $app)
     {
         $newUser = [];

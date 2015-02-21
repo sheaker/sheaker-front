@@ -78,7 +78,7 @@ class UserRepository implements RepositoryInterface
     {
         // Provide a default orderBy.
         if (!$orderBy) {
-            $orderBy = array('username' => 'ASC');
+            $orderBy = array('id' => 'DESC');
         }
 
         $queryBuilder = $this->db->createQueryBuilder();
@@ -93,7 +93,7 @@ class UserRepository implements RepositoryInterface
 
         $users = array();
         foreach ($usersData as $userData) {
-            $userId = $userData['user_id'];
+            $userId = $userData['id'];
             $users[$userId] = $this->buildUser($userData);
         }
 
@@ -130,7 +130,7 @@ class UserRepository implements RepositoryInterface
         $user->setLastIP($userData['last_ip']);
         $user->setSubscriptionDate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['subscription_date']))));
         $user->setFailedLogins($userData['failed_logins']);
-        $user->setUserLevel($userData['user_level']);
+        $user->setUserLevel((isset($userData['user_level'])) ? $userData['user_level'] : 0);
 
         return $user;
     }

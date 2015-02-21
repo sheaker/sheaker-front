@@ -9,9 +9,10 @@ angular.module('sheaker')
 
     $scope.$watch('searchText', function(newValue) {
         $location.search('text', newValue);
-
-        if (newValue && newValue.length > 3) {
-            $scope.clientlist = User.query({'text': newValue});
-        }
     });
+
+    // Load the last 50 clients, order by ID desc
+    $scope.clientslist = User.query();
+    // @Todo: load more clients on scroll
+    // or in case of a search, if results are empty until API return nothing
 });

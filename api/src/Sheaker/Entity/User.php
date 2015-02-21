@@ -9,84 +9,84 @@ class User
      *
      * @var integer
      */
-    protected $id;
+    public $id;
 
     /**
      * First Name.
      *
      * @var string
      */
-    protected $firstName;
+    public $firstName;
 
     /**
      * Last Name.
      *
      * @var string
      */
-    protected $lastName;
+    public $lastName;
 
     /**
      * Password.
      *
      * @var integer
      */
-    protected $password;
+    public $password;
 
     /**
      * Email.
      *
      * @var string
      */
-    protected $mail;
+    public $mail;
 
     /**
      * Access.
      *
      * @var integer
      */
-    protected $userLevel;
+    public $userLevel;
 
     /**
      * When the user entity was born.
      *
      * @var DateTime
      */
-    protected $birthdate;
+    public $birthdate;
 
     /**
      * What kind of person is the user entity.
      *
      * @var integer
      */
-    protected $gender;
+    public $gender;
 
     /**
      * When the user entity was last seen.
      *
      * @var DateTime
      */
-    protected $lastSeen;
+    public $lastSeen;
 
     /**
      * The last IP of the user.
      *
      * @var String
      */
-    protected $lastIP;
+    public $lastIP;
 
     /**
      * When the user entity was created.
      *
      * @var DateTime
      */
-    protected $subscriptionDate;
+    public $subscriptionDate;
 
     /**
      * Number of failed login for this user.
      *
      * @var integer
      */
-    protected $failedLogins;
+    public $failedLogins;
 
     public function getId()
     {
@@ -180,11 +180,11 @@ class User
 
     public function getSubscriptionDate()
     {
-        return $this->subcriptionDate;
+        return $this->subscriptionDate;
     }
-    public function setSubscriptionDate(\DateTime $subcriptionDate)
+    public function setSubscriptionDate(\DateTime $subscriptionDate)
     {
-        $this->subcriptionDate = $subcriptionDate;
+        $this->subscriptionDate = $subscriptionDate;
     }
 
     public function getFailedLogins()
