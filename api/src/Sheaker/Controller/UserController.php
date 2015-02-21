@@ -67,7 +67,7 @@ class UserController
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
-            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden.');
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
 
         $users = $app['repository.user']->findAll(50);
 
@@ -79,7 +79,7 @@ class UserController
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
-            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden.');
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
 
         $newUser = [];
         $newUser['firstName'] = $app->escape($request->get('firstName'));
@@ -88,13 +88,11 @@ class UserController
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
 
-        foreach($newUser as $value) {
+        foreach($newUser as $value) ii
             if (empty($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
-
-        // @Todo: check if user already exist
 
         $user = new User();
         $user->setFirstName($newUser['firstName']);
