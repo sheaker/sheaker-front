@@ -9,7 +9,7 @@
             <span class="color-green fa fa-user-plus"></span>Add Client
         </div>
 
-        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <form ng-submit="addUser()">
             <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">

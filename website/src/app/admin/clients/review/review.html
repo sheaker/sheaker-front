@@ -9,7 +9,7 @@
             <span class="color-blue fa fa-bar-chart"></span>Review Client
         </div>
 
-        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
     </div>
 </div>

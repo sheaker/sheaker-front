@@ -99,7 +99,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 
     $httpProvider.interceptors.push('jwtInterceptor');
 })
-.run(function ($rootScope, $window, $timeout, $location, jwtHelper, Authorization) {
+.run(function ($rootScope, $window, $timeout, $interval, $location, jwtHelper, Authorization) {
 
     $rootScope.authVars = {
         authorised: {
@@ -147,17 +147,22 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     });
 
     $rootScope.alerts = [];
-
-    // Every 3secondes alerts are removed
-    // TODO: It's better to set a duration for each alerts, and remove them here if expired
-    // $timeout(function() {
-    //     $rootScope.alerts.forEach(function (element, index, array) {
-    //         array.splice(index, 1);
-    //     })
-    // }, 3000);
-
     $rootScope.closeAlert = function(index) {
         $rootScope.alerts.splice(index, 1);
     };
+    // Check every second if there is alerts to remove
+    // Alert expiration can be override by adding a 'exp' key with value in ms in the alert obj
+    $interval(function() {
+        $rootScope.alerts.forEach(function (element, index, array) {
+            var exp = 5000; // Default timeout
+            if (element.exp) {
+                exp = element.exp;
+            }
+
+            $timeout(function() {
+                $rootScope.closeAlert(index);
+            }, exp);
+        })
+    }, 1000);
 })
 ;
