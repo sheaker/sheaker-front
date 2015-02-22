@@ -1,8 +1,15 @@
 <div class="container-fluid">
+
     <div ng-include="'components/admin/navbar/top/top.html'"></div>
-      <div class="container-fluid">
-          <div ng-include="'components/admin/navbar/side/side.html'"></div>
-          <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
-          <div class="col-lg-12 main"></div>
-      </div>
+    <div ng-include="'components/admin/navbar/side/side.html'"></div>
+    <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
+
+    <div class="col-lg-12 main">
+        <div class="title">
+            <span class="color-red fa fa-money"></span>Charge Client
+        </div>
+
+        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
+    </div>
 </div>

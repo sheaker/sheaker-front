@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($rootScope, $scope, $log, User) {
+.controller('AddClientCtrl', function ($rootScope, $scope, User) {
 
     // Birthdate Calendar
     $scope.open = function($event) {
