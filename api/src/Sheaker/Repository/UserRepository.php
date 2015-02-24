@@ -41,19 +41,23 @@ class UserRepository implements RepositoryInterface
 
         $userExtraInfoData = array(
             'sponsor_id' => $user->getSponsor(),
-            'comment' => $user->getComment()
+            'comment'    => $user->getComment()
         );
 
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
-            $this->db->update('users_extrainfo', $userExtraInfoData, array('id' => $user->getId()));
+            $this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
         } else {
             $this->db->insert('users', $userData);
-            $id = $this->db->lastInsertId();
-            $user->setId($id);
+            $userId = $this->db->lastInsertId();
+            $user->setId($userId);
 
-            $userExtraInfoData['user_id'] = $user->getId();
-            $this->db->insert('users_extrainfo', $userExtraInfoData);
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder
+                ->insert('users_extrainfo')
+                ->setValue('user_id', '?')
+                ->values($userExtraInfoData)
+                ->setParameter(0, $user->getId());
         }
     }
 
