@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.16-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-02-23 23:12:59 +0000
+# Temps de génération: 2015-02-24 17:22:44 +0000
 # ************************************************************
 
 
@@ -31,26 +31,28 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL DEFAULT '',
-  `birthdate` timestamp NULL DEFAULT NULL,
-  `gender` tinyint(1) unsigned DEFAULT NULL,
-  `last_seen` timestamp NULL DEFAULT NULL,
-  `last_ip` varchar(15) NOT NULL DEFAULT '',
+  `birthdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `gender` tinyint(1) unsigned NOT NULL,
+  `last_seen` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',
   `subscription_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `failed_logins` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`first_name`),
-  UNIQUE KEY `email` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `first_name` (`first_name`),
+  UNIQUE KEY `mail` (`mail`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `mail`, `birthdate`, `gender`, `last_seen`, `last_ip`, `subscription_date`, `failed_logins`)
 VALUES
-	(1,'user','','$2y$10$AHlCzRePTRmzTKmb.WbZROznKmHGCpnmjErwfs2NngcYHk1lnVqOG','user@user.user','2015-01-16 10:13:20',NULL,'2015-01-22 19:26:31','http://localhos','2015-01-02 18:43:59',0),
-	(2,'modo','','$2y$10$l9IQju8HMi30izZukfkml.ecV/fjLFs5wsEV/gVIiAU.CBfFAh3yK','modo@modo.modo','2015-01-16 10:13:20',NULL,'0000-00-00 00:00:00','127.0.0.1','2015-01-02 18:44:16',0),
-	(3,'admin','','$2y$10$sf1krqI89gRZQLo6L5E4aeTqaxa3DXCaZFKaBJ3/Xj2NlpfaZAOxq','admin@admin.admin','2015-01-16 10:13:20',NULL,'2015-01-25 03:25:54','http://127.0.0.','2015-01-02 18:44:32',0),
-	(4,'kevin','darcel','$2y$10$daUTTc4yiSZ2Nn2GJt./UeU/51CydHrdYjOTURLkGhREQS1OeZS4q','kevin.darcel@gmail.com','1990-08-01 08:00:00',0,NULL,'','2015-02-21 16:32:55',0);
+	(1,'user','','$2y$10$AHlCzRePTRmzTKmb.WbZROznKmHGCpnmjErwfs2NngcYHk1lnVqOG','user@user.user','2015-01-16 10:13:20',0,'0000-00-00 00:00:00','0.0.0.0','2015-01-02 18:43:59',0),
+	(2,'modo','','$2y$10$l9IQju8HMi30izZukfkml.ecV/fjLFs5wsEV/gVIiAU.CBfFAh3yK','modo@modo.modo','2015-01-16 10:13:20',0,'0000-00-00 00:00:00','0.0.0.0','2015-01-02 18:44:16',0),
+	(3,'admin','','$2y$10$sf1krqI89gRZQLo6L5E4aeTqaxa3DXCaZFKaBJ3/Xj2NlpfaZAOxq','admin@admin.admin','2015-01-16 10:13:20',0,'0000-00-00 00:00:00','0.0.0.0','2015-01-02 18:44:32',0),
+	(4,'kevin','darcel','$2y$10$daUTTc4yiSZ2Nn2GJt./UeU/51CydHrdYjOTURLkGhREQS1OeZS4q','kevin.darcel@gmail.com','1990-08-01 08:00:00',0,'0000-00-00 00:00:00','0.0.0.0','2015-02-21 16:32:55',0),
+	(5,'armoud','mohamed','$2y$10$jzx3QOZpFpskoappQ17H4up1KWVwXik1uu.7W5jV/VAEMOYME4bVW','hgvygfv@htfgjhbjhsdas','2015-02-05 07:00:00',1,'0000-00-00 00:00:00','0.0.0.0','2015-02-24 10:05:32',0),
+	(13,'claudia','patate','$2y$10$PPwtP0lR9HdX2octJPi02.RKO4hDoA2afqsvAbSVKgaVSKQSJv5Va','claudia.patate@gmail.com','2015-02-05 07:00:00',1,'0000-00-00 00:00:00','0.0.0.0','2015-02-24 11:06:28',0);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -77,6 +79,32 @@ VALUES
 	(3,2);
 
 /*!40000 ALTER TABLE `users_access` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Affichage de la table users_extrainfo
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users_extrainfo`;
+
+CREATE TABLE `users_extrainfo` (
+  `user_id` int(11) unsigned NOT NULL,
+  `sponsor_id` int(11) unsigned DEFAULT NULL,
+  `comment` text,
+  PRIMARY KEY (`user_id`),
+  KEY `sponsor_id` (`sponsor_id`),
+  CONSTRAINT `users_extrainfo_ibfk_2` FOREIGN KEY (`sponsor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `users_extrainfo_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `users_extrainfo` WRITE;
+/*!40000 ALTER TABLE `users_extrainfo` DISABLE KEYS */;
+
+INSERT INTO `users_extrainfo` (`user_id`, `sponsor_id`, `comment`)
+VALUES
+	(13,4,'- Je suis une patate');
+
+/*!40000 ALTER TABLE `users_extrainfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
