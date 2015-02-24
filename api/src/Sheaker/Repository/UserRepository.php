@@ -49,8 +49,7 @@ class UserRepository implements RepositoryInterface
             $this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
         } else {
             $this->db->insert('users', $userData);
-            $userId = $this->db->lastInsertId();
-            $user->setId($userId);
+            $user->setId($this->db->lastInsertId());
 
             $queryBuilder = $this->db->createQueryBuilder();
             $queryBuilder
