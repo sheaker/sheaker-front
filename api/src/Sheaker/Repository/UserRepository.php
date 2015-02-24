@@ -51,12 +51,8 @@ class UserRepository implements RepositoryInterface
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());
 
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder
-                ->insert('users_extrainfo')
-                ->setValue('user_id', '?')
-                ->values($userExtraInfoData)
-                ->setParameter(0, $user->getId());
+            $userExtraInfoData['user_id'] = $user->getId();
+            $this->db->insert('users_extrainfo', $userExtraInfoData);
         }
     }
 
