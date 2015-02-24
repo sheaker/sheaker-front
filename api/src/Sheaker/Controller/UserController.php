@@ -87,6 +87,8 @@ class UserController
         $newUser['mail']      = $app->escape($request->get('mail'));
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
+        $newUser['sponsor']   = $app->escape($request->get('sponsor'));
+        $newUser['comment']   = $app->escape($request->get('comment'));
 
         foreach($newUser as $value) {
             if (empty($value)) {
@@ -101,10 +103,15 @@ class UserController
         $user->setLastName($newUser['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
         $user->setMail($newUser['mail']);
-        $user->setGender($newUser['gender']);
         $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($newUser['birthdate']))));
+        $user->setGender($newUser['gender']);
+        $user->setLastSeen(new \DateTime('0000-00-00'));
+        $user->setLastIP('0.0.0.0');
+        $user->setFailedLogins(0);
+        $user->setSponsor($newUser['sponsor']);
+        $user->setComment($newUser['comment']);
         $app['repository.user']->save($user);
 
-        return json_encode(array_values($user), JSON_NUMERIC_CHECK);
+        return json_encode($user, JSON_NUMERIC_CHECK);
     }
 }

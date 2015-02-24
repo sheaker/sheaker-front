@@ -88,6 +88,21 @@ class User
      */
     public $failedLogins;
 
+    /**
+     * Sponsor id.
+     *
+     * @var integer
+     */
+    public $sponsor;
+
+    /**
+     * Comment on the user.
+     *
+     * @var String
+     */
+    public $comment;
+
+
     public function getId()
     {
         return $this->id;
@@ -194,5 +209,23 @@ class User
     public function setFailedLogins($failedLogins)
     {
         $this->failedLogins = $failedLogins;
+    }
+
+    public function getSponsor()
+    {
+        return $this->sponsor;
+    }
+    public function setSponsor($sponsor)
+    {
+        $this->sponsor = $sponsor;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
     }
 }

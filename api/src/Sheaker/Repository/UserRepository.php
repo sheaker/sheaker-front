@@ -34,18 +34,26 @@ class UserRepository implements RepositoryInterface
             'mail'          => $user->getMail(),
             'birthdate'     => $user->getBirthdate()->format('Y-m-d G:i:s'),
             'gender'        => $user->getGender(),
-            /*'last_seen'     => $user->getLastSeen()->format('Y-m-d G:i:s'),
+            'last_seen'     => $user->getLastSeen()->format('Y-m-d G:i:s'),
             'last_ip'       => $user->getLastIP(),
-            'failed_logins' => $user->getFailedLogins()*/
+            'failed_logins' => $user->getFailedLogins()
+        );
+
+        $userExtraInfoData = array(
+            'sponsor_id' => $user->getSponsor(),
+            'comment' => $user->getComment()
         );
 
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
+            $this->db->update('users_extrainfo', $userExtraInfoData, array('id' => $user->getId()));
         } else {
             $this->db->insert('users', $userData);
-
             $id = $this->db->lastInsertId();
             $user->setId($id);
+
+            $userExtraInfoData['user_id'] = $user->getId();
+            $this->db->insert('users_extrainfo', $userExtraInfoData);
         }
     }
 
