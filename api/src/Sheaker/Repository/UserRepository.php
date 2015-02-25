@@ -44,23 +44,22 @@ class UserRepository implements RepositoryInterface
             'comment'    => $user->getComment()
         );
 
-        $userPhoto = array(
+        $userPhotoData = array(
             'image' => $user->getPhoto()
         );
 
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
-            $this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
             $this->db->update('users_photo', $userPhoto, array('user_id' => $user->getId()));
+            //$this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
         } else {
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());
 
-            $userExtraInfoData['user_id'] = $user->getId();
-            $this->db->insert('users_extrainfo', $userExtraInfoData);
+            $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
 
-            $userPhoto['user_id'] = $user->getId();
-            $this->db->insert('users_photo', $userPhoto);
+            if (isset($userExtraInfoData['sponsor_id']) || isset($userExtraInfoData['comment']))
+                $this->db->insert('users_extrainfo', array_merge(['user_id' => $user->getId()], $userExtraInfoData));
         }
     }
 
