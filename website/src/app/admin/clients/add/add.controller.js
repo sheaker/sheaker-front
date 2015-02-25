@@ -2,6 +2,7 @@
 
 angular.module('sheaker')
 .controller('AddClientCtrl', function ($rootScope, $scope, User) {
+    $scope.formDatas = {};
 
     // Birthdate Calendar
     $scope.open = function($event) {
