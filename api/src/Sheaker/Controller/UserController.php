@@ -66,8 +66,9 @@ class UserController
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
-        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
 
         $limit = 50;
         $offset = 0;
@@ -80,8 +81,9 @@ class UserController
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
-        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
 
         $newUser = [];
         $newUser['firstName'] = $app->escape($request->get('firstName'));
