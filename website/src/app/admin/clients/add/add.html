@@ -57,12 +57,25 @@
             <div class="col-lg-5" id="Camera">
                 <div class="thumbnail thumbnail-form">
                     <span class="color-grey fa fa-camera pull-right"></span></font>
-                    <div class="title-small">Camera</div>
-                    <webcam on-stream="onStream(stream)"
-                    on-error="onError(err)"
-                    on-streaming="onSuccess()"
-                    video="your.video">
-                    </webcam>
+                    <div class="title-small">Photo</div>
+                    <div class="loading text-center" ng-show="webcam.isLoading">
+                        <i class="fa fa-spinner fa-pulse"></i>
+                        <br><br> <!-- Ouai ben je suis pas un bootstrapeur moi ! -->
+                        <p>Loading the image...<br>Please be sure the webcam is allowed to be used by the website</p>
+                    </div>
+                    <div class="webcam text-center" ng-hide="webcam.isLoading || webcam.userPhoto">
+                        <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" video="mywebcam" ng-hide="webcam.isLoading"></webcam>
+                        <div class="alert alert-error ng-scope" ng-show="webcamError">
+                            <span>Webcam could not be started correctly. Did you give access to it and there isn't any other tabs using it?</span>
+                        </div>
+                    </div>
+                    <div class="snapshot text-center" ng-show="webcam.userPhoto">
+                        <canvas id="snapshot"></canvas>
+                    </div>
+                    <div class="snapshotCtrls text-center" ng-hide="webcam.isLoading">
+                        <a class="btn btn-large btn-primary" ng-hide="webcam.userPhoto" ng-click="takeSnapshot()">Take photo!</a>
+                        <a class="btn btn-large btn-warning" ng-show="webcam.userPhoto" ng-click="webcam.userPhoto = null">Retry :(</a>
+                    </div>
                 </div>
             </div>  <!-- Camera end -->
             <div class="col-lg-offset-1 col-lg-5" id="DetailsInformations">

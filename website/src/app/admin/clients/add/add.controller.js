@@ -20,6 +20,57 @@ angular.module('sheaker')
       isopen: false
     };
 
+    $scope.webcam = {
+        isLoading: true,
+        hasErrors: false,
+        userPhoto: null
+    };
+    var webcam = null,
+        patOpts = {x: 0, y: 0, w: 25, h: 25};
+
+    $scope.onWebcamError = function(err) {
+        $scope.webcam.hasErrors = err;
+    };
+
+    $scope.onWebcamSuccess = function() {
+        $scope.webcam.isLoading = false;
+
+        if ($scope.mywebcam) { // null if the webcam is already in use
+            webcam = $scope.mywebcam;
+            patOpts.w = webcam.width;
+            patOpts.h = webcam.height;
+        } else {
+            $scope.onWebcamError(true);
+        }
+    };
+
+    var getImageFromVideo = function(x, y, w, h) {
+        var hiddenCanvas = document.createElement('canvas');
+        hiddenCanvas.width = webcam.width;
+        hiddenCanvas.height = webcam.height;
+
+        var ctx = hiddenCanvas.getContext('2d');
+        ctx.drawImage(webcam, 0, 0, webcam.width, webcam.height);
+        return ctx.getImageData(x, y, w, h);
+    };
+
+    $scope.takeSnapshot = function() {
+        if (webcam) {
+            var snapshotCanvas = document.querySelector('#snapshot');
+            if (snapshotCanvas) {
+                snapshotCanvas.width = webcam.width;
+                snapshotCanvas.height = webcam.height;
+
+                var imgData = getImageFromVideo(patOpts.x, patOpts.y, patOpts.w, patOpts.h);
+                var ctxSnapshot = snapshotCanvas.getContext('2d');
+                ctxSnapshot.putImageData(imgData, 0, 0);
+
+                $scope.webcam.userPhoto = imgData;
+                $scope.formDatas.userPhoto = snapshotCanvas.toDataURL();
+            }
+        }
+    };
+
     // Submit new user to API
     $scope.addUser = function () {
         var newUser = new User($scope.formDatas);
@@ -32,9 +83,5 @@ angular.module('sheaker')
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
         });
-    }
-
-
-
-
+    };
 });
