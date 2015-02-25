@@ -77,6 +77,24 @@ class UserController
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
+    public function getUser(Request $request, Application $app)
+    {
+        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
+
+        $userId = $app->escape($request->get('id'));
+
+        $user = $app['repository.user']->find($userId);
+        if (!$user) {
+            $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+        }
+
+        return json_encode($user, JSON_NUMERIC_CHECK);
+    }
+
     public function create(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
@@ -91,7 +109,6 @@ class UserController
         $newUser['mail']      = $app->escape($request->get('mail'));
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
-        $newUser['photo']     = $app->escape($request->get('userPhoto'));
 
         foreach($newUser as $value) {
             if (!isset($value)) {
@@ -99,6 +116,7 @@ class UserController
             }
         }
 
+        $newUser['photo']     = $app->escape($request->get('photo'));
         $newUser['sponsor']   = $app->escape($request->get('sponsor'));
         $newUser['comment']   = $app->escape($request->get('comment'));
 

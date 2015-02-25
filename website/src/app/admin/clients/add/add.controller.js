@@ -67,7 +67,7 @@ angular.module('sheaker')
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
                 $scope.webcam.userPhoto = imgData;
-                $scope.formDatas.userPhoto = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                $scope.formDatas.photo = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
             }
         }
     };
@@ -79,7 +79,7 @@ angular.module('sheaker')
         newUser
         .$save()
         .then(function(data) {
-            $rootScope.alerts.push({type: 'success', msg: 'The new user have been created.'});
+            $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});

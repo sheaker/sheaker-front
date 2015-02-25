@@ -50,16 +50,19 @@ class UserRepository implements RepositoryInterface
 
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
-            $this->db->update('users_photo', $userPhoto, array('user_id' => $user->getId()));
+            //$this->db->update('users_photo', $userPhoto, array('user_id' => $user->getId()));
             //$this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
         } else {
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());
 
-            $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
+            if (!empty($userPhotoData['image'])) {
+                $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
+            }
 
-            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment']))
+            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment'])) {
                 $this->db->insert('users_extrainfo', array_merge(['user_id' => $user->getId()], $userExtraInfoData));
+            }
         }
     }
 
@@ -72,7 +75,13 @@ class UserRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        $userData = $this->db->fetchAssoc('SELECT * FROM users u JOIN users_access ua ON ua.user_id = u.id WHERE id = ?', array($id));
+        $userData = $this->db->fetchAssoc('
+            SELECT *
+            FROM users u
+            LEFT JOIN users_access ua ON ua.user_id = u.id
+            LEFT JOIN users_photo up ON up.user_id = u.id
+            LEFT JOIN users_extrainfo uei ON uei.user_id = u.id
+            WHERE id = ?', array($id));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
 
@@ -144,7 +153,10 @@ class UserRepository implements RepositoryInterface
         $user->setLastIP($userData['last_ip']);
         $user->setSubscriptionDate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['subscription_date']))));
         $user->setFailedLogins($userData['failed_logins']);
+        $user->setPhoto((isset($userData['image'])) ? $userData['image'] : '');
         $user->setUserLevel((isset($userData['user_level'])) ? $userData['user_level'] : 0);
+        $user->setSponsor((isset($userData['sponsor_id'])) ? $userData['sponsor_id'] : '');
+        $user->setComment((isset($userData['comment'])) ? $userData['comment'] : '');
 
         return $user;
     }
