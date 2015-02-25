@@ -90,7 +90,7 @@ class UserController
         $newUser['photo']     = $app->escape($request->get('userPhoto'));
 
         foreach($newUser as $value) {
-            if (empty($value)) {
+            if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
