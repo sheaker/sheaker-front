@@ -69,7 +69,9 @@ class UserController
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions))
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
 
-        $users = $app['repository.user']->findAll(50);
+        $limit = 50;
+        $offset = 0;
+        $users = $app['repository.user']->findAll($limit, $offset, array('id' => 'DESC'));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }

@@ -93,7 +93,7 @@ class UserRepository implements RepositoryInterface
     {
         // Provide a default orderBy.
         if (!$orderBy) {
-            $orderBy = array('id' => 'DESC');
+            $orderBy = array('id' => 'ASC');
         }
 
         $queryBuilder = $this->db->createQueryBuilder();
