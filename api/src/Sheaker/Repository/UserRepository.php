@@ -58,7 +58,7 @@ class UserRepository implements RepositoryInterface
 
             $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
 
-            if (isset($userExtraInfoData['sponsor_id']) || isset($userExtraInfoData['comment']))
+            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment']))
                 $this->db->insert('users_extrainfo', array_merge(['user_id' => $user->getId()], $userExtraInfoData));
         }
     }

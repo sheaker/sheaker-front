@@ -62,7 +62,7 @@ class UserController
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }
 
-    public function list(Request $request, Application $app)
+    public function listUsers(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
