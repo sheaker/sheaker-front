@@ -88,14 +88,15 @@ class UserController
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
         $newUser['photo']     = $app->escape($request->get('userPhoto'));
-        $newUser['sponsor']   = $app->escape($request->get('sponsor'));
-        $newUser['comment']   = $app->escape($request->get('comment'));
 
         foreach($newUser as $value) {
             if (empty($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
+
+        $newUser['sponsor']   = $app->escape($request->get('sponsor'));
+        $newUser['comment']   = $app->escape($request->get('comment'));
 
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
