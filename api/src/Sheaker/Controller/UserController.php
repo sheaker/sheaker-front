@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController
 {
-    public function loginAction(Request $request, Application $app)
+    public function login(Request $request, Application $app)
     {
         $id         = $app->escape($request->get('id'));
         $password   = $app->escape($request->get('password'));
@@ -52,7 +52,7 @@ class UserController
         return json_encode(['token' => $token], JSON_NUMERIC_CHECK);
     }
 
-    public function renewTokenAction(Request $request, Application $app)
+    public function renewToken(Request $request, Application $app)
     {
         $oldToken = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -62,7 +62,7 @@ class UserController
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }
 
-    public function listUsers(Request $request, Application $app)
+    public function list(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -74,7 +74,7 @@ class UserController
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
-    public function createAction(Request $request, Application $app)
+    public function create(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
