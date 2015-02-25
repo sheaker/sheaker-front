@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.16-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-02-25 18:29:53 +0000
+# Temps de génération: 2015-02-25 20:39:44 +0000
 # ************************************************************
 
 
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `users_photo`;
 
 CREATE TABLE `users_photo` (
   `user_id` int(11) unsigned NOT NULL,
-  `image` text NOT NULL,
+  `image` mediumtext NOT NULL,
   `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `users_photo_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)

@@ -67,7 +67,7 @@ angular.module('sheaker')
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
                 $scope.webcam.userPhoto = imgData;
-                $scope.formDatas.userPhoto = snapshotCanvas.toDataURL();
+                $scope.formDatas.userPhoto = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
             }
         }
     };

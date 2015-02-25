@@ -64,7 +64,7 @@
                         <p>Loading the image...<br>Please be sure the webcam is allowed to be used by the website</p>
                     </div>
                     <div class="webcam text-center" ng-hide="webcam.isLoading || webcam.userPhoto">
-                        <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" video="mywebcam" ng-hide="webcam.isLoading"></webcam>
+                        <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" video="mywebcam"></webcam>
                         <div class="alert alert-error ng-scope" ng-show="webcamError">
                             <span>Webcam could not be started correctly. Did you give access to it and there isn't any other tabs using it?</span>
                         </div>
