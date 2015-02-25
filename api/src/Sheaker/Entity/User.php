@@ -102,6 +102,12 @@ class User
      */
     public $comment;
 
+    /**
+     * Photo of the user encoded in Base64.
+     *
+     * @var String
+     */
+    public $photo;
 
     public function getId()
     {
@@ -227,5 +233,14 @@ class User
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
     }
 }

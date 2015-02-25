@@ -87,6 +87,7 @@ class UserController
         $newUser['mail']      = $app->escape($request->get('mail'));
         $newUser['gender']    = $app->escape($request->get('gender'));
         $newUser['birthdate'] = $app->escape($request->get('birthdate'));
+        $newUser['photo']     = $app->escape($request->get('userPhoto'));
         $newUser['sponsor']   = $app->escape($request->get('sponsor'));
         $newUser['comment']   = $app->escape($request->get('comment'));
 
@@ -108,6 +109,7 @@ class UserController
         $user->setLastSeen(new \DateTime('0000-00-00'));
         $user->setLastIP('0.0.0.0');
         $user->setFailedLogins(0);
+        $user->setPhoto($newUser['photo']);
         $user->setSponsor($newUser['sponsor']);
         $user->setComment($newUser['comment']);
         $app['repository.user']->save($user);
