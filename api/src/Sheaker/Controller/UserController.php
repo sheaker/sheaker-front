@@ -25,8 +25,8 @@ class UserController
         }
 
         if (password_verify($password, $user->getPassword())) {
-            $user->setLastSeen(new \DateTime('now'));
-            $user->setLastIP($request->headers->get('referer'));
+            $user->setLastSeen(date("Y-m-d H:i:s", time()));
+            $user->setLastIP("0.0.0.0"/*$request->headers->get('referer')*/);
             $user->setFailedLogins(0);
             $app['repository.user']->save($user);
 
