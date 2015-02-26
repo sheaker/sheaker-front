@@ -9,3 +9,4 @@ $app->get('/users',              'Sheaker\Controller\UserController::listUsers')
 $app->get('/users/{id}',         'Sheaker\Controller\UserController::getUser');
 $app->put('/users/{id}',         'Sheaker\Controller\UserController::update');
 $app->post('/users',             'Sheaker\Controller\UserController::create');
+$app->post('/users/{id}/charge', 'Sheaker\Controller\UserPaymentController::charge');

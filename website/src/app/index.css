@@ -46,6 +46,20 @@ body {
     font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;        /* <-- reset the font property */
 }
 
+.remove-margin-padding {
+    margin : 0px;
+    padding : 0px;
+}
+
+.remove-padding-right {
+    padding-right: 0px;
+}
+
+.select-payment-method{
+    width: 100%;
+    height: 40px;
+}
+
 @media (max-width: 768px) {
     .vertical-center:before {
         /* height: auto; */
