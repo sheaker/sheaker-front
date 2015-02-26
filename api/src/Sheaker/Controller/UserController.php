@@ -95,6 +95,50 @@ class UserController
         return json_encode($user, JSON_NUMERIC_CHECK);
     }
 
+    public function update(Request $request, Application $app)
+    {
+        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
+
+        $updateUser = [];
+        $updateUser['id']        = $app->escape($request->get('id'));
+        $updateUser['firstName'] = $app->escape($request->get('firstName'));
+        $updateUser['lastName']  = $app->escape($request->get('lastName'));
+        $updateUser['mail']      = $app->escape($request->get('mail'));
+        $updateUser['gender']    = $app->escape($request->get('gender'));
+        $updateUser['birthdate'] = $app->escape($request->get('birthdate'));
+
+        foreach($updateUser as $value) {
+            if (!isset($value)) {
+                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
+            }
+        }
+
+        $updateUser['photo']     = $app->escape($request->get('photo'));
+        $updateUser['sponsor']   = $app->escape($request->get('sponsor'));
+        $updateUser['comment']   = $app->escape($request->get('comment'));
+
+        $user = $app['repository.user']->find($updateUser['id']);
+        if (!$user) {
+            $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+        }
+
+        $user->setFirstName($updateUser['firstName']);
+        $user->setLastName($updateUser['lastName']);
+        $user->setMail($updateUser['mail']);
+        $user->setGender($updateUser['gender']);
+        $user->setBirthdate($updateUser['birthdate']);
+        $user->setPhoto($updateUser['photo']);
+        $user->setSponsor($updateUser['sponsor']);
+        $user->setComment($updateUser['comment']);
+        $app['repository.user']->save($user);
+
+        return json_encode($user, JSON_NUMERIC_CHECK);
+    }
+
     public function create(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);

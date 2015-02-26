@@ -105,7 +105,7 @@ angular.module('sheaker')
         var editUser = new User($scope.formDatas);
 
         editUser
-        .$save()
+        .$update()
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The user have been saved.'});
         })

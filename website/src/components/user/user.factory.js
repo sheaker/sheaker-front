@@ -9,6 +9,9 @@ angular.module('sheaker')
             method: 'POST',
             url: API_URL + '/users/login',
             skipAuthorization: true
+        },
+        update: {
+            method:'PUT'
         }
     };
 
