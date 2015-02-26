@@ -15,6 +15,6 @@ angular.module('sheaker')
         }
     };
 
-    User = $resource(API_URL + '/users/:id', null, actions);
+    User = $resource(API_URL + '/users/:id', {id: '@id'}, actions);
     return User;
 });

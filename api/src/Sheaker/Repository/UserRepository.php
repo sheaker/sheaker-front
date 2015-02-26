@@ -50,8 +50,14 @@ class UserRepository implements RepositoryInterface
 
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
-            //$this->db->update('users_photo', $userPhoto, array('user_id' => $user->getId()));
-            //$this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
+
+            if (!empty($userPhotoData['image'])) {
+                $this->db->update('users_photo', $userPhotoData, array('user_id' => $user->getId()));
+            }
+
+            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment'])) {
+                $this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
+            }
         } else {
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());

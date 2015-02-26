@@ -95,19 +95,17 @@ angular.module('sheaker')
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
                 $scope.webcam.userPhoto = imgData;
-                $scope.formDatas.userPhoto = snapshotCanvas.toDataURL();
+                $scope.formDatas.photo = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
             }
         }
     };
 
     // Submit new user to API
     $scope.editUser = function () {
-        var editUser = new User($scope.formDatas);
-
-        editUser
-        .$update()
+        console.log($scope.formDatas);
+        User.update($scope.formDatas).$promise
         .then(function(data) {
-            $rootScope.alerts.push({type: 'success', msg: 'The user have been saved.'});
+            $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});

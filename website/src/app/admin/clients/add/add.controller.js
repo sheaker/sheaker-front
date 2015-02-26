@@ -74,10 +74,7 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.addUser = function () {
-        var newUser = new User($scope.formDatas);
-
-        newUser
-        .$save()
+        User.save($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});
         })
