@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.16-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-02-25 20:39:44 +0000
+# Temps de génération: 2015-02-26 03:01:55 +0000
 # ************************************************************
 
 
@@ -31,7 +31,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL DEFAULT '',
-  `birthdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `birthdate` date NOT NULL,
   `gender` tinyint(1) unsigned NOT NULL,
   `last_seen` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',

@@ -32,9 +32,9 @@ class UserRepository implements RepositoryInterface
             'last_name'     => $user->getLastName(),
             'password'      => $user->getPassword(),
             'mail'          => $user->getMail(),
-            'birthdate'     => $user->getBirthdate()->format('Y-m-d G:i:s'),
+            'birthdate'     => $user->getBirthdate(),
             'gender'        => $user->getGender(),
-            'last_seen'     => $user->getLastSeen()->format('Y-m-d G:i:s'),
+            'last_seen'     => $user->getLastSeen(),
             'last_ip'       => $user->getLastIP(),
             'failed_logins' => $user->getFailedLogins()
         );
@@ -147,11 +147,11 @@ class UserRepository implements RepositoryInterface
         $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);
         $user->setMail($userData['mail']);
-        $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['birthdate']))));
+        $user->setBirthdate($userData['birthdate']);
         $user->setGender($userData['gender']);
-        $user->setLastSeen(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['last_seen']))));
+        $user->setLastSeen(date('c', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);
-        $user->setSubscriptionDate(new \DateTime(date("Y-m-d H:i:s", strtotime($userData['subscription_date']))));
+        $user->setSubscriptionDate(date('c', strtotime($userData['subscription_date'])));
         $user->setFailedLogins($userData['failed_logins']);
         $user->setPhoto((isset($userData['image'])) ? $userData['image'] : '');
         $user->setUserLevel((isset($userData['user_level'])) ? $userData['user_level'] : 0);

@@ -127,9 +127,9 @@ class UserController
         $user->setLastName($newUser['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
         $user->setMail($newUser['mail']);
-        $user->setBirthdate(new \DateTime(date("Y-m-d H:i:s", strtotime($newUser['birthdate']))));
+        $user->setBirthdate($newUser['birthdate']);
         $user->setGender($newUser['gender']);
-        $user->setLastSeen(new \DateTime('0000-00-00'));
+        $user->setLastSeen('0000-00-00 00:00:00');
         $user->setLastIP('0.0.0.0');
         $user->setFailedLogins(0);
         $user->setPhoto($newUser['photo']);

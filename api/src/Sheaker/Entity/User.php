@@ -49,7 +49,7 @@ class User
     /**
      * When the user entity was born.
      *
-     * @var DateTime
+     * @var string
      */
     public $birthdate;
 
@@ -63,7 +63,7 @@ class User
     /**
      * When the user entity was last seen.
      *
-     * @var DateTime
+     * @var string
      */
     public $lastSeen;
 
@@ -77,7 +77,7 @@ class User
     /**
      * When the user entity was created.
      *
-     * @var DateTime
+     * @var string
      */
     public $subscriptionDate;
 
@@ -167,7 +167,7 @@ class User
     {
         return $this->birthdate;
     }
-    public function setBirthdate(\DateTime $birthdate)
+    public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
     }
@@ -185,7 +185,7 @@ class User
     {
         return $this->lastSeen;
     }
-    public function setLastSeen(\DateTime $lastSeen)
+    public function setLastSeen($lastSeen)
     {
         $this->lastSeen = $lastSeen;
     }
@@ -203,7 +203,7 @@ class User
     {
         return $this->subscriptionDate;
     }
-    public function setSubscriptionDate(\DateTime $subscriptionDate)
+    public function setSubscriptionDate($subscriptionDate)
     {
         $this->subscriptionDate = $subscriptionDate;
     }
