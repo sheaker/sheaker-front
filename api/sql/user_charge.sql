@@ -14,14 +14,12 @@
 CREATE TABLE IF NOT EXISTS `users_charge` (
   `user_id` int(11) unsigned NOT NULL,
   `days_number` smallint(5) unsigned DEFAULT NULL,
-  `departure_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `comment` varchar(255) NOT NULL DEFAULT '',
   `amount` smallint(5) unsigned DEFAULT NULL,
   `payment_method` tinyint(3) unsigned DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_id` (`user_id`),
-  UNIQUE KEY `departure_date` (`departure_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- L'exportation de données n'été pas sélectionné.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
