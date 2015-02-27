@@ -2,6 +2,9 @@
 
 angular.module('sheaker')
 .controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, UserPayment) {
+
+    $('.thumbnail-form').matchHeight();
+
     $scope.formDatas = {};
 
     // Available payment methods
