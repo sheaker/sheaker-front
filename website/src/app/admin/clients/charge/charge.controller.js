@@ -1,14 +1,26 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, User) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, UserPayment) {
     $scope.formDatas = {};
 
+    // Available payment methods
     $scope.availablepaymentmethods = [
-    {name:0},
-    {name:1},
-    {name:2}
+    {id: 0, paymentmethod: 'Cash'},
+    {id: 1, paymentmethod: 'Credit Card'},
+    {id: 2, paymentmethod: 'Debit Card'}
     ];
+
+    // End Date
+    $scope.onEndDateChange = function () {
+        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.numberOfDays, 'days').format("YYYY-MM-DD");
+    };
+
+    // Load the History payment
+    UserPayment.query().$promise
+    .then(function(historyPayments) {
+        $scope.paymentList = historyPayments;
+    })
 
     // Birthdate Calendar
     $scope.open = function($event) {
@@ -22,6 +34,7 @@ angular.module('sheaker')
       $event.stopPropagation();
       $scope.status.isopen = !$scope.status.isopen;
     };
+
     $scope.dt = new Date();
     $scope.status = {
       isopen: false
@@ -35,7 +48,7 @@ angular.module('sheaker')
     $scope.chargeUser = function () {
         $scope.formDatas.id = $routeParams.id;
 
-        User.charge($scope.formDatas).$promise
+        UserPayment.save($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The user has been charged.'});
         })

@@ -25,7 +25,7 @@ class UserController
         }
 
         if (password_verify($password, $user->getPassword())) {
-            $user->setLastSeen(date("Y-m-d H:i:s", time()));
+            $user->setLastSeen(date('Y-m-d H:i:s', time()));
             $user->setLastIP("0.0.0.0"/*$request->headers->get('referer')*/);
             $user->setFailedLogins(0);
             $app['repository.user']->save($user);
@@ -171,7 +171,7 @@ class UserController
         $user->setLastName($newUser['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
         $user->setMail($newUser['mail']);
-        $user->setBirthdate($newUser['birthdate']);
+        $user->setBirthdate(date('Y-m-d H:i:s', strtotime($newUser['birthdate'])));
         $user->setGender($newUser['gender']);
         $user->setLastSeen('0000-00-00 00:00:00');
         $user->setLastIP('0.0.0.0');

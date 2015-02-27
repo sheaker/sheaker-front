@@ -23,7 +23,7 @@ class UserPayment
      *
      * @var string
      */
-    public $departureDate;
+    public $startDate;
 
     /**
      * Special Comment.
@@ -46,6 +46,13 @@ class UserPayment
      */
     public $paymentMethod;
 
+    /**
+     * When the user entity was created.
+     *
+     * @var string
+     */
+    public $paymentDate;
+
     public function getUserId()
     {
         return $this->userId;
@@ -64,13 +71,13 @@ class UserPayment
         $this->daysNumber = $daysNumber;
     }
 
-    public function getDepartureDate()
+    public function getStartDate()
     {
-        return $this->departureDate;
+        return $this->startDate;
     }
-    public function setDepartureDate($departureDate)
+    public function setStartDate($startDate)
     {
-        $this->departureDate = $departureDate;
+        $this->startDate = $startDate;
     }
 
     public function getComment()
@@ -98,5 +105,14 @@ class UserPayment
     public function setPaymentMethod($paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
+    }
+
+    public function getPaymentDate()
+    {
+        return $this->paymentDate;
+    }
+    public function setPaymentDate($paymentDate)
+    {
+        $this->paymentDate = $paymentDate;
     }
 }

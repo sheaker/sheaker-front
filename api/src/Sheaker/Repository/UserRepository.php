@@ -155,9 +155,9 @@ class UserRepository implements RepositoryInterface
         $user->setMail($userData['mail']);
         $user->setBirthdate($userData['birthdate']);
         $user->setGender($userData['gender']);
-        $user->setLastSeen(date('c', strtotime($userData['last_seen'])));
+        $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);
-        $user->setSubscriptionDate(date('c', strtotime($userData['subscription_date'])));
+        $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['subscription_date'])));
         $user->setFailedLogins($userData['failed_logins']);
         $user->setPhoto((isset($userData['image'])) ? $userData['image'] : '');
         $user->setUserLevel((isset($userData['user_level'])) ? $userData['user_level'] : 0);

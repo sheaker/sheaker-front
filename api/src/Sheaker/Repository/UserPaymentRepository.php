@@ -30,7 +30,7 @@ class UserPaymentRepository implements RepositoryInterface
         $userData = array(
             'user_id'           => $user->getUserId(),
             'days_number'       => $user->getDaysNumber(),
-            'departure_date'    => $user->getDepartureDate(),
+            'start_date'        => $user->getStartDate(),
             'comment'           => $user->getComment(),
             'amount'            => $user->getAmount(),
             'payment_method'    => $user->getPaymentMethod(),
@@ -52,7 +52,7 @@ class UserPaymentRepository implements RepositoryInterface
             SELECT *
             FROM users_charge up
             WHERE id = ?', array($id));
-        return $userData ? $this->buildUser($userData) : FALSE;
+        return $userData ? $this->buildPaymentUser($userData) : FALSE;
     }
 
     /**
@@ -67,11 +67,11 @@ class UserPaymentRepository implements RepositoryInterface
      *
      * @return array A collection of users, keyed by user id.
      */
-    public function findAll($limit, $offset = 0, $orderBy = array())
+    public function findAll($id, $limit, $offset = 0, $orderBy = array())
     {
         // Provide a default orderBy.
         if (!$orderBy) {
-            $orderBy = array('id' => 'ASC');
+            $orderBy = array('user_id' => 'ASC');
         }
 
         $queryBuilder = $this->db->createQueryBuilder();
@@ -80,16 +80,16 @@ class UserPaymentRepository implements RepositoryInterface
             ->from('users_charge', 'up')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
-            ->orderBy('u.' . key($orderBy), current($orderBy));
+            ->orderBy('u.' . key($orderBy), current($orderBy))
+            ->where('user_id = :id');
         $statement = $queryBuilder->execute();
         $usersData = $statement->fetchAll();
 
         $users = array();
         foreach ($usersData as $userData) {
             $userId = $userData['user_id'];
-            $users[$userId] = $this->buildUser($userData);
+            $users[$userId] = $this->buildPaymentUser($userData);
         }
-
         return $users;
     }
 
@@ -109,15 +109,16 @@ class UserPaymentRepository implements RepositoryInterface
      *
      * @return \Sheaker\Entity\User
      */
-    protected function buildChargeUser($userData)
+    protected function buildPaymentUser($userData)
     {
-        $user = new UserPayment();
-        $user->setUserId($userData['user_id']);
-        $user->setDaysNumber($userData['days_number']);
-        $user->setDepartureDate($userData['departure_date']);
-        $user->setComment($userData['comment']);
-        $user->setAmount($userData['amount']);
-        $user->setPaymentMethod($userData['payment_method']);
-        return $user;
+        $userPayment = new UserPayment();
+        $userPayment->setUserId($userData['user_id']);
+        $userPayment->setDaysNumber($userData['days_number']);
+        $userPayment->setStartDate(date('c', strtotime($userData['start_date'])));
+        $userPayment->setComment((isset($userData['comment'])) ? $userData['comment'] : '');
+        $userPayment->setAmount($userData['amount']);
+        $userPayment->setPaymentMethod($userData['payment_method']);
+        $userPayment->setPaymentDate(date('c', strtotime($userData['payment_date'])));
+        return $userPayment;
     }
 }

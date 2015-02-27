@@ -12,10 +12,6 @@ angular.module('sheaker')
         },
         update: {
             method:'PUT'
-        },
-        charge: {
-            method: 'POST',
-            url: API_URL + '/users/:id/charge',
         }
     };
 
