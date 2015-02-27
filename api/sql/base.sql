@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.16-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-02-26 03:01:55 +0000
+# Temps de génération: 2015-02-27 23:54:50 +0000
 # ************************************************************
 
 
@@ -55,6 +55,23 @@ CREATE TABLE `users_access` (
   PRIMARY KEY (`user_id`),
   CONSTRAINT `users_access_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Affichage de la table users_payments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users_payments`;
+
+CREATE TABLE `users_payments` (
+  `user_id` int(11) unsigned NOT NULL,
+  `days` smallint(5) unsigned DEFAULT NULL,
+  `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment` varchar(255) NOT NULL DEFAULT '',
+  `price` smallint(5) unsigned DEFAULT NULL,
+  `method` tinyint(3) unsigned DEFAULT NULL,
+  `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 

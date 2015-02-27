@@ -16,7 +16,7 @@ class UserPayment
      *
      * @var integer
      */
-    public $daysNumber;
+    public $days;
 
     /**
      * First day of subscription.
@@ -33,11 +33,11 @@ class UserPayment
     public $comment;
 
     /**
-     * Amount of subscription.
+     * Price of the subscription.
      *
      * @var integer
      */
-    public $amount;
+    public $price;
 
     /**
      * Payment method.
@@ -62,13 +62,13 @@ class UserPayment
         return $this->userId = $userId;
     }
 
-    public function getDaysNumber()
+    public function getDays()
     {
-        return $this->daysNumber;
+        return $this->days;
     }
-    public function setDaysNumber($daysNumber)
+    public function setDays($days)
     {
-        $this->daysNumber = $daysNumber;
+        $this->days = $days;
     }
 
     public function getStartDate()
@@ -89,22 +89,22 @@ class UserPayment
         $this->comment = $comment;
     }
 
-    public function getAmount()
+    public function getPrice()
     {
-        return $this->amount;
+        return $this->price;
     }
-    public function setAmount($amount)
+    public function setPrice($price)
     {
-        $this->amount = $amount;
+        $this->price = $price;
     }
 
-    public function getPaymentMethod()
+    public function getMethod()
     {
-        return $this->paymentMethod;
+        return $this->method;
     }
-    public function setPaymentMethod($paymentMethod)
+    public function setMethod($method)
     {
-        $this->paymentMethod = $paymentMethod;
+        $this->method = $method;
     }
 
     public function getPaymentDate()

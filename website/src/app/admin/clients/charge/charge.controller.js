@@ -1,31 +1,41 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, UserPayment) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, UserPayment) {
 
-    $('.thumbnail-form').matchHeight();
+    if (typeof $routeParams.id === 'undefined') {
+        $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to charge before going to this page.'});
+        $location.path('/admin/clients/search');
+    }
 
     $scope.formDatas = {};
 
     // Available payment methods
-    $scope.availablepaymentmethods = [
-    {id: 0, paymentmethod: 'Cash'},
-    {id: 1, paymentmethod: 'Credit Card'},
-    {id: 2, paymentmethod: 'Debit Card'}
+    $scope.availablePaymentMethods = [
+        {id: 0, name: 'Cash'},
+        {id: 1, name: 'Credit Card'},
+        {id: 2, name: 'Debit Card'}
     ];
 
-    // End Date
-    $scope.onEndDateChange = function () {
+    // Load payment history
+    UserPayment.query({id: $routeParams.id}).$promise
+    .then(function(paymentHistory) {
+        $scope.paymentHistory = paymentHistory;
+    })
+    .catch(function(error) {
+        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving users payments, please contact a developper.'});
+    });
+
+    // Calculate ending date
+    $scope.calculateEndDate = function () {
         $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.numberOfDays, 'days').format("YYYY-MM-DD");
     };
 
-    // Load the History payment
-    UserPayment.query().$promise
-    .then(function(historyPayments) {
-        $scope.paymentList = historyPayments;
-    })
-
-    // Birthdate Calendar
+    // Starting date calendar
+    $scope.dt = new Date();
+    $scope.status = {
+        isopen: false
+    };
     $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -33,27 +43,23 @@ angular.module('sheaker')
         $scope.opened = true;
     };
     $scope.toggleDropdown = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
-    };
+        $event.preventDefault();
+        $event.stopPropagation();
 
-    $scope.dt = new Date();
-    $scope.status = {
-      isopen: false
+        $scope.status.isopen = !$scope.status.isopen;
     };
-
-    if (typeof $routeParams.id === 'undefined') {
-        $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to charge before going to this page.'});
-        $location.path('/admin/clients/search');
-    }
 
     $scope.chargeUser = function () {
         $scope.formDatas.id = $routeParams.id;
 
         UserPayment.save($scope.formDatas).$promise
-        .then(function(data) {
+        .then(function(payment) {
+            $scope.paymentHistory.push(payment);
+
             $rootScope.alerts.push({type: 'success', msg: 'The user has been charged.'});
+            $location.hash('top');
+            $anchorScroll();
+            $location.hash('');
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge, please contact a developper.'});

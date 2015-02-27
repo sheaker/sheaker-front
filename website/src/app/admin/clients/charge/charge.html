@@ -18,14 +18,14 @@
                     <div class="title-small">Subscription</div>
 
                     <div class="form-group">
-                        <label for="InputFirstName">Number of Days</label>
-                        <input type="number" class="form-control" id="InputNumberOfDays" ng-model="formDatas.numberOfDays" ng-change="onEndDateChange()" placeholder="Number of Days">
+                        <label for="InputFirstName">Days</label>
+                        <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym">
                     </div>
 
                     <div class="form-group col-lg-6 remove-margin-padding">
                         <label for="InputDepartureDate">Start date</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-required="true" ng-change="onEndDateChange()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                            <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-required="true" ng-change="calculateEndDate()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -39,13 +39,13 @@
 
                     <div class="form-group">
                         <label for="InputComment">Comment</label>
-                        <textarea class="form-control" rows="5" id="InputComment" ng-model="formDatas.comment" placeholder="Comment"></textarea>
+                        <textarea class="form-control" rows="5" id="InputComment" ng-model="formDatas.comment" placeholder="Any comment about that transaction?"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputAmount">Amount</label>
+                        <label for="exampleInputAmount">Price</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="exampleInputAmount" ng-model="formDatas.amount" placeholder="Amount">
+                            <input type="number" class="form-control" id="exampleInputPrice" ng-model="formDatas.price">
                             <div class="input-group-addon">$</div>
                             <div class="input-group-addon">(MXN)</div>
                         </div>
@@ -53,8 +53,8 @@
 
                     <div class="form-group">
                         <label for="exampleInputAmount">Payment method</label>
-                        <select class="select-payment-method" ng-model="formDatas.paymentMethod" ng-options="availablepaymentmethod.id as availablepaymentmethod.paymentmethod for availablepaymentmethod in availablepaymentmethods">
-                            <option value="">-- choose payment method --</option>
+                        <select class="select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods">
+                            <option value="">-- Choose a payment method --</option>
                         </select>
                     </div>
                 </div>
@@ -62,9 +62,12 @@
             <div class="col-lg-5" id="PaymentInformation">
                 <div class="thumbnail thumbnail-form-charge">
                     <span class="color-grey fa fa-list pull-right"></span></font>
-                    <div class="title-small">History of payments</div>
+                    <div class="title-small">Payment history</div>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <div class="text-center" ng-hide="paymentHistory.length">
+                            No previous payments.
+                        </div>
+                        <table class="table table-striped" ng-show="paymentHistory.length">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -72,13 +75,20 @@
                                     <th>Price</th>
                                 </tr>
                             </thead>
-
+                            <tbody>
+                                <tr ng-repeat="ph in paymentHistory">
+                                    <td>{{ ph.paymentDate | date }}</td>
+                                    <td>{{ ph.days }}</td>
+                                    <td>{{ ph.price | currency }}</td>
+                                </tr>
+                            </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Charge !</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Charge client</button>
             </div>
         </form>
     </div>
