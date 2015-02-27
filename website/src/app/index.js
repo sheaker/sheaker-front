@@ -96,7 +96,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 
     var address = $location.host().split(".");
 
-    if (address[0] !== 'www' && address[0] !== 'sheaker') {
+    if (address[0].toLowerCase() !== 'www' && address[0].toLowerCase() !== 'sheaker') {
         /*
         Sheaker.get({urlName: address[0]}).$promise
         .then(function() {
