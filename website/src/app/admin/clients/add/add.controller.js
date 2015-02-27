@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($rootScope, $scope, User) {
+.controller('AddClientCtrl', function ($rootScope, $scope, $anchorScroll, User) {
     $scope.formDatas = {};
 
     // Birthdate Calendar
@@ -77,6 +77,9 @@ angular.module('sheaker')
         User.save($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});
+            $location.hash('top');
+            $anchorScroll();
+            $location.hash('');
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});

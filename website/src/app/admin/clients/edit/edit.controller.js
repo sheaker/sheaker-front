@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, User) {
+.controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User) {
 
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to edit before going to this page.'});
@@ -102,10 +102,12 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.editUser = function () {
-        console.log($scope.formDatas);
         User.update($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
+            $location.hash('top');
+            $anchorScroll();
+            $location.hash('');
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});

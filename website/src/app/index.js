@@ -163,7 +163,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     // Alert expiration can be override by adding a 'exp' key with value in ms in the alert obj
     $interval(function() {
         $rootScope.alerts.forEach(function (element, index, array) {
-            var exp = 5000; // Default timeout
+            var exp = 10000; // Default timeout
             if (element.exp) {
                 exp = element.exp;
             }
