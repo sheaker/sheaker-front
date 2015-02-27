@@ -4,7 +4,60 @@
         <div ng-include="'components/admin/navbar/side/side.html'"></div>
         <div ng-include="'components/admin/navbar/subside-general/subside-general.html'"></div>
         <div class="col-lg-12 main">
-            <h1><span class="title color-red fa fa-cog"></span>Setting</h1>
+            <div class="title">
+                <span class="color-blue fa fa-cog"></span>Setting
+            </div>
+
+            <div class="col-lg-offset-3 col-lg-6" id="General">
+                <div class="thumbnail thumbnail-form">
+                    <span class="color-grey fa fa-list pull-right"></span></font>
+                    <div class="title-small">Gym Settings</div>
+                    <div class="form-group">
+                        <label for="InputFirstName">Gym Name</label>
+                        <input type="text" class="form-control" id="InputGymName" ng-model="formDatas.gymName" placeholder="Gym Name" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputEmail">Mail</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail" placeholder="Enter email address">
+                        </div>
+                    </div>
+                    <h3>Adress</h3>
+                    <div class="col-lg-offset-1 form-group col-lg-2">
+                        <label for="InputAdressNumber">#numero</label>
+                        <input type="number" class="form-control" id="InputAdressNumber" ng-model="formDatas.adress.number" placeholder="ex: 613">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="InputAdressCalle">Calle</label>
+                        <input type="text" class="form-control" id="InputAdressCalle" ng-model="formDatas.adress.calle" placeholder="ex: Francia">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="InputAdressColonia">Colonia</label>
+                        <input type="text" class="form-control" id="InputAdressColonia" ng-model="formDatas.adress.colonia" placeholder="ex: Ladron de Guevara">
+                    </div>
+                    <div class="col-lg-offset-1 form-group col-lg-4">
+                        <label for="InputAdressCp">Codigo Postal</label>
+                        <input type="number" class="form-control" id="InputAdressCp" ng-model="formDatas.adress.cp" placeholder="ex: 94240">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="InputAdressCiudad">Ciudad</label>
+                        <input type="text" class="form-control" id="InputAdressCiudad" ng-model="formDatas.adress.ciudad" placeholder="ex: Zapopan">
+                    </div>
+
+                    <h3>Opening hours</h3>
+                    <div class="form-group">
+                        <label for="InputBirthdate">Birthdate</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="InputBirthdate" ng-model="formDatas.birthdate" ng-required="true" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="comment">Description:</label>
                 <textarea class="form-control" rows="10" id="comment"></textarea>

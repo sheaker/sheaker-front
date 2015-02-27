@@ -28,7 +28,10 @@
 
                     <div class="form-group">
                         <label for="InputEmail">Mail</label>
-                        <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail" placeholder="Enter email address">
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail" placeholder="Enter email address">
+                        </div>
                     </div>
 
                     <div class="form-group">
