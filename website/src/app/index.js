@@ -12,13 +12,6 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         templateUrl: 'app/login/login.html',
         controller: 'LoginCtrl'
     })
-    .when('/profil', {
-        templateUrl: 'app/profil/profil.html',
-        controller: 'ProfilCtrl',
-        access: {
-              loginRequired: true
-        }
-    })
     .when('/admin/general', {
         templateUrl: 'app/admin/home/home.html',
         controller: 'HomeAdminCtrl',
