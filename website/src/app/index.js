@@ -92,7 +92,23 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 
     $httpProvider.interceptors.push('jwtInterceptor');
 })
-.run(function ($rootScope, $window, $timeout, $interval, $location, jwtHelper, Authorization) {
+.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization) {
+
+    var address = $location.host().split(".");
+
+    if (address[0] !== 'www' && address[0] !== 'sheaker') {
+        /*
+        Sheaker.get({urlName: address[0]}).$promise
+        .then(function() {
+            iff ('gym isn't registered') {
+                $window.location.href = 'http://sheaker.com/register/' + address[0];
+            }
+        })
+        .catch(function() {
+            $window.location.href = 'http://sheaker.com/register';
+        });
+         */
+    }
 
     $rootScope.authVars = {
         authorised: {
@@ -112,8 +128,8 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         $rootScope.user = decodedToken.user;
     }
 
-    var routeChangeRequiredAfterLogin = false,
-    loginRedirectUrl;
+    var routeChangeRequiredAfterLogin = false;
+    var loginRedirectUrl;
 
     $rootScope.$on('$routeChangeStart', function (event, next, previous) {
         var authorised;
