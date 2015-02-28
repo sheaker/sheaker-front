@@ -28,7 +28,7 @@ angular.module('sheaker')
 
     // Calculate ending date
     $scope.calculateEndDate = function () {
-        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.numberOfDays, 'days').format("YYYY-MM-DD");
+        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format("YYYY-MM-DD");
     };
 
     // Starting date calendar
