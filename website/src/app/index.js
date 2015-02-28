@@ -12,8 +12,8 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         templateUrl: 'app/login/login.html',
         controller: 'LoginCtrl'
     })
-    .when('/admin/general', {
-        templateUrl: 'app/admin/home/home.html',
+    .when('/admin/general/home', {
+        templateUrl: 'app/admin/general/home/home.html',
         controller: 'HomeAdminCtrl',
         access: {
             loginRequired: true,
@@ -21,9 +21,9 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
             permissionType: 'atLeastOne'
         }
     })
-    .when('/admin/general/setting-gym', {
-        templateUrl: 'app/admin/setting-gym/setting-gym.html',
-        controller: 'SettingGymCtrl',
+    .when('/admin/general/settings', {
+        templateUrl: 'app/admin/general/settings/settings.html',
+        controller: 'SettingsCtrl',
         access: {
             loginRequired: true,
             permissionsRequired: ['Modo', 'Admin'],
