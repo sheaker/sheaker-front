@@ -95,8 +95,16 @@ class UserPaymentRepository implements RepositoryInterface
         return $this->getPayments($conditions, $limit, $offset, $orderBy);
     }
 
+    public function delete($id)
+    {
+    }
+
+    public function getCount()
+    {
+    }
+
     /**
-     * Returns a collection of users.
+     * Returns a collection of payments.
      *
      * @param integer $limit
      *   The number of users to return.
@@ -105,7 +113,7 @@ class UserPaymentRepository implements RepositoryInterface
      * @param array $orderBy
      *   Optionally, the order by info, in the $column => $direction format.
      *
-     * @return array A collection of users, keyed by user id.
+     * @return array A collection of payments.
      */
     public function getPayments($conditions, $limit, $offset = 0, $orderBy = array())
     {
@@ -136,14 +144,6 @@ class UserPaymentRepository implements RepositoryInterface
             array_push($payments, $this->buildPayment($paymentData));
         }
         return $payments;
-    }
-
-    public function delete($id)
-    {
-    }
-
-    public function getCount()
-    {
     }
 
     /**

@@ -105,6 +105,31 @@ class UserRepository implements RepositoryInterface
      */
     public function findAll($limit, $offset = 0, $orderBy = array())
     {
+        return $this->getUsers(array(), $limit, $offset, $orderBy);
+    }
+
+    public function delete($id)
+    {
+    }
+
+    public function getCount()
+    {
+    }
+
+    /**
+     * Returns a collection of users.
+     *
+     * @param integer $limit
+     *   The number of users to return.
+     * @param integer $offset
+     *   The number of users to skip.
+     * @param array $orderBy
+     *   Optionally, the order by info, in the $column => $direction format.
+     *
+     * @return array A collection of users, keyed by user id.
+     */
+    public function getUsers($conditions, $limit, $offset = 0, $orderBy = array())
+    {
         // Provide a default orderBy.
         if (!$orderBy) {
             $orderBy = array('id' => 'ASC');
@@ -117,6 +142,13 @@ class UserRepository implements RepositoryInterface
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->orderBy('u.' . key($orderBy), current($orderBy));
+        $parameters = array();
+        foreach ($conditions as $key => $value) {
+            $parameters[':' . $key] = $value;
+            $where = $queryBuilder->expr()->eq('u.' . $key, ':' . $key);
+            $queryBuilder->andWhere($where);
+        }
+        $queryBuilder->setParameters($parameters);
         $statement = $queryBuilder->execute();
         $usersData = $statement->fetchAll();
 
@@ -127,14 +159,6 @@ class UserRepository implements RepositoryInterface
         }
 
         return $users;
-    }
-
-    public function delete($id)
-    {
-    }
-
-    public function getCount()
-    {
     }
 
     /**
