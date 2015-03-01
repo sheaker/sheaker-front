@@ -196,6 +196,7 @@ class UserController
         $user->setGender($newParams['gender']);
         $user->setLastSeen('0000-00-00 00:00:00');
         $user->setLastIP('0.0.0.0');
+        $user->setSubscriptionDate(date('c'));
         $user->setFailedLogins(0);
         $user->setPhoto($newParams['photo']);
         $user->setSponsor($newParams['sponsor']);

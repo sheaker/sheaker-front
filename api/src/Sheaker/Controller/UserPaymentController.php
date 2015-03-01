@@ -62,6 +62,7 @@ class UserPaymentController
         $userPayment->setComment($chargeParams['comment']);
         $userPayment->setPrice($chargeParams['price']);
         $userPayment->setMethod($chargeParams['method']);
+        $userPayment->setPaymentDate(date('c'));
         $app['repository.userPayment']->save($userPayment);
 
         return json_encode($userPayment, JSON_NUMERIC_CHECK);
