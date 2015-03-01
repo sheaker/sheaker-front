@@ -25,14 +25,14 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="client in clientsList | filter: searchText">
-                        <td>{{ client.id }}</td>
+                        <td>{{ client.customId || client.id }}</td>
                         <td>{{ client.firstName }}</td>
                         <td>{{ client.lastName }}</td>
                         <td></td>
                         <td>
-                            <a href="#/admin/clients/edit/{{ client.id }}"><span class="fa fa-pencil-square-o"></span></a>&nbsp&nbsp
-                            <a href="#/admin/clients/charge/{{ client.id }}"><span class="fa fa-money"> </span></a>&nbsp&nbsp
-                            <a href="#/admin/clients/review/{{ client.id }}"><span class="fa fa-bar-chart"></span></a>
+                            <a href="#/admin/clients/edit/{{ client.customId || client.id }}"><span class="fa fa-pencil-square-o"></span></a>&nbsp&nbsp
+                            <a href="#/admin/clients/charge/{{ client.customId || client.id }}"><span class="fa fa-money"> </span></a>&nbsp&nbsp
+                            <a href="#/admin/clients/review/{{ client.customId || client.id }}"><span class="fa fa-bar-chart"></span></a>
                         </td>
                     </tr>
                 </tbody>

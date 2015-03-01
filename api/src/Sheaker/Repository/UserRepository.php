@@ -28,6 +28,7 @@ class UserRepository implements RepositoryInterface
     public function save($user)
     {
         $userData = array(
+            'custom_id'     => $user->getCustomId(),
             'first_name'    => $user->getFirstName(),
             'last_name'     => $user->getLastName(),
             'password'      => $user->getPassword(),
@@ -73,7 +74,7 @@ class UserRepository implements RepositoryInterface
     }
 
     /**
-     * Returns a user matching the supplied id.
+     * Returns a user matching the supplied Id.
      *
      * @param integer $id
      *
@@ -81,13 +82,45 @@ class UserRepository implements RepositoryInterface
      */
     public function find($id)
     {
+        // Use findById()
+    }
+
+    /**
+     * Returns a user matching the supplied id.
+     * The id is most use db side
+     *
+     * @param integer $id
+     *
+     * @return \Sheaker\Entity\User|false An entity object if found, false otherwise.
+     */
+    public function findById($id)
+    {
         $userData = $this->db->fetchAssoc('
             SELECT *
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
             LEFT JOIN users_photo up ON up.user_id = u.id
             LEFT JOIN users_extrainfo uei ON uei.user_id = u.id
-            WHERE id = ?', array($id));
+            WHERE u.id = ?', array($id));
+        return $userData ? $this->buildUser($userData) : FALSE;
+    }
+
+    /**
+     * Returns a user matching the supplied custom Id.
+     *
+     * @param integer $customId
+     *
+     * @return \Sheaker\Entity\User|false An entity object if found, false otherwise.
+     */
+    public function findByCustomId($customId)
+    {
+        $userData = $this->db->fetchAssoc('
+            SELECT *
+            FROM users u
+            LEFT JOIN users_access ua ON ua.user_id = u.id
+            LEFT JOIN users_photo up ON up.user_id = u.id
+            LEFT JOIN users_extrainfo uei ON uei.user_id = u.id
+            WHERE u.custom_id = ?', array($customId));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
 
@@ -173,6 +206,7 @@ class UserRepository implements RepositoryInterface
     {
         $user = new User();
         $user->setId($userData['id']);
+        $user->setCustomId($userData['custom_id']);
         $user->setFirstName($userData['first_name']);
         $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);

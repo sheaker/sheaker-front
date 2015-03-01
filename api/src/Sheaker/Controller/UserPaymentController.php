@@ -56,7 +56,7 @@ class UserPaymentController
         $chargeParams['comment'] = $app->escape($request->get('comment'));
 
         $userPayment = new UserPayment();
-        $userPayment->setUserID($chargeParams['userId']);
+        $userPayment->setUserId($chargeParams['userId']);
         $userPayment->setDays($chargeParams['days']);
         $userPayment->setStartDate(date('Y-m-d H:i:s', strtotime($chargeParams['startDate'])));
         $userPayment->setComment($chargeParams['comment']);

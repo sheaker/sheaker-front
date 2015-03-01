@@ -11,10 +11,10 @@ class UserController
 {
     public function login(Request $request, Application $app)
     {
-        $loginParams['id']         = $app->escape($request->get('id'));
-        $loginParams['password']   = $app->escape($request->get('password'));
+        $loginParams['id']       = $app->escape($request->get('id'));
+        $loginParams['password'] = $app->escape($request->get('password'));
 
-        foreach($loginParams as $value) {
+        foreach ($loginParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
@@ -22,20 +22,23 @@ class UserController
 
         $loginParams['rememberMe'] = $app->escape($request->get('rememberMe'));
 
-        $user = $app['repository.user']->find($loginParams['id']);
+        $user = $app['repository.user']->findByCustomId($loginParams['id']);
         if (!$user) {
-            $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+            $user = $app['repository.user']->findById($loginParams['id']);
+            if (!$user) {
+                $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+            }
         }
 
         if (password_verify($loginParams['password'], $user->getPassword())) {
             $user->setLastSeen(date('Y-m-d H:i:s', time()));
-            $user->setLastIP("0.0.0.0"/*$request->headers->get('referer')*/);
+            $user->setLastIP('0.0.0.0'/*$request->headers->get('referer')*/);
             $user->setFailedLogins(0);
             $app['repository.user']->save($user);
 
             $exp = ($loginParams['rememberMe']) ? time() + 60 * 60 * 24 * 360 : time() + 60 * 60 * 24; // expire in 1year or 24h
             $userToken = [
-                'id'          => $user->getId(),
+                'number'      => ($user->getCustomId()) ? $user->getCustomId() : $user->getId(),
                 'name'        => $user->getFirstName(),
                 'lastname'    => $user->getLastname(),
                 'permissions' => [
@@ -75,7 +78,7 @@ class UserController
 
         $limit = 50;
         $offset = 0;
-        $users = $app['repository.user']->findAll($limit, $offset, array('id' => 'DESC'));
+        $users = $app['repository.user']->findAll($limit, $offset, array('subscription_date' => 'DESC'));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
@@ -91,15 +94,18 @@ class UserController
         $getParams = [];
         $getParams['id'] = $app->escape($request->get('id'));
 
-        foreach($getParams as $value) {
+        foreach ($getParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
 
-        $user = $app['repository.user']->find($getParams['id']);
+        $user = $app['repository.user']->findByCustomId($getParams['id']);
         if (!$user) {
-            $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+            $user = $app['repository.user']->findById($getParams['id']);
+            if (!$user) {
+                $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+            }
         }
 
         return json_encode($user, JSON_NUMERIC_CHECK);
@@ -121,21 +127,24 @@ class UserController
         $updateParams['gender']    = $app->escape($request->get('gender'));
         $updateParams['birthdate'] = $app->escape($request->get('birthdate'));
 
-        foreach($updateParams as $value) {
+        foreach ($updateParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
 
+        $updateParams['customId']  = $app->escape($request->get('customId'));
         $updateParams['photo']     = $app->escape($request->get('photo'));
         $updateParams['sponsor']   = $app->escape($request->get('sponsor'));
         $updateParams['comment']   = $app->escape($request->get('comment'));
 
-        $user = $app['repository.user']->find($updateParams['id']);
+
+        $user = $app['repository.user']->findById($updateParams['id']);
         if (!$user) {
             $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
         }
 
+        $user->setCustomId((isset($updateParams['customId'])) ? $updateParams['customId'] : 0);
         $user->setFirstName($updateParams['firstName']);
         $user->setLastName($updateParams['lastName']);
         $user->setMail($updateParams['mail']);
@@ -164,12 +173,13 @@ class UserController
         $newParams['gender']    = $app->escape($request->get('gender'));
         $newParams['birthdate'] = $app->escape($request->get('birthdate'));
 
-        foreach($newParams as $value) {
+        foreach ($newParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
 
+        $newParams['customId']  = $app->escape($request->get('customId'));
         $newParams['photo']     = $app->escape($request->get('photo'));
         $newParams['sponsor']   = $app->escape($request->get('sponsor'));
         $newParams['comment']   = $app->escape($request->get('comment'));
@@ -177,6 +187,7 @@ class UserController
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
         $user = new User();
+        $user->setCustomId((isset($newParams['customId'])) ? $newParams['customId'] : 0);
         $user->setFirstName($newParams['firstName']);
         $user->setLastName($newParams['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));

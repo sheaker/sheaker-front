@@ -5,11 +5,19 @@ namespace Sheaker\Entity;
 class User
 {
     /**
-     * User id.
+     * User id in database.
      *
      * @var integer
      */
     public $id;
+
+    /**
+     * User custom id to log in gym.
+     * Could be differente if user want a custom identification
+     *
+     * @var integer
+     */
+    public $customId;
 
     /**
      * First Name.
@@ -116,6 +124,15 @@ class User
     public function setId($id)
     {
         return $this->id = $id;
+    }
+
+    public function getCustomId()
+    {
+        return $this->customId;
+    }
+    public function setCustomId($customId)
+    {
+        return $this->customId = $customId;
     }
 
     public function getFirstName()

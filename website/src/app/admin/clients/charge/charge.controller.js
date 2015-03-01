@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, UserPayment) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, UserPayment) {
 
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to charge before going to this page.'});
@@ -17,13 +17,22 @@ angular.module('sheaker')
         {id: 2, name: 'Debit Card'}
     ];
 
-    // Load payment history
-    UserPayment.query({id: $routeParams.id}).$promise
-    .then(function(paymentHistory) {
-        $scope.paymentHistory = paymentHistory;
+    // Load user
+    User.get({id: $routeParams.id}).$promise
+    .then(function(user) {
+        $scope.user = user;
+
+        // Load payment history
+        UserPayment.query({id: $scope.user.id}).$promise
+        .then(function(paymentHistory) {
+            $scope.paymentHistory = paymentHistory;
+        })
+        .catch(function(error) {
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
+        });
     })
     .catch(function(error) {
-        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving users payments, please contact a developper.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations, please contact a developper.'});
     });
 
     // Calculate ending date
@@ -50,7 +59,7 @@ angular.module('sheaker')
     };
 
     $scope.chargeUser = function () {
-        $scope.formDatas.id = $routeParams.id;
+        $scope.formDatas.id = $scope.user.id;
 
         UserPayment.save($scope.formDatas).$promise
         .then(function(payment) {

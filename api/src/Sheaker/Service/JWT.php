@@ -56,7 +56,7 @@ class JWT
         try {
             $decoded_token = \JWT::decode($token, $this->secretKey);
         }
-        catch(UnexpectedValueException $ex) {
+        catch (UnexpectedValueException $ex) {
             $this->app->abort(Response::HTTP_UNAUTHORIZED, 'Invalid token');
         }
 
