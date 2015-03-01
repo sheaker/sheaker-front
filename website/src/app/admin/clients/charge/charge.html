@@ -10,7 +10,7 @@
         </div>
 
         <div class="text-center" id="userInfos">
-            <img src="{{ user.photo || 'assets/images/user_unknow.png' }}" height=120 width=160>
+            <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height=120 width=160>
             <p>{{ user.firstName }} {{ user.lastName }}</p>
         </div>
 
