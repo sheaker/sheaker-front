@@ -17,18 +17,23 @@
                     <span class="color-grey fa fa-list pull-right"></span></font>
                     <div class="title-small">General Informations</div>
                     <div class="form-group">
+                        <label for="InputCustomId">Custom ID ?</label>
+                        <input type="checkbox" ng-checked="formDatas.customId" ng-model="hasCustomId">
+                        <input type="number" class="form-control" id="InputCustomId" ng-show="hasCustomId" ng-model="formDatas.customId" placeholder="Enter the Id you want, if it's available">
+                    </div>
+                    <div class="form-group">
                         <label for="InputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="InputFirstName" ng-model="formDatas.firstName" placeholder="First Name">
+                        <input type="text" class="form-control" id="InputFirstName" ng-model="formDatas.firstName">
                     </div>
 
                     <div class="form-group">
                         <label for="InputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="InputLastName" ng-model="formDatas.lastName" placeholder="Last Name">
+                        <input type="text" class="form-control" id="InputLastName" ng-model="formDatas.lastName">
                     </div>
 
                     <div class="form-group">
                         <label for="InputEmail">Mail</label>
-                        <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail" placeholder="Enter email address">
+                        <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail" placeholder="user@anything.anything">
                     </div>
 
                     <div class="form-group">
@@ -86,11 +91,11 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="InputFirstName">Sponsor</label>
-                                <input type="number" class="form-control" id="InputSponsor" ng-model="formDatas.sponsor" placeholder="Sponsor ID">
+                                <input type="number" class="form-control" id="InputSponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                             </div>
 
                             <label for="comment">Comment</label>
-                            <textarea class="form-control" id="InputComment" ng-model="formDatas.comment" rows="10"></textarea>
+                            <textarea class="form-control" id="InputComment" ng-model="formDatas.comment" rows="10" placeholder="If you have any comments to do..."></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Edit client</button>

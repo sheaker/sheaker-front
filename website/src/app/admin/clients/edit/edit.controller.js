@@ -102,6 +102,10 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.editUser = function () {
+        if (!$scope.hasCustomId && $scope.formDatas.customId) {
+            $scope.formDatas.customId = 0;
+        }
+
         User.update($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});

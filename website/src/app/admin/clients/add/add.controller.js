@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($rootScope, $scope, $anchorScroll, User) {
+.controller('AddClientCtrl', function ($rootScope, $scope, $location, $anchorScroll, User) {
     $scope.formDatas = {};
 
     // Birthdate Calendar
