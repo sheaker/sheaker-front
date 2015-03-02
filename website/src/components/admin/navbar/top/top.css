@@ -1,0 +1,18 @@
+.right-menu {
+    padding-top : 15px;
+    margin-right: 10px;
+    color : #5b5b5b;
+}
+
+.right-menu > li {
+    margin-right: 50px;
+}
+.right-menu > li > a {
+    margin-top : -15px;
+    margin-right: -10px;
+}
+
+.right-menu > li > a:link {color: #289A31;}
+.right-menu > li > a:visited {color: #289A31;}
+.right-menu > li > a:hover {color: #289A31;}
+.right-menu > li > a:active {color: #289A31;}

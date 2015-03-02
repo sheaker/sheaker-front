@@ -83,12 +83,48 @@
                     </div>
                 </div>
             </div>  <!-- Camera end -->
-            <div class="col-lg-offset-1 col-lg-5" id="DetailsInformations">
+            <div class="col-lg-offset-1 col-lg-5" id="MoreInformations">
+                <div class="thumbnail thumbnail-form">
+                    <span class="color-grey fa fa-list pull-right"></span></font>
+                    <div class="caption">
+                        <div class="title-small">More Informations</div>
+                        <div class="form-group">
+                            <h3>Adress</h3>
+                            <div class="col-lg-offset-1 form-group col-lg-2">
+                                <label for="InputAdressNumber">#number</label>
+                                <input type="number" class="form-control" id="InputAdressNumber" ng-model="formDatas.adress.number" placeholder="ex: 613">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="InputAdressCalle">Street</label>
+                                <input type="text" class="form-control" id="InputAdressCalle" ng-model="formDatas.adress.calle" placeholder="ex: Francia">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="InputAdressColonia">Colonia</label>
+                                <input type="text" class="form-control" id="InputAdressColonia" ng-model="formDatas.adress.colonia" placeholder="ex: Ladron de Guevara">
+                            </div>
+                            <div class="col-lg-offset-1 form-group col-lg-4">
+                                <label for="InputAdressCp">Zip code</label>
+                                <input type="number" class="form-control" id="InputAdressCp" ng-model="formDatas.adress.cp" placeholder="ex: 94240">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="InputAdressCiudad">City</label>
+                                <input type="text" class="form-control" id="InputAdressCiudad" ng-model="formDatas.adress.ciudad" placeholder="ex: Zapopan">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputFirstName">Phone Number</label>
+                                <input type="number" class="form-control" id="InputGymName" ng-model="formDatas.gymName" placeholder="ex: 3365895889">
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Details informations end -->
+            </div>
+            <div class="col-lg-5" id="DetailsInformations">
                 <div class="thumbnail thumbnail-form">
                     <span class="color-grey fa fa-paperclip pull-right"></span></font>
                     <div class="caption">
                         <div class="title-small">Extra Informations</div>
                         <div class="form-group">
+
                             <div class="form-group">
                                 <label for="InputFirstName">Sponsor</label>
                                 <input type="number" class="form-control" id="InputSponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
@@ -100,6 +136,7 @@
                     </div>
                 </div> <!-- Details informations end -->
             </div>
+
             <div class="col-lg-10" id="ButtonAdd">
                 <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block">Add client</button>
             </div>

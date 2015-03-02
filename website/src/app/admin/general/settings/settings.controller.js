@@ -5,7 +5,7 @@ angular.module('sheaker')
 
     $scope.formDatas = {};
 
-    $scope.availablepaymentmethods = [
+    $scope.days = [
         {id: 0, day: 'Monday'},
         {id: 1, day: 'Tuesday'},
         {id: 2, day: 'Wednesday'},
