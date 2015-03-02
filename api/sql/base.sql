@@ -7,7 +7,7 @@
 #
 # Hôte: localhost (MySQL 10.0.16-MariaDB)
 # Base de données: gymname
-# Temps de génération: 2015-02-27 23:54:50 +0000
+# Temps de génération: 2015-03-02 22:32:37 +0000
 # ************************************************************
 
 
@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `custom_id` int(11) unsigned NOT NULL DEFAULT '0',
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
@@ -58,23 +59,6 @@ CREATE TABLE `users_access` (
 
 
 
-# Affichage de la table users_payments
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users_payments`;
-
-CREATE TABLE `users_payments` (
-  `user_id` int(11) unsigned NOT NULL,
-  `days` smallint(5) unsigned DEFAULT NULL,
-  `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment` varchar(255) NOT NULL DEFAULT '',
-  `price` smallint(5) unsigned DEFAULT NULL,
-  `method` tinyint(3) unsigned DEFAULT NULL,
-  `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
 # Affichage de la table users_extrainfo
 # ------------------------------------------------------------
 
@@ -89,6 +73,23 @@ CREATE TABLE `users_extrainfo` (
   CONSTRAINT `users_extrainfo_ibfk_2` FOREIGN KEY (`sponsor_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_extrainfo_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Affichage de la table users_payments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users_payments`;
+
+CREATE TABLE `users_payments` (
+  `user_id` int(11) unsigned NOT NULL,
+  `days` smallint(5) unsigned DEFAULT NULL,
+  `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment` varchar(255) NOT NULL DEFAULT '',
+  `price` smallint(5) unsigned DEFAULT NULL,
+  `method` tinyint(3) unsigned DEFAULT NULL,
+  `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
