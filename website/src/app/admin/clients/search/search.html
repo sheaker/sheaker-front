@@ -11,7 +11,7 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <div class="panel-heading">Search :<input class="search-field" ng-model="searchText"></div>
+        <div class="panel-heading">Search :<input type="search" class="search-field" ng-model="searchText" placeholder="search by id, first name, last name"></div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
