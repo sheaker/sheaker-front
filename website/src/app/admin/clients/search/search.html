@@ -30,9 +30,9 @@
                         <td>{{ client.lastName }}</td>
                         <td></td>
                         <td>
-                            <a popover="Edit {{ client.firstName }}" popover-trigger="mouseenter" href="#/admin/clients/edit/{{ client.customId || client.id }}"><span class="fa fa-pencil-square-o"></span></a>&nbsp&nbsp
-                            <a popover="Charge {{ client.firstName }}" popover-trigger="mouseenter" href="#/admin/clients/charge/{{ client.customId || client.id }}"><span class="fa fa-money"> </span></a>&nbsp&nbsp
-                            <a popover="Stats about {{ client.firstName }}" popover-trigger="mouseenter" href="#/admin/clients/review/{{ client.customId || client.id }}"><span class="fa fa-bar-chart"></span></a>
+                            <a href="#/admin/clients/edit/{{ client.customId || client.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>&nbsp&nbsp
+                            <a href="#/admin/clients/charge/{{ client.customId || client.id }}" tooltip="Charge" tooltip-placement="top"><span class="fa fa-money fa-lg"></span></a>&nbsp&nbsp
+                            <a href="" tooltip="Review" tooltip-placement="right"><span class="fa fa-bar-chart fa-lg"></span></a>
                         </td>
                     </tr>
                 </tbody>
