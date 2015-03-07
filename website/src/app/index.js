@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber'])
-.constant('API_URL', '//api.sheaker.perso.dev')
+.constant('SHEAKER_MAIN_API_URL', '//sheaker.dev/api')
+.constant('SHEAKER_API_URL', '//gym4devs.sheaker.dev/api')
 .config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
     $routeProvider
     .when('/', {
@@ -80,7 +81,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         redirectTo: '/'
     });
 
-     jwtInterceptorProvider.tokenGetter = function(jwtHelper, $http, $window, API_URL) {
+     jwtInterceptorProvider.tokenGetter = function(jwtHelper, $http, $window, SHEAKER_API_URL) {
          var token = $window.localStorage.getItem('token');
 
         if (token && jwtHelper.isTokenExpired(token)) {
@@ -92,22 +93,21 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 
     $httpProvider.interceptors.push('jwtInterceptor');
 })
-.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization) {
+.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Sheaker, Authorization) {
 
     var address = $location.host().split(".");
+    var prohibitedSubs = ['www'];
 
-    if (address[0].toLowerCase() !== 'www' && address[0].toLowerCase() !== 'sheaker') {
-        /*
-        Sheaker.get({urlName: address[0]}).$promise
-        .then(function() {
-            iff ('gym isn't registered') {
+    if (address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
+        Sheaker.exist({subdomain: address[0]}).$promise
+        .then(function(client) {
+            $rootScope.gymname = client.name;
+        })
+        .catch(function(error) {
+            if (error.status === 404) {
                 $window.location.href = 'http://sheaker.com/register/' + address[0];
             }
-        })
-        .catch(function() {
-            $window.location.href = 'http://sheaker.com/register';
         });
-         */
     }
 
     $rootScope.authVars = {

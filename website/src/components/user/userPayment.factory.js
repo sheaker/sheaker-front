@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('sheaker')
-.factory('UserPayment', function ($resource, API_URL) {
+.factory('UserPayment', function ($resource, SHEAKER_API_URL) {
     var UserPayment;
 
-    UserPayment = $resource(API_URL + '/users/:id/charge', {id: '@id'});
+    UserPayment = $resource(SHEAKER_API_URL + '/users/:id/charge', {id: '@id'});
     return UserPayment;
 });

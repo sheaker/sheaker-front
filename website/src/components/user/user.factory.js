@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('sheaker')
-.factory('User', function ($resource, API_URL) {
+.factory('User', function ($resource, SHEAKER_API_URL) {
     var User, actions;
 
     actions = {
         login: {
             method: 'POST',
-            url: API_URL + '/users/login',
+            url: SHEAKER_API_URL + '/users/login',
             skipAuthorization: true
         },
         update: {
@@ -15,6 +15,6 @@ angular.module('sheaker')
         }
     };
 
-    User = $resource(API_URL + '/users/:id', {id: '@id'}, actions);
+    User = $resource(SHEAKER_API_URL + '/users/:id', {id: '@id'}, actions);
     return User;
 });
