@@ -62,6 +62,34 @@ class User
     public $birthdate;
 
     /**
+     * First line Street Address.
+     *
+     * @var string
+     */
+    public $addressStreet1;
+
+    /**
+     * Second line Street Address.
+     *
+     * @var string
+     */
+    public $addressStreet2;
+
+    /**
+     * Name of the City.
+     *
+     * @var string
+     */
+    public $city;
+
+    /**
+     * Zip code.
+     *
+     * @var integer
+     */
+    public $zip;
+
+    /**
      * What kind of person is the user entity.
      *
      * @var integer
@@ -187,6 +215,42 @@ class User
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
+    }
+
+    public function getAddressStreet1()
+    {
+        return $this->addressStreet1;
+    }
+    public function setAddressStreet1($addressStreet1)
+    {
+        $this->addressStreet1 = $addressStreet1;
+    }
+
+    public function getAddressStreet2()
+    {
+        return $this->addressStreet2;
+    }
+    public function setAddressStreet2($addressStreet2)
+    {
+        $this->addressStreet2 = $addressStreet2;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getZip()
+    {
+        return $this->zip;
+    }
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
     }
 
     public function getGender()

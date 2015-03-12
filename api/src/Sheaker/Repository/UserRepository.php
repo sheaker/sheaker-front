@@ -28,21 +28,25 @@ class UserRepository implements RepositoryInterface
     public function save($user)
     {
         $userData = array(
-            'custom_id'     => $user->getCustomId(),
-            'first_name'    => $user->getFirstName(),
-            'last_name'     => $user->getLastName(),
-            'password'      => $user->getPassword(),
-            'mail'          => $user->getMail(),
-            'birthdate'     => $user->getBirthdate(),
-            'gender'        => $user->getGender(),
-            'last_seen'     => $user->getLastSeen(),
-            'last_ip'       => $user->getLastIP(),
-            'failed_logins' => $user->getFailedLogins()
+            'custom_id'             => $user->getCustomId(),
+            'first_name'            => $user->getFirstName(),
+            'last_name'             => $user->getLastName(),
+            'password'              => $user->getPassword(),
+            'mail'                  => $user->getMail(),
+            'birthdate'             => $user->getBirthdate(),
+            'address_street_1'   => $user->getAddressStreet1(),
+            'address_street_2'   => $user->getAddressStreet2(),
+            'city'                  => $user->getCity(),
+            'zip'                   => $user->getZip(),
+            'gender'                => $user->getGender(),
+            'last_seen'             => $user->getLastSeen(),
+            'last_ip'               => $user->getLastIP(),
+            'failed_logins'         => $user->getFailedLogins()
         );
 
         $userExtraInfoData = array(
-            'sponsor_id' => $user->getSponsor(),
-            'comment'    => $user->getComment()
+            'sponsor_id'        => $user->getSponsor(),
+            'comment'           => $user->getComment()
         );
 
         $userPhotoData = array(
@@ -212,6 +216,10 @@ class UserRepository implements RepositoryInterface
         $user->setPassword($userData['password']);
         $user->setMail($userData['mail']);
         $user->setBirthdate($userData['birthdate']);
+        $user->setAddressStreet1($userData['address_street_1']);
+        $user->setAddressStreet2($userData['address_street_2']);
+        $user->setCity($userData['city']);
+        $user->setZip($userData['zip']);
         $user->setGender($userData['gender']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);

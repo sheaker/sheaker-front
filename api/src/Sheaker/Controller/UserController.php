@@ -120,12 +120,17 @@ class UserController
         }
 
         $updateParams = [];
-        $updateParams['id']        = $app->escape($request->get('id'));
-        $updateParams['firstName'] = $app->escape($request->get('firstName'));
-        $updateParams['lastName']  = $app->escape($request->get('lastName'));
-        $updateParams['mail']      = $app->escape($request->get('mail'));
-        $updateParams['gender']    = $app->escape($request->get('gender'));
-        $updateParams['birthdate'] = $app->escape($request->get('birthdate'));
+        $updateParams['id']                 = $app->escape($request->get('id'));
+        $updateParams['firstName']          = $app->escape($request->get('firstName'));
+        $updateParams['lastName']           = $app->escape($request->get('lastName'));
+        $updateParams['mail']               = $app->escape($request->get('mail'));
+        $updateParams['gender']             = $app->escape($request->get('gender'));
+        $updateParams['birthdate']          = $app->escape($request->get('birthdate'));
+        $updateParams['addressStreet1']    = $app->escape($request->get('addressStreet1'));
+        $updateParams['addressStreet2']    = $app->escape($request->get('addressStreet2'));
+        $updateParams['city']               = $app->escape($request->get('city'));
+        $updateParams['zip']                = $app->escape($request->get('zip'));
+
 
         foreach ($updateParams as $value) {
             if (!isset($value)) {
@@ -150,6 +155,10 @@ class UserController
         $user->setMail($updateParams['mail']);
         $user->setGender($updateParams['gender']);
         $user->setBirthdate($updateParams['birthdate']);
+        $user->setAddressStreet1($updateParams['addressStreet1']);
+        $user->setAddressStreet2($updateParams['addressStreet2']);
+        $user->setCity($updateParams['city']);
+        $user->setZip($updateParams['zip']);
         $user->setPhoto($updateParams['photo']);
         $user->setSponsor($updateParams['sponsor']);
         $user->setComment($updateParams['comment']);
@@ -167,11 +176,15 @@ class UserController
         }
 
         $newParams = [];
-        $newParams['firstName'] = $app->escape($request->get('firstName'));
-        $newParams['lastName']  = $app->escape($request->get('lastName'));
-        $newParams['mail']      = $app->escape($request->get('mail'));
-        $newParams['gender']    = $app->escape($request->get('gender'));
-        $newParams['birthdate'] = $app->escape($request->get('birthdate'));
+        $newParams['firstName']         = $app->escape($request->get('firstName'));
+        $newParams['lastName']          = $app->escape($request->get('lastName'));
+        $newParams['mail']              = $app->escape($request->get('mail'));
+        $newParams['gender']            = $app->escape($request->get('gender'));
+        $newParams['birthdate']         = $app->escape($request->get('birthdate'));
+        $newParams['addressStreet1']   = $app->escape($request->get('addressStreet1'));
+        $newParams['addressStreet2']   = $app->escape($request->get('addressStreet2'));
+        $newParams['city']              = $app->escape($request->get('city'));
+        $newParams['zip']               = $app->escape($request->get('zip'));
 
         foreach ($newParams as $value) {
             if (!isset($value)) {
@@ -179,10 +192,10 @@ class UserController
             }
         }
 
-        $newParams['customId']  = $app->escape($request->get('customId'));
-        $newParams['photo']     = $app->escape($request->get('photo'));
-        $newParams['sponsor']   = $app->escape($request->get('sponsor'));
-        $newParams['comment']   = $app->escape($request->get('comment'));
+        $newParams['customId']          = $app->escape($request->get('customId'));
+        $newParams['photo']             = $app->escape($request->get('photo'));
+        $newParams['sponsor']           = $app->escape($request->get('sponsor'));
+        $newParams['comment']           = $app->escape($request->get('comment'));
 
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
@@ -193,6 +206,10 @@ class UserController
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
         $user->setMail($newParams['mail']);
         $user->setBirthdate(date('Y-m-d H:i:s', strtotime($newParams['birthdate'])));
+        $user->setAddressStreet1($newParams['addressStreet1']);
+        $user->setAddressStreet2($newParams['addressStreet2']);
+        $user->setCity($newParams['city']);
+        $user->setZip($newParams['zip']);
         $user->setGender($newParams['gender']);
         $user->setLastSeen('0000-00-00 00:00:00');
         $user->setLastIP('0.0.0.0');
