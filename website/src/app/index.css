@@ -137,7 +137,7 @@ body {
     border-top-right-radius: 0;
 }
 
-.form .form-control{
+.form-group .form-control{
     margin-bottom: 10px;
 }
 /* End Form */

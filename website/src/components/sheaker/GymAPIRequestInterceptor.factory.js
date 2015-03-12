@@ -8,7 +8,7 @@ angular.module('sheaker')
 
             if (request.url.indexOf(GYM_API_URL) != -1) {
                 request.params = {
-                    client: $rootScope.client.id
+                    client: 1
                 };
             }
 

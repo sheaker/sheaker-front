@@ -67,21 +67,18 @@
 
                     <div class="form-group">
                         <h3>Address</h3>
-                        <div class="form-group col-lg-3">
-                            <label for="InputAddressNumber">Number</label>
-                            <input type="number" class="form-control" id="InputAddressNumber" min="1" ng-model="formDatas.address.number">
-                        </div>
-                        <div class="form-group col-lg-9">
-                            <label for="InputAddressStreet">Street</label>
-                            <input type="text" class="form-control" id="InputAddressStreet" ng-model="formDatas.address.street">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="InputAddressZipCode">Zip code</label>
-                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" ng-model="formDatas.address.zipCode">
+                        <div class="form-group col-lg-12">
+                            <label for="InputAddressStreet">Street address</label>
+                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
+                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
                         </div>
                         <div class="form-group col-lg-8">
                             <label for="InputAddressCity">City</label>
-                            <input type="text" class="form-control" id="InputAddressCity" ng-model="formDatas.address.city">
+                            <input type="text" class="form-control" id="InputAddressCity" ng-model="formDatas.city">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="InputAddressZipCode">Zip code</label>
+                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" ng-model="formDatas.zip">
                         </div>
                     </div>
                 </div>
