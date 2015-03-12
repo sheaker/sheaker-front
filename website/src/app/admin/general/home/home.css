@@ -1,0 +1,17 @@
+.thumbnail-form-home {
+    font-size: 16px;
+    border: 0;
+    height: 350px;
+    border-top: 1px solid #dbdbdb;
+    color: #4b4b4b;
+}
+
+.thumbnail-form-home .title-small {
+    padding-top: 8px;
+    margin-bottom: 50px;
+    font-size: 22px;
+}
+
+.thumbnail-form-home .fa {
+    font-size: 50px;
+}

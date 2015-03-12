@@ -8,7 +8,58 @@
         <div class="title">
             <span class="color-green fa fa-home"></span>Home
         </div>
-
+        <div class="col-lg-3" id="SheakerMembership">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-tachometer pull-right"></span>
+                <div class="title-small">Sheaker Membership</div>
+                Account type : Free
+            </div>
+        </div>  <!--Total Gains end -->
+        <div class="col-lg-3" id="Birthdays">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-birthday-cake pull-right"></span>
+                <div class="title-small">Birthdays</div>
+            </div>
+        </div>  <!-- Birthday end -->
+        <div class="col-lg-3" id="LastsEntry">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-street-view pull-right"></span>
+                <div class="title-small">Lasts Entry</div>
+            </div>
+        </div>  <!-- Lasts Entry end -->
+        <div class="col-lg-3" id="NewClients">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-bookmark pull-right"></span>
+                <div class="title-small">New Clients</div>
+            </div>
+        </div>  <!-- Lasts Entry end -->
+        <div class="col-lg-3" id="ClientsNumber">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-users pull-right"></span>
+                <div class="title-small">Total Clients</div>
+                <h1><span class="color-green fa fa-smile-o"></span> 255</h1>
+                <h1><span class="color-red fa fa-frown-o"></span> 88</h1>
+                <h1>Total: 343</h1>
+            </div>
+        </div>  <!--Total Clients end -->
+        <div class="col-lg-3" id="FinishedMemberships">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-frown-o pull-right"></span>
+                <div class="title-small">Finished Memberships</div>
+            </div>
+        </div>  <!--Finished memberships end -->
+        <div class="col-lg-3" id="NewMemberships">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-smile-o pull-right"></span>
+                <div class="title-small">New Memberships</div>
+            </div>
+        </div>  <!--New memberships end -->
+        <div class="col-lg-3" id="TotalGains">
+            <div class="thumbnail thumbnail-form-home">
+                <span class="color-grey fa fa-usd pull-right"></span>
+                <div class="title-small">Total Gains</div>
+            </div>
+        </div>  <!--Total Gains end -->
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
     </div>
