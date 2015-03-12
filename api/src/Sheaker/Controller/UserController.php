@@ -47,7 +47,7 @@ class UserController
                 'rememberMe'  => $loginParams['rememberMe']
             ];
 
-            $token = $app['jwt']->createToken($request->headers->get('referer'), $exp, $userToken);
+            $token = $app['jwt']->createToken($request, $exp, $userToken);
         }
         else {
             $user->setFailedLogins($user->getFailedLogins() + 1);

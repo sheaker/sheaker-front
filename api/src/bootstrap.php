@@ -66,7 +66,7 @@ $app['repository.userPayment'] = $app->share(function ($app) {
  * Register custom services
  */
 $app['jwt'] = $app->share(function ($app) {
-    return new Sheaker\Service\JWT($app, $app['api.secretKey']);
+    return new Sheaker\Service\JWT($app);
 });
 
 /**

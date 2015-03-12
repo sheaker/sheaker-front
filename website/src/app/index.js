@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber'])
-.constant('SHEAKER_MAIN_API_URL', '//sheaker.dev/api')
-.constant('SHEAKER_API_URL', '//gym4devs.sheaker.dev/api')
-.config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
+.constant('SHEAKER_URL', '//sheaker.dev')
+.constant('SHEAKER_API_URL', '//sheaker.dev/api')
+.constant('GYM_API_URL', '//gym4devs.sheaker.dev/api')
+.config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
     $routeProvider
     .when('/', {
         templateUrl: 'app/home/home.html',
@@ -81,7 +82,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         redirectTo: '/'
     });
 
-     jwtInterceptorProvider.tokenGetter = function(jwtHelper, $http, $window, SHEAKER_API_URL) {
+     jwtInterceptorProvider.tokenGetter = function(jwtHelper, $http, $window, GYM_API_URL) {
          var token = $window.localStorage.getItem('token');
 
         if (token && jwtHelper.isTokenExpired(token)) {
@@ -92,16 +93,23 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     };
 
     $httpProvider.interceptors.push('jwtInterceptor');
+    $httpProvider.interceptors.push('GymAPIRequestInterceptor');
 })
-.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Sheaker, Authorization) {
+.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, SheakerClient, Authorization) {
+
+    $rootScope.client = {
+        id: -1,
+        name: ''
+    };
 
     var address = $location.host().split(".");
     var prohibitedSubs = ['www'];
 
     if (address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
-        Sheaker.exist({subdomain: address[0]}).$promise
+        SheakerClient.get({subdomain: address[0]}).$promise
         .then(function(client) {
-            $rootScope.gymname = client.name;
+            $rootScope.client.id = client.id;
+            $rootScope.client.name = client.name;
         })
         .catch(function(error) {
             if (error.status === 404) {

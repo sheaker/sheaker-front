@@ -16,29 +16,32 @@ class JWT
      */
     protected $app;
 
-    /**
-     * Secret Key.
-     *
-     * @var string
-     */
-    protected $secretKey;
-
-    public function __construct(Application $app, $secretKey)
+    public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->secretKey = $secretKey;
     }
 
-    public function createToken($referer, $exp, $user)
+    public function createToken(Request $request, $exp, $user)
     {
+        $idClient = $this->app->escape($request->get('client'));
+        if (!isset($idClient)) {
+            $this->app->abort(Response::HTTP_UNAUTHORIZED, 'No client specified');
+        }
+
         $payload = [
-            'iss' => $referer,
+            'iss' => $request->headers->get('referer'),
             'iat' => time(),
             'exp' => $exp,
             'user' => $user
         ];
 
-        $token = \JWT::encode($payload, $this->secretKey);
+        // Retrieve the secret key on Sheaker API to encode the token
+        $ch = curl_init("http://sheaker.dev/api/clients?id={$idClient}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $client = json_decode(curl_exec($ch));
+        curl_close($ch);
+
+        $token = \JWT::encode($payload, $client->secretKey);
 
         return $token;
     }
@@ -51,10 +54,21 @@ class JWT
             $this->app->abort(Response::HTTP_UNAUTHORIZED, 'No authorization header sent');
         }
 
+        $idClient = $this->app->escape($request->get('client'));
+        if (!isset($idClient)) {
+            $this->app->abort(Response::HTTP_UNAUTHORIZED, 'No client specified');
+        }
+
+        // Retrieve the secret key on Sheaker API to encode the token
+        $ch = curl_init("http://sheaker.dev/api/clients?id={$idClient}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $client = json_decode(curl_exec($ch));
+        curl_close($ch);
+
         // $authorizationHeader should be in that form: Bearer THE_TOKEN
         $token = explode(' ', $authorizationHeader)[1];
         try {
-            $decoded_token = \JWT::decode($token, $this->secretKey);
+            $decoded_token = \JWT::decode($token, $client->secretKey);
         }
         catch (UnexpectedValueException $ex) {
             $this->app->abort(Response::HTTP_UNAUTHORIZED, 'Invalid token');
