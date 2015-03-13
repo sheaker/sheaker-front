@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User) {
+.controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -13,12 +13,11 @@ angular.module('sheaker')
     $scope.webcam = {
         isLoading: true,
         hasErrors: false,
-        userPhoto: null
+        wantNewPhoto: false
     };
 
     User.get({id: $routeParams.id}, function(user) {
         $scope.formDatas = user;
-        $scope.webcam.userPhoto = $scope.formDatas.photo
 
         var snapshotCanvas = document.querySelector('#snapshot');
         if (snapshotCanvas) {
@@ -32,7 +31,7 @@ angular.module('sheaker')
                 ctxSnapshot.drawImage(this, 0, 0);
             };
 
-            imageObj.src = $scope.formDatas.photo;
+            imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
         }
     }, function(error) {
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
@@ -71,7 +70,7 @@ angular.module('sheaker')
             patOpts.w = webcam.width;
             patOpts.h = webcam.height;
         } else {
-            $scope.onWebcamError(true);
+            $scope.onWebcamError({error: 'Can\'t load webcam feed'});
         }
     };
 
@@ -87,8 +86,18 @@ angular.module('sheaker')
 
     $scope.takeSnapshot = function() {
         if (webcam) {
+            $scope.webcam.wantNewPhoto = false;
+
             var snapshotCanvas = document.querySelector('#snapshot');
             if (snapshotCanvas) {
+                // Delete the previous canvas and recreate another
+                var parent = snapshotCanvas.parentNode;
+                var newElement = document.createElement('canvas');
+                newElement.id = 'snapshotActual';
+                parent.insertBefore(newElement, snapshotCanvas);
+                parent.removeChild(snapshotCanvas);
+
+                snapshotCanvas = newElement;
                 snapshotCanvas.width = webcam.width;
                 snapshotCanvas.height = webcam.height;
 
@@ -96,7 +105,6 @@ angular.module('sheaker')
                 var ctxSnapshot = snapshotCanvas.getContext('2d');
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
-                $scope.webcam.userPhoto = imgData;
                 $scope.formDatas.photo = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
             }
         }

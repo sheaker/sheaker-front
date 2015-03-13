@@ -26,7 +26,7 @@ angular.module('sheaker')
     $scope.webcam = {
         isLoading: true,
         hasErrors: false,
-        userPhoto: null
+        wantNewPhoto: true
     };
     var webcam = null,
         patOpts = {x: 0, y: 0, w: 25, h: 25};
@@ -43,7 +43,7 @@ angular.module('sheaker')
             patOpts.w = webcam.width;
             patOpts.h = webcam.height;
         } else {
-            $scope.onWebcamError(true);
+            $scope.onWebcamError({error: 'Can\'t load webcam feed'});
         }
     };
 
@@ -59,6 +59,8 @@ angular.module('sheaker')
 
     $scope.takeSnapshot = function() {
         if (webcam) {
+            $scope.webcam.wantNewPhoto = false;
+
             var snapshotCanvas = document.querySelector('#snapshot');
             if (snapshotCanvas) {
                 snapshotCanvas.width = webcam.width;
@@ -68,7 +70,6 @@ angular.module('sheaker')
                 var ctxSnapshot = snapshotCanvas.getContext('2d');
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
-                $scope.webcam.userPhoto = imgData;
                 $scope.formDatas.photo = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
             }
         }
