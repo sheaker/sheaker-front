@@ -77,17 +77,17 @@ class UserController
         }
 
         $getParams = [];
-        $getParams['limit']    = $app->escape($request->get('limit'));
-        $getParams['offset']   = $app->escape($request->get('offset'));
-        $getParams['sortingBy']  = $app->escape($request->get('sortingBy'));
-        $getParams['order']    = $app->escape($request->get('order'));
+        $getParams['limit']  = $app->escape($request->get('limit'));
+        $getParams['offset'] = $app->escape($request->get('offset'));
+        $getParams['sortBy'] = $app->escape($request->get('sortBy'));
+        $getParams['order']  = $app->escape($request->get('order'));
 
-        $limit   = isset($getParams['limit']) ? $getParams['limit'] : -1;
-        $offset  = isset($getParams['offset']) ? $getParams['offset'] : 0;
-        $sortingBy = isset($getParams['sortingBy']) ? $getParams['sortingBy'] : 'subscription_date';
-        $order   = isset($getParams['order']) ? $getParams['order'] : 'DESC';
+        $limit  = (!empty($getParams['limit'])) ? $getParams['limit'] : 50;
+        $offset = (!empty($getParams['offset'])) ? $getParams['offset'] : 0;
+        $sortBy = (!empty($getParams['sortBy'])) ? $getParams['sortBy'] : 'subscription_date';
+        $order  = (!empty($getParams['order'])) ? $getParams['order'] : 'DESC';
 
-        $users = $app['repository.user']->findAll($limit, $offset, array($sortingBy => $order));
+        $users = $app['repository.user']->findAll($limit, $offset, array($sortBy => $order));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }

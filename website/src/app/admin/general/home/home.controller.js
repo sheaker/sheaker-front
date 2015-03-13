@@ -8,7 +8,7 @@ angular.module('sheaker')
     $scope.todayBirthday    = moment($scope.dateToday).format('MM-DD');
     $scope.dateTodayParse   = moment($scope.dateToday).format('YYYY-MM-DD');;
 
-    User.query({offset:0, sortingBy:'subscription_date', order:'DESC'}).$promise
+    User.query({offset:0, sortBy:'subscription_date', order:'DESC'}).$promise
     .then(function(usersList) {
         $scope.clientsList = usersList;
         $scope.clientsTotalNumber = $scope.clientsList.length;

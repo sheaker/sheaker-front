@@ -7,7 +7,7 @@ angular.module('sheaker')
             request.headers = request.headers || {};
 
             if (request.url.indexOf(GYM_API_URL) != -1) {
-                angular.extend(request.params,  {client: $rootScope.client.id});
+                angular.extend(request.params, {client: $rootScope.client.id});
             }
 
             return request;
