@@ -5,7 +5,39 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 .constant('SHEAKER_API_URL', '//sheaker.dev/api')
 .constant('GYM_API_URL', '//gym4devs.sheaker.dev/api')
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
-    $routeProvider
+
+    var universalResolves = {
+        config: function($rootScope, $location, $window, SheakerClient) {
+            var address = $location.host().split(".");
+            var prohibitedSubs = ['www'];
+
+            if (address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
+                return SheakerClient.get({subdomain: address[0]}).$promise
+                .then(function(client) {
+                    $rootScope.client = {
+                        id: client.id,
+                        name: client.name
+                    };
+                })
+                .catch(function(error) {
+                    if (error.status === 404) {
+                        $window.location.href = 'http://sheaker.com/register/' + address[0];
+                    }
+                });
+            }
+        }
+    };
+
+    var customRouteProvider = angular.extend({}, $routeProvider, {
+        when: function(path, route) {
+            route.resolve = (route.resolve) ? route.resolve : {};
+            angular.extend(route.resolve, universalResolves);
+            $routeProvider.when(path, route);
+            return this;
+        }
+    });
+
+    customRouteProvider
     .when('/', {
         templateUrl: 'app/home/home.html',
         controller: 'HomeCtrl'
@@ -95,28 +127,11 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     $httpProvider.interceptors.push('jwtInterceptor');
     $httpProvider.interceptors.push('GymAPIRequestInterceptor');
 })
-.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, SheakerClient, Authorization) {
-
+.run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization) {
     $rootScope.client = {
-        id: -1,
-        name: ''
+            id: -1,
+            name: ''
     };
-
-    var address = $location.host().split(".");
-    var prohibitedSubs = ['www'];
-
-    if (address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
-        SheakerClient.get({subdomain: address[0]}).$promise
-        .then(function(client) {
-            $rootScope.client.id = client.id;
-            $rootScope.client.name = client.name;
-        })
-        .catch(function(error) {
-            if (error.status === 404) {
-                $window.location.href = 'http://sheaker.com/register/' + address[0];
-            }
-        });
-    }
 
     $rootScope.authVars = {
         authorised: {
