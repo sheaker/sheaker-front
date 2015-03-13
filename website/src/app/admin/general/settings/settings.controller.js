@@ -3,6 +3,8 @@
 angular.module('sheaker')
 .controller('SettingsCtrl', function ($scope) {
 
+    $scope.isButtonSaveDisabled = false;
+
     $scope.formDatas = {};
 
     $scope.days = [

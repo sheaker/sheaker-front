@@ -76,9 +76,18 @@ class UserController
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
-        $limit = 50;
-        $offset = 0;
-        $users = $app['repository.user']->findAll($limit, $offset, array('subscription_date' => 'DESC'));
+        $getParams = [];
+        $getParams['limit']    = $app->escape($request->get('limit'));
+        $getParams['offset']   = $app->escape($request->get('offset'));
+        $getParams['orderBy']  = $app->escape($request->get('orderBy'));
+        $getParams['order']    = $app->escape($request->get('order'));
+
+        $limit   = isset($getParams['limit']) ? $getParams['limit'] : 50;
+        $offset  = isset($getParams['offset']) ? $getParams['offset'] : 0;
+        $orderBy = isset($getParams['orderBy']) ? $getParams['orderBy'] : 'subscription_date';
+        $order   = isset($getParams['order']) ? $getParams['order'] : 'DESC';
+
+        $users = $app['repository.user']->findAll($limit, $offset, array($orderBy => $order));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }

@@ -69,8 +69,8 @@
                         <h3>Address</h3>
                         <div class="form-group col-lg-12">
                             <label for="InputAddressStreet">Street address</label>
-                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
-                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
                         </div>
                         <div class="form-group col-lg-8">
                             <label for="InputAddressCity">City</label>
@@ -129,7 +129,7 @@
             </div>
 
             <div class="col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block">Add client</button>
+                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled">Add client</button>
             </div>
         </form>
     </div>

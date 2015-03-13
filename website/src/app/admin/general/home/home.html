@@ -18,7 +18,25 @@
         <div class="col-lg-3" id="Birthdays">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-birthday-cake pull-right"></span>
-                <div class="title-small">Birthdays</div>
+                <div class="title-small">Birthday</div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="client in clientsList | filter:{ birthdate: todayBirthday }">
+                                <td>{{ client.customId || client.id }}</td>
+                                <td>{{ client.firstName }}</td>
+                                <td>{{ client.lastName }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>  <!-- Birthday end -->
         <div class="col-lg-3" id="LastsEntry">

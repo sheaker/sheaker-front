@@ -4,6 +4,7 @@
     height: 350px;
     border-top: 1px solid #dbdbdb;
     color: #4b4b4b;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 .thumbnail-form-home .title-small {

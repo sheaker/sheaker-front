@@ -3,6 +3,8 @@
 angular.module('sheaker')
 .controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User) {
 
+    $scope.isButtonSaveDisabled = false;
+
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to edit before going to this page.'});
         $location.path('/admin/clients/search');
@@ -105,6 +107,7 @@ angular.module('sheaker')
         if (!$scope.hasCustomId && $scope.formDatas.customId) {
             $scope.formDatas.customId = 0;
         }
+        $scope.isButtonSaveDisabled = true;
 
         User.update($scope.formDatas).$promise
         .then(function(data) {
@@ -112,9 +115,11 @@ angular.module('sheaker')
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
+            $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
+            $scope.isButtonSaveDisabled = false;
         });
     };
 });

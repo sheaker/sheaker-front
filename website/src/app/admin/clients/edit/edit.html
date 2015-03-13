@@ -69,8 +69,8 @@
                         <h3>Address</h3>
                         <div class="form-group col-lg-12">
                             <label for="InputAddressStreet">Street address</label>
-                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
-                            <input type="text" class="form-control" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
                         </div>
                         <div class="form-group col-lg-8">
                             <label for="InputAddressCity">City</label>
@@ -122,7 +122,7 @@
                             <textarea class="form-control" id="InputComment" ng-model="formDatas.comment" rows="10" placeholder="If you have any comments to do..."></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Edit client</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled">Edit client</button>
                 </div> <!-- Details informations end -->
             </div>
         </form>

@@ -3,6 +3,8 @@
 angular.module('sheaker')
 .controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, UserPayment) {
 
+    $scope.isButtonSaveDisabled = false;
+
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to charge before going to this page.'});
         $location.path('/admin/clients/search');
@@ -60,6 +62,7 @@ angular.module('sheaker')
 
     $scope.chargeUser = function () {
         $scope.formDatas.id = $scope.user.id;
+        $scope.isButtonSaveDisabled = true;
 
         UserPayment.save($scope.formDatas).$promise
         .then(function(payment) {
@@ -69,9 +72,11 @@ angular.module('sheaker')
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
+            $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge, please contact a developper.'});
+            $scope.isButtonSaveDisabled = false;
         });
     };
 });
