@@ -11,7 +11,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
             var address = $location.host().split(".");
             var prohibitedSubs = ['www'];
 
-            if (address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
+            if ($rootScope.client.id === -1 && address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
                 return SheakerClient.get({subdomain: address[0]}).$promise
                 .then(function(client) {
                     $rootScope.client = {
