@@ -12,8 +12,14 @@
     font-size: 16px;
     border: 0;
     height: 550px;
-    border-top: 1px solid #dbdbdb;
+    border: 1px solid #dbdbdb;
     color: #4b4b4b;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.thumbnail-form-big {
+    height: 870px;
 }
 
 .thumbnail-form .title-small {
