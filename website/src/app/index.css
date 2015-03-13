@@ -1,5 +1,5 @@
 body {
-    padding-top: 60px;
+    padding-top: 10px;
 
     font-family: 'Signika', sans-serif;
     font-weight: 400;
@@ -9,6 +9,7 @@ body {
 
 .main {
     padding-left: 220px;
+    background-color: #fff;
 }
 
 /* Containers */
@@ -181,7 +182,7 @@ body {
 }
 
 .nav-subsidebar span{
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .nav-subsidebar > li > a {
@@ -206,50 +207,6 @@ body {
     height: 50px;
     width: auto;
 }
-
-.navbar-inverse .navbar-header .navbar-brand > img {
-    margin-top: -6px;
-    display: inline;
-    margin-left: -10px;
-}
-
-.navbar-inverse .navbar-header .navbar-brand {
-    width: 50px;
-    background: rgb(222,222,222); /* Old browsers */
-    background: -moz-linear-gradient(45deg,  rgba(222,222,222,1) 0%, rgba(222,222,222,1) 50%, rgba(247,247,247,1) 50%, rgba(247,247,247,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(222,222,222,1)), color-stop(50%,rgba(222,222,222,1)), color-stop(50%,rgba(247,247,247,1)), color-stop(100%,rgba(247,247,247,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(45deg,  rgba(222,222,222,1) 0%,rgba(222,222,222,1) 50%,rgba(247,247,247,1) 50%,rgba(247,247,247,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(45deg,  rgba(222,222,222,1) 0%,rgba(222,222,222,1) 50%,rgba(247,247,247,1) 50%,rgba(247,247,247,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(45deg,  rgba(222,222,222,1) 0%,rgba(222,222,222,1) 50%,rgba(247,247,247,1) 50%,rgba(247,247,247,1) 100%); /* IE10+ */
-    background: linear-gradient(45deg,  rgba(222,222,222,1) 0%,rgba(222,222,222,1) 50%,rgba(247,247,247,1) 50%,rgba(247,247,247,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dedede', endColorstr='#f7f7f7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
-
-.navbar-inverse {
-    background-color: #F7F7F7;
-    border-bottom: 2px solid #dbdbdb;
-}
-
-.navbar-inverse .navbar-header > a {
-    color: #3a3a3a;
-}
-.navbar-inverse .navbar-header > a:hover,
-.navbar-inverse .navbar-header > a:focus {
-    color: #5b5b5b;
-}
-
-.navbar-inverse .navbar-nav {
-    margin-top: 2px;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #3a3a3a;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover {
-    color: #5b5b5b;
-}
-
 /* End NavBar */
 
 /* Begin Footer */
@@ -304,13 +261,14 @@ body {
 /* End color set */
 
 .title {
-    font-size: 40px;
+    font-size: 35px;
     margin-right: 20px;
     margin-bottom: 20px;
     color: #4b4b4b;
 }
 
 .title > .fa {
+    font-size: 35px;
     margin-top: 20px;
     margin-right: 20px;
 }

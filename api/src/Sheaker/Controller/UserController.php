@@ -79,15 +79,15 @@ class UserController
         $getParams = [];
         $getParams['limit']    = $app->escape($request->get('limit'));
         $getParams['offset']   = $app->escape($request->get('offset'));
-        $getParams['orderBy']  = $app->escape($request->get('orderBy'));
+        $getParams['sortingBy']  = $app->escape($request->get('sortingBy'));
         $getParams['order']    = $app->escape($request->get('order'));
 
-        $limit   = isset($getParams['limit']) ? $getParams['limit'] : 50;
+        $limit   = isset($getParams['limit']) ? $getParams['limit'] : -1;
         $offset  = isset($getParams['offset']) ? $getParams['offset'] : 0;
-        $orderBy = isset($getParams['orderBy']) ? $getParams['orderBy'] : 'subscription_date';
+        $sortingBy = isset($getParams['sortingBy']) ? $getParams['sortingBy'] : 'subscription_date';
         $order   = isset($getParams['order']) ? $getParams['order'] : 'DESC';
 
-        $users = $app['repository.user']->findAll($limit, $offset, array($orderBy => $order));
+        $users = $app['repository.user']->findAll($limit, $offset, array($sortingBy => $order));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }

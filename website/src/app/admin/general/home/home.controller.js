@@ -3,15 +3,15 @@
 angular.module('sheaker')
 .controller('HomeAdminCtrl', function ($rootScope, $scope, User) {
 
-    /* Filter Birthday */
+    /* Filter date */
     $scope.dateToday        = new Date();
-    $scope.todayMonth       = moment($scope.dateToday).get('month') + 1;
-    $scope.todayDate        = moment($scope.dateToday).get('date');
-    $scope.todayBirthday    = $scope.todayMonth + '-' + $scope.todayDate;
+    $scope.todayBirthday    = moment($scope.dateToday).format('MM-DD');
+    $scope.dateTodayParse   = moment($scope.dateToday).format('YYYY-MM-DD');;
 
-    User.query().$promise
+    User.query({offset:0, sortingBy:'subscription_date', order:'DESC'}).$promise
     .then(function(usersList) {
         $scope.clientsList = usersList;
+        $scope.clientsTotalNumber = $scope.clientsList.length;
     })
     .catch(function(error) {
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});

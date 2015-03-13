@@ -12,7 +12,7 @@ angular.module('sheaker')
     });
 
     // Load the last 50 clients, order by ID desc
-    User.query({limit:50, oderBy:'subscription_date', order:'DESC'}).$promise
+    User.query({limit:50, offset:0, sortingBy:'subscription_date', order:'DESC'}).$promise
     .then(function(usersList) {
         $scope.clientsList = usersList;
     })

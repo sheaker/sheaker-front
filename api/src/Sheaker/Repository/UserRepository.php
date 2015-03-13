@@ -175,8 +175,11 @@ class UserRepository implements RepositoryInterface
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('u.*')
-            ->from('users', 'u')
-            ->setMaxResults($limit)
+            ->from('users', 'u');
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit); 
+        }
+        $queryBuilder
             ->setFirstResult($offset)
             ->orderBy('u.' . key($orderBy), current($orderBy));
         $parameters = array();
