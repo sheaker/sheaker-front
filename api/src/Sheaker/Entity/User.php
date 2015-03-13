@@ -139,7 +139,7 @@ class User
     public $comment;
 
     /**
-     * Photo of the user encoded in Base64.
+     * Photo path.
      *
      * @var String
      */

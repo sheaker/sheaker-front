@@ -120,16 +120,16 @@ class UserController
         }
 
         $updateParams = [];
-        $updateParams['id']                 = $app->escape($request->get('id'));
-        $updateParams['firstName']          = $app->escape($request->get('firstName'));
-        $updateParams['lastName']           = $app->escape($request->get('lastName'));
-        $updateParams['mail']               = $app->escape($request->get('mail'));
-        $updateParams['gender']             = $app->escape($request->get('gender'));
-        $updateParams['birthdate']          = $app->escape($request->get('birthdate'));
-        $updateParams['addressStreet1']    = $app->escape($request->get('addressStreet1'));
-        $updateParams['addressStreet2']    = $app->escape($request->get('addressStreet2'));
-        $updateParams['city']               = $app->escape($request->get('city'));
-        $updateParams['zip']                = $app->escape($request->get('zip'));
+        $updateParams['id']             = $app->escape($request->get('id'));
+        $updateParams['firstName']      = $app->escape($request->get('firstName'));
+        $updateParams['lastName']       = $app->escape($request->get('lastName'));
+        $updateParams['mail']           = $app->escape($request->get('mail'));
+        $updateParams['gender']         = $app->escape($request->get('gender'));
+        $updateParams['birthdate']      = $app->escape($request->get('birthdate'));
+        $updateParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
+        $updateParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
+        $updateParams['city']           = $app->escape($request->get('city'));
+        $updateParams['zip']            = $app->escape($request->get('zip'));
 
 
         foreach ($updateParams as $value) {
@@ -143,10 +143,23 @@ class UserController
         $updateParams['sponsor']   = $app->escape($request->get('sponsor'));
         $updateParams['comment']   = $app->escape($request->get('comment'));
 
-
         $user = $app['repository.user']->findById($updateParams['id']);
         if (!$user) {
             $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+        }
+
+        if (!empty($updateParams['photo'])) {
+            unlink($user->getPhoto());
+
+            $clientPhotosPath = 'photos/' . $app->escape($request->get('client'));
+            if (!file_exists($clientPhotosPath)) {
+                mkdir($clientPhotosPath);
+            }
+
+            $photoPath = $clientPhotosPath . '/' . uniqid() . '.png';
+            list($photoType, $updateParams['photo']) = explode(';', $updateParams['photo']);
+            list(, $updateParams['photo'])           = explode(',', $updateParams['photo']);
+            file_put_contents($photoPath, base64_decode($updateParams['photo']));
         }
 
         $user->setCustomId((isset($updateParams['customId'])) ? $updateParams['customId'] : 0);
@@ -159,7 +172,7 @@ class UserController
         $user->setAddressStreet2($updateParams['addressStreet2']);
         $user->setCity($updateParams['city']);
         $user->setZip($updateParams['zip']);
-        $user->setPhoto($updateParams['photo']);
+        $user->setPhoto($photoPath);
         $user->setSponsor($updateParams['sponsor']);
         $user->setComment($updateParams['comment']);
         $app['repository.user']->save($user);
@@ -176,15 +189,15 @@ class UserController
         }
 
         $newParams = [];
-        $newParams['firstName']         = $app->escape($request->get('firstName'));
-        $newParams['lastName']          = $app->escape($request->get('lastName'));
-        $newParams['mail']              = $app->escape($request->get('mail'));
-        $newParams['gender']            = $app->escape($request->get('gender'));
-        $newParams['birthdate']         = $app->escape($request->get('birthdate'));
-        $newParams['addressStreet1']   = $app->escape($request->get('addressStreet1'));
-        $newParams['addressStreet2']   = $app->escape($request->get('addressStreet2'));
-        $newParams['city']              = $app->escape($request->get('city'));
-        $newParams['zip']               = $app->escape($request->get('zip'));
+        $newParams['firstName']      = $app->escape($request->get('firstName'));
+        $newParams['lastName']       = $app->escape($request->get('lastName'));
+        $newParams['mail']           = $app->escape($request->get('mail'));
+        $newParams['gender']         = $app->escape($request->get('gender'));
+        $newParams['birthdate']      = $app->escape($request->get('birthdate'));
+        $newParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
+        $newParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
+        $newParams['city']           = $app->escape($request->get('city'));
+        $newParams['zip']            = $app->escape($request->get('zip'));
 
         foreach ($newParams as $value) {
             if (!isset($value)) {
@@ -192,10 +205,22 @@ class UserController
             }
         }
 
-        $newParams['customId']          = $app->escape($request->get('customId'));
-        $newParams['photo']             = $app->escape($request->get('photo'));
-        $newParams['sponsor']           = $app->escape($request->get('sponsor'));
-        $newParams['comment']           = $app->escape($request->get('comment'));
+        $newParams['customId'] = $app->escape($request->get('customId'));
+        $newParams['photo']    = $app->escape($request->get('photo'));
+        $newParams['sponsor']  = $app->escape($request->get('sponsor'));
+        $newParams['comment']  = $app->escape($request->get('comment'));
+
+        if (!empty($newParams['photo'])) {
+            $clientPhotosPath = 'photos/' . $app->escape($request->get('client'));
+            if (!file_exists($clientPhotosPath)) {
+                mkdir($clientPhotosPath);
+            }
+
+            $photoPath = $clientPhotosPath . '/' . uniqid() . '.png';
+            list($photoType, $newParams['photo']) = explode(';', $newParams['photo']);
+            list(, $newParams['photo'])           = explode(',', $newParams['photo']);
+            file_put_contents($photoPath, base64_decode($newParams['photo']));
+        }
 
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
@@ -215,7 +240,7 @@ class UserController
         $user->setLastIP('0.0.0.0');
         $user->setSubscriptionDate(date('c'));
         $user->setFailedLogins(0);
-        $user->setPhoto($newParams['photo']);
+        $user->setPhoto($photoPath);
         $user->setSponsor($newParams['sponsor']);
         $user->setComment($newParams['comment']);
         $app['repository.user']->save($user);
