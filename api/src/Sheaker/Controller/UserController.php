@@ -140,7 +140,6 @@ class UserController
         $updateParams['city']           = $app->escape($request->get('city'));
         $updateParams['zip']            = $app->escape($request->get('zip'));
 
-
         foreach ($updateParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
@@ -157,6 +156,7 @@ class UserController
             $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
         }
 
+        $photoPath = '';
         if (!empty($updateParams['photo'])) {
             unlink($user->getPhoto());
 
@@ -171,7 +171,7 @@ class UserController
             file_put_contents($photoPath, base64_decode($updateParams['photo']));
         }
 
-        $user->setCustomId((isset($updateParams['customId'])) ? $updateParams['customId'] : 0);
+        $user->setCustomId((!empty($updateParams['customId'])) ? $updateParams['customId'] : 0);
         $user->setFirstName($updateParams['firstName']);
         $user->setLastName($updateParams['lastName']);
         $user->setMail($updateParams['mail']);
@@ -219,6 +219,7 @@ class UserController
         $newParams['sponsor']  = $app->escape($request->get('sponsor'));
         $newParams['comment']  = $app->escape($request->get('comment'));
 
+        $photoPath = '';
         if (!empty($newParams['photo'])) {
             $clientPhotosPath = 'photos/' . $app->escape($request->get('client'));
             if (!file_exists($clientPhotosPath)) {
@@ -234,7 +235,7 @@ class UserController
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
         $user = new User();
-        $user->setCustomId((isset($newParams['customId'])) ? $newParams['customId'] : 0);
+        $user->setCustomId((!empty($newParams['customId'])) ? $newParams['customId'] : 0);
         $user->setFirstName($newParams['firstName']);
         $user->setLastName($newParams['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
