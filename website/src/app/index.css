@@ -5,12 +5,12 @@ body {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 
 .main {
     padding-left: 220px;
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 
 /* Containers */
@@ -167,7 +167,7 @@ body {
     padding-left: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f7f7f7;
+    background-color: #fff;
     font-weight: 600;
     /*border-right: 1px solid #dbdbdb;*/
 }
@@ -199,7 +199,7 @@ body {
 .nav-subsidebar > li > a,
 .nav-subsidebar > li > a:hover,
 .nav-subsidebar > li > a:focus {
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 
 

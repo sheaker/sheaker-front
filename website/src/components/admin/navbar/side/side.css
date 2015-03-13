@@ -14,7 +14,7 @@
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #fff;
     border-right: 1px solid #dbdbdb;
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 
 .nav-sidebar {
