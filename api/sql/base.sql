@@ -1,85 +1,47 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4096
 #
-# http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
+# SQL Export
+# Created by Querious (962)
+# Created: March 14, 2015 at 2:05:11 PM CST
+# Encoding: Unicode (UTF-8)
 #
-# Hôte: localhost (MySQL 10.0.16-MariaDB)
-# Base de données: gymname
-# Temps de génération: 2015-03-02 22:32:37 +0000
-# ************************************************************
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Affichage de la table users
-# ------------------------------------------------------------
-
+DROP TABLE IF EXISTS `users_photo`;
+DROP TABLE IF EXISTS `users_payments`;
+DROP TABLE IF EXISTS `users_access`;
 DROP TABLE IF EXISTS `users`;
+
 
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `custom_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `custom_id` int(11) unsigned DEFAULT NULL,
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL DEFAULT '',
   `birthdate` date NOT NULL,
+  `address_street_1` varchar(255) NOT NULL DEFAULT '',
+  `address_street_2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `zip` int(11) unsigned NOT NULL,
   `gender` tinyint(1) unsigned NOT NULL,
-  `last_seen` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `last_ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',
-  `subscription_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sponsor_id` int(11) DEFAULT NULL,
+  `comment` text,
   `failed_logins` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `first_name` (`first_name`),
-  UNIQUE KEY `mail` (`mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `last_seen` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_ip` varchar(255) NOT NULL DEFAULT '0.0.0.0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-
-
-# Affichage de la table users_access
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users_access`;
 
 CREATE TABLE `users_access` (
   `user_id` int(11) unsigned NOT NULL,
   `user_level` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`user_id`),
-  CONSTRAINT `users_access_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Affichage de la table users_extrainfo
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users_extrainfo`;
-
-CREATE TABLE `users_extrainfo` (
-  `user_id` int(11) unsigned NOT NULL,
-  `sponsor_id` int(11) unsigned DEFAULT NULL,
-  `comment` text,
-  PRIMARY KEY (`user_id`),
-  KEY `sponsor_id` (`sponsor_id`),
-  CONSTRAINT `users_extrainfo_ibfk_2` FOREIGN KEY (`sponsor_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `users_extrainfo_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Affichage de la table users_payments
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users_payments`;
 
 CREATE TABLE `users_payments` (
   `user_id` int(11) unsigned NOT NULL,
@@ -88,30 +50,57 @@ CREATE TABLE `users_payments` (
   `comment` varchar(255) NOT NULL DEFAULT '',
   `price` smallint(5) unsigned DEFAULT NULL,
   `method` tinyint(3) unsigned DEFAULT NULL,
-  `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-# Affichage de la table users_photo
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users_photo`;
-
 CREATE TABLE `users_photo` (
   `user_id` int(11) unsigned NOT NULL,
-  `image` mediumtext NOT NULL,
-  `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `image` varchar(255) NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
-  CONSTRAINT `users_photo_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET @PREVIOUS_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS;
+SET FOREIGN_KEY_CHECKS = 0;
+
+
+LOCK TABLES `users` WRITE;
+ALTER TABLE `users` DISABLE KEYS;
+INSERT INTO `users` (`id`, `custom_id`, `first_name`, `last_name`, `password`, `mail`, `birthdate`, `address_street_1`, `address_street_2`, `city`, `zip`, `gender`, `sponsor_id`, `comment`, `failed_logins`, `last_seen`, `last_ip`, `created_at`) VALUES 
+	(1,0,'Gym4devs','Gym4devs','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','admin@sheaker.com','1970-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-14 14:03:43','http://gym4devs.sheaker.dev:3000/','2015-01-02 18:44:32');
+ALTER TABLE `users` ENABLE KEYS;
+UNLOCK TABLES;
+
+
+LOCK TABLES `users_access` WRITE;
+ALTER TABLE `users_access` DISABLE KEYS;
+INSERT INTO `users_access` (`user_id`, `user_level`) VALUES 
+	(1,2);
+ALTER TABLE `users_access` ENABLE KEYS;
+UNLOCK TABLES;
+
+
+LOCK TABLES `users_payments` WRITE;
+ALTER TABLE `users_payments` DISABLE KEYS;
+ALTER TABLE `users_payments` ENABLE KEYS;
+UNLOCK TABLES;
+
+
+LOCK TABLES `users_photo` WRITE;
+ALTER TABLE `users_photo` DISABLE KEYS;
+ALTER TABLE `users_photo` ENABLE KEYS;
+UNLOCK TABLES;
+
+
+
+
+SET FOREIGN_KEY_CHECKS = @PREVIOUS_FOREIGN_KEY_CHECKS;
+
+
