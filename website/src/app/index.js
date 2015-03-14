@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber'])
-.constant('SHEAKER_URL', '//sheaker.dev')
-.constant('SHEAKER_API_URL', '//sheaker.dev/api')
-.constant('GYM_API_URL', '//gym4devs.sheaker.dev/api')
+.constant('SHEAKER_URL', '//sheaker.com')
+.constant('SHEAKER_API_URL', '//sheaker.com/api')
+.constant('GYM_API_URL', '//gym4devs.sheaker.com/api')
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
 
     var universalResolves = {
