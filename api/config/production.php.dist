@@ -3,12 +3,7 @@
 /**
  * Database Connection
  */
-$app['database.dbname'] = 'gymname';
+$app['database.dbname'] = 'sheaker_gym';
 $app['database.host']   = '127.0.0.1';
 $app['database.user']   = 'root';
 $app['database.passwd'] = '';
-
-/**
- * API
- */
-$app['api.secretKey'] = '';

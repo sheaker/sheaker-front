@@ -1,7 +1,7 @@
 #
 # SQL Export
 # Created by Querious (962)
-# Created: March 14, 2015 at 2:05:11 PM CST
+# Created: March 14, 2015 at 2:50:36 PM CST
 # Encoding: Unicode (UTF-8)
 #
 
@@ -53,7 +53,7 @@ CREATE TABLE `users_payments` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `users_photo` (
