@@ -5,6 +5,7 @@ angular.module('sheaker')
     $scope.formDatas = {};
 
     $scope.isButtonSaveDisabled = false;
+    $scope.hasCustomId = false;
 
     // Birthdate Calendar
     $scope.open = function($event) {
@@ -77,7 +78,11 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.addUser = function () {
+        if ($scope.hasCustomId === false && $scope.formDatas.customId) {
+            $scope.formDatas.customId = 0;
+        }
         $scope.isButtonSaveDisabled = true;
+
         User.save($scope.formDatas).$promise
         .then(function(data) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});

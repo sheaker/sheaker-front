@@ -18,8 +18,9 @@
                     <div class="title-small">General Informations</div>
                     <div class="form-group">
                         <label for="InputCustomId">Custom ID ?</label>
-                        <input type="checkbox" ng-model="hasCustomId">
+                        <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
                         <input type="number" class="form-control" id="InputCustomId" min="1" ng-show="hasCustomId" ng-model="formDatas.customId" placeholder="Enter the Id you want, if it's available">
+
                     </div>
                     <div class="form-group">
                         <label for="InputFirstName">First Name</label>

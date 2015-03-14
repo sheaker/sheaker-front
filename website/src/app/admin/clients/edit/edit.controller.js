@@ -17,6 +17,7 @@ angular.module('sheaker')
     };
 
     User.get({id: $routeParams.id}, function(user) {
+        $scope.hasCustomId = user.customId ? true : false;
         $scope.formDatas = user;
 
         var snapshotCanvas = document.querySelector('#snapshot');
@@ -112,7 +113,7 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.editUser = function () {
-        if (!$scope.hasCustomId && $scope.formDatas.customId) {
+        if ($scope.hasCustomId === false && $scope.formDatas.customId) {
             $scope.formDatas.customId = 0;
         }
         $scope.isButtonSaveDisabled = true;
