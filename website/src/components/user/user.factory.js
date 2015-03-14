@@ -10,6 +10,11 @@ angular.module('sheaker')
             url: GYM_API_URL + '/users/login',
             skipAuthorization: true
         },
+        renewToken: {
+            method: 'POST',
+            url: GYM_API_URL + '/users/renew_token',
+            skipAuthorization: true
+        },
         update: {
             method:'PUT'
         }

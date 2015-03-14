@@ -114,11 +114,25 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
         redirectTo: '/'
     });
 
-     jwtInterceptorProvider.tokenGetter = function(jwtHelper, $http, $window, GYM_API_URL) {
-         var token = $window.localStorage.getItem('token');
 
+    jwtInterceptorProvider.tokenGetter = function(jwtHelper, config, $rootScope, $http, $window, User, GYM_API_URL) {
+        // Skip authentication for any requests ending in .html
+        if (config.url.substr(config.url.length - 5) == '.html') {
+            return null;
+        }
+
+        var token = $window.localStorage.getItem('token');
         if (token && jwtHelper.isTokenExpired(token)) {
-
+            return User.renewToken({oldToken: token}).$promise
+            .then(function (response) {
+                $window.localStorage.setItem('token', response.token);
+                var decodedToken = jwtHelper.decodeToken(response.token);
+                $rootScope.user = decodedToken.user;
+                return response.token;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         } else {
             return token;
         }

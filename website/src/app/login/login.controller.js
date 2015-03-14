@@ -3,9 +3,7 @@
 angular.module('sheaker')
 .controller('LoginCtrl', function ($rootScope, $scope, $location, $window, jwtHelper, User) {
     $scope.login = function () {
-        var user = new User($scope.loginForm);
-
-        user.$login()
+        User.login($scope.loginForm).$promise
         .then(function(response) {
             if (response.token) {
                 $window.localStorage.setItem('token', response.token);
