@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('AddClientCtrl', function ($rootScope, $scope, $location, $anchorScroll, User) {
+.controller('AddClientCtrl', function ($rootScope, $scope, $window, $location, $anchorScroll, User) {
     $scope.formDatas = {};
 
     $scope.isButtonSaveDisabled = false;
@@ -49,7 +49,7 @@ angular.module('sheaker')
     };
 
     var getImageFromVideo = function(x, y, w, h) {
-        var hiddenCanvas = document.createElement('canvas');
+        var hiddenCanvas = $window.document.createElement('canvas');
         hiddenCanvas.width = webcam.width;
         hiddenCanvas.height = webcam.height;
 
@@ -62,7 +62,7 @@ angular.module('sheaker')
         if (webcam) {
             $scope.webcam.wantNewPhoto = false;
 
-            var snapshotCanvas = document.querySelector('#snapshot');
+            var snapshotCanvas = $window.document.querySelector('#snapshot');
             if (snapshotCanvas) {
                 snapshotCanvas.width = webcam.width;
                 snapshotCanvas.height = webcam.height;
@@ -84,7 +84,7 @@ angular.module('sheaker')
         $scope.isButtonSaveDisabled = true;
 
         User.save($scope.formDatas).$promise
-        .then(function(data) {
+        .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});
             $location.hash('top');
             $anchorScroll();
@@ -92,7 +92,7 @@ angular.module('sheaker')
             $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
-            /*$scope.isButtonSaveDisabled = true;*/
+            console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
             $scope.isButtonSaveDisabled = false;
         });

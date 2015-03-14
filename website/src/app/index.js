@@ -8,7 +8,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 
     var universalResolves = {
         config: function($rootScope, $location, $window, SheakerClient) {
-            var address = $location.host().split(".");
+            var address = $location.host().split('.');
             var prohibitedSubs = ['www'];
 
             if ($rootScope.client.id === -1 && address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
@@ -115,9 +115,9 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     });
 
 
-    jwtInterceptorProvider.tokenGetter = function(jwtHelper, config, $rootScope, $http, $window, User, GYM_API_URL) {
+    jwtInterceptorProvider.tokenGetter = function(jwtHelper, config, $rootScope, $http, $window, User) {
         // Skip authentication for any requests ending in .html
-        if (config.url.substr(config.url.length - 5) == '.html') {
+        if (config.url.substr(config.url.length - 5) === '.html') {
             return null;
         }
 
@@ -199,7 +199,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
     // Check every second if there is alerts to remove
     // Alert expiration can be override by adding a 'exp' key with value in ms in the alert obj
     $interval(function() {
-        $rootScope.alerts.forEach(function (element, index, array) {
+        $rootScope.alerts.forEach(function (element, index) {
             var exp = 10000; // Default timeout
             if (element.exp) {
                 exp = element.exp;
@@ -208,7 +208,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
             $timeout(function() {
                 $rootScope.closeAlert(index);
             }, exp);
-        })
+        });
     }, 1000);
 })
 ;

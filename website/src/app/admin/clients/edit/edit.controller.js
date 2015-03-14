@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
+.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -20,7 +20,7 @@ angular.module('sheaker')
         $scope.hasCustomId = user.customId ? true : false;
         $scope.formDatas = user;
 
-        var snapshotCanvas = document.querySelector('#snapshot');
+        var snapshotCanvas = $window.document.querySelector('#snapshot');
         if (snapshotCanvas) {
             snapshotCanvas.width = 320;
             snapshotCanvas.height = 240;
@@ -35,6 +35,7 @@ angular.module('sheaker')
             imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
         }
     }, function(error) {
+        console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
         $location.path('/admin/clients/search');
     });
@@ -76,7 +77,7 @@ angular.module('sheaker')
     };
 
     var getImageFromVideo = function(x, y, w, h) {
-        var hiddenCanvas = document.createElement('canvas');
+        var hiddenCanvas = $window.document.createElement('canvas');
         hiddenCanvas.width = webcam.width;
         hiddenCanvas.height = webcam.height;
 
@@ -89,11 +90,11 @@ angular.module('sheaker')
         if (webcam) {
             $scope.webcam.wantNewPhoto = false;
 
-            var snapshotCanvas = document.querySelector('#snapshot');
+            var snapshotCanvas = $window.document.querySelector('#snapshot');
             if (snapshotCanvas) {
                 // Delete the previous canvas and recreate another
                 var parent = snapshotCanvas.parentNode;
-                var newElement = document.createElement('canvas');
+                var newElement = $window.document.createElement('canvas');
                 newElement.id = 'snapshotActual';
                 parent.insertBefore(newElement, snapshotCanvas);
                 parent.removeChild(snapshotCanvas);
@@ -119,7 +120,7 @@ angular.module('sheaker')
         $scope.isButtonSaveDisabled = true;
 
         User.update($scope.formDatas).$promise
-        .then(function(data) {
+        .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
             $location.hash('top');
             $anchorScroll();
@@ -127,6 +128,7 @@ angular.module('sheaker')
             $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
+            console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
             $scope.isButtonSaveDisabled = false;
         });

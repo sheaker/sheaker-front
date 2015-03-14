@@ -17,6 +17,7 @@ angular.module('sheaker')
         $scope.clientsList = usersList;
     })
     .catch(function(error) {
+        console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
         $location.path('/admin/clients/search');
     });

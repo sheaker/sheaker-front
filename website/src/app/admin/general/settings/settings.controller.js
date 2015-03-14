@@ -40,7 +40,7 @@ angular.module('sheaker')
     };
 
     $scope.changed = function () {
-        $log.log('Time changed to: ' + $scope.mytime);
+        //$log.log('Time changed to: ' + $scope.mytime);
     };
 
     $scope.clear = function() {

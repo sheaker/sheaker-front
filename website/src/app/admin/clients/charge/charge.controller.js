@@ -30,16 +30,18 @@ angular.module('sheaker')
             $scope.paymentHistory = paymentHistory;
         })
         .catch(function(error) {
+            console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
         });
     })
     .catch(function(error) {
+        console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations, please contact a developper.'});
     });
 
     // Calculate ending date
     $scope.calculateEndDate = function () {
-        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format("YYYY-MM-DD");
+        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format('YYYY-MM-DD');
     };
 
     // Starting date calendar
@@ -75,6 +77,7 @@ angular.module('sheaker')
             $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
+            console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge, please contact a developper.'});
             $scope.isButtonSaveDisabled = false;
         });
