@@ -17,6 +17,7 @@ class UserPaymentController
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
+        $historyParams = []
         $historyParams['userId'] = $app->escape($request->get('id'));
 
         foreach($historyParams as $value) {

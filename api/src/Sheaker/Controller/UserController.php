@@ -33,7 +33,7 @@ class UserController
 
         if (password_verify($loginParams['password'], $user->getPassword())) {
             $user->setLastSeen(date('Y-m-d H:i:s', time()));
-            $user->setLastIP('0.0.0.0'/*$request->headers->get('referer')*/);
+            $user->setLastIP($request->headers->get('referer'));
             $user->setFailedLogins(0);
             $app['repository.user']->save($user);
 
@@ -102,7 +102,7 @@ class UserController
 
         $limit  = (!empty($getParams['limit'])) ? $getParams['limit'] : 50;
         $offset = (!empty($getParams['offset'])) ? $getParams['offset'] : 0;
-        $sortBy = (!empty($getParams['sortBy'])) ? $getParams['sortBy'] : 'subscription_date';
+        $sortBy = (!empty($getParams['sortBy'])) ? $getParams['sortBy'] : 'created_at';
         $order  = (!empty($getParams['order'])) ? $getParams['order'] : 'DESC';
 
         $users = $app['repository.user']->findAll($limit, $offset, array($sortBy => $order));
@@ -151,12 +151,12 @@ class UserController
         $updateParams['firstName']      = $app->escape($request->get('firstName'));
         $updateParams['lastName']       = $app->escape($request->get('lastName'));
         $updateParams['mail']           = $app->escape($request->get('mail'));
-        $updateParams['gender']         = $app->escape($request->get('gender'));
         $updateParams['birthdate']      = $app->escape($request->get('birthdate'));
         $updateParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $updateParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $updateParams['city']           = $app->escape($request->get('city'));
         $updateParams['zip']            = $app->escape($request->get('zip'));
+        $updateParams['gender']         = $app->escape($request->get('gender'));
 
         foreach ($updateParams as $value) {
             if (!isset($value)) {
@@ -176,7 +176,9 @@ class UserController
 
         $photoPath = '';
         if (!empty($updateParams['photo'])) {
-            unlink($user->getPhoto());
+            if (file_exists($user->getPhoto())) {
+                unlink($user->getPhoto());
+            }
 
             $clientPhotosPath = 'photos/' . $app->escape($request->get('client'));
             if (!file_exists($clientPhotosPath)) {
@@ -193,15 +195,16 @@ class UserController
         $user->setFirstName($updateParams['firstName']);
         $user->setLastName($updateParams['lastName']);
         $user->setMail($updateParams['mail']);
-        $user->setGender($updateParams['gender']);
         $user->setBirthdate($updateParams['birthdate']);
         $user->setAddressStreet1($updateParams['addressStreet1']);
         $user->setAddressStreet2($updateParams['addressStreet2']);
         $user->setCity($updateParams['city']);
         $user->setZip($updateParams['zip']);
-        $user->setPhoto($photoPath);
+        $user->setGender($updateParams['gender']);
         $user->setSponsor($updateParams['sponsor']);
         $user->setComment($updateParams['comment']);
+        $user->setPhoto($photoPath);
+
         $app['repository.user']->save($user);
 
         return json_encode($user, JSON_NUMERIC_CHECK);
@@ -219,12 +222,12 @@ class UserController
         $newParams['firstName']      = $app->escape($request->get('firstName'));
         $newParams['lastName']       = $app->escape($request->get('lastName'));
         $newParams['mail']           = $app->escape($request->get('mail'));
-        $newParams['gender']         = $app->escape($request->get('gender'));
         $newParams['birthdate']      = $app->escape($request->get('birthdate'));
         $newParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $newParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $newParams['city']           = $app->escape($request->get('city'));
         $newParams['zip']            = $app->escape($request->get('zip'));
+        $newParams['gender']         = $app->escape($request->get('gender'));
 
         foreach ($newParams as $value) {
             if (!isset($value)) {
@@ -264,13 +267,13 @@ class UserController
         $user->setCity($newParams['city']);
         $user->setZip($newParams['zip']);
         $user->setGender($newParams['gender']);
+        $user->setSponsor($newParams['sponsor']);
+        $user->setComment($newParams['comment']);
         $user->setLastSeen('0000-00-00 00:00:00');
         $user->setLastIP('0.0.0.0');
         $user->setSubscriptionDate(date('c'));
         $user->setFailedLogins(0);
         $user->setPhoto($photoPath);
-        $user->setSponsor($newParams['sponsor']);
-        $user->setComment($newParams['comment']);
         $app['repository.user']->save($user);
 
         return json_encode($user, JSON_NUMERIC_CHECK);

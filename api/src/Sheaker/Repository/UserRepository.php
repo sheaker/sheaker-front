@@ -28,25 +28,22 @@ class UserRepository implements RepositoryInterface
     public function save($user)
     {
         $userData = array(
-            'custom_id'             => $user->getCustomId(),
-            'first_name'            => $user->getFirstName(),
-            'last_name'             => $user->getLastName(),
-            'password'              => $user->getPassword(),
-            'mail'                  => $user->getMail(),
-            'birthdate'             => $user->getBirthdate(),
-            'address_street_1'   => $user->getAddressStreet1(),
-            'address_street_2'   => $user->getAddressStreet2(),
-            'city'                  => $user->getCity(),
-            'zip'                   => $user->getZip(),
-            'gender'                => $user->getGender(),
-            'last_seen'             => $user->getLastSeen(),
-            'last_ip'               => $user->getLastIP(),
-            'failed_logins'         => $user->getFailedLogins()
-        );
-
-        $userExtraInfoData = array(
-            'sponsor_id'        => $user->getSponsor(),
-            'comment'           => $user->getComment()
+            'custom_id'        => $user->getCustomId(),
+            'first_name'       => $user->getFirstName(),
+            'last_name'        => $user->getLastName(),
+            'password'         => $user->getPassword(),
+            'mail'             => $user->getMail(),
+            'birthdate'        => $user->getBirthdate(),
+            'address_street_1' => $user->getAddressStreet1(),
+            'address_street_2' => $user->getAddressStreet2(),
+            'city'             => $user->getCity(),
+            'zip'              => $user->getZip(),
+            'gender'           => $user->getGender(),
+            'sponsor_id'       => $user->getSponsor(),
+            'comment'          => $user->getComment(),
+            'last_seen'        => $user->getLastSeen(),
+            'last_ip'          => $user->getLastIP(),
+            'failed_logins'    => $user->getFailedLogins()
         );
 
         $userPhotoData = array(
@@ -59,20 +56,12 @@ class UserRepository implements RepositoryInterface
             if (!empty($userPhotoData['image'])) {
                 $this->db->update('users_photo', $userPhotoData, array('user_id' => $user->getId()));
             }
-
-            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment'])) {
-                $this->db->update('users_extrainfo', $userExtraInfoData, array('user_id' => $user->getId()));
-            }
         } else {
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());
 
             if (!empty($userPhotoData['image'])) {
                 $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
-            }
-
-            if (!empty($userExtraInfoData['sponsor_id']) || !empty($userExtraInfoData['comment'])) {
-                $this->db->insert('users_extrainfo', array_merge(['user_id' => $user->getId()], $userExtraInfoData));
             }
         }
     }
@@ -104,7 +93,6 @@ class UserRepository implements RepositoryInterface
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
             LEFT JOIN users_photo up ON up.user_id = u.id
-            LEFT JOIN users_extrainfo uei ON uei.user_id = u.id
             WHERE u.id = ?', array($id));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
@@ -123,7 +111,6 @@ class UserRepository implements RepositoryInterface
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
             LEFT JOIN users_photo up ON up.user_id = u.id
-            LEFT JOIN users_extrainfo uei ON uei.user_id = u.id
             WHERE u.custom_id = ?', array($customId));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
@@ -174,10 +161,12 @@ class UserRepository implements RepositoryInterface
 
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-            ->select('u.*')
-            ->from('users', 'u');
+            ->select('u.*', 'ua.*', 'up.*')
+            ->from('users', 'u')
+            ->leftJoin('u', 'users_access', 'ua', 'u.id = ua.user_id')
+            ->leftJoin('u', 'users_photo', 'up', 'u.id = up.user_id');
         if ($limit) {
-            $queryBuilder->setMaxResults($limit); 
+            $queryBuilder->setMaxResults($limit);
         }
         $queryBuilder
             ->setFirstResult($offset)
@@ -224,14 +213,15 @@ class UserRepository implements RepositoryInterface
         $user->setCity($userData['city']);
         $user->setZip($userData['zip']);
         $user->setGender($userData['gender']);
+        $user->setSponsor($userData['sponsor_id']);
+        $user->setComment($userData['comment']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);
-        $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['subscription_date'])));
         $user->setFailedLogins($userData['failed_logins']);
-        $user->setPhoto((isset($userData['image'])) ? $userData['image'] : '');
-        $user->setUserLevel((isset($userData['user_level'])) ? $userData['user_level'] : 0);
-        $user->setSponsor((isset($userData['sponsor_id'])) ? $userData['sponsor_id'] : '');
-        $user->setComment((isset($userData['comment'])) ? $userData['comment'] : '');
+        $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['created_at'])));
+        $user->setPhoto($userData['image']);
+        $user->setUserLevel($userData['user_level']);
+
 
         return $user;
     }

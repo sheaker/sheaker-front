@@ -159,11 +159,11 @@ class UserPaymentRepository implements RepositoryInterface
         $userPayment = new UserPayment();
         $userPayment->setUserId($paymentData['user_id']);
         $userPayment->setDays($paymentData['days']);
-        $userPayment->setStartDate(date('c', strtotime($paymentData['payment_date'])));
+        $userPayment->setStartDate(date('c', strtotime($paymentData['created_at'])));
         $userPayment->setComment((isset($paymentData['comment'])) ? $paymentData['comment'] : '');
         $userPayment->setPrice($paymentData['price']);
         $userPayment->setMethod($paymentData['method']);
-        $userPayment->setPaymentDate(date('c', strtotime($paymentData['payment_date'])));
+        $userPayment->setPaymentDate(date('c', strtotime($paymentData['created_at'])));
         return $userPayment;
     }
 }
