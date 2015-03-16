@@ -20,6 +20,6 @@ angular.module('sheaker')
         }
     };
 
-    User = $resource(GYM_API_URL + '/users/:id', {id: '@id'}, actions);
+    User = $resource(GYM_API_URL + '/users', null, actions);
     return User;
 });

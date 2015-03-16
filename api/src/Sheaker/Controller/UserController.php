@@ -86,7 +86,7 @@ class UserController
         return json_encode(['token' => $newToken], JSON_NUMERIC_CHECK);
     }
 
-    public function listUsers(Request $request, Application $app)
+    public function getUsers(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -95,50 +95,38 @@ class UserController
         }
 
         $getParams = [];
+        $getParams['id']     = $app->escape($request->get('id'));
         $getParams['limit']  = $app->escape($request->get('limit'));
         $getParams['offset'] = $app->escape($request->get('offset'));
         $getParams['sortBy'] = $app->escape($request->get('sortBy'));
         $getParams['order']  = $app->escape($request->get('order'));
 
-        $limit  = (!empty($getParams['limit'])) ? $getParams['limit'] : 50;
-        $offset = (!empty($getParams['offset'])) ? $getParams['offset'] : 0;
-        $sortBy = (!empty($getParams['sortBy'])) ? $getParams['sortBy'] : 'created_at';
-        $order  = (!empty($getParams['order'])) ? $getParams['order'] : 'DESC';
-
-        $users = $app['repository.user']->findAll($limit, $offset, array($sortBy => $order));
-
-        return json_encode(array_values($users), JSON_NUMERIC_CHECK);
-    }
-
-    public function getUser(Request $request, Application $app)
-    {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
-
-        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
-            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
-        }
-
-        $getParams = [];
-        $getParams['id'] = $app->escape($request->get('id'));
-
-        foreach ($getParams as $value) {
-            if (!isset($value)) {
-                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
-            }
-        }
-
-        $user = $app['repository.user']->findByCustomId($getParams['id']);
-        if (!$user) {
-            $user = $app['repository.user']->findById($getParams['id']);
+        if (!empty($getParams['id'] )) {
+            $user = $app['repository.user']->findByCustomId($getParams['id']);
             if (!$user) {
-                $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+                $user = $app['repository.user']->findById($getParams['id']);
+                if (!$user) {
+                    $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
+                }
             }
+
+            $response = $user;
+        }
+        else {
+            $limit  = (!empty($getParams['limit'])) ? $getParams['limit'] : 50;
+            $offset = (!empty($getParams['offset'])) ? $getParams['offset'] : 0;
+            $sortBy = (!empty($getParams['sortBy'])) ? $getParams['sortBy'] : 'created_at';
+            $order  = (!empty($getParams['order'])) ? $getParams['order'] : 'DESC';
+
+            $users = $app['repository.user']->findAll($limit, $offset, array($sortBy => $order));
+
+            $response = array_values($users);
         }
 
-        return json_encode($user, JSON_NUMERIC_CHECK);
+        return json_encode($response, JSON_NUMERIC_CHECK);
     }
 
-    public function update(Request $request, Application $app)
+    public function updateUser(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -210,7 +198,7 @@ class UserController
         return json_encode($user, JSON_NUMERIC_CHECK);
     }
 
-    public function create(Request $request, Application $app)
+    public function createUser(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
