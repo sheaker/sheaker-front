@@ -115,7 +115,7 @@ angular.module('sheaker')
     // Submit new user to API
     $scope.editUser = function () {
         if ($scope.hasCustomId === false && $scope.formDatas.customId) {
-            $scope.formDatas.customId = 0;
+            $scope.formDatas.customId = null;
         }
         $scope.isButtonSaveDisabled = true;
 

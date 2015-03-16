@@ -164,9 +164,9 @@ class UserController
             }
         }
 
-        $updateParams['customId']  = $app->escape($request->get('customId'));
+        $updateParams['customId']  = $app->escape($request->get('customId', NULL));
         $updateParams['photo']     = $app->escape($request->get('photo'));
-        $updateParams['sponsor']   = $app->escape($request->get('sponsor'));
+        $updateParams['sponsor']   = $app->escape($request->get('sponsor', NULL));
         $updateParams['comment']   = $app->escape($request->get('comment'));
 
         $user = $app['repository.user']->findById($updateParams['id']);
@@ -191,7 +191,7 @@ class UserController
             file_put_contents($photoPath, base64_decode($updateParams['photo']));
         }
 
-        $user->setCustomId((!empty($updateParams['customId'])) ? $updateParams['customId'] : 0);
+        $user->setCustomId($updateParams['customId']);
         $user->setFirstName($updateParams['firstName']);
         $user->setLastName($updateParams['lastName']);
         $user->setMail($updateParams['mail']);
@@ -256,7 +256,7 @@ class UserController
         $generatedPassword = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?"), 0, 6);
 
         $user = new User();
-        $user->setCustomId((!empty($newParams['customId'])) ? $newParams['customId'] : 0);
+        $user->setCustomId($newParams['customId']);
         $user->setFirstName($newParams['firstName']);
         $user->setLastName($newParams['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));

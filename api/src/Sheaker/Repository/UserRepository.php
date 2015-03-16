@@ -202,7 +202,7 @@ class UserRepository implements RepositoryInterface
     {
         $user = new User();
         $user->setId($userData['id']);
-        $user->setCustomId($userData['custom_id']);
+        $user->setCustomId($userData['custom_id'] ? $userData['custom_id'] : NULL);
         $user->setFirstName($userData['first_name']);
         $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);
@@ -213,7 +213,7 @@ class UserRepository implements RepositoryInterface
         $user->setCity($userData['city']);
         $user->setZip($userData['zip']);
         $user->setGender($userData['gender']);
-        $user->setSponsor($userData['sponsor_id']);
+        $user->setSponsor($userData['sponsor_id'] ? $userData['sponsor_id'] : NULL);
         $user->setComment($userData['comment']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);

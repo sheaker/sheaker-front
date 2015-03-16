@@ -11,7 +11,7 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <form ng-submit="editUser()" novalidate>
+        <form ng-submit="editUser()">
             <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
                 <div class="thumbnail thumbnail-form">
                     <span class="color-grey fa fa-list pull-right"></span></font>
