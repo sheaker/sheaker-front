@@ -32,7 +32,10 @@ module.exports = function(options) {
     browserSync.instance = browserSync.init({
       startPath: '/',
       server: server,
-      browser: browser
+      browser: browser,
+      host: 'gym4devs.sheaker.com',
+      open: 'external'
+
     });
   }
 
