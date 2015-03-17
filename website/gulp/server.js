@@ -35,7 +35,6 @@ module.exports = function(options) {
       browser: browser,
       host: 'gym4devs.sheaker.com',
       open: 'external'
-
     });
   }
 
