@@ -105,7 +105,7 @@ class UserController
             $user = $app['repository.user']->findByCustomId($getParams['id']);
             if (!$user) {
                 $user = $app['repository.user']->findById($getParams['id']);
-                if (!$user) {
+                if (!$user || ($user->id && $user->customId)) {
                     $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
                 }
             }

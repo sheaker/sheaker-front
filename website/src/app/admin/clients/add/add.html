@@ -11,16 +11,19 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <form ng-submit="addUser()">
+        <form name="addForm" ng-submit="addUser()">
             <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
                 <div class="thumbnail thumbnail-form thumbnail-form-big">
                     <span class="color-grey fa fa-list pull-right"></span></font>
                     <div class="title-small">General Informations</div>
-                    <div class="form-group">
+                    <div>
                         <label for="InputCustomId">Custom ID ?</label>
                         <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
-                        <input type="number" class="form-control" id="InputCustomId" min="1" ng-show="hasCustomId" ng-model="formDatas.customId" placeholder="Enter the Id you want, if it's available">
-
+                    </div>
+                    <div class="form-group" ng-show="hasCustomId">
+                        <input type="number" class="form-control" id="InputCustomId" name="customId" min="1" ng-model="formDatas.customId" ng-unique="id" placeholder="Enter the Id you want, if it's available">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!addForm.customId.$invalid"></span>
+                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addForm.customId.$invalid"></span>
                     </div>
                     <div class="form-group">
                         <label for="InputFirstName">First Name</label>
@@ -131,7 +134,7 @@
             </div>
 
             <div class="col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled">Add client</button>
+                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && addForm.$invalid)">Add client</button>
             </div>
         </form>
     </div>
