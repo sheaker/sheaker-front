@@ -14,7 +14,7 @@
         <form name="editForm" ng-submit="editUser()">
             <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
                 <div class="thumbnail thumbnail-form">
-                    <span class="color-grey fa fa-list pull-right"></span></font>
+                    <span class="color-grey fa fa-list pull-right"></span>
                     <div class="title-small">General Informations</div>
                     <div>
                         <label for="InputCustomId">Custom ID ?</label>
@@ -51,10 +51,10 @@
                         <label for="InputGender">Sex</label>
                         <div class="form-inline">
                             <label class="radio-inline">
-                                <input type="radio" name="genderRadios" id="InputGender" ng-model="formDatas.gender" value="0"> Male
+                                <input type="radio" name="genderRadios" id="InputGenderMale" ng-model="formDatas.gender" value="0"> Male
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="genderRadios" id="InputGender" ng-model="formDatas.gender" value="1"> Female
+                                <input type="radio" name="genderRadios" id="InputGenderFemale" ng-model="formDatas.gender" value="1"> Female
                             </label>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                         <div class="form-group col-lg-12">
                             <label for="InputAddressStreet">Street address</label>
                             <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet2">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" ng-model="formDatas.addressStreet2">
                         </div>
                         <div class="form-group col-lg-8">
                             <label for="InputAddressCity">City</label>
@@ -89,7 +89,7 @@
             </div> <!-- General informations end -->
             <div class="col-lg-5" id="Camera">
                 <div class="thumbnail thumbnail-form">
-                    <span class="color-grey fa fa-camera pull-right"></span></font>
+                    <span class="color-grey fa fa-camera pull-right"></span>
                     <div class="title-small">Photo</div>
                     <div class="webcaminfos" ng-show="webcam.wantNewPhoto">
                         <div class="webcam-loading text-center" ng-show="webcam.isLoading && !webcam.hasErrors">
@@ -116,7 +116,7 @@
             </div>  <!-- Camera end -->
             <div class="col-lg-offset-1 col-lg-5" id="DetailsInformations">
                 <div class="thumbnail thumbnail-form">
-                    <span class="color-grey fa fa-paperclip pull-right"></span></font>
+                    <span class="color-grey fa fa-paperclip pull-right"></span>
                     <div class="caption">
                         <div class="title-small">Extra Informations</div>
                         <div class="form-group">

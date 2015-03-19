@@ -10,7 +10,7 @@
         </div>
 
         <div class="text-center" id="userInfos">
-            <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height=240 width=320>
+            <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height="240" width="320">
             <div class="client-infos">{{ user.firstName }} {{ user.lastName }}</div>
         </div>
 
@@ -19,7 +19,7 @@
         <form ng-submit="chargeUser()">
             <div class="col-lg-offset-1 col-lg-5" id="PaymentInformation">
                 <div class="thumbnail thumbnail-form-charge">
-                    <span class="color-grey fa fa-list pull-right"></span></font>
+                    <span class="color-grey fa fa-list pull-right"></span>
                     <div class="title-small">Subscription</div>
 
                     <div class="form-group">
@@ -64,9 +64,9 @@
                     </div>
                 </div>
             </div> <!-- Soubsription end -->
-            <div class="col-lg-5" id="PaymentInformation">
+            <div class="col-lg-5" id="PaymentsHistory">
                 <div class="thumbnail thumbnail-form-charge">
-                    <span class="color-grey fa fa-list pull-right"></span></font>
+                    <span class="color-grey fa fa-list pull-right"></span>
                     <div class="title-small">Payment history</div>
                     <div class="table-responsive">
                         <div class="text-center" ng-hide="payments.length">

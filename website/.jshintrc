@@ -22,6 +22,7 @@
   "globals": {
     "angular": false,
     "moment": false,
+    "Image": false,
     // Angular Mocks
     "inject": false,
     // JASMINE
