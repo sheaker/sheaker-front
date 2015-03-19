@@ -43,7 +43,7 @@ class PaymentController
         }
 
         $addParams = [];
-        $addParams['userId']    = $app->escape($request->get('id'));
+        $addParams['user']      = $app->escape($request->get('user'));
         $addParams['days']      = $app->escape($request->get('days'));
         $addParams['startDate'] = $app->escape($request->get('startDate'));
         $addParams['price']     = $app->escape($request->get('price'));
@@ -57,9 +57,9 @@ class PaymentController
 
         $addParams['comment'] = $app->escape($request->get('comment'));
 
-        $user = $app['repository.user']->findById($paymentData['user_id']);
+        $user = $app['repository.user']->findById($addParams['user']);
 
-        $payment = new UserPayment();
+        $payment = new Payment();
         $payment->setUser($user);
         $payment->setDays($addParams['days']);
         $payment->setStartDate(date('Y-m-d H:i:s', strtotime($addParams['startDate'])));
