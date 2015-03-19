@@ -1,7 +1,7 @@
 #
 # SQL Export
 # Created by Querious (962)
-# Created: March 14, 2015 at 2:50:36 PM CST
+# Created: March 19, 2015 at 3:52:17 PM CST
 # Encoding: Unicode (UTF-8)
 #
 
@@ -32,7 +32,7 @@ CREATE TABLE `users` (
   `last_ip` varchar(255) NOT NULL DEFAULT '0.0.0.0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `users_access` (
@@ -44,14 +44,16 @@ CREATE TABLE `users_access` (
 
 
 CREATE TABLE `users_payments` (
-  `user_id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `days` smallint(5) unsigned DEFAULT NULL,
   `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `comment` varchar(255) NOT NULL DEFAULT '',
   `price` smallint(5) unsigned DEFAULT NULL,
   `method` tinyint(3) unsigned DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -74,7 +76,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 LOCK TABLES `users` WRITE;
 ALTER TABLE `users` DISABLE KEYS;
 INSERT INTO `users` (`id`, `custom_id`, `first_name`, `last_name`, `password`, `mail`, `birthdate`, `address_street_1`, `address_street_2`, `city`, `zip`, `gender`, `sponsor_id`, `comment`, `failed_logins`, `last_seen`, `last_ip`, `created_at`) VALUES 
-	(1,0,'Gym4devs','Gym4devs','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','admin@sheaker.com','1970-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-14 14:03:43','http://gym4devs.sheaker.dev:3000/','2015-01-02 18:44:32');
+	(1,0,'admin','adminnn','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','admin@sheaker.com','2015-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-19 12:00:30','0.0.0.0','2015-01-02 18:44:32');
 ALTER TABLE `users` ENABLE KEYS;
 UNLOCK TABLES;
 
