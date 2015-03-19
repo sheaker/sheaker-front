@@ -6,21 +6,25 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
 
     var universalResolves = {
-        config: function($rootScope, $location, $window, SHEAKER_URL, SheakerClient) {
+        config: function($rootScope, $location, $window, $q, SHEAKER_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
-            var prohibitedSubs = ['www'];
 
-            if ($rootScope.client.id === -1 && address.length === 3 && prohibitedSubs.indexOf(address[0].toLowerCase()) === -1) {
-                return SheakerClient.get({subdomain: address[0]}).$promise
-                .then(function(client) {
-                    $rootScope.client = {
-                        id: client.id,
-                        name: client.name
-                    };
-                })
-                .catch(function(error) {
-                    if (error.status === 404) {
-                        $window.location.href = SHEAKER_URL + '/register/' + address[0];
+            if ($rootScope.client.id === -1 && address.length === 3) {
+                return SheakerInfos.get().$promise
+                .then(function (infos) {
+                    if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
+                        return SheakerClient.get({subdomain: address[0]}).$promise
+                        .then(function(client) {
+                            $rootScope.client = {
+                                id: client.id,
+                                name: client.name
+                            };
+                        })
+                        .catch(function(error) {
+                            if (error.status === 404) {
+                                $window.location.href = SHEAKER_URL + '/register/' + address[0];
+                            }
+                        });
                     }
                 });
             }
