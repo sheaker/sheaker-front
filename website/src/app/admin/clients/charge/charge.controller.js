@@ -30,7 +30,7 @@ angular.module('sheaker')
     });
 
     // Load payment history
-    Payment.query({id: $routeParams.id}).$promise
+    Payment.query({user: $routeParams.id}).$promise
     .then(function(payments) {
         $scope.payments = payments;
     })
@@ -63,12 +63,12 @@ angular.module('sheaker')
     };
 
     $scope.chargeUser = function () {
-        $scope.formDatas.id = $scope.user.id;
+        $scope.formDatas.user = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
 
-        UserPayment.save($scope.formDatas).$promise
+        Payment.save($scope.formDatas).$promise
         .then(function(payment) {
-            $scope.paymentHistory.push(payment);
+            $scope.payments.push(payment);
 
             $rootScope.alerts.push({type: 'success', msg: 'The user has been charged.'});
             $location.hash('top');

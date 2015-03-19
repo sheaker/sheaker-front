@@ -17,6 +17,6 @@ $app->put('/users/{id}', 'Sheaker\Controller\UserController::editUser');
 /**
  * Payments routes
  */
-//$app->get('/payments',      'Sheaker\Controller\PaymentController::getPaymentsList');
+$app->get('/payments',      'Sheaker\Controller\PaymentController::getPaymentsList');
 //$app->get('/payments/{id}', 'Sheaker\Controller\PaymentController::getPayment');
-//$app->post('/payments',     'Sheaker\Controller\PaymentController::addPayment');
+$app->post('/payments',     'Sheaker\Controller\PaymentController::addPayment');

@@ -18,20 +18,18 @@ class PaymentController
         }
 
         $getParams = [];
-        $getParams['userId'] = $app->escape($request->get('id'));
-
-        foreach ($getParams as $value) {
-            if (!isset($value)) {
-                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
-            }
-        }
-
+        $getParams['user']   = $app->escape($request->get('user'));
         $getParams['limit']  = $app->escape($request->get('limit',  200));
         $getParams['offset'] = $app->escape($request->get('offset', 0));
-        $getParams['sortBy'] = $app->escape($request->get('sortBy', 'payment_date'));
+        $getParams['sortBy'] = $app->escape($request->get('sortBy', 'created_at'));
         $getParams['order']  = $app->escape($request->get('order',  'DESC'));
 
-        $users = $app['repository.payment']->findAllByUser($getParams['userId'], $getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
+        if ($getParams['user']) {
+            $users = $app['repository.payment']->findAllByUser($getParams['user'], $getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
+        }
+        else {
+            $users = $app['repository.payment']->findAll($getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
+        }
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
