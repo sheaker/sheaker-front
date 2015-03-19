@@ -69,10 +69,10 @@
                     <span class="color-grey fa fa-list pull-right"></span></font>
                     <div class="title-small">Payment history</div>
                     <div class="table-responsive">
-                        <div class="text-center" ng-hide="paymentHistory.length">
+                        <div class="text-center" ng-hide="payments.length">
                             No previous payments.
                         </div>
-                        <table class="table table-striped" ng-show="paymentHistory.length">
+                        <table class="table table-striped" ng-show="payments.length">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -81,10 +81,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="ph in paymentHistory">
-                                    <td>{{ ph.paymentDate | date }}</td>
-                                    <td>{{ ph.days }}</td>
-                                    <td>{{ ph.price | currency }}</td>
+                                <tr ng-repeat="p in payments">
+                                    <td>{{ p.paymentDate | date }}</td>
+                                    <td>{{ p.days }}</td>
+                                    <td>{{ p.price | currency }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -2,14 +2,21 @@
 
 namespace Sheaker\Entity;
 
-class UserPayment
+class Payment
 {
     /**
-     * User id.
+     * Payment id.
      *
      * @var integer
      */
-    public $userId;
+    public $id;
+
+    /**
+     * User.
+     *
+     * @var \Sheaker\Entity\User
+     */
+    public $user;
 
     /**
      * Number of days of the subscription.
@@ -53,13 +60,22 @@ class UserPayment
      */
     public $paymentDate;
 
-    public function getUserId()
+    public function getId()
     {
-        return $this->userId;
+        return $this->id;
     }
-    public function setUserId($userId)
+    public function setId($id)
     {
-        return $this->userId = $userId;
+        return $this->id = $id;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function setUser($user)
+    {
+        return $this->user = $user;
     }
 
     public function getDays()

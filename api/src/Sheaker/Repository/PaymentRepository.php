@@ -3,69 +3,75 @@
 namespace Sheaker\Repository;
 
 use Doctrine\DBAL\Connection;
-use Sheaker\Entity\UserPayment;
+use Sheaker\Entity\Payment;
 
 /**
- * User repository
+ * Payment repository
  */
-class UserPaymentRepository implements RepositoryInterface
+class PaymentRepository implements RepositoryInterface
 {
     /**
      * @var \Doctrine\DBAL\Connection
      */
     protected $db;
 
-    public function __construct(Connection $db)
+    /**
+     * @var \Sheaker\Repository\UserRepository
+     */
+    protected $userRepository;
+
+    public function __construct(Connection $db, $userRepository)
     {
         $this->db = $db;
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * Saves the user to the database.
+     * Saves the payment to the database.
      *
-     * @param \Sheaker\Entity\User $user
+     * @param \Sheaker\Entity\Payment $payment
      */
-    public function save($user)
+    public function save($payment)
     {
-        $userData = array(
-            'user_id'    => $user->getUserId(),
-            'days'       => $user->getDays(),
-            'start_date' => $user->getStartDate(),
-            'comment'    => $user->getComment(),
-            'price'      => $user->getPrice(),
-            'method'     => $user->getMethod(),
+        $paymentData = array(
+            'user_id'    => $payment->getUser()->getId(),
+            'days'       => $payment->getDays(),
+            'start_date' => $payment->getStartDate(),
+            'comment'    => $payment->getComment(),
+            'price'      => $payment->getPrice(),
+            'method'     => $payment->getMethod(),
         );
 
-        $this->db->insert('users_payments', $userData);
+        $this->db->insert('users_payments', $paymentData);
     }
 
     /**
-     * Returns a user matching the supplied id.
+     * Returns a payment matching the supplied id.
      *
      * @param integer $id
      *
-     * @return \Sheaker\Entity\User|false An entity object if found, false otherwise.
+     * @return \Sheaker\Entity\Payment|false An entity object if found, false otherwise.
      */
     public function find($id)
     {
-        $userData = $this->db->fetchAssoc('
+        $paymentData = $this->db->fetchAssoc('
             SELECT *
             FROM users_payments up
             WHERE id = ?', array($id));
-        return $userData ? $this->buildPaymentUser($userData) : FALSE;
+        return $paymentData ? $this->buildPayment($paymentData) : FALSE;
     }
 
     /**
-     * Returns a collection of users.
+     * Returns a collection of payments.
      *
      * @param integer $limit
-     *   The number of users to return.
+     *   The number of payments to return.
      * @param integer $offset
-     *   The number of users to skip.
+     *   The number of payments to skip.
      * @param array $orderBy
      *   Optionally, the order by info, in the $column => $direction format.
      *
-     * @return array A collection of users, keyed by user id.
+     * @return array A collection of payments, keyed by payment id.
      */
     public function findAll($limit, $offset = 0, $orderBy = array())
     {
@@ -78,13 +84,13 @@ class UserPaymentRepository implements RepositoryInterface
      * @param integer $userId
      *   The user Id
      * @param integer $limit
-     *   The number of users to return.
+     *   The number of payments to return.
      * @param integer $offset
-     *   The number of users to skip.
+     *   The number of payments to skip.
      * @param array $orderBy
      *   Optionally, the order by info, in the $column => $direction format.
      *
-     * @return array A collection of users, keyed by user id.
+     * @return array A collection of payments, keyed by payment id.
      */
     public function findAllByUser($userId, $limit, $offset = 0, $orderBy = array())
     {
@@ -107,9 +113,9 @@ class UserPaymentRepository implements RepositoryInterface
      * Returns a collection of payments.
      *
      * @param integer $limit
-     *   The number of users to return.
+     *   The number of payments to return.
      * @param integer $offset
-     *   The number of users to skip.
+     *   The number of payments to skip.
      * @param array $orderBy
      *   Optionally, the order by info, in the $column => $direction format.
      *
@@ -139,7 +145,7 @@ class UserPaymentRepository implements RepositoryInterface
         $statement = $queryBuilder->execute();
         $paymentsData = $statement->fetchAll();
 
-        $payments = array();
+        $payments = [];
         foreach ($paymentsData as $paymentData) {
             array_push($payments, $this->buildPayment($paymentData));
         }
@@ -147,23 +153,26 @@ class UserPaymentRepository implements RepositoryInterface
     }
 
     /**
-     * Instantiates a user entity and sets its properties using db data.
+     * Instantiates a payment entity and sets its properties using db data.
      *
-     * @param array $userData
+     * @param array $paymentData
      *   The array of db data.
      *
-     * @return \Sheaker\Entity\User
+     * @return \Sheaker\Entity\Payment
      */
     protected function buildPayment($paymentData)
     {
-        $userPayment = new UserPayment();
-        $userPayment->setUserId($paymentData['user_id']);
-        $userPayment->setDays($paymentData['days']);
-        $userPayment->setStartDate(date('c', strtotime($paymentData['created_at'])));
-        $userPayment->setComment((isset($paymentData['comment'])) ? $paymentData['comment'] : '');
-        $userPayment->setPrice($paymentData['price']);
-        $userPayment->setMethod($paymentData['method']);
-        $userPayment->setPaymentDate(date('c', strtotime($paymentData['created_at'])));
-        return $userPayment;
+        $user = $this->userRepository->findById($paymentData['user_id']);
+
+        $payment = new Payment();
+        $payment->setId($paymentData['id']);
+        $payment->setUser($user);
+        $payment->setDays($paymentData['days']);
+        $payment->setStartDate(date('c', strtotime($paymentData['created_at'])));
+        $payment->setComment($paymentData['comment']);
+        $payment->setPrice($paymentData['price']);
+        $payment->setMethod($paymentData['method']);
+        $payment->setPaymentDate(date('c', strtotime($paymentData['created_at'])));
+        return $payment;
     }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, UserPayment) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -23,20 +23,20 @@ angular.module('sheaker')
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
         $scope.user = user;
-
-        // Load payment history
-        UserPayment.query({id: $scope.user.id}).$promise
-        .then(function(paymentHistory) {
-            $scope.paymentHistory = paymentHistory;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
-        });
     })
     .catch(function(error) {
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations, please contact a developper.'});
+    });
+
+    // Load payment history
+    Payment.query({id: $routeParams.id}).$promise
+    .then(function(payments) {
+        $scope.payments = payments;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
     });
 
     // Calculate ending date

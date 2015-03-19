@@ -58,8 +58,8 @@ $app['repository.user'] = $app->share(function ($app) {
     return new Sheaker\Repository\UserRepository($app['db']);
 });
 
-$app['repository.userPayment'] = $app->share(function ($app) {
-    return new Sheaker\Repository\UserPaymentRepository($app['db']);
+$app['repository.payment'] = $app->share(function ($app) {
+    return new Sheaker\Repository\PaymentRepository($app['db'], $app['repository.user']);
 });
 
 /**

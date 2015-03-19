@@ -2,14 +2,14 @@
 
 namespace Sheaker\Controller;
 
-use Sheaker\Entity\UserPayment;
+use Sheaker\Entity\Payment;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserPaymentController
+class PaymentController
 {
-    public function getUserPaymentsList(Request $request, Application $app)
+    public function getPaymentsList(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -31,12 +31,12 @@ class UserPaymentController
         $getParams['sortBy'] = $app->escape($request->get('sortBy', 'payment_date'));
         $getParams['order']  = $app->escape($request->get('order',  'DESC'));
 
-        $users = $app['repository.userPayment']->findAllByUser($getParams['userId'], $getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
+        $users = $app['repository.payment']->findAllByUser($getParams['userId'], $getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
-    public function addUserPayment(Request $request, Application $app)
+    public function addPayment(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -59,16 +59,18 @@ class UserPaymentController
 
         $addParams['comment'] = $app->escape($request->get('comment'));
 
-        $userPayment = new UserPayment();
-        $userPayment->setUserId($addParams['userId']);
-        $userPayment->setDays($addParams['days']);
-        $userPayment->setStartDate(date('Y-m-d H:i:s', strtotime($addParams['startDate'])));
-        $userPayment->setComment($addParams['comment']);
-        $userPayment->setPrice($addParams['price']);
-        $userPayment->setMethod($addParams['method']);
-        $userPayment->setPaymentDate(date('c'));
-        $app['repository.userPayment']->save($userPayment);
+        $user = $app['repository.user']->findById($paymentData['user_id']);
 
-        return json_encode($userPayment, JSON_NUMERIC_CHECK);
+        $payment = new UserPayment();
+        $payment->setUser($user);
+        $payment->setDays($addParams['days']);
+        $payment->setStartDate(date('Y-m-d H:i:s', strtotime($addParams['startDate'])));
+        $payment->setComment($addParams['comment']);
+        $payment->setPrice($addParams['price']);
+        $payment->setMethod($addParams['method']);
+        $payment->setPaymentDate(date('c'));
+        $app['repository.payment']->save($payment);
+
+        return json_encode($payment, JSON_NUMERIC_CHECK);
     }
 }
