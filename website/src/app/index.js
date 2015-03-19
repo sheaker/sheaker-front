@@ -2,12 +2,11 @@
 
 angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber'])
 .constant('SHEAKER_URL', '//sheaker.com')
-.constant('SHEAKER_API_URL', '//sheaker.com/api')
 .constant('GYM_API_URL', '//gym4devs.sheaker.com/api')
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
 
     var universalResolves = {
-        config: function($rootScope, $location, $window, SheakerClient) {
+        config: function($rootScope, $location, $window, SHEAKER_URL, SheakerClient) {
             var address = $location.host().split('.');
             var prohibitedSubs = ['www'];
 
@@ -21,7 +20,7 @@ angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt
                 })
                 .catch(function(error) {
                     if (error.status === 404) {
-                        $window.location.href = 'http://sheaker.com/register/' + address[0];
+                        $window.location.href = SHEAKER_URL + '/register/' + address[0];
                     }
                 });
             }

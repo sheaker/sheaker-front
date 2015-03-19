@@ -3,6 +3,8 @@
 /**
  * Main routes
  */
+$app->get('/clients',      'Sheaker\Controller\MainController::getSheakerClient');
+$app->get('/infos',        'Sheaker\Controller\MainController::getSheakerInfos');
 $app->post('/login',       'Sheaker\Controller\MainController::login');
 $app->post('/renew_token', 'Sheaker\Controller\MainController::renewToken');
 

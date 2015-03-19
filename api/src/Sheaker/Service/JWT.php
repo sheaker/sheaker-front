@@ -36,7 +36,7 @@ class JWT
         ];
 
         // Retrieve the secret key on Sheaker API to encode the token
-        $ch = curl_init("http://sheaker.com/api/clients?id={$idClient}");
+        $ch = curl_init($this->app['sheaker.api'] . "/clients?id={$idClient}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $client = json_decode(curl_exec($ch));
         curl_close($ch);
@@ -60,7 +60,7 @@ class JWT
         }
 
         // Retrieve the secret key on Sheaker API to encode the token
-        $ch = curl_init("http://sheaker.com/api/clients?id={$idClient}");
+        $ch = curl_init($this->app['sheaker.api'] . "/clients?id={$idClient}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $client = json_decode(curl_exec($ch));
         curl_close($ch);

@@ -2,13 +2,42 @@
 
 namespace Sheaker\Controller;
 
-use Sheaker\Entity\User;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MainController
 {
+    public function getSheakerClient(Request $request, Application $app)
+    {
+        $getParams = [];
+        $getParams['subdomain'] = $app->escape($request->get('subdomain'));
+
+        foreach ($getParams as $value) {
+            if (!isset($value)) {
+                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
+            }
+        }
+
+        $clientSub = $getParams['subdomain'];
+        $ch = curl_init($app['sheaker.api'] . "/clients?subdomain={$clientSub}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $client = curl_exec($ch);
+        curl_close($ch);
+
+        return $client;
+    }
+
+    public function getSheakerInfos(Request $request, Application $app)
+    {
+        $ch = curl_init($app['sheaker.api'] . "/infos");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $infos = curl_exec($ch);
+        curl_close($ch);
+
+        return $infos;
+    }
+
     public function login(Request $request, Application $app)
     {
         $loginParams = [];
@@ -73,7 +102,7 @@ class MainController
 
         // Retrieve the secret key on Sheaker API to encode the token
         $idClient = $renewParams['idClient'];
-        $ch = curl_init("http://sheaker.com/api/clients?id={$idClient}");
+        $ch = curl_init($app['sheaker.api'] . "/clients?id={$idClient}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $client = json_decode(curl_exec($ch));
         curl_close($ch);
