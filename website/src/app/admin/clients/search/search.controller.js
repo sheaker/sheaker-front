@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('SearchClientCtrl', function ($rootScope, $scope, $location, User) {
+.controller('SearchClientCtrl', function ($rootScope, $scope, $location, User, Payment) {
 
     if ($location.search().search) {
         $scope.searchText = $location.search().search;
@@ -14,7 +14,25 @@ angular.module('sheaker')
     // Load the last 50 clients, order by ID desc
     User.query({limit:50, offset:0, sortBy:'created_at', order:'DESC'}).$promise
     .then(function(usersList) {
-        $scope.clientsList = usersList;
+        usersList.forEach(function (user) {
+            // Load user payments
+            Payment.query({user: user.id}).$promise
+            .then(function(payments) {
+                if (!user.hasMembershipActive) {
+                    payments.forEach(function (payment) {
+                        user.hasMembershipActive = moment().isBetween(payment.startDate, moment(payment.startDate).add(payment.days, 'd'));
+                    });
+                }
+
+                user.payments = payments;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
+            });
+        });
+
+        $scope.usersList = usersList;
     })
     .catch(function(error) {
         console.log(error);

@@ -168,7 +168,7 @@ class PaymentRepository implements RepositoryInterface
         $payment->setId($paymentData['id']);
         $payment->setUser($user);
         $payment->setDays($paymentData['days']);
-        $payment->setStartDate(date('c', strtotime($paymentData['created_at'])));
+        $payment->setStartDate(date('c', strtotime($paymentData['start_date'])));
         $payment->setComment($paymentData['comment']);
         $payment->setPrice($paymentData['price']);
         $payment->setMethod($paymentData['method']);

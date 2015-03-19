@@ -24,14 +24,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="client in clientsList | filter: searchText">
-                        <td>{{ client.customId || client.id }}</td>
-                        <td>{{ client.firstName }}</td>
-                        <td>{{ client.lastName }}</td>
-                        <td></td>
+                    <tr ng-repeat="user in usersList | filter: searchText">
+                        <td>{{ user.customId || user.id }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
                         <td>
-                            <a href="#/admin/clients/edit/{{ client.customId || client.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>&nbsp&nbsp
-                            <a href="#/admin/clients/charge/{{ client.customId || client.id }}" tooltip="Charge" tooltip-placement="top"><span class="fa fa-money fa-lg"></span></a>&nbsp&nbsp
+                            <i class="fa fa-check fa-lg color-green" ng-show="user.hasMembershipActive"></i>
+                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.hasMembershipActive"></i>
+                        </td>
+                        <td>
+                            <a href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>&nbsp&nbsp
+                            <a href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top"><span class="fa fa-money fa-lg"></span></a>&nbsp&nbsp
                             <a href="" tooltip="Review" tooltip-placement="right"><span class="fa fa-bar-chart fa-lg"></span></a>
                         </td>
                     </tr>
