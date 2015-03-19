@@ -7,12 +7,12 @@ angular.module('sheaker')
     actions = {
         login: {
             method: 'POST',
-            url: GYM_API_URL + '/users/login',
+            url: GYM_API_URL + '/login',
             skipAuthorization: true
         },
         renewToken: {
             method: 'POST',
-            url: GYM_API_URL + '/users/renew_token',
+            url: GYM_API_URL + '/renew_token',
             skipAuthorization: true
         },
         update: {
@@ -20,6 +20,6 @@ angular.module('sheaker')
         }
     };
 
-    User = $resource(GYM_API_URL + '/users', null, actions);
+    User = $resource(GYM_API_URL + '/users/:id', {id: '@id'}, actions);
     return User;
 });

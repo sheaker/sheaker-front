@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserPaymentController
 {
-    public function historyPayments(Request $request, Application $app)
+    public function getUserPaymentsList(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -17,23 +17,26 @@ class UserPaymentController
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
-        $historyParams = []
-        $historyParams['userId'] = $app->escape($request->get('id'));
+        $getParams = [];
+        $getParams['userId'] = $app->escape($request->get('id'));
 
-        foreach($historyParams as $value) {
+        foreach ($getParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
 
-        $offset = 0;
-        $limit = 200;
-        $users = $app['repository.userPayment']->findAllByUser($historyParams['userId'], $limit, $offset, array('payment_date' => 'DESC'));
+        $getParams['limit']  = $app->escape($request->get('limit',  200));
+        $getParams['offset'] = $app->escape($request->get('offset', 0));
+        $getParams['sortBy'] = $app->escape($request->get('sortBy', 'payment_date'));
+        $getParams['order']  = $app->escape($request->get('order',  'DESC'));
+
+        $users = $app['repository.userPayment']->findAllByUser($getParams['userId'], $getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
 
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
-    public function charge(Request $request, Application $app)
+    public function addUserPayment(Request $request, Application $app)
     {
         $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
 
@@ -41,28 +44,28 @@ class UserPaymentController
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
-        $chargeParams = [];
-        $chargeParams['userId']    = $app->escape($request->get('id'));
-        $chargeParams['days']      = $app->escape($request->get('days'));
-        $chargeParams['startDate'] = $app->escape($request->get('startDate'));
-        $chargeParams['price']     = $app->escape($request->get('price'));
-        $chargeParams['method']    = $app->escape($request->get('method'));
+        $addParams = [];
+        $addParams['userId']    = $app->escape($request->get('id'));
+        $addParams['days']      = $app->escape($request->get('days'));
+        $addParams['startDate'] = $app->escape($request->get('startDate'));
+        $addParams['price']     = $app->escape($request->get('price'));
+        $addParams['method']    = $app->escape($request->get('method'));
 
-        foreach($chargeParams as $value) {
+        foreach ($addParams as $value) {
             if (!isset($value)) {
                 $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
             }
         }
 
-        $chargeParams['comment'] = $app->escape($request->get('comment'));
+        $addParams['comment'] = $app->escape($request->get('comment'));
 
         $userPayment = new UserPayment();
-        $userPayment->setUserId($chargeParams['userId']);
-        $userPayment->setDays($chargeParams['days']);
-        $userPayment->setStartDate(date('Y-m-d H:i:s', strtotime($chargeParams['startDate'])));
-        $userPayment->setComment($chargeParams['comment']);
-        $userPayment->setPrice($chargeParams['price']);
-        $userPayment->setMethod($chargeParams['method']);
+        $userPayment->setUserId($addParams['userId']);
+        $userPayment->setDays($addParams['days']);
+        $userPayment->setStartDate(date('Y-m-d H:i:s', strtotime($addParams['startDate'])));
+        $userPayment->setComment($addParams['comment']);
+        $userPayment->setPrice($addParams['price']);
+        $userPayment->setMethod($addParams['method']);
         $userPayment->setPaymentDate(date('c'));
         $app['repository.userPayment']->save($userPayment);
 
