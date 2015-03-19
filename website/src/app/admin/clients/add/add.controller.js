@@ -84,8 +84,8 @@ angular.module('sheaker')
         $scope.isButtonSaveDisabled = true;
 
         User.save($scope.formDatas).$promise
-        .then(function(/*user*/) {
-            $rootScope.alerts.push({type: 'success', msg: 'The new user has been created.'});
+        .then(function(user) {
+            $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.customId || user.id) + '.'});
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
