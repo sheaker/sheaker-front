@@ -8,7 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link href="http://fonts.googleapis.com/css?family=Signika:400,300,600,700" rel="stylesheet" type="text/css">
-    <!-- build:css({.tmp,src}) styles/vendor.css -->
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
@@ -16,17 +16,13 @@
     <!-- endbuild -->
 
 
-    <!-- build:css({.tmp,src}) styles/app.css -->
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
     <!-- inject:css -->
     <link rel="stylesheet" href="app/index.css">
     <link rel="stylesheet" href="app/admin/clients/add/add.css">
     <link rel="stylesheet" href="app/admin/clients/search/search.css">
     <link rel="stylesheet" href="components/admin/navbar/side/side.css">
     <!-- endinject -->
-    <!-- endbuild -->
-
-    <!-- build:js scripts/modernizr.js -->
-    <script src="../bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
 </head>
 <body id="top">
@@ -46,7 +42,7 @@
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
@@ -58,7 +54,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,src}) scripts/app.js -->
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
     <script src="app/index.js"></script>
     <script src="components/admin/navbar/top/top.controller.js"></script>
