@@ -67,13 +67,6 @@ class UserController
         $addParams = [];
         $addParams['firstName']      = $app->escape($request->get('firstName'));
         $addParams['lastName']       = $app->escape($request->get('lastName'));
-        $addParams['mail']           = $app->escape($request->get('mail'));
-        $addParams['birthdate']      = $app->escape($request->get('birthdate'));
-        $addParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
-        $addParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
-        $addParams['city']           = $app->escape($request->get('city'));
-        $addParams['zip']            = $app->escape($request->get('zip'));
-        $addParams['gender']         = $app->escape($request->get('gender'));
 
         foreach ($addParams as $value) {
             if (!isset($value)) {
@@ -81,10 +74,17 @@ class UserController
             }
         }
 
-        $addParams['customId'] = $app->escape($request->get('customId'));
-        $addParams['photo']    = $app->escape($request->get('photo'));
-        $addParams['sponsor']  = $app->escape($request->get('sponsor'));
-        $addParams['comment']  = $app->escape($request->get('comment'));
+        $addParams['mail']           = $app->escape($request->get('mail'));
+        $addParams['birthdate']      = $app->escape($request->get('birthdate'));
+        $addParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
+        $addParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
+        $addParams['city']           = $app->escape($request->get('city'));
+        $addParams['zip']            = $app->escape($request->get('zip'));
+        $addParams['gender']         = $app->escape($request->get('gender'));
+        $addParams['customId']       = $app->escape($request->get('customId'));
+        $addParams['photo']          = $app->escape($request->get('photo'));
+        $addParams['sponsor']        = $app->escape($request->get('sponsor'));
+        $addParams['comment']        = $app->escape($request->get('comment'));
 
         $photoPath = '';
         if (!empty($addParams['photo'])) {
@@ -137,13 +137,6 @@ class UserController
         $editParams['id']             = $app->escape($request->get('id'));
         $editParams['firstName']      = $app->escape($request->get('firstName'));
         $editParams['lastName']       = $app->escape($request->get('lastName'));
-        $editParams['mail']           = $app->escape($request->get('mail'));
-        $editParams['birthdate']      = $app->escape($request->get('birthdate'));
-        $editParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
-        $editParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
-        $editParams['city']           = $app->escape($request->get('city'));
-        $editParams['zip']            = $app->escape($request->get('zip'));
-        $editParams['gender']         = $app->escape($request->get('gender'));
 
         foreach ($editParams as $value) {
             if (!isset($value)) {
@@ -151,10 +144,17 @@ class UserController
             }
         }
 
-        $editParams['customId']  = $app->escape($request->get('customId', NULL));
-        $editParams['photo']     = $app->escape($request->get('photo'));
-        $editParams['sponsor']   = $app->escape($request->get('sponsor', NULL));
-        $editParams['comment']   = $app->escape($request->get('comment'));
+        $editParams['mail']           = $app->escape($request->get('mail'));
+        $editParams['birthdate']      = $app->escape($request->get('birthdate'));
+        $editParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
+        $editParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
+        $editParams['city']           = $app->escape($request->get('city'));
+        $editParams['zip']            = $app->escape($request->get('zip'));
+        $editParams['gender']         = $app->escape($request->get('gender'));
+        $editParams['customId']       = $app->escape($request->get('customId', NULL));
+        $editParams['photo']          = $app->escape($request->get('photo'));
+        $editParams['sponsor']        = $app->escape($request->get('sponsor', NULL));
+        $editParams['comment']        = $app->escape($request->get('comment'));
 
         $user = $app['repository.user']->findById($editParams['id']);
         if (!$user) {
