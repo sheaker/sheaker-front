@@ -1,7 +1,7 @@
 #
 # SQL Export
 # Created by Querious (962)
-# Created: March 19, 2015 at 3:52:17 PM CST
+# Created: March 20, 2015 at 9:24:15 PM CST
 # Encoding: Unicode (UTF-8)
 #
 
@@ -18,27 +18,29 @@ CREATE TABLE `users` (
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL,
-  `mail` varchar(255) NOT NULL DEFAULT '',
-  `birthdate` date NOT NULL,
-  `address_street_1` varchar(255) NOT NULL DEFAULT '',
+  `phone` varchar(128) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT '',
+  `birthdate` date DEFAULT NULL,
+  `address_street_1` varchar(255) DEFAULT '',
   `address_street_2` varchar(255) DEFAULT NULL,
-  `city` varchar(255) NOT NULL,
-  `zip` int(11) unsigned NOT NULL,
-  `gender` tinyint(1) unsigned NOT NULL,
-  `sponsor_id` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zip` int(11) unsigned DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT '-1',
+  `sponsor_id` int(11) unsigned DEFAULT NULL,
   `comment` text,
   `failed_logins` int(11) unsigned NOT NULL DEFAULT '0',
   `last_seen` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_ip` varchar(255) NOT NULL DEFAULT '0.0.0.0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `users_access` (
   `user_id` int(11) unsigned NOT NULL,
   `user_level` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`user_id`),
+  KEY `idx_user_id` (`user_id`) USING BTREE,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -53,7 +55,7 @@ CREATE TABLE `users_payments` (
   `method` tinyint(3) unsigned DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
+  KEY `idx_user_id` (`user_id`) USING BTREE,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -63,6 +65,7 @@ CREATE TABLE `users_photo` (
   `image` varchar(255) NOT NULL DEFAULT '',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
+  KEY `idx_user_id` (`user_id`) USING BTREE,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -75,8 +78,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 LOCK TABLES `users` WRITE;
 ALTER TABLE `users` DISABLE KEYS;
-INSERT INTO `users` (`id`, `custom_id`, `first_name`, `last_name`, `password`, `mail`, `birthdate`, `address_street_1`, `address_street_2`, `city`, `zip`, `gender`, `sponsor_id`, `comment`, `failed_logins`, `last_seen`, `last_ip`, `created_at`) VALUES 
-	(1,0,'admin','adminnn','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','admin@sheaker.com','2015-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-19 12:00:30','0.0.0.0','2015-01-02 18:44:32');
+INSERT INTO `users` (`id`, `custom_id`, `first_name`, `last_name`, `password`, `phone`, `mail`, `birthdate`, `address_street_1`, `address_street_2`, `city`, `zip`, `gender`, `sponsor_id`, `comment`, `failed_logins`, `last_seen`, `last_ip`, `created_at`) VALUES 
+	(1,0,'admin','admin','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','523312345678','admin@sheaker.com','2015-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-19 16:27:51','http://gym4devs.sheaker.com:3000/','2015-01-02 18:44:32');
 ALTER TABLE `users` ENABLE KEYS;
 UNLOCK TABLES;
 
