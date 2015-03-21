@@ -89,7 +89,7 @@
                 <div class="thumbnail thumbnail-form">
                     <span class="color-grey fa fa-camera pull-right"></span>
                     <div class="title-small">Photo</div>
-                    <div class="webcaminfos" ng-show="webcam.wantNewPhoto">
+                    <div class="webcaminfos" ng-if="webcam.wantNewPhoto">
                         <div class="webcam-loading text-center" ng-show="webcam.isLoading && !webcam.hasErrors">
                             <i class="fa fa-spinner fa-pulse"></i>
                             <br><br> <!-- Ouai ben je suis pas un bootstrapeur moi ! -->
@@ -100,7 +100,7 @@
                             <p>Webcam could not be started correctly.<br>Did you give us access to it? Or there isn't any other tabs in your browser using it already?</p>
                         </div>
                         <div class="webcam text-center" ng-hide="!webcam.wantNewPhoto || webcam.isLoading || webcam.hasErrors">
-                            <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" video="mywebcam"></webcam>
+                            <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" channel="channel"></webcam>
                         </div>
                     </div>
                     <div class="snapshot text-center">

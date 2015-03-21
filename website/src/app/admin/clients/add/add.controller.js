@@ -24,6 +24,10 @@ angular.module('sheaker')
       isopen: false
     };
 
+    // Setup a channel to receive a video property
+    // with a reference to the video element
+    $scope.channel = {};
+
     $scope.webcam = {
         isLoading: true,
         hasErrors: false,
@@ -38,14 +42,9 @@ angular.module('sheaker')
 
     $scope.onWebcamSuccess = function() {
         $scope.webcam.isLoading = false;
-
-        if ($scope.mywebcam) { // null if the webcam is already in use
-            webcam = $scope.mywebcam;
-            patOpts.w = webcam.width;
-            patOpts.h = webcam.height;
-        } else {
-            $scope.onWebcamError({error: 'Can\'t load webcam feed'});
-        }
+        webcam = $scope.channel.video;
+        patOpts.w = webcam.width;
+        patOpts.h = webcam.height;
     };
 
     var getImageFromVideo = function(x, y, w, h) {

@@ -100,7 +100,7 @@
                         <p>Webcam could not be started correctly.<br>Did you give us access to it? Or there isn't any other tabs in your browser using it already?</p>
                     </div>
                     <div class="webcam text-center" ng-hide="!webcam.wantNewPhoto || webcam.isLoading || webcam.hasErrors">
-                        <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" video="mywebcam"></webcam>
+                        <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" channel="channel"></webcam>
                     </div>
                     <div class="snapshot text-center">
                         <canvas id="snapshot" ng-hide="webcam.wantNewPhoto"></canvas>
