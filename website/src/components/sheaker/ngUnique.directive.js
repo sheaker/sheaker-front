@@ -8,7 +8,7 @@ angular.module('sheaker')
         link: function (scope, element, attrs, ngModel) {
             element.bind('blur', function () {
                 if (!ngModel || !element.val()) {
-                    element.parent().removeClass('has-success').addClass('has-error has-feedback');
+                    element.parent().removeClass('has-success').addClass('has-error');
                     ngModel.$setValidity('unique', false);
                     return;
                 }
@@ -22,14 +22,14 @@ angular.module('sheaker')
                     //Ensure value that being checked hasn't changed
                     if (currentValue === element.val()) {
                         ngModel.$setValidity('unique', false);
-                        element.parent().removeClass('has-success').addClass('has-error has-feedback');
+                        element.parent().removeClass('has-success').addClass('has-error');
                     }
                 })
                 .catch(function () { // return 404, resource doesn't exist, not really an error here
                     //Ensure value that being checked hasn't changed
                     if (currentValue === element.val()) {
                         ngModel.$setValidity('unique', true);
-                        element.parent().removeClass('has-error').addClass('has-success has-feedback');
+                        element.parent().removeClass('has-error').addClass('has-success');
                     }
                 });
             });

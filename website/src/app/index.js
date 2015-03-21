@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber'])
+angular.module('sheaker', ['ngResource', 'ngRoute', 'ui.bootstrap', 'angular-jwt', 'webcam', 'internationalPhoneNumber', 'ui.bootstrap.showErrors'])
 .constant('SHEAKER_URL', '//sheaker.com')
 .constant('GYM_API_URL', '//gym4devs.sheaker.com/api')
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {

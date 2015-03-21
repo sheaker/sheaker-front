@@ -22,39 +22,37 @@
                     </div>
                     <div class="form-group" ng-show="hasCustomId">
                         <input type="number" class="form-control" id="InputCustomId" name="customId" min="1" ng-model="formDatas.customId" ng-unique="id" placeholder="Enter the Id you want, if it's available">
-                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!editForm.customId.$invalid"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="editForm.customId.$invalid"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <label for="InputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="InputFirstName" ng-model="formDatas.firstName">
+                        <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.firstName" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <label for="InputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="InputLastName" ng-model="formDatas.lastName">
+                        <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.lastName" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <label for="InputPhoneNumber">Phone</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="InputPhoneNumber" international-phone-number preferred-countries="us, mx" ng-model="formDatas.phone">
+                            <input type="text" class="form-control" id="InputPhoneNumber" name="phone" international-phone-number preferred-countries="mx, us" ng-model="formDatas.phone">
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <label for="InputEmail">Mail</label>
-                        <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail">
+                        <input type="email" class="form-control" id="InputMail" name="mail" ng-model="formDatas.mail">
                     </div>
 
                     <div class="form-group">
                         <label for="InputGender">Sex</label>
                         <div class="form-inline">
                             <label class="radio-inline">
-                                <input type="radio" name="genderRadios" id="InputGenderMale" ng-model="formDatas.gender" value="0"> Male
+                                <input type="radio" id="InputGenderMale" name="genderRadios" ng-model="formDatas.gender" value="0"> Male
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="genderRadios" id="InputGenderFemale" ng-model="formDatas.gender" value="1"> Female
+                                <input type="radio" id="InputGenderFemale" name="genderRadios" ng-model="formDatas.gender" value="1"> Female
                             </label>
                         </div>
                     </div>
@@ -62,7 +60,7 @@
                     <div class="form-group">
                         <label for="InputBirthdate">Birthdate</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="InputBirthdate" ng-model="formDatas.birthdate" ng-required="true" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                            <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -73,16 +71,16 @@
                         <h3>Address</h3>
                         <div class="form-group col-lg-12">
                             <label for="InputAddressStreet">Street address</label>
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.addressStreet1">
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" ng-model="formDatas.addressStreet2">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.addressStreet1">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.addressStreet2">
                         </div>
                         <div class="form-group col-lg-8">
                             <label for="InputAddressCity">City</label>
-                            <input type="text" class="form-control" id="InputAddressCity" ng-model="formDatas.city">
+                            <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="InputAddressZipCode">Zip code</label>
-                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" ng-model="formDatas.zip">
+                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
                         </div>
                     </div>
                 </div>
@@ -122,11 +120,11 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="InputFirstName">Sponsor</label>
-                                <input type="number" class="form-control" id="InputSponsor" min="1" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
+                                <input type="number" class="form-control" id="InputSponsor" min="1" name="sponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                             </div>
 
                             <label for="comment">Comment</label>
-                            <textarea class="form-control" id="InputComment" ng-model="formDatas.comment" rows="10" placeholder="If you have any comments to do..."></textarea>
+                            <textarea class="form-control" id="InputComment" rows="10" name="comment" ng-model="formDatas.comment" placeholder="If you have any comments to do..."></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && editForm.$invalid)">Edit client</button>
