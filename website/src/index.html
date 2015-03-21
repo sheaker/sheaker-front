@@ -11,17 +11,14 @@
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- bower:css -->
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
 
     <!-- build:css({.tmp/serve,src}) styles/app.css -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="app/index.css">
-    <link rel="stylesheet" href="app/admin/clients/add/add.css">
-    <link rel="stylesheet" href="app/admin/clients/search/search.css">
-    <link rel="stylesheet" href="components/admin/navbar/side/side.css">
+    <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
 </head>
@@ -44,37 +41,13 @@
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-resource/angular-resource.js"></script>
-    <script src="../bower_components/angular-route/angular-route.js"></script>
-    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="../bower_components/webcam-directive/dist/webcam.min.js"></script>
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
-    <script src="app/index.js"></script>
-    <script src="components/admin/navbar/top/top.controller.js"></script>
-    <script src="components/admin/navbar/subside-general/subside-general.controller.js"></script>
-    <script src="components/admin/navbar/subside-client/subside-client.controller.js"></script>
-    <script src="components/admin/navbar/side/side.controller.js"></script>
-    <script src="app/admin/clients/search/search.controller.js"></script>
-    <script src="app/admin/clients/review/review.controller.js"></script>
-    <script src="app/admin/clients/edit/edit.controller.js"></script>
-    <script src="app/admin/clients/charge/charge.controller.js"></script>
-    <script src="app/admin/clients/add/add.controller.js"></script>
-    <script src="app/admin/home/home.controller.js"></script>
-    <script src="app/admin/setting-gym/setting-gym.controller.js"></script>
-    <script src="components/user/user.factory.js"></script>
-    <script src="components/navbar/navbar.controller.js"></script>
-    <script src="components/authorization/authorization.factory.js"></script>
-    <script src="components/authorization/authorization.directive.js"></script>
-    <script src="app/profil/profil.controller.js"></script>
-    <script src="app/login/login.controller.js"></script>
-    <script src="app/home/home.controller.js"></script>
+    <!-- js files will be automatically insert here -->
     <!-- endinject -->
 
     <!-- inject:partials -->
