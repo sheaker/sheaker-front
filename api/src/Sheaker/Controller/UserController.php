@@ -74,16 +74,17 @@ class UserController
             }
         }
 
+        $addParams['phone']          = $app->escape($request->get('phone'));
         $addParams['mail']           = $app->escape($request->get('mail'));
         $addParams['birthdate']      = $app->escape($request->get('birthdate'));
         $addParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $addParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $addParams['city']           = $app->escape($request->get('city'));
-        $addParams['zip']            = $app->escape($request->get('zip'));
-        $addParams['gender']         = $app->escape($request->get('gender'));
-        $addParams['customId']       = $app->escape($request->get('customId'));
+        $addParams['zip']            = $app->escape($request->get('zip', NULL));
+        $addParams['gender']         = $app->escape($request->get('gender', -1));
+        $addParams['customId']       = $app->escape($request->get('customId', NULL));
         $addParams['photo']          = $app->escape($request->get('photo'));
-        $addParams['sponsor']        = $app->escape($request->get('sponsor'));
+        $addParams['sponsor']        = $app->escape($request->get('sponsor', NULL));
         $addParams['comment']        = $app->escape($request->get('comment'));
 
         $photoPath = '';
@@ -106,6 +107,7 @@ class UserController
         $user->setFirstName($addParams['firstName']);
         $user->setLastName($addParams['lastName']);
         $user->setPassword(password_hash($generatedPassword, PASSWORD_DEFAULT));
+        $user->setPhone($addParams['phone']);
         $user->setMail($addParams['mail']);
         $user->setBirthdate(date('Y-m-d H:i:s', strtotime($addParams['birthdate'])));
         $user->setAddressStreet1($addParams['addressStreet1']);
@@ -144,13 +146,14 @@ class UserController
             }
         }
 
+        $editParams['phone']          = $app->escape($request->get('phone'));
         $editParams['mail']           = $app->escape($request->get('mail'));
         $editParams['birthdate']      = $app->escape($request->get('birthdate'));
         $editParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $editParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $editParams['city']           = $app->escape($request->get('city'));
-        $editParams['zip']            = $app->escape($request->get('zip'));
-        $editParams['gender']         = $app->escape($request->get('gender'));
+        $editParams['zip']            = $app->escape($request->get('zip', NULL));
+        $editParams['gender']         = $app->escape($request->get('gender', -1));
         $editParams['customId']       = $app->escape($request->get('customId', NULL));
         $editParams['photo']          = $app->escape($request->get('photo'));
         $editParams['sponsor']        = $app->escape($request->get('sponsor', NULL));
@@ -181,6 +184,7 @@ class UserController
         $user->setCustomId($editParams['customId']);
         $user->setFirstName($editParams['firstName']);
         $user->setLastName($editParams['lastName']);
+        $user->setPhone($editParams['phone']);
         $user->setMail($editParams['mail']);
         $user->setBirthdate($editParams['birthdate']);
         $user->setAddressStreet1($editParams['addressStreet1']);

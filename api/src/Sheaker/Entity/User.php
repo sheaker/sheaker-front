@@ -41,6 +41,13 @@ class User
     public $password;
 
     /**
+     * Phone number.
+     *
+     * @var string
+     */
+    public $phone;
+
+    /**
      * Email.
      *
      * @var string
@@ -188,6 +195,15 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
     public function getMail()

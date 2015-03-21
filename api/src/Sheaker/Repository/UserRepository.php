@@ -32,6 +32,7 @@ class UserRepository implements RepositoryInterface
             'first_name'       => $user->getFirstName(),
             'last_name'        => $user->getLastName(),
             'password'         => $user->getPassword(),
+            'phone'            => $user->getphone(),
             'mail'             => $user->getMail(),
             'birthdate'        => $user->getBirthdate(),
             'address_street_1' => $user->getAddressStreet1(),
@@ -206,13 +207,14 @@ class UserRepository implements RepositoryInterface
         $user->setFirstName($userData['first_name']);
         $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);
+        $user->setPhone($userData['phone']);
         $user->setMail($userData['mail']);
         $user->setBirthdate($userData['birthdate']);
         $user->setAddressStreet1($userData['address_street_1']);
         $user->setAddressStreet2($userData['address_street_2']);
         $user->setCity($userData['city']);
-        $user->setZip($userData['zip']);
-        $user->setGender($userData['gender']);
+        $user->setZip($userData['zip'] ? $userData['zip'] : NULL);
+        $user->setGender($userData['gender'] >= 0 ? $userData['gender'] : -1);
         $user->setSponsor($userData['sponsor_id'] ? $userData['sponsor_id'] : NULL);
         $user->setComment($userData['comment']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
@@ -221,7 +223,6 @@ class UserRepository implements RepositoryInterface
         $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['created_at'])));
         $user->setPhoto($userData['image']);
         $user->setUserLevel($userData['user_level']);
-
 
         return $user;
     }
