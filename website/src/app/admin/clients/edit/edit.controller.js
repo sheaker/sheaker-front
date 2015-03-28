@@ -118,6 +118,9 @@ angular.module('sheaker')
         }
         $scope.isButtonSaveDisabled = true;
 
+        if ($scope.formDatas.phone) {
+            $scope.formDatas.phone = "+" + $scope.formDatas.phone;
+        }
         User.update($scope.formDatas).$promise
         .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
