@@ -60,7 +60,7 @@ class JWTService
             $this->app->abort(Response::HTTP_UNAUTHORIZED, 'Invalid token');
         }
 
-        $this->token = $decoded_token;
+        $this->decodedToken = $decoded_token;
     }
 
     public function getDecodedToken()
