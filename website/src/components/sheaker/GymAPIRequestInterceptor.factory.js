@@ -8,7 +8,7 @@ angular.module('sheaker')
                 request.url.indexOf(GYM_API_URL + '/clients') === -1 &&
                 request.url.indexOf(GYM_API_URL + '/infos') === -1) {
                 request.params = request.params || {};
-                angular.extend(request.params, {client: $rootScope.client.id});
+                angular.extend(request.params, {'id_client': $rootScope.client.id});
             }
 
             return request;

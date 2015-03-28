@@ -19,13 +19,7 @@ class MainController
             }
         }
 
-        $clientSub = $getParams['subdomain'];
-        $ch = curl_init($app['sheaker.api'] . "/clients?subdomain={$clientSub}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $client = curl_exec($ch);
-        curl_close($ch);
-
-        return $client;
+        return json_encode($app['client']->getClient());
     }
 
     public function getSheakerInfos(Request $request, Application $app)
@@ -62,7 +56,7 @@ class MainController
 
         if (password_verify($loginParams['password'], $user->getPassword())) {
             $user->setLastSeen(date('Y-m-d H:i:s', time()));
-            $user->setLastIP($request->headers->get('referer'));
+            $user->setLastIP($request->getClientIp());
             $user->setFailedLogins(0);
             $app['repository.user']->save($user);
 
@@ -91,7 +85,7 @@ class MainController
     public function renewToken(Request $request, Application $app)
     {
         $renewParams = [];
-        $renewParams['idClient'] = $app->escape($request->get('client'));
+        $renewParams['idClient'] = $app->escape($request->get('id_client'));
         $renewParams['oldToken'] = $app->escape($request->get('oldToken'));
 
         foreach ($renewParams as $value) {
@@ -100,14 +94,7 @@ class MainController
             }
         }
 
-        // Retrieve the secret key on Sheaker API to encode the token
-        $idClient = $renewParams['idClient'];
-        $ch = curl_init($app['sheaker.api'] . "/clients?id={$idClient}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $client = json_decode(curl_exec($ch));
-        curl_close($ch);
-
-        $oldToken = \JWT::decode($renewParams['oldToken'], $client->secretKey, false);
+        $oldToken = \JWT::decode($renewParams['oldToken'], $app['client']->getClient()->secretKey, false);
 
         $exp = ($oldToken->user->rememberMe) ? time() + 60 * 60 * 24 * 360 : time() + 60 * 60 * 24; // expire in 1year or 24h
         $newToken = $app['jwt']->createToken($request, $exp, $oldToken->user);

@@ -11,7 +11,7 @@ class UserController
 {
     public function getUsersList(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
@@ -30,7 +30,7 @@ class UserController
 
     public function getUser(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
@@ -58,7 +58,7 @@ class UserController
 
     public function addUser(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
@@ -129,7 +129,7 @@ class UserController
 
     public function editUser(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');

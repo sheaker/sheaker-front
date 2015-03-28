@@ -38,11 +38,11 @@ $app['api.accessLevels'] = [
  */
 $app->register(new DoctrineServiceProvider(), [
     'db.options' => [
-        'dbname'   => $app['database.dbname'],
+        'dbname'   => 'client_' . explode('.', $_SERVER['HTTP_HOST'])[0],
         'host'     => $app['database.host'],
         'user'     => $app['database.user'],
-        'password' => $app['database.passwd'],
-    ],
+        'password' => $app['database.passwd']
+    ]
 ]);
 
 $app->register(new MonologServiceProvider(), [
@@ -50,6 +50,17 @@ $app->register(new MonologServiceProvider(), [
     'monolog.level'   => Logger::WARNING,
     'monolog.name'    => 'api'
 ]);
+
+/**
+ * Register our custom services
+ */
+$app['client'] = $app->share(function ($app) {
+    return new Sheaker\Service\ClientService($app);
+});
+
+$app['jwt'] = $app->share(function ($app) {
+    return new Sheaker\Service\JWTService($app);
+});
 
 /**
  * Register repositories
@@ -63,19 +74,24 @@ $app['repository.payment'] = $app->share(function ($app) {
 });
 
 /**
- * Register custom services
- */
-$app['jwt'] = $app->share(function ($app) {
-    return new Sheaker\Service\JWT($app);
-});
-
-/**
  * Register before handler
  */
-$app->before(function (Request $request) {
+$app->before(function (Request $request, Application $app) {
+    if ($request->getMethod() === 'OPTIONS') {
+        return;
+    }
+
     if (strpos($request->headers->get('Content-Type'), 'application/json') === 0) {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
+    }
+
+    if (strpos($request->getPathInfo(), "info") === false) {
+        $app['client']->fetchClient($request);
+
+        if (preg_match("/users|payments/", $request->getPathInfo())) {
+            $app['jwt']->checkTokenAuthenticity($request);
+        }
     }
 });
 
@@ -83,8 +99,9 @@ $app->before(function (Request $request) {
  * Register error handler
  */
 $app->error(function (\Exception $e, $code) use ($app) {
-    if ($app['debug'])
+    if ($app['debug']) {
         return;
+    }
 
     $app['monolog']->addError($e->getMessage());
     $app['monolog']->addError($e->getTraceAsString());

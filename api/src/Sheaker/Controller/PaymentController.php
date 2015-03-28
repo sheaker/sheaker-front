@@ -11,7 +11,7 @@ class PaymentController
 {
     public function getPaymentsList(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
@@ -36,7 +36,7 @@ class PaymentController
 
     public function addPayment(Request $request, Application $app)
     {
-        $token = $app['jwt']->checkIfTokenIsPresentAndLikeAVirgin($request);
+        $token = $app['jwt']->getDecodedToken();
 
         if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
             $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
