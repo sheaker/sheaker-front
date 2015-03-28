@@ -6,7 +6,7 @@ angular.module('sheaker')
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, element, attrs, ngModel) {
-            element.bind('blur', function () {
+            element.bind('change paste keyup', function () {
                 if (!ngModel || !element.val()) {
                     element.parent().removeClass('has-success').addClass('has-error');
                     ngModel.$setValidity('unique', false);

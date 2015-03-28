@@ -132,7 +132,7 @@
             </div>
 
             <div class="col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && addForm.$invalid)">Add client</button>
+                <button type="submit" class="col-lg-offset-1 col-lg-10 btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && (editForm.$invalid || !formDatas.customId))">Add client</button>
             </div>
         </form>
     </div>

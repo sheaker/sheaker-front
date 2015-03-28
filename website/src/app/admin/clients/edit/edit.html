@@ -127,7 +127,7 @@
                             <textarea class="form-control" id="InputComment" rows="10" name="comment" ng-model="formDatas.comment" placeholder="If you have any comments to do..."></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && editForm.$invalid)">Edit client</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled || (hasCustomId && (editForm.$invalid || !formDatas.customId))">Edit client</button>
                 </div>
             </div><!-- Details informations end -->
         </form>
