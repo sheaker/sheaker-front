@@ -85,6 +85,7 @@ angular.module('sheaker')
         User.save($scope.formDatas).$promise
         .then(function(user) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.customId || user.id) + '.'});
+            $scope.formDatas = {};
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
