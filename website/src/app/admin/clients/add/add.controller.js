@@ -82,11 +82,6 @@ angular.module('sheaker')
         }
         $scope.isButtonSaveDisabled = true;
 
-        // prepend a + to save the phone number as a string in database, e.g. +523312345678
-        if ($scope.formDatas.phone) {
-            $scope.formDatas.phone = '+' + $scope.formDatas.phone;
-        }
-
         User.save($scope.formDatas).$promise
         .then(function(user) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.customId || user.id) + '.'});

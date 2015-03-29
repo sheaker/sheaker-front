@@ -53,7 +53,7 @@ class UserController
             }
         }
 
-        return json_encode($user);
+        return json_encode($user, JSON_NUMERIC_CHECK);
     }
 
     public function addUser(Request $request, Application $app)
