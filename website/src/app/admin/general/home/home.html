@@ -21,21 +21,14 @@
         <div class="col-lg-4" id="Birthdays">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-birthday-cake pull-right"></span>
-                <div class="title-small">Birthday</div>
+                <div class="title-small">Incoming birthday</div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-striped table-condensed">
                         <tbody>
-                            <tr ng-repeat="client in clientsList | filter:{ birthdate: todayBirthday }">
-                                <td>{{ client.customId || client.id }}</td>
-                                <td>{{ client.firstName }}</td>
-                                <td>{{ client.lastName }}</td>
+                            <tr ng-repeat="user in usersList | filter: {hasBirthdayInc: true} | limitTo: 5 | orderBy: 'lastName'">
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.birthdate | date: 'd MMM'}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -45,16 +38,16 @@
         <div class="col-lg-4" id="LastsEntry">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-street-view pull-right"></span>
-                <div class="title-small">Lasts Entry</div>
+                <div class="title-small">Last check-in</div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
+                    <table class="table table-striped table-condensed">
+                        <tbody>
                             <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </thead>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -62,21 +55,14 @@
         <div class="col-lg-4" id="NewClients">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-bookmark pull-right"></span>
-                <div class="title-small">New Clients</div>
+                <div class="title-small">New clients</div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-striped table-condensed">
                         <tbody>
-                            <tr ng-repeat="client in clientsList | filter:{ subscriptionDate: dateTodayParse }">
-                                <td>{{ client.customId || client.id }}</td>
-                                <td>{{ client.firstName }}</td>
-                                <td>{{ client.lastName }}</td>
+                            <tr ng-repeat="user in usersList | orderBy: 'subscriptionDate':true | limitTo: 5">
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.customId || user.id }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -86,25 +72,25 @@
         <div class="col-lg-4" id="ClientsNumber">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-users pull-right"></span>
-                <div class="title-small">Total Clients</div>
-                <h1><span class="color-green fa fa-smile-o"></span> 255</h1>
-                <h1><span class="color-red fa fa-frown-o"></span> 88</h1>
-                <h1>Total: {{clientsTotalNumber}}</h1>
+                <div class="title-small">Total of clients</div>
+                <p>Total: {{ usersMemberships.active + usersMemberships.inactive }}</p>
+                <p><span class="color-green fa fa-smile-o"></span> {{ usersMemberships.active }}</p>
+                <p><span class="color-red fa fa-frown-o"></span> {{ usersMemberships.inactive }}</p>
             </div>
         </div>  <!--Total Clients end -->
         <div class="col-lg-4" id="FinishedMemberships">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-frown-o pull-right"></span>
-                <div class="title-small">Finished Memberships</div>
+                <div class="title-small">Incoming finished memberships</div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                    <table class="table table-striped table-condensed">
+                        <tbody>
+                            <tr ng-repeat="user in usersList | filter: {hasInactiveMembershipInc: true} | limitTo: 5 | orderBy: 'lastName'">
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.membershipEndingDate | date: 'd MMM' }}</td>
                             </tr>
-                        </thead>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -114,14 +100,14 @@
                 <span class="color-grey fa fa-smile-o pull-right"></span>
                 <div class="title-small">New Memberships</div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                    <table class="table table-striped table-condensed">
+                        <tbody>
+                            <tr ng-repeat="user in usersList | filter: {hasNewActiveMembership: true} | limitTo: 5 | orderBy: 'lastName'">
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.customId || user.id }}</td>
                             </tr>
-                        </thead>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -129,7 +115,10 @@
         <div class="col-lg-4" id="TotalGains">
             <div class="thumbnail thumbnail-form-home">
                 <span class="color-grey fa fa-usd pull-right"></span>
-                <div class="title-small">Total Gains</div>
+                <div class="title-small">Gains today</div>
+                <div class="table-responsive">
+                    {{ gym.gainToday | currency }}
+                </div>
             </div>
         </div>  <!--Total Gains end -->
 

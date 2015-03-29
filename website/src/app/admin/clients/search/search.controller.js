@@ -15,14 +15,18 @@ angular.module('sheaker')
     User.query({limit:50, offset:0, sortBy:'created_at', order:'DESC'}).$promise
     .then(function(usersList) {
         usersList.forEach(function (user) {
+            user.hasMembershipActive = false;
+
             // Load user payments
             Payment.query({user: user.id}).$promise
             .then(function(payments) {
-                if (!user.hasMembershipActive) {
-                    payments.forEach(function (payment) {
+                payments.forEach(function (payment) {
+                    delete payment.user; // no need to duplicate user object
+
+                    if (user.hasMembershipActive === false) {
                         user.hasMembershipActive = moment().isBetween(payment.startDate, moment(payment.startDate).add(payment.days, 'd'));
-                    });
-                }
+                    }
+                });
 
                 user.payments = payments;
             })
