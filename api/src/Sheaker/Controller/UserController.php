@@ -18,7 +18,7 @@ class UserController
         }
 
         $getParams = [];
-        $getParams['limit']  = $app->escape($request->get('limit',  50));
+        $getParams['limit']  = $app->escape($request->get('limit'));
         $getParams['offset'] = $app->escape($request->get('offset', 0));
         $getParams['sortBy'] = $app->escape($request->get('sortBy', 'created_at'));
         $getParams['order']  = $app->escape($request->get('order',  'DESC'));
