@@ -12,7 +12,7 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <div class="panel-heading">Search :<input type="search" class="search-field" ng-model="searchText" placeholder="search by id, first name, last name"></div>
-        <div class="table-responsive">
+        <div class="table-responsive" infinite-scroll="loadUsers()" infinite-scroll-disabled="usersList.busy" infinite-scroll-distance="1">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="user in usersList | filter: searchText">
+                    <tr ng-repeat="user in usersList.users | filter: searchText">
                         <td>{{ user.customId || user.id }}</td>
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.lastName }}</td>
@@ -40,6 +40,8 @@
                     </tr>
                 </tbody>
             </table>
+            <div style="clear: both;"></div>
         </div>
+        <div ng-show="usersList.busy">Loading data...</div>
     </div>
 </div>
