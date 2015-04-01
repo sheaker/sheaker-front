@@ -14,24 +14,32 @@ angular.module('sheaker')
     $scope.usersList = {
         users: [],
         busy: false,
-        offset: 0
+        limit: 50,
+        offset: 0,
+        noMoreApi: false
     };
 
     $scope.loadUsers = function () {
-        if ($scope.usersList.busy) {
+        if ($scope.usersList.busy || $scope.usersList.noMoreApi) {
             return;
         }
 
         $scope.usersList.busy = true;
 
-        // Load the last 25 clients, order by ID desc
-        User.query({limit:25, offset:$scope.usersList.offset, sortBy:'created_at', order:'DESC'}).$promise
+        User.query({limit:$scope.usersList.limit, offset:$scope.usersList.offset, sortBy:'created_at', order:'DESC'}).$promise
         .then(function(usersList) {
+            $scope.usersList.busy = false;
+
+            if (usersList.length === 0) {
+                $scope.usersList.noMoreApi = true;
+                return;
+            }
+
             usersList.forEach(function (user) {
                 user.hasMembershipActive = false;
 
                 // Load user payments
-                Payment.query({user: user.id}).$promise
+                /*Payment.query({user: user.id}).$promise
                 .then(function(payments) {
                     payments.forEach(function (payment) {
                         delete payment.user; // no need to duplicate user object
@@ -46,11 +54,11 @@ angular.module('sheaker')
                 .catch(function(error) {
                     console.log(error);
                     $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
-                });
+                });*/
             });
 
             $scope.usersList.users = $scope.usersList.users.concat(usersList);
-            $scope.usersList.busy = false;
+            $scope.usersList.limit *= 2;
             $scope.usersList.offset += usersList.length;
         })
         .catch(function(error) {
