@@ -8,7 +8,8 @@ angular.module('sheaker', [
     'webcam',
     'internationalPhoneNumber',
     'ui.bootstrap.showErrors',
-    'infinite-scroll'
+    'infinite-scroll',
+    'angular-spinkit'
 ])
 .constant('SHEAKER_URL', '//sheaker.com')
 .constant('GYM_API_URL', '//gym4devs.sheaker.com/api')
