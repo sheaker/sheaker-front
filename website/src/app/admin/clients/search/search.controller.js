@@ -3,8 +3,8 @@
 angular.module('sheaker')
 .controller('SearchClientCtrl', function ($rootScope, $scope, $location, User, Payment) {
 
-    if ($location.search().search) {
-        $scope.searchText = $location.search().search;
+    if ($location.search().text) {
+        $scope.searchText = $location.search().text;
     }
 
     $scope.$watch('searchText', function(newValue) {
@@ -55,7 +55,7 @@ angular.module('sheaker')
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users, please contact a developper.'});
         });
     };
 
