@@ -48,7 +48,7 @@ class UserRepository implements RepositoryInterface
         );
 
         $userPhotoData = array(
-            'image' => $user->getPhoto()
+            'path' => $user->getPhoto()
         );
 
         if ($user->getId()) {
@@ -221,7 +221,7 @@ class UserRepository implements RepositoryInterface
         $user->setLastIP($userData['last_ip']);
         $user->setFailedLogins($userData['failed_logins']);
         $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['created_at'])));
-        $user->setPhoto($userData['image']);
+        $user->setPhoto($userData['path']);
         $user->setUserLevel($userData['user_level']);
 
         return $user;

@@ -13,7 +13,7 @@ foreach($fgMembers as $fgMember) {
         'first_name'       => $fgMember['nombre'],
         'last_name'        => $fgMember['apellidos'],
         'password'         => '',
-        'phone'            => $fgMember['celular'],
+        'phone'            => '52'.$fgMember['celular'],
         'mail'             => $fgMember['email'],
         'birthdate'        => $fgMember['fecha_nac'],
         'address_street_1' => $fgMember['direccion'],
