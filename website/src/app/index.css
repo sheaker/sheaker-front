@@ -308,6 +308,16 @@ body {
     text-shadow: 0 1px #d2d4e3;
 }
 
+.general-box .title-x-small {
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    text-shadow: 0 1px #d2d4e3;
+}
+
 .general-box .content-box .snapshotCtrls {
     margin-bottom: 20px;
 }
@@ -325,6 +335,18 @@ body {
 .general-box .content-box {
     padding-left : 20px;
     padding-right : 20px;
+}
+
+.general-box .content-box p {
+    font-size: 20px;
+}
+
+.little-box {
+    height: 200px;
+}
+
+.medium-box {
+    height: 450px;
 }
 
 /* End Box */
