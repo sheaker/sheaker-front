@@ -277,7 +277,7 @@ body {
 /* Box css */
 
 .charge-photo{
-    margin-bottom: 40px;    
+    margin-bottom: 40px;
 }
 
 .general-box {
@@ -285,9 +285,8 @@ body {
 
     color: #4b4b4b;
     border: 1px solid #DDD;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     margin-bottom: 30px;
-    padding:0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -309,14 +308,18 @@ body {
     text-shadow: 0 1px #d2d4e3;
 }
 
-.general-box .content-box .snapshotCtrls
-{
+.general-box .content-box .snapshotCtrls {
     margin-bottom: 20px;
 }
 
-.general-box .fa {
-    padding-top: 10px;
+.general-box > .fa {
+    padding-top: 20px;
+    padding-right: 20px;
     font-size: 50px;
+}
+
+.general-box .fa {
+    font-size: 40px;
 }
 
 .general-box .content-box {
