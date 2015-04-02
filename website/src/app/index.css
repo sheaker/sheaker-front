@@ -5,12 +5,12 @@ body {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 .main {
     padding-left: 220px;
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 /* Containers */
@@ -167,7 +167,7 @@ body {
     padding-left: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #fff;
+    background-color: #f9f9f9;
     font-weight: 600;
     /*border-right: 1px solid #dbdbdb;*/
 }
@@ -199,7 +199,7 @@ body {
 .nav-subsidebar > li > a,
 .nav-subsidebar > li > a:hover,
 .nav-subsidebar > li > a:focus {
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 
@@ -273,3 +273,55 @@ body {
     margin-top: 20px;
     margin-right: 20px;
 }
+
+/* Box css */
+
+.charge-photo{
+    margin-bottom: 40px;    
+}
+
+.general-box {
+    font-size: 16px;
+
+    color: #4b4b4b;
+    border: 1px solid #DDD;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    padding:0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.general-box .pull-right {
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+.general-box .title-small {
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 50px;
+    font-size: 35px;
+    text-shadow: 0 1px #d2d4e3;
+}
+
+.general-box .content-box .snapshotCtrls
+{
+    margin-bottom: 20px;
+}
+
+.general-box .fa {
+    padding-top: 10px;
+    font-size: 50px;
+}
+
+.general-box .content-box {
+    padding-left : 20px;
+    padding-right : 20px;
+}
+
+/* End Box */
