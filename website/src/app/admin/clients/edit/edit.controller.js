@@ -33,7 +33,7 @@ angular.module('sheaker')
             var imageObj = new Image();
 
             imageObj.onload = function() {
-                ctxSnapshot.drawImage(this, 0, 0);
+                ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
             };
 
             imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
