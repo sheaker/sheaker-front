@@ -12,75 +12,77 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <form name="addForm" ng-submit="addUser()">
-            <div class="general-box col-lg-offset-1 col-lg-5" id="GeneralInformations">
-                <span class="color-grey fa fa-list pull-right"></span>
-                <div class="title-small">General Informations</div>
-                <div class="content-box">
-                    <div>
-                        <label for="InputCustomId">Custom ID ?</label>
-                        <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
-                    </div>
-                    <div class="form-group" ng-show="hasCustomId">
-                        <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-model="formDatas.customId" ng-unique="id" placeholder="Enter the Id you want, if it's available">
-                    </div>
-                    <div class="form-group" show-errors>
-                        <label for="InputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.firstName" required>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.lastName" required>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputPhoneNumber">Phone</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="InputPhoneNumber" name="phone" international-phone-number preferred-countries="mx, us" ng-model="formDatas.phone">
+            <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
+                <div class="general-box">
+                    <span class="color-grey fa fa-list pull-right"></span>
+                    <div class="title-small">General Informations</div>
+                    <div class="content-box">
+                        <div>
+                            <label for="InputCustomId">Custom ID ?</label>
+                            <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
                         </div>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputEmail">Mail</label>
-                        <input type="email" class="form-control" id="InputMail" name="mail" ng-model="formDatas.mail">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="InputGender">Sex</label>
-                        <div class="form-inline">
-                            <label class="radio-inline">
-                                <input type="radio" id="InputGenderMale" name="genderRadios" ng-model="formDatas.gender" value="0"> Male
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="InputGenderFemale" name="genderRadios" ng-model="formDatas.gender" value="1"> Female
-                            </label>
+                        <div class="form-group" ng-show="hasCustomId">
+                            <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-model="formDatas.customId" ng-unique="id" placeholder="Enter the Id you want, if it's available">
                         </div>
-                    </div>
+                        <div class="form-group" show-errors>
+                            <label for="InputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.firstName" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="InputBirthdate">Birthdate</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
-                            <span class="input-group-btn">
-                                <button type="button" class="form-control btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
+                        <div class="form-group" show-errors>
+                            <label for="InputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.lastName" required>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <h3>Address</h3>
-                        <div class="form-group col-lg-12">
-                            <label for="InputAddressStreet">Street address</label>
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.addressStreet1">
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.addressStreet2">
+                        <div class="form-group" show-errors>
+                            <label for="InputPhoneNumber">Phone</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="InputPhoneNumber" name="phone" international-phone-number preferred-countries="mx, us" ng-model="formDatas.phone">
+                            </div>
                         </div>
-                        <div class="form-group col-lg-8">
-                            <label for="InputAddressCity">City</label>
-                            <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
+
+                        <div class="form-group" show-errors>
+                            <label for="InputEmail">Mail</label>
+                            <input type="email" class="form-control" id="InputMail" name="mail" ng-model="formDatas.mail">
                         </div>
-                        <div class="form-group col-lg-4">
-                            <label for="InputAddressZipCode">Zip code</label>
-                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
+
+                        <div class="form-group">
+                            <label for="InputGender">Sex</label>
+                            <div class="form-inline">
+                                <label class="radio-inline">
+                                    <input type="radio" id="InputGenderMale" name="genderRadios" ng-model="formDatas.gender" value="0"> Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="InputGenderFemale" name="genderRadios" ng-model="formDatas.gender" value="1"> Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputBirthdate">Birthdate</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                                <span class="input-group-btn">
+                                    <button type="button" class="form-control btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row row-padding">
+                            <h3>Address</h3>
+                            <div class="form-group col-lg-12">
+                                <label for="InputAddressStreet">Street address</label>
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.addressStreet1">
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.addressStreet2">
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label for="InputAddressCity">City</label>
+                                <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="InputAddressZipCode">Zip code</label>
+                                <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
+                            </div>
                         </div>
                     </div>
                 </div>
