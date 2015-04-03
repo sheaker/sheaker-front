@@ -11,15 +11,20 @@ angular.module('sheaker')
                 var decodedToken = jwtHelper.decodeToken(response.token);
                 $rootScope.user = decodedToken.user;
 
-                $location.path('/');
+                if ($rootScope.user.permissions.length) {
+                    $location.path('/admin/general/home');
+                }
+                else {
+                    $location.path('/');
+                }
             }
             else {
                 $rootScope.alerts.push({type: 'danger', msg: 'Username or password are wrong.'});
             }
         })
         .catch(function(error) {
-            console.log('>>> Failed to post datas');
             console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while trying to connect, please contact a developper.'});
         });
     };
 });
