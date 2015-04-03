@@ -70,10 +70,10 @@
                     <div class="title-small">Payment history</div>
                     <div class="content-box">
                         <div class="table-responsive">
-                            <div class="text-center" ng-hide="payments.length">
+                            <div class="text-center" ng-hide="user.payments.length">
                                 No previous payments.
                             </div>
-                            <table class="table table-striped" ng-show="payments.length">
+                            <table class="table table-striped" ng-show="user.payments.length">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
@@ -82,7 +82,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="p in payments">
+                                    <tr ng-repeat="p in user.payments">
                                         <td>{{ p.paymentDate | date }}</td>
                                         <td>{{ p.days }}</td>
                                         <td>{{ p.price | currency }}</td>

@@ -159,6 +159,12 @@ class User
      */
     public $activeMembershipId;
 
+    /**
+     * Array of all his payments.
+     *
+     * @var array
+     */
+    public $payments;
 
     public function getId()
     {
@@ -356,5 +362,14 @@ class User
     public function setActiveMembershipId($activeMembershipId)
     {
         $this->activeMembershipId = $activeMembershipId;
+    }
+
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+    public function setPayments($payments)
+    {
+        $this->payments = $payments;
     }
 }

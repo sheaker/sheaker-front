@@ -150,7 +150,7 @@ class UserRepository implements RepositoryInterface
      *
      * @return array A collection of users, keyed by user id.
      */
-    public function getUsers($conditions, $limit, $offset = 0, $orderBy = array())
+    public function getUsers($conditions, $limit = 0, $offset = 0, $orderBy = array())
     {
         // Provide a default orderBy.
         if (!$orderBy) {
@@ -171,9 +171,10 @@ class UserRepository implements RepositoryInterface
         if ($limit) {
             $queryBuilder->setMaxResults($limit);
         }
-        $queryBuilder
-            ->setFirstResult($offset)
-            ->orderBy('u.' . key($orderBy), current($orderBy));
+        if ($offset) {
+            $queryBuilder->setFirstResult($offset);
+        }
+        $queryBuilder->orderBy('u.' . key($orderBy), current($orderBy));
         $parameters = array();
         foreach ($conditions as $key => $value) {
             $parameters[':' . $key] = $value;

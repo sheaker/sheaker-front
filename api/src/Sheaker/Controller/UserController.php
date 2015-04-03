@@ -25,6 +25,10 @@ class UserController
 
         $users = $app['repository.user']->findAll($getParams['limit'], $getParams['offset'], array($getParams['sortBy'] => $getParams['order']));
 
+        foreach ($users as $user) {
+            $user->setPayments($app['repository.payment']->find($user->activeMembershipId));
+        }
+
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
@@ -52,6 +56,8 @@ class UserController
                 $app->abort(Response::HTTP_NOT_FOUND, 'User not found');
             }
         }
+
+        $user->setPayments($app['repository.payment']->findAllByUser($user->id));
 
         return json_encode($user, JSON_NUMERIC_CHECK);
     }

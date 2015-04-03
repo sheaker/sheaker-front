@@ -74,7 +74,7 @@ class PaymentRepository implements RepositoryInterface
      *
      * @return array A collection of payments, keyed by payment id.
      */
-    public function findAll($limit, $offset = 0, $orderBy = array())
+    public function findAll($limit = 0, $offset = 0, $orderBy = array())
     {
         return $this->getPayments(array(), $limit, $offset, $orderBy);
     }
@@ -93,7 +93,7 @@ class PaymentRepository implements RepositoryInterface
      *
      * @return array A collection of payments, keyed by payment id.
      */
-    public function findAllByUser($userId, $limit, $offset = 0, $orderBy = array())
+    public function findAllByUser($userId, $limit = 0, $offset = 0, $orderBy = array())
     {
         $conditions = array(
             'user_id' => $userId
@@ -122,7 +122,7 @@ class PaymentRepository implements RepositoryInterface
      *
      * @return array A collection of payments.
      */
-    public function getPayments($conditions, $limit, $offset = 0, $orderBy = array())
+    public function getPayments($conditions, $limit = 0, $offset = 0, $orderBy = array())
     {
         // Provide a default orderBy.
         if (!$orderBy) {
@@ -132,10 +132,14 @@ class PaymentRepository implements RepositoryInterface
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('up.*')
-            ->from('users_payments', 'up')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
-            ->orderBy('up.' . key($orderBy), current($orderBy));
+            ->from('users_payments', 'up');
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+        if ($offset) {
+            $queryBuilder->setFirstResult($offset);
+        }
+        $queryBuilder->orderBy('up.' . key($orderBy), current($orderBy));
         $parameters = array();
         foreach ($conditions as $key => $value) {
             $parameters[':' . $key] = $value;

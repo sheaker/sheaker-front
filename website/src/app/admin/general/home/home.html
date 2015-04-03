@@ -97,7 +97,7 @@
                                 <tr ng-repeat="user in usersList | filter: {hasInactiveMembershipInc: true} | orderBy: 'lastName'">
                                     <td>{{ user.firstName }}</td>
                                     <td>{{ user.lastName }}</td>
-                                    <td>{{ user.membershipEndingDate | date: 'd MMM' }}</td>
+                                    <td>{{ user.payments.endDate | date: 'd MMM' }}</td>
                                 </tr>
                             </tbody>
                         </table>

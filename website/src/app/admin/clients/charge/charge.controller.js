@@ -29,16 +29,6 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations, please contact a developper.'});
     });
 
-    // Load payment history
-    Payment.query({user: $routeParams.id}).$promise
-    .then(function(payments) {
-        $scope.payments = payments;
-    })
-    .catch(function(error) {
-        console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
-    });
-
     // Calculate ending date
     $scope.calculateEndDate = function () {
         $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days');
