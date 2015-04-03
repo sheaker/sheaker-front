@@ -79,7 +79,12 @@ class UserRepository implements RepositoryInterface
     public function findById($id)
     {
         $userData = $this->db->fetchAssoc('
-            SELECT *
+            SELECT *, (
+                SELECT id
+                FROM users_payments
+                WHERE user_id = u.id
+                AND NOW() BETWEEN start_date AND end_date
+            ) AS active_membership_id
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
             WHERE u.id = ?', array($id));
@@ -96,7 +101,12 @@ class UserRepository implements RepositoryInterface
     public function findByCustomId($customId)
     {
         $userData = $this->db->fetchAssoc('
-            SELECT *
+            SELECT *, (
+                SELECT id
+                FROM users_payments
+                WHERE user_id = u.id
+                AND NOW() BETWEEN start_date AND end_date
+            ) AS active_membership_id
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
             WHERE u.custom_id = ?', array($customId));
