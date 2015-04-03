@@ -32,14 +32,15 @@ foreach($fgMembers as $fgMember) {
 
     $stmt = $dbh_sheaker->prepare("
     INSERT INTO users
-    (created_at, birthdate, gender, last_ip, last_seen, zip, address_street_2, sponsor_id, mail, phone, comment, password, failed_logins, city, address_street_1, last_name, first_name, custom_id)
+    (created_at, birthdate, gender, photo, last_ip, last_seen, zip, address_street_2, sponsor_id, mail, phone, comment, password, failed_logins, city, address_street_1, last_name, first_name, custom_id)
     VALUES
-    (:created_at, :birthdate, :gender, :last_ip, :last_seen, :zip, :address_street_2, :sponsor_id, :mail, :phone, :comment, :password, :failed_logins, :city, :address_street_1, :last_name, :first_name, :custom_id)
+    (:created_at, :birthdate, :gender, :photo, :last_ip, :last_seen, :zip, :address_street_2, :sponsor_id, :mail, :phone, :comment, :password, :failed_logins, :city, :address_street_1, :last_name, :first_name, :custom_id)
     ");
 
     $stmt->bindValue(':created_at',       $newMember['created_at']);
     $stmt->bindValue(':birthdate',        $newMember['birthdate']);
     $stmt->bindValue(':gender',           $newMember['gender']);
+    $stmt->bindValue(':photo',            $newMember['photo']);
     $stmt->bindValue(':last_ip',          $newMember['last_ip']);
     $stmt->bindValue(':last_seen',        $newMember['last_seen']);
     $stmt->bindValue(':zip',              $newMember['zip']);
