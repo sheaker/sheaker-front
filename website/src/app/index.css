@@ -1,8 +1,6 @@
 body {
     padding-top: 10px;
 
-
-
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
@@ -213,6 +211,29 @@ body {
     height: 50px;
     width: auto;
 }
+
+.homebar {
+    margin-top: -13px;
+    margin-bottom: 20px;
+}
+
+.nav-home > li > a {
+    padding-top: 18px;
+    font-weight: 400;
+    color: #484848;
+}
+
+.nav-home > li > a:hover {
+    text-decoration: none;
+    background-color: transparent;
+    font-weight: 800;
+}
+
+.nav-home > li > a,
+.nav-home > li > a:hover,
+.nav-homer > li > a:focus {
+    background-color: transparent;
+}
 /* End NavBar */
 
 /* Begin Footer */
@@ -313,6 +334,12 @@ body {
 .general-box .pull-right {
     padding-top: 5px;
     padding-right: 15px;
+}
+
+.general-box .title-medium {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 85px;
 }
 
 .general-box .title-small {

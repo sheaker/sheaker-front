@@ -1,17 +1,27 @@
 <div class="container-fluid">
     <div ng-include="'components/navbar/navbar.html'"></div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> Website: Login Page
     <div class="container">
         <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <form class="form-signin" ng-submit="login()">
-            <div class="jumbotron">
+            <div class="general-box">
                 <h1 class="form-signin-heading text-center"><span class="fa fa-user"></span></h1>
                 <br>
+<<<<<<< HEAD
                 <input type="text" id="inputID" class="form-control" ng-model="loginForm.id" placeholder="Id" required autofocus>
                 <input type="password" id="inputPassword" class="form-control" ng-model="loginForm.password" placeholder="Password" required>
+=======
+                <div class="content-box">
+                <input type="text" id="inputID" class="form-control" ng-model="loginForm.id" placeholder="ID Client" required autofocus />
+                <input type="password" id="inputPassword" class="form-control" ng-model="loginForm.password" placeholder="Password" required />
+>>>>>>> Website: Login Page
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Signin</button>
+            </div>
             </div>
         </form>
     </div>

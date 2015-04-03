@@ -1,20 +1,12 @@
-<nav class="navbar navbar-static-top navbar-inverse navbar-fixed-top" ng-controller="NavbarCtrl">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#/">
-                <span class="glyphicon glyphicon-home"></span> {{ client.name }}
-            </a>
-
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li ng-hide="user" ng-class="{active: isActive('/login')}"><a href="#/login">Login</a></li>
-                <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">Profile</a></li>
-                <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
-            </ul>
-        </div>
-            <!--<ul class="nav navbar-nav navbar-right">
-                <li>Current date: {{ date | date:'yyyy-MM-dd' }}</li>
-            </ul>-->
+<nav class="container navbar-inverse homebar" ng-controller="NavbarCtrl">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#/">
+            <img src="assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
+        </a>
     </div>
+    <ul class="nav nav-home">
+        <li ng-hide="user" ng-class="{active: isActive('/login')}"><a href="#/login">Login</a></li>
+        <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">Profile</a></li>
+        <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
+    </ul>
 </nav>

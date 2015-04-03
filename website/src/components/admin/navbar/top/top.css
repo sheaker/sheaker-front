@@ -13,9 +13,12 @@
 }
 
 .navbar-inverse {
-    width: 200px;
     background-color: #f9f9f9;
     border-bottom: 1px solid #dbdbdb;
+}
+
+.navbar-inverse-size {
+    width: 200px;
 }
 
 .navbar-inverse .navbar-header > a {
