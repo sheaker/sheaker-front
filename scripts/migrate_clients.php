@@ -85,7 +85,7 @@ foreach($fgMembers as $fgMember) {
     echo ", his membership too";
 
     $originalPhoto = "photo/{$newMember['custom_id']}.jpg";
-    $prefixNewPhoto = '../api/public';
+    $prefixNewPhoto = '../api/public/';
 
     if (!copy($originalPhoto, $prefixNewPhoto.$newMember['photo'])) {
         echo "ERROR: while copying photo\n";
