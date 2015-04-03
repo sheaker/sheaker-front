@@ -13,15 +13,12 @@
 
         <div class="col-lg-4" id="SheakerMembership">
             <div class="general-box medium-box">
-                <span class="color-grey fa fa-tachometer pull-right"></span>
-                <div class="title-x-small">General Stats</div>
-                    <div class="content-box">
-                        <p>Account type : Free</p>
-                    </div>
                 <span class="color-grey fa fa-users pull-right"></span>
                 <div class="title-x-small">Total of clients</div>
                 <div class="content-box">
-                    <p>Total: {{ usersList.length }}, <span class="color-green">Actifs: </span> {{ (usersList | filter:{activeMembershipId: '!null'}).length }}, <span class="color-red">Inactifs: </span> {{ (usersList | filter:{activeMembershipId: 'null'}).length }}</p>
+                        <p>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usersList.length }}</p>
+                        <p><span class="color-green">Actifs: &nbsp;&nbsp;&nbsp;</span> {{ (usersList | filter:{activeMembershipId: '!null'}).length }}</p>
+                        <p><span class="color-red">Inactifs:&nbsp;</span> {{ (usersList | filter:{activeMembershipId: 'null'}).length }}</p>
                 </div>
                 <span class="color-grey fa fa-usd pull-right"></span>
                 <div class="title-x-small">Gains today</div>

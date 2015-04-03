@@ -264,6 +264,14 @@ body {
     color: #DCDCDC;
 }
 
+.color-background-white {
+    background-color: #FFFFFF;
+}
+
+.color-white {
+    color: #FFFFFF;
+}
+
 /* End color set */
 
 .title {
@@ -300,6 +308,7 @@ body {
     background-color: #fff;
     font-weight: 400;
 }
+
 
 .general-box .pull-right {
     padding-top: 5px;
@@ -341,8 +350,7 @@ body {
 .general-box .content-box {
     padding-left : 20px;
     padding-right : 20px;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-
+    overflow-x: hidden;
 }
 
 .general-box .content-box p {
@@ -358,7 +366,7 @@ body {
 }
 
 .row-padding h3 {
-    margin-left : 15px;
+    margin-left: 15px;
     margin-top: 0px;
 }
 
