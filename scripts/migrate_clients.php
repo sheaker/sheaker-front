@@ -21,6 +21,7 @@ foreach($fgMembers as $fgMember) {
         'city'             => $fgMember['ciudad'],
         'zip'              => '', //$fgMember[''],
         'gender'           => ($fgMember['genero'] == 1) ? 0 : 1,
+        'photo'            => "photos/{$clientId}/" . uniqid() . '.jpg',
         'sponsor_id'       => -1,
         'comment'          => '',//$fgMember['fecha_nac'],
         'failed_logins'    => 0,
@@ -85,19 +86,10 @@ foreach($fgMembers as $fgMember) {
 
     $originalPhoto = "photo/{$newMember['custom_id']}.jpg";
     $prefixNewPhoto = '../api/public';
-    $newPhoto = "/photos/{$clientId}/" . uniqid() . '.jpg';
 
-    if (!copy($originalPhoto, $prefixNewPhoto.$newPhoto)) {
+    if (!copy($originalPhoto, $prefixNewPhoto.$newMember['photo'])) {
         echo "ERROR: while copying photo\n";
     }
 
-    $stmt = $dbh_sheaker->prepare("
-    INSERT INTO users_photo (user_id, path)
-    VALUES
-    (:user_id, :path)
-    ");
-    $stmt->bindValue(':user_id',    $newMember['id']);
-    $stmt->bindValue(':path',       $newPhoto);
-    $stmt->execute();
     echo ", and his photo.\n";
 }
