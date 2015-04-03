@@ -2,10 +2,6 @@
 
 angular.module('sheaker')
 .controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User) {
-    $scope.usersMemberships = {
-        active: 0,
-        inactive: 0
-    };
 
     $scope.gym = {
         gainToday: 0

@@ -150,6 +150,12 @@ class UserRepository implements RepositoryInterface
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('u.*', 'ua.*')
+            ->addSelect('(SELECT id
+                FROM users_payments
+                WHERE user_id = u.id
+                AND NOW() BETWEEN start_date AND end_date
+                ) AS active_membership_id
+            ')
             ->from('users', 'u')
             ->leftJoin('u', 'users_access', 'ua', 'u.id = ua.user_id');
         if ($limit) {
@@ -201,13 +207,14 @@ class UserRepository implements RepositoryInterface
         $user->setCity($userData['city']);
         $user->setZip($userData['zip']);
         $user->setGender($userData['gender']);
+        $user->setPhoto($userData['photo']);
         $user->setSponsor($userData['sponsor_id']);
         $user->setComment($userData['comment']);
+        $user->setFailedLogins($userData['failed_logins']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);
-        $user->setFailedLogins($userData['failed_logins']);
         $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['created_at'])));
-        $user->setPhoto($userData['photo']);
+        $user->setActiveMembershipId($userData['active_membership_id']);
         $user->setUserLevel($userData['user_level']);
 
         return $user;

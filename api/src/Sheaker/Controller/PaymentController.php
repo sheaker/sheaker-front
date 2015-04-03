@@ -34,6 +34,31 @@ class PaymentController
         return json_encode(array_values($users), JSON_NUMERIC_CHECK);
     }
 
+    public function getPayment(Request $request, Application $app)
+    {
+        $token = $app['jwt']->getDecodedToken();
+
+        if (!in_array('admin', $token->user->permissions) && !in_array('modo', $token->user->permissions)) {
+            $app->abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
+
+        $getParams = [];
+        $getParams['id'] = $app->escape($request->get('id'));
+
+        foreach ($getParams as $value) {
+            if (!isset($value)) {
+                $app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
+            }
+        }
+
+        $payment = $app['repository.payment']->find($getParams['id']);
+        if (!$payment) {
+            $app->abort(Response::HTTP_NOT_FOUND, 'Payment not found');
+        }
+
+        return json_encode($payment, JSON_NUMERIC_CHECK);
+    }
+
     public function addPayment(Request $request, Application $app)
     {
         $token = $app['jwt']->getDecodedToken();

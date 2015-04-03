@@ -104,6 +104,34 @@ class User
     public $gender;
 
     /**
+     * Photo path.
+     *
+     * @var String
+     */
+    public $photo;
+
+    /**
+     * Sponsor id.
+     *
+     * @var integer
+     */
+    public $sponsor;
+
+    /**
+     * Comment on the user.
+     *
+     * @var String
+     */
+    public $comment;
+
+    /**
+     * Number of failed login for this user.
+     *
+     * @var integer
+     */
+    public $failedLogins;
+
+    /**
      * When the user entity was last seen.
      *
      * @var string
@@ -125,32 +153,12 @@ class User
     public $subscriptionDate;
 
     /**
-     * Number of failed login for this user.
+     * The active membership id.
      *
      * @var integer
      */
-    public $failedLogins;
+    public $activeMembershipId;
 
-    /**
-     * Sponsor id.
-     *
-     * @var integer
-     */
-    public $sponsor;
-
-    /**
-     * Comment on the user.
-     *
-     * @var String
-     */
-    public $comment;
-
-    /**
-     * Photo path.
-     *
-     * @var String
-     */
-    public $photo;
 
     public function getId()
     {
@@ -278,6 +286,42 @@ class User
         $this->gender = $gender;
     }
 
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    public function getSponsor()
+    {
+        return $this->sponsor;
+    }
+    public function setSponsor($sponsor)
+    {
+        $this->sponsor = $sponsor;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    public function getFailedLogins()
+    {
+        return $this->failedLogins;
+    }
+    public function setFailedLogins($failedLogins)
+    {
+        $this->failedLogins = $failedLogins;
+    }
+
     public function getLastSeen()
     {
         return $this->lastSeen;
@@ -305,39 +349,12 @@ class User
         $this->subscriptionDate = $subscriptionDate;
     }
 
-    public function getFailedLogins()
+    public function getActiveMembershipId()
     {
-        return $this->failedLogins;
+        return $this->activeMembershipId;
     }
-    public function setFailedLogins($failedLogins)
+    public function setActiveMembershipId($activeMembershipId)
     {
-        $this->failedLogins = $failedLogins;
-    }
-
-    public function getSponsor()
-    {
-        return $this->sponsor;
-    }
-    public function setSponsor($sponsor)
-    {
-        $this->sponsor = $sponsor;
-    }
-
-    public function getComment()
-    {
-        return $this->comment;
-    }
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-    }
-
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
+        $this->activeMembershipId = $activeMembershipId;
     }
 }

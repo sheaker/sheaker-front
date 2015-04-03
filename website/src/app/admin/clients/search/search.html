@@ -35,8 +35,8 @@
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.lastName }}</td>
                         <td>
-                            <i class="fa fa-check fa-lg color-green" ng-show="user.hasMembershipActive"></i>
-                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.hasMembershipActive"></i>
+                            <i class="fa fa-check fa-lg color-green" ng-show="user.activeMembershipId"></i>
+                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId"></i>
                         </td>
                         <td>
                             <a href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>&nbsp&nbsp

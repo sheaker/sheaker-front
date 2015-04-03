@@ -21,7 +21,7 @@
                 <span class="color-grey fa fa-users pull-right"></span>
                 <div class="title-x-small">Total of clients</div>
                 <div class="content-box">
-                    <p>Total: {{ usersMemberships.active + usersMemberships.inactive }}, <span class="color-green">Actifs: </span> {{ usersMemberships.active }}, <span class="color-red">Inactifs: </span> {{ usersMemberships.inactive }}</p>
+                    <p>Total: {{ usersList.length }}, <span class="color-green">Actifs: </span> {{ (usersList | filter:{activeMembershipId: '!null'}).length }}, <span class="color-red">Inactifs: </span> {{ (usersList | filter:{activeMembershipId: 'null'}).length }}</p>
                 </div>
                 <span class="color-grey fa fa-usd pull-right"></span>
                 <div class="title-x-small">Gains today</div>
