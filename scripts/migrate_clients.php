@@ -64,9 +64,9 @@ foreach($fgMembers as $fgMember) {
     $membership = $fgMemberships->fetch();
 
     $stmt = $dbh_sheaker->prepare("
-    INSERT INTO users_payments (user_id, days, start_date, comment, price, method, created_at)
+    INSERT INTO users_payments (user_id, days, start_date, end_date, comment, price, method, created_at)
     VALUES
-    (:user_id, :days, :start_date, :comment, :price, :method, :created_at)
+    (:user_id, :days, :start_date, :end_date, :comment, :price, :method, :created_at)
     ");
 
     $datetimeStart = strtotime($membership['fecha_ini']);
@@ -75,6 +75,7 @@ foreach($fgMembers as $fgMember) {
     $stmt->bindValue(':user_id',    $newMember['id']);
     $stmt->bindValue(':days',       ($datetimeEnd - $datetimeStart) / 86400);
     $stmt->bindValue(':start_date', $membership['fecha_ini']);
+    $stmt->bindValue(':end_date',   $membership['fecha_fin']);
     $stmt->bindValue(':comment',    $membership['descripcion']);
     $stmt->bindValue(':price',      $membership['precio']);
     $stmt->bindValue(':method',     $membership['tipo_pago']);
