@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment, GYM_API_URL) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -22,6 +22,7 @@ angular.module('sheaker')
     // Load user
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
+        user.photo = GYM_API_URL + '/' + user.photo;
         $scope.user = user;
     })
     .catch(function(error) {
