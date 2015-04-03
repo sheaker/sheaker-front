@@ -20,7 +20,7 @@ foreach($fgMembers as $fgMember) {
         'address_street_2' => '', //$fgMember[''],
         'city'             => $fgMember['ciudad'],
         'zip'              => '', //$fgMember[''],
-        'gender'           => ($fgMember['genero'] == 1) ? 0 : 1,
+        'gender'           => ($fgMember['genero'] == 1) ? 1 : 0,
         'photo'            => "photos/{$clientId}/" . uniqid() . '.jpg',
         'sponsor_id'       => -1,
         'comment'          => '',//$fgMember['fecha_nac'],
