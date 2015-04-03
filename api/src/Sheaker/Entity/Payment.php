@@ -33,6 +33,13 @@ class Payment
     public $startDate;
 
     /**
+     * Last day of subscription.
+     *
+     * @var string
+     */
+    public $endDate;
+
+    /**
      * Special Comment.
      *
      * @var string
@@ -94,6 +101,15 @@ class Payment
     public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
+    }
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     public function getComment()

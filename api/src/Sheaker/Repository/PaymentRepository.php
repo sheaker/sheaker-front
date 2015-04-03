@@ -37,6 +37,7 @@ class PaymentRepository implements RepositoryInterface
             'user_id'    => $payment->getUser()->getId(),
             'days'       => $payment->getDays(),
             'start_date' => $payment->getStartDate(),
+            'end_date'   => $payment->getEndDate(),
             'comment'    => $payment->getComment(),
             'price'      => $payment->getPrice(),
             'method'     => $payment->getMethod(),
@@ -169,6 +170,7 @@ class PaymentRepository implements RepositoryInterface
         $payment->setUser($user);
         $payment->setDays($paymentData['days']);
         $payment->setStartDate(date('c', strtotime($paymentData['start_date'])));
+        $payment->setEndDate(date('c', strtotime($paymentData['end_date'])));
         $payment->setComment($paymentData['comment']);
         $payment->setPrice($paymentData['price']);
         $payment->setMethod($paymentData['method']);

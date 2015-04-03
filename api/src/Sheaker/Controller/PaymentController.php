@@ -46,6 +46,7 @@ class PaymentController
         $addParams['user']      = $app->escape($request->get('user'));
         $addParams['days']      = $app->escape($request->get('days'));
         $addParams['startDate'] = $app->escape($request->get('startDate'));
+        $addParams['endDate']   = $app->escape($request->get('endDate'));
         $addParams['price']     = $app->escape($request->get('price'));
         $addParams['method']    = $app->escape($request->get('method'));
 
@@ -63,6 +64,7 @@ class PaymentController
         $payment->setUser($user);
         $payment->setDays($addParams['days']);
         $payment->setStartDate(date('Y-m-d H:i:s', strtotime($addParams['startDate'])));
+        $payment->setEndDate(date('Y-m-d H:i:s', strtotime($addParams['endDate'])));
         $payment->setComment($addParams['comment']);
         $payment->setPrice($addParams['price']);
         $payment->setMethod($addParams['method']);
