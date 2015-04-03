@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('SearchClientCtrl', function ($rootScope, $scope, $location, User, Payment) {
+.controller('SearchClientCtrl', function ($rootScope, $scope, $location, User) {
 
     if ($location.search().text) {
         $scope.searchText = $location.search().text;

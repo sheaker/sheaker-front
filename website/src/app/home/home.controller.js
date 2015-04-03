@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('HomeCtrl', function ($scope) {
+.controller('HomeCtrl', function () {
 
 });
