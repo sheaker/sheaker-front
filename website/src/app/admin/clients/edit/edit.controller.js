@@ -114,17 +114,17 @@ angular.module('sheaker')
     // Submit new user to API
     $scope.editUser = function () {
         if ($scope.hasCustomId === false && $scope.formDatas.customId) {
-            $scope.formDatas.customId = null;
+            $scope.formDatas.customId = 0;
         }
         $scope.isButtonSaveDisabled = true;
 
         User.update($scope.formDatas).$promise
         .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
+            $scope.isButtonSaveDisabled = false;
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
-            $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
             console.log(error);

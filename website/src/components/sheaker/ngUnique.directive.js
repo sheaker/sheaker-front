@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.directive('ngUnique', function($timeout, User) {
+.directive('ngUnique', function($routeParams, User) {
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -20,14 +20,14 @@ angular.module('sheaker')
                 User.get(resourceObj).$promise
                 .then(function () {
                     //Ensure value that being checked hasn't changed
-                    if (currentValue === element.val()) {
+                    if (currentValue === element.val() && currentValue !== $routeParams.id) {
                         ngModel.$setValidity('unique', false);
                         element.parent().removeClass('has-success').addClass('has-error');
                     }
                 })
                 .catch(function () { // return 404, resource doesn't exist, not really an error here
                     //Ensure value that being checked hasn't changed
-                    if (currentValue === element.val()) {
+                    if (currentValue === element.val() && currentValue !== $routeParams.id) {
                         ngModel.$setValidity('unique', true);
                         element.parent().removeClass('has-error').addClass('has-success');
                     }

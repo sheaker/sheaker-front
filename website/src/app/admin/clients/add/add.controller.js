@@ -78,7 +78,7 @@ angular.module('sheaker')
     // Submit new user to API
     $scope.addUser = function () {
         if ($scope.hasCustomId === false && $scope.formDatas.customId) {
-            $scope.formDatas.customId = null;
+            $scope.formDatas.customId = 0;
         }
         $scope.isButtonSaveDisabled = true;
 
@@ -86,10 +86,11 @@ angular.module('sheaker')
         .then(function(user) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.customId || user.id) + '.'});
             $scope.formDatas = {};
+            $scope.hasCustomId = false;
+            $scope.isButtonSaveDisabled = false;
             $location.hash('top');
             $anchorScroll();
             $location.hash('');
-            $scope.isButtonSaveDisabled = false;
         })
         .catch(function(error) {
             console.log(error);

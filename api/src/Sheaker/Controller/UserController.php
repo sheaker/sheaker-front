@@ -80,11 +80,11 @@ class UserController
         $addParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $addParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $addParams['city']           = $app->escape($request->get('city'));
-        $addParams['zip']            = $app->escape($request->get('zip', NULL));
+        $addParams['zip']            = $app->escape($request->get('zip'));
         $addParams['gender']         = $app->escape($request->get('gender', -1));
-        $addParams['customId']       = $app->escape($request->get('customId', NULL));
+        $addParams['customId']       = $app->escape($request->get('customId', 0));
         $addParams['photo']          = $app->escape($request->get('photo'));
-        $addParams['sponsor']        = $app->escape($request->get('sponsor', NULL));
+        $addParams['sponsor']        = $app->escape($request->get('sponsor', 0));
         $addParams['comment']        = $app->escape($request->get('comment'));
 
         $photoPath = '';
@@ -152,11 +152,11 @@ class UserController
         $editParams['addressStreet1'] = $app->escape($request->get('addressStreet1'));
         $editParams['addressStreet2'] = $app->escape($request->get('addressStreet2'));
         $editParams['city']           = $app->escape($request->get('city'));
-        $editParams['zip']            = $app->escape($request->get('zip', NULL));
+        $editParams['zip']            = $app->escape($request->get('zip'));
         $editParams['gender']         = $app->escape($request->get('gender', -1));
-        $editParams['customId']       = $app->escape($request->get('customId', NULL));
+        $editParams['customId']       = $app->escape($request->get('customId', 0));
         $editParams['photo']          = $app->escape($request->get('photo'));
-        $editParams['sponsor']        = $app->escape($request->get('sponsor', NULL));
+        $editParams['sponsor']        = $app->escape($request->get('sponsor', 0));
         $editParams['comment']        = $app->escape($request->get('comment'));
 
         $user = $app['repository.user']->findById($editParams['id']);

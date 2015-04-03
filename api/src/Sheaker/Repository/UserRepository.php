@@ -40,6 +40,7 @@ class UserRepository implements RepositoryInterface
             'city'             => $user->getCity(),
             'zip'              => $user->getZip(),
             'gender'           => $user->getGender(),
+            'photo'            => $user->getPhoto(),
             'sponsor_id'       => $user->getSponsor(),
             'comment'          => $user->getComment(),
             'last_seen'        => $user->getLastSeen(),
@@ -47,23 +48,11 @@ class UserRepository implements RepositoryInterface
             'failed_logins'    => $user->getFailedLogins()
         );
 
-        $userPhotoData = array(
-            'path' => $user->getPhoto()
-        );
-
         if ($user->getId()) {
             $this->db->update('users', $userData, array('id' => $user->getId()));
-
-            if (!empty($userPhotoData['image'])) {
-                $this->db->update('users_photo', $userPhotoData, array('user_id' => $user->getId()));
-            }
         } else {
             $this->db->insert('users', $userData);
             $user->setId($this->db->lastInsertId());
-
-            if (!empty($userPhotoData['image'])) {
-                $this->db->insert('users_photo', array_merge(['user_id' => $user->getId()], $userPhotoData));
-            }
         }
     }
 
@@ -93,7 +82,6 @@ class UserRepository implements RepositoryInterface
             SELECT *
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
-            LEFT JOIN users_photo up ON up.user_id = u.id
             WHERE u.id = ?', array($id));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
@@ -111,7 +99,6 @@ class UserRepository implements RepositoryInterface
             SELECT *
             FROM users u
             LEFT JOIN users_access ua ON ua.user_id = u.id
-            LEFT JOIN users_photo up ON up.user_id = u.id
             WHERE u.custom_id = ?', array($customId));
         return $userData ? $this->buildUser($userData) : FALSE;
     }
@@ -162,10 +149,9 @@ class UserRepository implements RepositoryInterface
 
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-            ->select('u.*', 'ua.*', 'up.*')
+            ->select('u.*', 'ua.*')
             ->from('users', 'u')
-            ->leftJoin('u', 'users_access', 'ua', 'u.id = ua.user_id')
-            ->leftJoin('u', 'users_photo', 'up', 'u.id = up.user_id');
+            ->leftJoin('u', 'users_access', 'ua', 'u.id = ua.user_id');
         if ($limit) {
             $queryBuilder->setMaxResults($limit);
         }
@@ -203,7 +189,7 @@ class UserRepository implements RepositoryInterface
     {
         $user = new User();
         $user->setId($userData['id']);
-        $user->setCustomId($userData['custom_id'] ? $userData['custom_id'] : NULL);
+        $user->setCustomId($userData['custom_id']);
         $user->setFirstName($userData['first_name']);
         $user->setLastName($userData['last_name']);
         $user->setPassword($userData['password']);
@@ -213,15 +199,15 @@ class UserRepository implements RepositoryInterface
         $user->setAddressStreet1($userData['address_street_1']);
         $user->setAddressStreet2($userData['address_street_2']);
         $user->setCity($userData['city']);
-        $user->setZip($userData['zip'] ? $userData['zip'] : NULL);
-        $user->setGender($userData['gender'] >= 0 ? $userData['gender'] : -1);
-        $user->setSponsor($userData['sponsor_id'] ? $userData['sponsor_id'] : NULL);
+        $user->setZip($userData['zip']);
+        $user->setGender($userData['gender']);
+        $user->setSponsor($userData['sponsor_id']);
         $user->setComment($userData['comment']);
         $user->setLastSeen(date('Y-m-d H:i:s', strtotime($userData['last_seen'])));
         $user->setLastIP($userData['last_ip']);
         $user->setFailedLogins($userData['failed_logins']);
         $user->setSubscriptionDate(date('Y-m-d H:i:s', strtotime($userData['created_at'])));
-        $user->setPhoto($userData['path']);
+        $user->setPhoto($userData['photo']);
         $user->setUserLevel($userData['user_level']);
 
         return $user;
