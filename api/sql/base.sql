@@ -1,12 +1,11 @@
 #
 # SQL Export
 # Created by Querious (962)
-# Created: March 20, 2015 at 9:24:15 PM CST
+# Created: April 3, 2015 at 9:01:56 AM CST
 # Encoding: Unicode (UTF-8)
 #
 
 
-DROP TABLE IF EXISTS `users_photo`;
 DROP TABLE IF EXISTS `users_payments`;
 DROP TABLE IF EXISTS `users_access`;
 DROP TABLE IF EXISTS `users`;
@@ -48,23 +47,14 @@ CREATE TABLE `users_access` (
 CREATE TABLE `users_payments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
-  `days` smallint(5) unsigned DEFAULT NULL,
+  `days` smallint(5) NOT NULL DEFAULT '-1',
   `start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment` varchar(255) NOT NULL DEFAULT '',
-  `price` smallint(5) unsigned DEFAULT NULL,
-  `method` tinyint(3) unsigned DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `price` smallint(5) NOT NULL DEFAULT '-1',
+  `method` tinyint(3) NOT NULL DEFAULT '-1',
+  `comment` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`) USING BTREE,
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `users_photo` (
-  `user_id` int(11) unsigned NOT NULL,
-  `image` varchar(255) NOT NULL DEFAULT '',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`),
   KEY `idx_user_id` (`user_id`) USING BTREE,
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -79,7 +69,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 LOCK TABLES `users` WRITE;
 ALTER TABLE `users` DISABLE KEYS;
 INSERT INTO `users` (`id`, `custom_id`, `first_name`, `last_name`, `password`, `phone`, `mail`, `birthdate`, `address_street_1`, `address_street_2`, `city`, `zip`, `gender`, `sponsor_id`, `comment`, `failed_logins`, `last_seen`, `last_ip`, `created_at`) VALUES 
-	(1,0,'admin','admin','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','523312345678','admin@sheaker.com','2015-01-01','calle egipcios, 360','appt 302','Zapopan',45160,0,0,'',0,'2015-03-19 16:27:51','http://gym4devs.sheaker.com:3000/','2015-01-02 18:44:32');
+	(1,0,'admin','admin','$1$OhuHu9HV$MGnsyEEGXt6Y6QShwL7ZM/','523312345678','admin@sheaker.com','0000-00-00','','','',0,0,0,'',0,'2015-03-19 16:27:51','127.0.0.1','2015-01-01 00:00:00');
 ALTER TABLE `users` ENABLE KEYS;
 UNLOCK TABLES;
 
@@ -95,12 +85,6 @@ UNLOCK TABLES;
 LOCK TABLES `users_payments` WRITE;
 ALTER TABLE `users_payments` DISABLE KEYS;
 ALTER TABLE `users_payments` ENABLE KEYS;
-UNLOCK TABLES;
-
-
-LOCK TABLES `users_photo` WRITE;
-ALTER TABLE `users_photo` DISABLE KEYS;
-ALTER TABLE `users_photo` ENABLE KEYS;
 UNLOCK TABLES;
 
 
