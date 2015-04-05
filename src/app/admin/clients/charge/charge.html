@@ -1,0 +1,101 @@
+<div class="container-fluid">
+
+    <div ng-include="'components/admin/navbar/top/top.html'"></div>
+    <div ng-include="'components/admin/navbar/side/side.html'"></div>
+    <div ng-include="'components/admin/navbar/subside-client/subside-client.html'"></div>
+
+    <div class="col-lg-12 main">
+        <div class="title">
+            <span class="color-red fa fa-money"></span>Charge Client
+        </div>
+
+        <div class="charge-photo text-center" id="userInfos">
+            <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height="240" width="320">
+            <div class="client-infos">{{ user.firstName }} {{ user.lastName }}</div>
+        </div>
+
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
+        <form ng-submit="chargeUser()">
+            <div class="col-lg-offset-1 col-lg-5" id="PaymentInformation">
+                <div class="general-box">
+                    <span class="color-grey fa fa-list pull-right"></span>
+                    <div class="title-small">Subscription</div>
+                    <div class="content-box">
+                        <div class="form-group">
+                            <label for="InputFirstName">Days</label>
+                            <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym">
+                        </div>
+
+                        <div class="form-group col-lg-6 remove-margin-padding">
+                            <label for="InputDepartureDate">Start date</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-required="true" ng-change="calculateEndDate()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 remove-padding-right">
+                            <label for="InputEndDate">End date</label>
+                                <input type="text" class="form-control" id="InputEndDate" ng-model="formDatas.endDate" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="yyyy-MM-dd" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputComment">Comment</label>
+                            <textarea class="form-control" rows="5" id="InputComment" ng-model="formDatas.comment" placeholder="Any comment about that transaction?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputAmount">Price</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="exampleInputPrice" ng-model="formDatas.price">
+                                <div class="input-group-addon">$</div>
+                                <div class="input-group-addon">(MXN)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputAmount">Payment method</label>
+                            <select class="select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods">
+                                <option value="">-- Choose a payment method --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Soubsription end -->
+            <div class="col-lg-5" id="PaymentsHistory">
+                <div class="general-box">
+                    <span class="color-grey fa fa-archive pull-right"></span>
+                    <div class="title-small">Payment history</div>
+                    <div class="content-box">
+                        <div class="table-responsive">
+                            <div class="text-center" ng-hide="user.payments.length">
+                                No previous payments.
+                            </div>
+                            <table class="table table-striped" ng-show="user.payments.length">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Days</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="p in user.payments">
+                                        <td>{{ p.paymentDate | date }}</td>
+                                        <td>{{ p.days }}</td>
+                                        <td>{{ p.price | currency }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled">Charge client</button>
+            </div>
+        </form>
+    </div>
+</div>

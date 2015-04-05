@@ -1,0 +1,400 @@
+body {
+    padding-top: 10px;
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f9f9f9;
+}
+
+.main {
+    padding-left: 220px;
+    background-color: #f9f9f9;
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+/* Containers */
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* End Containers */
+
+/* Vertical Center */
+.vertical-center {
+    height: 100%;
+    width: 100%;
+
+    text-align: center;  /* align the inline(-block) elements horizontally */
+    font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.vertical-center:before {    /* create a full-height inline block pseudo=element */
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    height: 100%;
+}
+
+.vertical-center > .jumbotron {
+    max-width: 100%;
+    background-color: gold;
+
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;        /* <-- reset the font property */
+}
+
+.remove-margin-padding {
+    margin : 0;
+    padding : 0;
+}
+
+.remove-padding-right {
+    padding-right: 0;
+}
+
+.select-payment-method{
+    width: 100%;
+    height: 40px;
+}
+
+.day-picker{
+    padding-top: 36px;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .vertical-center:before {
+        /* height: auto; */
+        display: none;
+    }
+}
+/* End Vertical Center */
+
+/* Form */
+.form-signin, .form-signup {
+    max-width: 300px;
+    padding: 0;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signup .form-signup-heading,
+.form-signin .checkbox {
+    margin-bottom: 0;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control,
+.form-signup .form-control {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus,
+.form-signup .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-signup input#inputUsername {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputEmail {
+    margin-bottom: -1px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputPassword {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signup input#inputConfirmPassword {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-group .field-address-street{
+    margin-bottom: 10px;
+}
+
+.thumbnail-form-setting-gym .form-control{
+    margin-bottom: 10px;
+}
+/* End Form */
+
+/* Begin SubSideBar */
+/* Hide for mobile, show later */
+.subsidebar {
+    display: none;
+}
+
+.subsidebar {
+    width: 150px;
+    font-size: 18px;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    margin-left: 50px;
+    padding-left: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f9f9f9;
+    font-weight: 600;
+    /*border-right: 1px solid #dbdbdb;*/
+}
+
+/* Sidebar navigation */
+.nav-subsidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-left: -20px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 0;
+    /*border-bottom: 2px solid #dbdbdb;*/
+}
+
+.nav-subsidebar span{
+    margin-right: 8px;
+}
+
+.nav-subsidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #484848;
+}
+
+.nav-subsidebar > li > a:hover {
+    text-decoration:underline;
+}
+
+.nav-subsidebar > li > a,
+.nav-subsidebar > li > a:hover,
+.nav-subsidebar > li > a:focus {
+    background-color: #f9f9f9;
+}
+
+
+/* NavBar */
+.navbar {
+    height: 50px;
+    width: auto;
+}
+
+.homebar {
+    margin-top: -13px;
+    margin-bottom: 20px;
+}
+
+.nav-home > li > a {
+    padding-top: 18px;
+    font-weight: 400;
+    color: #484848;
+}
+
+.nav-home > li > a:hover {
+    text-decoration: none;
+    background-color: transparent;
+    font-weight: 800;
+}
+
+.nav-home > li > a,
+.nav-home > li > a:hover,
+.nav-homer > li > a:focus {
+    background-color: transparent;
+}
+/* End NavBar */
+
+/* Begin Footer */
+.cls-footer {
+    padding-bottom: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+/* End Footer */
+
+/* Color set */
+
+.color-background-yellow {
+    background-color: #D2C22A;
+}
+
+.color-yellow {
+    color: #D2C22A;
+}
+
+.color-background-green {
+    background-color: #289A31;
+}
+
+.color-green {
+    color: #289A31;
+}
+
+.color-background-red {
+    background-color: #AC292B;
+}
+
+.color-red {
+    color: #AC292B;
+}
+
+.color-background-blue {
+    background-color: #2B88BB;
+}
+.color-blue {
+    color: #2B88BB;
+}
+
+.color-background-grey {
+    background-color: #DCDCDC;
+}
+
+.color-grey {
+    color: #DCDCDC;
+}
+
+.color-background-white {
+    background-color: #FFFFFF;
+}
+
+.color-white {
+    color: #FFFFFF;
+}
+
+/* End color set */
+
+.title {
+    font-size: 35px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    color: #4b4b4b;
+    font-weight: 700;
+}
+
+.title > .fa {
+    font-size: 35px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+/* Box css */
+
+.charge-photo{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.general-box {
+    font-size: 16px;
+
+    color: #4b4b4b;
+    border: 1px solid #DDD;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    font-weight: 400;
+}
+
+
+.general-box .pull-right {
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+.general-box .title-medium {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 85px;
+}
+
+.general-box .title-small {
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 40px;
+    font-size: 35px;
+}
+
+.general-box .title-x-small {
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.general-box .ox .snapshotCtrls {
+    margin-bottom: 20px;
+}
+
+.general-box > .fa {
+    padding-top: 20px;
+    padding-right: 20px;
+    font-size: 50px;
+}
+
+.general-box .fa {
+    font-size: 40px;
+}
+
+.general-box .content-box {
+    padding-left : 20px;
+    padding-right : 20px;
+    overflow-x: hidden;
+}
+
+.general-box .content-box p {
+    font-size: 20px;
+}
+
+.little-box {
+    height: 200px;
+}
+
+.medium-box {
+    height: 450px;
+}
+
+.row-padding h3 {
+    margin-left: 15px;
+    margin-top: 0px;
+}
+
+/* End Box */

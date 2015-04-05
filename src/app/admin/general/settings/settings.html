@@ -1,0 +1,82 @@
+<div class="container-fluid">
+
+    <div ng-include="'components/admin/navbar/top/top.html'"></div>
+    <div ng-include="'components/admin/navbar/side/side.html'"></div>
+    <div ng-include="'components/admin/navbar/subside-general/subside-general.html'"></div>
+
+    <div class="col-lg-12 main">
+        <div class="title">
+            <span class="color-blue fa fa-cog"></span>Settings
+        </div>
+
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
+        <div class="col-lg-offset-1 col-lg-5" id="General">
+            <div class="general-box">
+            <span class="color-grey fa fa-list pull-right"></span>
+            <div class="title-small">General</div>
+            <div class="content-box row row-padding">
+                <h3>Address</h3>
+                <div class="form-group col-lg-12">
+                    <label for="InputAddressStreet">Street address</label>
+                    <input type="text" class="form-control field-address-street" id="InputAddressStreet1" ng-model="formDatas.address.street1">
+                    <input type="text" class="form-control field-address-street" id="InputAddressStreet2" ng-model="formDatas.address.street2">
+                </div>
+                <div class="form-group col-lg-8">
+                    <label for="InputAddressCity">City</label>
+                    <input type="text" class="form-control" id="InputAddressCity" ng-model="formDatas.address.city">
+                </div>
+                <div class="form-group col-lg-4">
+                    <label for="InputAddressZipCode">Zip code</label>
+                    <input type="number" class="form-control" id="InputAddressZipCode" min="1" ng-model="formDatas.address.zipCode">
+                </div>
+                <div class="form-group col-lg-12">
+                    <label for="InputPhoneNumber">Phone</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="InputPhoneNumber" international-phone-number preferred-countries="us, mx" ng-model="formDatas.phone">
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label for="InputEmail">Mail</label>
+                    <input type="email" class="form-control" id="InputMail" ng-model="formDatas.mail">
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-lg-5" id="Hours">
+            <div class="general-box">
+                <span class="color-grey fa fa-clock-o pull-right"></span>
+                <div class="title-small">Opening Hours</div>
+                <div class="content-box">
+                    <div class="form-group row">
+                        <div class="col-lg-4 day-picker">
+                            <select ng-model="formDatas.day" ng-options="day.id as day.day for day in days">
+                                <option value="">-- choose day --</option>
+                            </select>
+                        </div>
+                        <div class = "col-lg-4">
+                            <timepicker ng-model="mytime" ng-change="changedStartHour()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                        </div>
+                        <div class = "col-lg-4">
+                            <timepicker ng-model="mytime" ng-change="changedEndHour()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-offset-1 col-lg-10" id="description">
+            <div class="general-box">
+                <div class="title-small">Description:</div>
+                <div class="content-box">
+                    <div class="form-group">
+                        <label for="comment"></label>
+                        <textarea class="form-control" rows="10" id="comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="col-lg-12 btn btn-lg btn-primary pull-left" type="submit" ng-disabled="isButtonSaveDisabled">Save Settings</button>
+        </div>
+    </div>
+</div>
