@@ -12,7 +12,7 @@ angular.module('sheaker', [
     'angular-spinkit'
 ])
 .constant('SHEAKER_URL', '//sheaker.com')
-.constant('GYM_API_URL', '//gym4devs.sheaker.com/api')
+.constant('GYM_API_URL', '//api.sheaker.com')
 .config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
 
     var universalResolves = {

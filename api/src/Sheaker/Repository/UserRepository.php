@@ -125,7 +125,7 @@ class UserRepository implements RepositoryInterface
      *
      * @return array A collection of users, keyed by user id.
      */
-    public function findAll($limit, $offset = 0, $orderBy = array())
+    public function findAll($limit = 0, $offset = 0, $orderBy = array())
     {
         return $this->getUsers(array(), $limit, $offset, $orderBy);
     }

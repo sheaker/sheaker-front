@@ -37,11 +37,19 @@ $app['api.accessLevels'] = [
  * Register service providers
  */
 $app->register(new DoctrineServiceProvider(), [
-    'db.options' => [
-        'dbname'   => 'client_' . explode('.', $_SERVER['HTTP_HOST'])[0],
-        'host'     => $app['database.host'],
-        'user'     => $app['database.user'],
-        'password' => $app['database.passwd']
+    'dbs.options' => [
+        'gym' => [
+            'dbname'   => 'client_gym4devs',// . explode('.', $_SERVER['HTTP_HOST'])[0],
+            'host'     => $app['database.host'],
+            'user'     => $app['database.user'],
+            'password' => $app['database.passwd']
+        ],
+        'sheaker' => [
+            'dbname'   => 'sheaker',
+            'host'     => $app['database.host'],
+            'user'     => $app['database.user'],
+            'password' => $app['database.passwd']
+        ]
     ]
 ]);
 
@@ -65,12 +73,16 @@ $app['jwt'] = $app->share(function ($app) {
 /**
  * Register repositories
  */
+$app['repository.client'] = $app->share(function ($app) {
+    return new Sheaker\Repository\ClientRepository($app['dbs']['sheaker']);
+});
+
 $app['repository.user'] = $app->share(function ($app) {
-    return new Sheaker\Repository\UserRepository($app['db']);
+    return new Sheaker\Repository\UserRepository($app['dbs']['gym']);
 });
 
 $app['repository.payment'] = $app->share(function ($app) {
-    return new Sheaker\Repository\PaymentRepository($app['db'], $app['repository.user']);
+    return new Sheaker\Repository\PaymentRepository($app['dbs']['gym'], $app['repository.user']);
 });
 
 /**

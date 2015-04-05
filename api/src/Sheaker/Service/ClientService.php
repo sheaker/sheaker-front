@@ -34,14 +34,23 @@ class ClientService
         else
             $this->app->abort(Response::HTTP_UNAUTHORIZED, 'No client specified');
 
-        $key = key($getParams);
-        $value = $getParams[key($getParams)];
+        if (!empty($getParams['id_client'])) {
+            $client = $this->app['repository.client']->find($getParams['id_client']);
+            if (!$client) {
+                $this->app->abort(Response::HTTP_NOT_FOUND, 'Client not found');
+            }
+        }
+        else if (!empty($getParams['subdomain'])) {
+            $client = $this->app['repository.client']->findBySubdomain($getParams['subdomain']);
+            if (!$client) {
+                $this->app->abort(Response::HTTP_NOT_FOUND, 'Client not found');
+            }
 
-        // Fetch client informtions from Sheaker API
-        $ch = curl_init($this->app['sheaker.api'] . "/clients?{$key}={$value}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $client = json_decode(curl_exec($ch));
-        curl_close($ch);
+            unset($client->secretKey);
+        }
+        else {
+            $this->app->abort(Response::HTTP_BAD_REQUEST, 'Missing parameters');
+        }
 
         $this->client = $client;
     }

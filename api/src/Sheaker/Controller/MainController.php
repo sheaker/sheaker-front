@@ -24,12 +24,15 @@ class MainController
 
     public function getSheakerInfos(Request $request, Application $app)
     {
-        $ch = curl_init($app['sheaker.api'] . "/infos");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $infos = curl_exec($ch);
-        curl_close($ch);
+        $reserved_subdomains = [];
+        foreach ($app['dbs']['sheaker']->fetchAll('SELECT * FROM reserved_subdomains rs') as $sub) {
+            array_push($reserved_subdomains, $sub['subdomain']);
+        }
 
-        return $infos;
+        $infos = [];
+        $infos['reservedSubdomains'] = $reserved_subdomains;
+
+        return json_encode($infos, JSON_NUMERIC_CHECK);
     }
 
     public function login(Request $request, Application $app)
