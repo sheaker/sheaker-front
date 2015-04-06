@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.directive('access', ['$rootScope', 'Authorization', function ($rootScope, Authorization) {
+.directive('access', function ($rootScope, Authorization) {
 
     var linkFct = function (scope, element, attrs) {
         var makeVisible = function () {
@@ -33,5 +33,4 @@ angular.module('sheaker')
         restrict: 'A',
         link: linkFct
     };
-}])
-;
+});
