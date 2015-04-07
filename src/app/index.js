@@ -16,7 +16,7 @@ angular.module('sheaker', [
 .config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
 
     var universalResolves = {
-        config: function($rootScope, $location, $window, SHEAKER_URL, SheakerClient, SheakerInfos) {
+        config: /*@ngInject*/ function($rootScope, $location, $window, SHEAKER_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
@@ -132,7 +132,7 @@ angular.module('sheaker', [
     });
 
 
-    jwtInterceptorProvider.tokenGetter = function(jwtHelper, config, $rootScope, $window, User) {
+    jwtInterceptorProvider.tokenGetter = /*@ngInject*/ function(jwtHelper, config, $rootScope, $window, User) {
         // Skip authentication for any requests ending in .html
         if (config.url.substr(config.url.length - 5) === '.html') {
             return null;
