@@ -50,7 +50,7 @@ module.exports = function(options) {
       .pipe(cssFilter.restore())
       .pipe(assets.restore())
       .pipe($.useref())
-      .pipe($.revReplace())
+      .pipe($.revReplace({prefix: '//static.sheaker.com/sheaker-gym/'}))
       .pipe(htmlFilter)
       .pipe($.minifyHtml({
         empty: true,
