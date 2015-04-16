@@ -396,6 +396,10 @@ body {
     margin-top: 100px;
 }
 
+.checkin-box .title {
+    font-size: 40px;
+}
+
 .little-box {
     height: 200px;
 }
