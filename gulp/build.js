@@ -9,8 +9,8 @@ var $ = require('gulp-load-plugins')({
 module.exports = function(options) {
   gulp.task('partials', function () {
     return gulp.src([
-      options.src + '/{app,components}/**/*.html',
-      options.tmp + '/serve/{app,components}/**/*.html'
+      options.src + '/app/**/*.html',
+      options.tmp + '/serve/app/**/*.html'
     ])
       .pipe($.minifyHtml({
         empty: true,
@@ -18,7 +18,8 @@ module.exports = function(options) {
         quotes: true
       }))
       .pipe($.angularTemplatecache('templateCacheHtml.js', {
-        module: 'sheaker'
+        module: 'sheaker',
+        root: 'app'
       }))
       .pipe(gulp.dest(options.tmp + '/partials/'));
   });
@@ -49,7 +50,7 @@ module.exports = function(options) {
       .pipe(cssFilter.restore())
       .pipe(assets.restore())
       .pipe($.useref())
-      .pipe($.revReplace())
+      .pipe($.revReplace({prefix: '//static.sheaker.com/sheaker-gym/'}))
       .pipe(htmlFilter)
       .pipe($.minifyHtml({
         empty: true,

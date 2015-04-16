@@ -3,10 +3,6 @@
 angular.module('sheaker')
 .controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User) {
 
-    $scope.gym = {
-        gainToday: 0
-    };
-
     var today = moment();
     var statsToFurtherDate = moment().add(3, 'day');
     var statsToPreviousDate = moment().subtract(3, 'day');

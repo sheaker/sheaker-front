@@ -13,10 +13,10 @@ angular.module('sheaker', [
 ])
 .constant('SHEAKER_URL', '//sheaker.com')
 .constant('GYM_API_URL', '//api.sheaker.com')
-.config(function ($routeProvider, $httpProvider, $resourceProvider, jwtInterceptorProvider) {
+.config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
 
     var universalResolves = {
-        config: function($rootScope, $location, $window, $q, SHEAKER_URL, SheakerClient, SheakerInfos) {
+        config: /*@ngInject*/ function($rootScope, $location, $window, SHEAKER_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
@@ -62,6 +62,10 @@ angular.module('sheaker', [
     .when('/logout', {
         templateUrl: 'app/logout/logout.html',
         controller: 'LogoutCtrl'
+    })
+    .when('/checkin', {
+        templateUrl: 'app/checkin/checkin.html',
+        controller: 'CheckinCtrl'
     })
     .when('/admin/general/home', {
         templateUrl: 'app/admin/general/home/home.html',
@@ -132,7 +136,7 @@ angular.module('sheaker', [
     });
 
 
-    jwtInterceptorProvider.tokenGetter = function(jwtHelper, config, $rootScope, $http, $window, User) {
+    jwtInterceptorProvider.tokenGetter = /*@ngInject*/ function(jwtHelper, config, $rootScope, $window, User) {
         // Skip authentication for any requests ending in .html
         if (config.url.substr(config.url.length - 5) === '.html') {
             return null;

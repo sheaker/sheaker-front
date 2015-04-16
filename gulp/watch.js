@@ -12,7 +12,7 @@ module.exports = function(options) {
 
     gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
 
-    gulp.watch(options.src + '/{app,components}/**/*.css', function(event) {
+    gulp.watch(options.src + '/app/**/*.css', function(event) {
       if(isOnlyChange(event)) {
         browserSync.reload(event.path);
       } else {
@@ -20,7 +20,7 @@ module.exports = function(options) {
       }
     });
 
-    gulp.watch(options.src + '/{app,components}/**/*.js', function(event) {
+    gulp.watch(options.src + '/app/**/*.js', function(event) {
       if(isOnlyChange(event)) {
         gulp.start('scripts');
       } else {
@@ -28,7 +28,7 @@ module.exports = function(options) {
       }
     });
 
-    gulp.watch(options.src + '/{app,components}/**/*.html', function(event) {
+    gulp.watch(options.src + '/app/**/*.html', function(event) {
       browserSync.reload(event.path);
     });
   });

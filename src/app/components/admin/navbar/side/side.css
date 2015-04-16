@@ -24,6 +24,11 @@
     border-bottom: 0 solid #dbdbdb;
 }
 
+.independant-button
+{
+    border-top: 2px solid #dbdbdb;
+}
+
 .nav-sidebar > li > a {
     padding-right: 0;
     padding-left: 10px;
