@@ -1,10 +1,18 @@
 <div class="container-fluid">
     <div class="container">
-        <div class="col-lg-offset-4 col-lg-4" id="SheakerMembership">
-            <div class="general-box">
-                <div class="title-medium"><span class="fa fa-paint-brush"></span></div>
-                <div class="content-box">
-                    <h1>Hey! We are working on this place, come back soon :)</h1>
+        <div class="col-lg-offset-3 col-lg-6" id="SheakerMembership">
+            <div class="general-box checkin-box">
+                <div class="content-box padding-top-general-box">
+                    <div class="col-lg-offset-3 col-lg-6">
+                        <div class="form-group has-feedback">
+                            <span ng-hide="searchText.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
+                            <input type="text" class="form-control search-field" ng-model="searchText" placeholder="Id">
+                        </div>
+                    </div>
+                    <div class="charge-photo text-center padding-top-general-box" id="userInfos">
+                        <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height="240" width="320">
+                        <div class="client-infos">{{ user.firstName }} {{ user.lastName }}</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -384,6 +384,14 @@ body {
     font-size: 20px;
 }
 
+.padding-top-general-box {
+    padding-top: 40px;
+}
+
+.checkin-box {
+    margin-top: 100px;
+}
+
 .little-box {
     height: 200px;
 }
