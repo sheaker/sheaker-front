@@ -30,7 +30,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="user in usersList | filter: {hasBirthdayInc: true} | orderBy: 'lastName'">
+                                <tr ng-repeat="user in usersList | limitTo: 10 | filter: {hasBirthdayInc: true} | orderBy: 'lastName'">
                                     <td>{{ user.firstName }}</td>
                                     <td>{{ user.lastName }}</td>
                                     <td>{{ user.birthdate | date: 'd MMM'}}</td>
@@ -87,7 +87,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="user in usersList | filter: {hasInactiveMembershipInc: true} | orderBy: 'lastName'">
+                                <tr ng-repeat="user in usersList | limitTo: 10 | filter: {hasInactiveMembershipInc: true} | orderBy: 'lastName'">
                                     <td>{{ user.firstName }}</td>
                                     <td>{{ user.lastName }}</td>
                                     <td>{{ user.payments.endDate | date: 'd MMM' }}</td>
@@ -106,7 +106,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="user in usersList | filter: {hasNewActiveMembership: true} | orderBy: 'lastName'">
+                                <tr ng-repeat="user in usersList | limitTo: 10 | filter: {hasNewActiveMembership: true} | orderBy: 'lastName'">
                                     <td>{{ user.firstName }}</td>
                                     <td>{{ user.lastName }}</td>
                                     <td>{{ user.customId || user.id }}</td>
