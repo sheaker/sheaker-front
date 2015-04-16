@@ -63,6 +63,10 @@ angular.module('sheaker', [
         templateUrl: 'app/logout/logout.html',
         controller: 'LogoutCtrl'
     })
+    .when('/checkin', {
+        templateUrl: 'app/checkin/checkin.html',
+        controller: 'CheckinCtrl'
+    })
     .when('/admin/general/home', {
         templateUrl: 'app/admin/general/home/home.html',
         controller: 'HomeAdminCtrl',
