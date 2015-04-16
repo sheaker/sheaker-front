@@ -22,7 +22,7 @@ angular.module('sheaker')
             }, 5000);
         }, function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'This user doesn\'t exist.'});
         });
 
     };
