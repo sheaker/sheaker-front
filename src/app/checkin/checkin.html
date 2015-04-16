@@ -5,19 +5,23 @@
                 <span class="title">Welcome</div>
                 <div class="general-box">
                     <div class="content-box padding-top-general-box">
-                        <div class="col-lg-offset-3 col-lg-6">
-                            <div class="form-group has-feedback">
-                                <span ng-hide="searchText.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
-                                <input type="text" class="form-control search-field" ng-model="searchText" placeholder="Id" autofocus>
+
+                        <form ng-submit="checkin(userCheckinId)">
+                            <div class="col-lg-offset-3 col-lg-6">
+                                <div class="form-group has-feedback">
+                                    <span ng-hide="userCheckinId.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
+                                    <input type="text" class="form-control search-field" ng-model="userCheckinId" placeholder="Id" autofocus>
+                                </div>
                             </div>
+                        </form>
+                        <div class="charge-photo text-center padding-top-general-box" id="userInfos" ng-show="userCheckin">
+                            <img ng-src="{{ userCheckin.photo || 'assets/images/user_unknow.png' }}" height="240" width="320">
+                            <div class="client-infos">{{ userCheckin.firstName }} {{ userCheckin.lastName }}</div>
                         </div>
-                        <div class="charge-photo text-center padding-top-general-box" id="userInfos">
-                            <img ng-src="{{ user.photo || 'assets/images/user_unknow.png' }}" height="240" width="320">
-                            <div class="client-infos">{{ user.firstName }} {{ user.lastName }}</div>
+                        <div class="col-lg-offset-3 col-lg-6 content-checkin text-center" ng-show="userCheckin">
+                            <div ng-class="{'color-green': userCheckin.activeMembershipId, 'color-red': !userCheckin.activeMembershipId}"><i class="fa fa-unlock-alt"></i> {{ userCheckin.remainingDays }} days</div>
                         </div>
-                        <div class="col-lg-offset-3 col-lg-6 content-checkin text-center">
-                            <div class="color-green "><i class="fa fa-unlock-alt"></i> 5 days</div>
-                        </div>
+
                     </div>
                 </div>
             </div>
