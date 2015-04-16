@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('LogoutCtrl', function ($window, $location, $route) {
+.controller('LogoutCtrl', function ($window, $location) {
     $window.localStorage.removeItem('token');
     $location.path('/');
-    $route.reload();
+    $window.location.reload();
 });
