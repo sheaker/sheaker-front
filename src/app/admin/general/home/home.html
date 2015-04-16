@@ -20,13 +20,6 @@
                         <p><span class="color-green">Actifs: &nbsp;&nbsp;&nbsp;</span> {{ (usersList | filter:{activeMembershipId: '!null'}).length }}</p>
                         <p><span class="color-red">Inactifs:&nbsp;</span> {{ (usersList | filter:{activeMembershipId: 'null'}).length }}</p>
                 </div>
-                <span class="color-grey fa fa-usd pull-right"></span>
-                <div class="title-x-small">Gains today</div>
-                <div class="content-box">
-                    <div class="table-responsive">
-                        <p>{{ gym.gainToday | currency }}</p>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-lg-4" id="Birthdays">
