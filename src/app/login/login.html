@@ -8,10 +8,12 @@
                 <h1 class="form-signin-heading text-center"><span class="fa fa-user"></span></h1>
                 <br>
                 <div class="content-box">
-                <input type="text" id="inputID" class="form-control" ng-model="loginForm.id" placeholder="ID Client" required autofocus />
-                <input type="password" id="inputPassword" class="form-control" ng-model="loginForm.password" placeholder="Password" required />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Signin</button>
-            </div>
+                    <input type="text" id="inputID" class="form-control" ng-model="loginForm.id" placeholder="Id" required autofocus>
+                    <input type="password" id="inputPassword" class="form-control" ng-model="loginForm.password" placeholder="Password" required>
+                    <input type="checkbox" value="rememberMe" ng-model="loginForm.rememberMe"> Remember me
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Signin</button>
+                </div>
             </div>
         </form>
     </div>
