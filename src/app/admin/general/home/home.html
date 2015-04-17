@@ -16,9 +16,22 @@
                 <span class="color-grey fa fa-users pull-right"></span>
                 <div class="title-x-small">Total of clients</div>
                 <div class="content-box">
-                        <p>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usersList.length }}</p>
-                        <p><span class="color-green">Actifs: &nbsp;&nbsp;&nbsp;</span> {{ (usersList | filter:{activeMembershipId: '!null'}).length }}</p>
-                        <p><span class="color-red">Inactifs:&nbsp;</span> {{ (usersList | filter:{activeMembershipId: 'null'}).length }}</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th width="40%">Total</th>
+                                    <th width="30%">Active</th>
+                                    <th width="30%">Inactive</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ usersList.length }}</td>
+                                    <td><span class="color-green">{{ (usersList | filter:{activeMembershipId: '!null'}).length }}</span></td>
+                                    <td><span class="color-red">{{ (usersList | filter:{activeMembershipId: 'null'}).length }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
