@@ -414,6 +414,7 @@ body {
 
 .table-condensed {
     table-layout:fixed;
+    white-space: nowrap;
 }
 
 td {
