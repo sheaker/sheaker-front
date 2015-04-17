@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputAmount">Payment method</label>
-                            <select class="select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods">
+                            <select class="form-control select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods">
                                 <option value="">-- Choose a payment method --</option>
                             </select>
                         </div>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
-                <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isButtonSaveDisabled">Charge client</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled">Charge client</button>
             </div>
         </form>
     </div>
