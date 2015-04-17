@@ -221,6 +221,14 @@ body {
     padding-top: 18px;
     font-weight: 400;
     color: #484848;
+    display: inline-block;
+}
+
+.nav-home > .active > a,
+.nav-home > .active > a:hover,
+.nav-home > .active > a:focus {
+    font-weight: 800;
+    background-color: transparent;
 }
 
 .nav-home > li > a:hover {

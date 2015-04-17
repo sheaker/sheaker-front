@@ -1,4 +1,4 @@
-<nav class="container navbar-inverse homebar" ng-controller="NavbarCtrl">
+<div class="container navbar-inverse homebar" ng-controller="NavbarCtrl">
     <div class="navbar-header">
         <a class="navbar-brand" href="#/">
             <img src="assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
@@ -9,4 +9,4 @@
         <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">Profile</a></li>
         <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
     </ul>
-</nav>
+</div>
