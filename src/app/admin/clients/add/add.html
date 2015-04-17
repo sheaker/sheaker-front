@@ -124,6 +124,14 @@
                         <div class="content-box">
                             <div class="form-group">
                                 <div class="form-group">
+                                    <label for="exampleInputAmount">Access level</label>
+                                    <select class="form-control">
+                                        <option value="0" selected>Client</option>
+                                        <option value="1">Moderator</option>
+                                        <option value="2">Administrator</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>
                                     <input type="number" class="form-control" id="InputSponsor" min="0" name="sponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                                 </div>
