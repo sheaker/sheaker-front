@@ -418,6 +418,7 @@ body {
 }
 
 td {
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 
