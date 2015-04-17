@@ -59,7 +59,7 @@ angular.module('sheaker')
 
         Payment.save($scope.formDatas).$promise
         .then(function(payment) {
-            $scope.payments.push(payment);
+            $scope.user.payments.push(payment);
 
             $rootScope.alerts.push({type: 'success', msg: 'The user has been charged.'});
             $location.hash('top');
