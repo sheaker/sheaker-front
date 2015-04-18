@@ -24,7 +24,7 @@ angular.module('sheaker')
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while trying to connect, please contact a developper.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while trying to connect.'});
         });
     };
 });
