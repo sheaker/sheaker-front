@@ -11,7 +11,7 @@ angular.module('sheaker')
 
             user.remainingDays = 0;
             if (user.activeMembershipId) {
-                user.remainingDays = today.subtract(user.payments.endDate).days();
+                user.remainingDays = moment.duration(moment(user.activeMembership.endDate).diff(today)).asDays().toFixed();
             }
 
             Checkin.save({user: user.id}).$promise
