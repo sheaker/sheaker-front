@@ -23,6 +23,16 @@ angular.module('sheaker')
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
         user.photo = GYM_API_URL + '/' + user.photo;
+
+        Payment.query({user: user.id}).$promise
+        .then(function(payments) {
+            user.payments = payments;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments, please contact a developper.'});
+        });
+
         $scope.user = user;
     })
     .catch(function(error) {
