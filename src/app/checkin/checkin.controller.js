@@ -12,16 +12,16 @@ angular.module('sheaker')
             user.remainingDays = 0;
             if (user.activeMembershipId) {
                 user.remainingDays = moment.duration(moment(user.activeMembership.endDate).diff(today)).asDays().toFixed();
-            }
 
-            Checkin.save({user: user.id}).$promise
-            .then(function () {
-                $scope.userCheckin = user;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while checked in the user.', exp: 5000});
-            });
+                Checkin.save({user: user.id}).$promise
+                .then(function () {
+                    $scope.userCheckin = user;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    $rootScope.alerts.push({type: 'danger', msg: 'An error happen while checked in the user.', exp: 5000});
+                });
+            }
 
             $timeout(function() {
                 $scope.userCheckin = null;
