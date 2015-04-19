@@ -100,7 +100,7 @@
                         </div>
                         <div class="webcam-alert alert alert-error text-center ng-scope" ng-show="webcam.hasErrors">
                             <i class="fa fa-exclamation-triangle fa-2x color-red"></i>
-                            <p>Webcam could not be started correctly.<br>Did you give us access to it? Or there isn't any other tabs in your browser using it already?</p>
+                            <p>Webcam could not be started correctly.<br>Did you give us access to it?</p>
                         </div>
                         <div class="webcam text-center" ng-hide="!webcam.wantNewPhoto || webcam.isLoading || webcam.hasErrors">
                             <webcam on-error="onWebcamError(err)" on-streaming="onWebcamSuccess()" channel="channel"></webcam>
