@@ -7,6 +7,8 @@ angular.module('sheaker')
     $scope.isButtonSaveDisabled = false;
     $scope.hasCustomId = false;
 
+    $scope.formDatas.userLevel = 0;
+
     // Birthdate Calendar
     $scope.open = function($event) {
         $event.preventDefault();
