@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User) {
+.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Checkin) {
 
     var today = moment();
     var statsToFurtherDate = moment().add(3, 'day');
@@ -32,5 +32,14 @@ angular.module('sheaker')
     .catch(function(error) {
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
+    });
+
+    Checkin.query({limit:10, offset:0, sortBy:'created_at', order:'DESC'}).$promise
+    .then(function (checkin) {
+        $scope.checkin = checkin;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins.'});
     });
 });
