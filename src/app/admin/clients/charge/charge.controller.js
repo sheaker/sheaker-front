@@ -23,11 +23,21 @@ angular.module('sheaker')
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
         user.photo = GYM_API_URL + '/' + user.photo;
+
+        Payment.query({user: user.id}).$promise
+        .then(function(payments) {
+            user.payments = payments;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
+        });
+
         $scope.user = user;
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations, please contact a developper.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations.'});
     });
 
     // Calculate ending date
@@ -69,7 +79,7 @@ angular.module('sheaker')
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge, please contact a developper.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge.'});
             $scope.isButtonSaveDisabled = false;
         });
     };

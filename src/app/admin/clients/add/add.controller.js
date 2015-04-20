@@ -7,6 +7,8 @@ angular.module('sheaker')
     $scope.isButtonSaveDisabled = false;
     $scope.hasCustomId = false;
 
+    $scope.formDatas.userLevel = 0;
+
     // Birthdate Calendar
     $scope.open = function($event) {
         $event.preventDefault();
@@ -94,7 +96,7 @@ angular.module('sheaker')
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user, please contact a developper.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
             $scope.isButtonSaveDisabled = false;
         });
     };

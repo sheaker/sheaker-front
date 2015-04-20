@@ -62,10 +62,10 @@
                     <div class="content-box">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="user in usersLastCheckInList">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr ng-repeat="ci in checkin">
+                                    <td>{{ ci.user.firstName }}</td>
+                                    <td>{{ ci.user.lastName }}</td>
+                                    <td>{{ ci.user.customId || ci.user.id }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -95,7 +95,7 @@
         <div class="col-lg-4" id="FinishedMemberships">
             <div class="general-box medium-box">
                 <span class="color-grey fa fa-frown-o pull-right"></span>
-                <div class="title-x-small">Finishing memberships</div>
+                <div class="title-x-small">Ending memberships</div>
                 <div class="content-box">
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">
@@ -103,7 +103,7 @@
                                 <tr ng-repeat="user in usersList | filter: {hasInactiveMembershipInc: true} | limitTo: 10 | orderBy: 'lastName'">
                                     <td width="35%">{{ user.firstName }}</td>
                                     <td width="35%">{{ user.lastName }}</td>
-                                    <td width="30%">{{ user.payments.endDate | date: 'd MMM' }}</td>
+                                    <td width="30%">{{ user.activeMembership.endDate | date: 'd MMM' }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -114,7 +114,7 @@
         <div class="col-lg-4" id="NewMemberships">
             <div class="general-box medium-box">
                 <span class="color-grey fa fa-smile-o pull-right"></span>
-                <div class="title-x-small">New Memberships</div>
+                <div class="title-x-small">New memberships</div>
                 <div class="content-box">
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">

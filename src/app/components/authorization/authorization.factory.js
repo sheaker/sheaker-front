@@ -2,12 +2,12 @@
 
 angular.module('sheaker')
 .factory('Authorization', function ($rootScope) {
-
     var authorize = function (loginRequired, permissionsRequired, permissionType) {
         var result = $rootScope.authVars.authorised.authorised,
         user = $rootScope.user,
         userPermissions = [],
-        hasPermission = true;
+        hasPermission = true,
+        permission, i;
 
         if (loginRequired === true && user === undefined) {
             result = $rootScope.authVars.authorised.loginRequired;
@@ -21,24 +21,23 @@ angular.module('sheaker')
 
             permissionType = $rootScope.authVars.permissionCheckTypes[permissionType] || $rootScope.authVars.permissionCheckTypes.atLeastOne;
 
-            angular.forEach(permissionsRequired, function (permission) {
-                permission = permission.trim()
-                .toLowerCase();
+            for (i = 0; i < permissionsRequired.length; i += 1) {
+                permission = permissionsRequired[i].toLowerCase().trim();
 
                 if (permissionType === $rootScope.authVars.permissionCheckTypes.combinationRequired) {
                     hasPermission = hasPermission && userPermissions.indexOf(permission) > -1;
                     // if all the permissions are required and hasPermission is false there is no point carrying on
                     if (hasPermission === false) {
-                        return;
+                        break;
                     }
                 } else if (permissionType === $rootScope.authVars.permissionCheckTypes.atLeastOne) {
                     hasPermission = userPermissions.indexOf(permission) > -1;
                     // if we only need one of the permissions and we have it there is no point carrying on
                     if (hasPermission) {
-                        return;
+                        break;
                     }
                 }
-            });
+            }
 
             result = hasPermission ? $rootScope.authVars.authorised.authorised : $rootScope.authVars.authorised.notAuthorised;
         }

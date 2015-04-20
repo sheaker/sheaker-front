@@ -6,7 +6,6 @@ angular.module('sheaker', [
     'ui.bootstrap',
     'angular-jwt',
     'webcam',
-    'internationalPhoneNumber',
     'ui.bootstrap.showErrors',
     'infinite-scroll',
     'angular-spinkit'
