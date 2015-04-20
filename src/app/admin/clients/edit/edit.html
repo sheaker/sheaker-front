@@ -123,11 +123,12 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="exampleInputAmount">Access level</label>
-                                    <select class="form-control" ng-model="formDatas.userLevel">
+                                    <select class="form-control" ng-model="formDatas.userLevel" access="Admin">
                                         <option value="0">Client</option>
-                                        <option value="1" access="Admin">Moderator</option>
-                                        <option value="2" access="Admin">Administrator</option>
+                                        <option value="1">Moderator</option>
+                                        <option value="2">Administrator</option>
                                     </select>
+                                    <p access="Modo">You can't do that</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>
