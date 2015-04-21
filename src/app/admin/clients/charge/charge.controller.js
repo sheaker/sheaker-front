@@ -48,13 +48,11 @@ angular.module('sheaker')
     };
 
     $scope.setNumberDaysInput = function () {
-        if (!$scope.beenCustomDays)
-        {
+        if (!$scope.beenCustomDays) {
             $scope.formDatas.days = 31;
         }
-        else
-        {
-            $scope.formDatas.days = null;            
+        else {
+            $scope.formDatas.days = null;
         }
     };
 

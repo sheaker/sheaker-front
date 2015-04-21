@@ -24,6 +24,10 @@ angular.module('sheaker')
         $scope.hasCustomId = user.customId ? true : false;
         $scope.formDatas = user;
 
+        if ($scope.formDatas.userLevel === null) {
+            $scope.formDatas.userLevel = 0;
+        }
+
         var snapshotCanvas = $window.document.querySelector('#snapshot');
         if (snapshotCanvas) {
             snapshotCanvas.width = 320;
