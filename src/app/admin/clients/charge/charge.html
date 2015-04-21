@@ -11,7 +11,7 @@
 
         <div class="charge-photo text-center" id="userInfos">
             <img ng-src="{{ user.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
-            <div class="client-infos">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="client-infos">{{ user.customId || user.id }} - {{ user.firstName }} {{ user.lastName }}</div>
         </div>
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
