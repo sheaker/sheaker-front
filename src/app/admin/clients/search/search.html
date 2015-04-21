@@ -39,10 +39,12 @@
                             <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId"></i>
                         </td>
                         <td>
-                            <a href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>&nbsp&nbsp
-                            <a href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top"><span class="fa fa-money fa-lg"></span></a>&nbsp&nbsp
-                            <a href="" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg"></span></a>&nbsp&nbsp
-                            <a href="" tooltip="Delete" tooltip-placement="right"><span class="fa fa-trash-o fa-lg color-red"></span></a>
+                            <a href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left"><span class="fa fa-pencil-square-o fa-lg"></span></a>
+                            &nbsp&nbsp<a href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top"><span class="fa fa-money fa-lg"></span></a>
+                            &nbsp&nbsp<a href="" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg"></span></a>
+                            <span access="Admin">
+                                &nbsp&nbsp<a href="" tooltip="Delete" tooltip-placement="right"><span class="fa fa-trash-o fa-lg color-red"></span></a>
+                            </span>
                         </td>
                     </tr>
                 </tbody>
