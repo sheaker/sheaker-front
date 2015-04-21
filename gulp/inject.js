@@ -6,11 +6,19 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
+var gulpNgConfig = require('gulp-ng-config');
+
 module.exports = function(options) {
   gulp.task('inject', ['scripts'], function () {
     var injectStyles = gulp.src([
       options.src + '/app/**/*.css'
     ], { read: false });
+
+    gulp.src('app-config.json')
+    .pipe(gulpNgConfig('sheaker.config', {
+      environment: options.mode
+    }))
+    .pipe(gulp.dest(options.src + '/app/'));
 
     var injectScripts = gulp.src([
       options.src + '/app/**/*.js',

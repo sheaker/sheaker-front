@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('sheaker', [
+    'sheaker.config',
     'ngResource',
     'ngRoute',
     'ui.bootstrap',
@@ -10,8 +11,6 @@ angular.module('sheaker', [
     'infinite-scroll',
     'angular-spinkit'
 ])
-.constant('SHEAKER_URL', '//sheaker.com')
-.constant('GYM_API_URL', '//api.sheaker.com')
 .config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
 
     var universalResolves = {

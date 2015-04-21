@@ -1,0 +1,10 @@
+{
+  "production": {
+    "SHEAKER_URL": "//sheaker.com",
+    "GYM_API_URL": "//api.sheaker.com"
+  },
+  "developement": {
+    "SHEAKER_URL": "//sheaker.dev",
+    "GYM_API_URL": "//api.sheaker.dev"
+  }
+}
