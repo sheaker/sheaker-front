@@ -33,7 +33,7 @@ module.exports = function(options) {
       startPath: '/',
       server: server,
       browser: browser,
-      host: 'gym4devs.sheaker.com',
+      host: 'gymtest.sheaker.dev',
       open: 'external'
     });
   }
@@ -42,7 +42,11 @@ module.exports = function(options) {
     selector: '[ng-app]'// Only needed for angular apps
   }));
 
-  gulp.task('serve', ['watch'], function () {
+  gulp.task('serve-config', function () {
+    options.mode = 'developement';
+  });
+
+  gulp.task('serve', ['serve-config', 'watch'], function () {
     browserSyncInit([options.tmp + '/serve', options.src]);
   });
 

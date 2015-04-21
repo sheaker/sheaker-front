@@ -46,7 +46,8 @@
     "chalk": "~1.0.0",
     "protractor": "~2.0.0",
     "uglify-save-license": "~0.4.1",
-    "wrench": "~1.5.8"
+    "wrench": "~1.5.8",
+    "gulp-ng-config": "~1.1.0"
   },
   "engines": {
     "node": ">=0.10.0"
