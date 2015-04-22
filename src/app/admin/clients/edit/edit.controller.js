@@ -43,7 +43,10 @@ angular.module('sheaker')
                 ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
             };
 
-            imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+            imageObj.src = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+            if ($scope.formDatas.photo) {
+                imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+            }
         }
     }, function(error) {
         console.log(error);

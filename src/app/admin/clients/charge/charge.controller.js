@@ -24,7 +24,10 @@ angular.module('sheaker')
     // Load user
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
-        user.photo = GYM_API_URL + '/' + user.photo;
+        user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+        if ($scope.formDatas.photo) {
+            user.photo = GYM_API_URL + '/' + user.photo;
+        }
 
         Payment.query({user: user.id}).$promise
         .then(function(payments) {
