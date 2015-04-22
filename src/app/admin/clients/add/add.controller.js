@@ -9,21 +9,14 @@ angular.module('sheaker')
 
     $scope.formDatas.userLevel = 0;
 
-    // Birthdate Calendar
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.opened = true;
-    };
-    $scope.toggleDropdown = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
-    };
-    $scope.dt = new Date();
-    $scope.status = {
-      isopen: false
+    $scope.birthdateCal = {
+        today: new Date(),
+        isOpen: false,
+        openCal: function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.birthdateCal.isOpen = true;
+        }
     };
 
     // Setup a channel to receive a video property
