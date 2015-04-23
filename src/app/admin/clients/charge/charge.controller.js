@@ -45,11 +45,6 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations.'});
     });
 
-    // Calculate ending date
-    $scope.calculateEndDate = function () {
-        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format('DD-MMM-YYYY');
-    };
-
     $scope.setNumberDaysInput = function () {
         if (!$scope.beenCustomDays) {
             $scope.formDatas.days = 31;
@@ -59,22 +54,17 @@ angular.module('sheaker')
         }
     };
 
-    // Starting date calendar
-    $scope.dt = new Date();
-    $scope.status = {
-        isopen: false
-    };
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.opened = true;
-    };
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.status.isopen = !$scope.status.isopen;
+    // Payment calendar
+    $scope.paymentCal = {
+        isOpen: false,
+        openCal: function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.paymentCal.isOpen = true;
+        },
+        calculateEndDate: function() {
+            $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days, 'days');
+        }
     };
 
     $scope.chargeUser = function () {

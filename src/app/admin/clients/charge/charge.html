@@ -23,36 +23,36 @@
                     <div class="title-small">Subscription</div>
                     <div class="content-box">
                         <div class="form-group">
-                            <label for="InputFirstName">Days</label>
+                            <label for="InputDays">Days</label>
                             <div class="pull-right"><label for="InputCustomId">Custom Days?</label>
                                 <input type="checkbox" ng-checked="beenCustomDays" ng-click="beenCustomDays = !beenCustomDays; setNumberDaysInput();">
                             </div>
                             <div class="form-group" ng-hide="beenCustomDays">
-                                <select class="form-control" ng-model="formDatas.days" ng-change="calculateEndDate()">
+                                <select class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="paymentCal.calculateEndDate()">
                                     <option value="1">Visit</option>
                                     <option value="7">1 Week</option>
                                     <option value="31">1 Month</option>
-                                    <option value="93">3 Month</option>
+                                    <option value="93">3 Months</option>
                                     <option value="365">1 Year</option>
                                 </select>
                             </div>
                             <div class="form-group" ng-show="beenCustomDays">
-                                <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym">
+                                <input type="number" class="form-control" id="InputDays" min="0" ng-model="formDatas.days" ng-change="paymentCal.calculateEndDate()" placeholder="Number of days the user can access to the gym">
                             </div>
                     </div>
 
                         <div class="form-group col-lg-6 remove-margin-padding">
-                            <label for="InputDepartureDate">Start date</label>
+                            <label for="InputStartDate">Start date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-change="calculateEndDate()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="dd-MMM-yyyy" is-open="opened" disabled required>
+                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.startDate" ng-change="paymentCal.calculateEndDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd-MMM-yyyy" is-open="paymentCal.isOpen" disabled required>
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="paymentCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group col-lg-6 remove-padding-right">
                             <label for="InputEndDate">End date</label>
-                                <input type="text" class="form-control" id="InputEndDate" ng-model="formDatas.endDate" disabled>
+                            <input type="text" class="form-control" id="InputEndDate" ng-model="formDatas.endDate" disabled>
                         </div>
 
                         <div class="form-group">
