@@ -11,6 +11,8 @@ angular.module('sheaker')
     }
 
     $scope.formDatas = {};
+    $scope.beenCustomDays = false;
+    $scope.formDatas.days = 31;
 
     // Available payment methods
     $scope.availablePaymentMethods = [
@@ -43,6 +45,17 @@ angular.module('sheaker')
     // Calculate ending date
     $scope.calculateEndDate = function () {
         $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format('DD-MMM-YYYY');
+    };
+
+    $scope.setNumberDaysInput = function () {
+        if (!$scope.beenCustomDays)
+        {
+            $scope.formDatas.days = 31;
+        }
+        else
+        {
+            $scope.formDatas.days = null;            
+        }
     };
 
     // Starting date calendar

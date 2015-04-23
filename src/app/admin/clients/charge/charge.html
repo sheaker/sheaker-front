@@ -24,8 +24,22 @@
                     <div class="content-box">
                         <div class="form-group">
                             <label for="InputFirstName">Days</label>
-                            <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym" required>
-                        </div>
+                            <div class="pull-right"><label for="InputCustomId">Custom Days?</label>
+                                <input type="checkbox" ng-checked="beenCustomDays" ng-click="beenCustomDays = !beenCustomDays; setNumberDaysInput();">
+                            </div>
+                            <div class="form-group" ng-hide="beenCustomDays">
+                                <select class="form-control" ng-model="formDatas.days" ng-change="calculateEndDate()">
+                                    <option value="1">Visit</option>
+                                    <option value="7">1 Week</option>
+                                    <option value="31">1 Month</option>
+                                    <option value="93">3 Month</option>
+                                    <option value="365">1 Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-show="beenCustomDays">
+                                <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym">
+                            </div>
+                    </div>
 
                         <div class="form-group col-lg-6 remove-margin-padding">
                             <label for="InputDepartureDate">Start date</label>
@@ -96,7 +110,7 @@
                 </div>
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
-                <button type="submit" class="btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled  || chargeForm.$invalid">Charge client</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled  || chargeForm.$invalid || !formDatas.days">Charge client</button>
             </div>
         </form>
     </div>
