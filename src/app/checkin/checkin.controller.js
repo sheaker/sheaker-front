@@ -9,6 +9,11 @@ angular.module('sheaker')
         User.get({id: userId}, function(user) {
             user.photo = GYM_API_URL + '/' + user.photo;
 
+            var BirthdateMonth = moment(user.birthdate).month();
+            var BirthdateDay = moment(user.birthdate).date();
+
+            user.isBirthday = BirthdateMonth === moment(user.birthdate).month() && BirthdateDay === today.date();
+
             user.remainingDays = 0;
             if (user.activeMembershipId) {
                 user.remainingDays = moment.duration(moment(user.activeMembership.endDate).diff(today)).asDays().toFixed();

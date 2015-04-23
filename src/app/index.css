@@ -416,6 +416,13 @@ body {
     height: 450px;
 }
 
+/* Check-in */
+.birthday-box {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+/* End Check-in */
+
 .button-submit {
     margin-bottom: 30px;
 }

@@ -16,7 +16,7 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <form ng-submit="chargeUser()">
+        <form name="chargeForm" ng-submit="chargeUser()">
             <div class="col-lg-offset-1 col-lg-5" id="PaymentInformation">
                 <div class="general-box">
                     <span class="color-grey fa fa-list pull-right"></span>
@@ -24,13 +24,13 @@
                     <div class="content-box">
                         <div class="form-group">
                             <label for="InputFirstName">Days</label>
-                            <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym">
+                            <input type="number" class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="calculateEndDate()" placeholder="Number of days the user can access to the gym" required>
                         </div>
 
                         <div class="form-group col-lg-6 remove-margin-padding">
                             <label for="InputDepartureDate">Start date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-required="true" ng-change="calculateEndDate()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="dd-MMM-yyyy" is-open="opened" disabled>
+                                <input type="text" class="form-control" id="InputDepartureDate" ng-model="formDatas.startDate" ng-change="calculateEndDate()" datepicker-mode="year" min-date="'1950-01-01'" max-date="'2030-01-01'" datepicker-popup="dd-MMM-yyyy" is-open="opened" disabled required>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="exampleInputAmount">Price</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="exampleInputPrice" ng-model="formDatas.price">
+                                <input type="number" class="form-control" id="exampleInputPrice" ng-model="formDatas.price" required>
                                 <div class="input-group-addon">$</div>
                                 <div class="input-group-addon">(MXN)</div>
                             </div>
@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputAmount">Payment method</label>
-                            <select class="form-control select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods">
+                            <select class="form-control select-payment-method" ng-model="formDatas.method" ng-options="apm.id as apm.name for apm in availablePaymentMethods" required>
                                 <option value="">-- Choose a payment method --</option>
                             </select>
                         </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
-                <button type="submit" class="btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled">Charge client</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled  || chargeForm.$invalid">Charge client</button>
             </div>
         </form>
     </div>
