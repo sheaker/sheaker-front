@@ -37,14 +37,14 @@
                                 </select>
                             </div>
                             <div class="form-group" ng-show="beenCustomDays">
-                                <input type="number" class="form-control" id="InputDays" min="0" ng-model="formDatas.days" ng-change="paymentCal.calculateEndDate()" placeholder="Number of days the user can access to the gym">
+                                <input type="number" class="form-control" id="InputDays" min="0" ng-model="formDatas.days" ng-change="paymentCal.calculateEndingDate()" placeholder="Number of days the user can access to the gym">
                             </div>
-                    </div>
+                        </div>
 
                         <div class="form-group col-lg-6 remove-margin-padding">
                             <label for="InputStartDate">Start date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.startDate" ng-change="paymentCal.calculateEndDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd-MMM-yyyy" is-open="paymentCal.isOpen" disabled required>
+                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.startDate" ng-change="paymentCal.calculateEndingDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd MMM yyyy" is-open="paymentCal.isOpen" disabled required>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="paymentCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group col-lg-6 remove-padding-right">
                             <label for="InputEndDate">End date</label>
-                            <input type="text" class="form-control" id="InputEndDate" ng-model="formDatas.endDate" disabled>
+                            <input type="text" class="form-control" id="InputEndDate" ng-model="calculatedEndingDate" disabled>
                         </div>
 
                         <div class="form-group">

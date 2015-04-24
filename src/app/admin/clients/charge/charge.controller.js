@@ -62,14 +62,21 @@ angular.module('sheaker')
             $event.stopPropagation();
             $scope.paymentCal.isOpen = true;
         },
-        calculateEndDate: function() {
-            $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days, 'days');
+        calculateEndingDate: function() {
+            if (!$scope.formDatas.startDate || !$scope.formDatas.days) {
+                return;
+            }
+
+            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days, 'days').format('DD MMM YYYY');
         }
     };
 
     $scope.chargeUser = function () {
         $scope.formDatas.user = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
+
+        $scope.formDatas.startDate = moment($scope.formDatas.startDate).format();
+        $scope.formDatas.endDate = moment($scope.calculatedEndingDate).format();
 
         Payment.save($scope.formDatas).$promise
         .then(function(payment) {
