@@ -64,7 +64,8 @@ angular.module('sheaker', [
     .when('/checkin', {
         templateUrl: 'app/checkin/checkin.html',
         permissionsRequired: ['user', 'modo', 'admin'],
-        controller: 'CheckinCtrl'
+        controller: 'CheckinCtrl',
+        permissionType: 'atLeastOne'
     })
     .when('/admin/general/home', {
         templateUrl: 'app/admin/general/home/home.html',
