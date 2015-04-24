@@ -7,6 +7,8 @@ angular.module('sheaker')
     var statsToFurtherDate = moment().add(3, 'day');
     var statsToPreviousDate = moment().subtract(3, 'day');
 
+    $scope.staffMember = [0, 0, 0, 0];
+
     User.query().$promise
     .then(function(usersList) {
         usersList.forEach(function (user) {
@@ -25,6 +27,11 @@ angular.module('sheaker')
             if (user.activeMembershipId) {
                 user.hasNewActiveMembership = moment(user.activeMembership.paymentDate).isBetween(statsToPreviousDate, today, 'second');
             }
+
+            if (user.userLevel !== 0) {
+                $scope.staffMember[user.userLevel] += 1;
+            }
+
         });
 
         $scope.usersList = usersList;

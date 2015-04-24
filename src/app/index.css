@@ -378,6 +378,12 @@ body {
     font-size: 50px;
 }
 
+.box-title > .fa {
+    padding-top: 20px;
+    padding-right: 20px;
+    font-size: 50px;
+}
+
 .general-box .fa {
     font-size: 40px;
 }
@@ -414,6 +420,12 @@ body {
 
 .medium-box {
     height: 450px;
+}
+
+.box-title {
+    border-bottom: 1px solid #DDD;
+    margin-bottom: -1px;
+    background-color: #fff;
 }
 
 /* Check-in */

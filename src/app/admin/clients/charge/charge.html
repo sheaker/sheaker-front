@@ -92,6 +92,7 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Days</th>
+                                        <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Price</th>
                                     </tr>
@@ -100,6 +101,7 @@
                                     <tr ng-repeat="p in user.payments">
                                         <td>{{ p.paymentDate | date: 'd MMM' }}</td>
                                         <td>{{ p.days }}</td>
+                                        <td>{{ p.startDate | date: 'd MMM' }}</td>
                                         <td>{{ p.endDate | date: 'd MMM' }}</td>
                                         <td>{{ p.price | currency }}</td>
                                     </tr>
