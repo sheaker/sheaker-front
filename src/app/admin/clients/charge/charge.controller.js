@@ -67,7 +67,7 @@ angular.module('sheaker')
                 return;
             }
 
-            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days, 'days').format('DD MMM YYYY');
+            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
         }
     };
 
@@ -75,8 +75,8 @@ angular.module('sheaker')
         $scope.formDatas.user = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
 
-        $scope.formDatas.startDate = moment($scope.formDatas.startDate).format();
-        $scope.formDatas.endDate = moment($scope.calculatedEndingDate).format();
+        $scope.formDatas.startDate = moment($scope.formDatas.startDate).startOf('day').format();
+        $scope.formDatas.endDate = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
         Payment.save($scope.formDatas).$promise
         .then(function(payment) {
