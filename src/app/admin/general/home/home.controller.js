@@ -3,9 +3,10 @@
 angular.module('sheaker')
 .controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Checkin) {
 
-    var today = moment();
-    var statsToFurtherDate = moment().add(3, 'day');
-    var statsToPreviousDate = moment().subtract(3, 'day');
+    var now = moment();
+    var today = moment().startOf('day');
+    var statsToFurtherDate = moment().add(3, 'day').endOf('day');
+    var statsToPreviousDate = moment().subtract(3, 'day').startOf('day');
 
     $scope.staffMember = [0, 0, 0, 0];
 
@@ -13,8 +14,12 @@ angular.module('sheaker')
     .then(function(usersList) {
         usersList.forEach(function (user) {
             // Calculate if his birthday is in 3 days
+            // Add years between birthdate and now to calculate next anniversary
             var furtherBirthdate = moment(user.birthdate).add(today.diff(user.birthdate, 'years') + 1, 'years');
             user.hasBirthdayInc = furtherBirthdate.isBetween(today, statsToFurtherDate, 'second');
+            if (user.hasBirthdayInc) {
+                user.furtherBirthdate = furtherBirthdate;
+            }
 
             // Calculate if his membership (for users which have one) will expire in 3 days
             user.hasInactiveMembershipInc = false;
@@ -25,7 +30,7 @@ angular.module('sheaker')
             // Calculate if it's a recent membership (for users which have one)
             user.hasNewActiveMembership = false;
             if (user.activeMembershipId) {
-                user.hasNewActiveMembership = moment(user.activeMembership.paymentDate).isBetween(statsToPreviousDate, today, 'second');
+                user.hasNewActiveMembership = moment(user.activeMembership.paymentDate).isBetween(statsToPreviousDate, now, 'second');
             }
 
             if (user.userLevel !== 0) {
