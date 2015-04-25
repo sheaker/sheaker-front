@@ -9,6 +9,7 @@ angular.module('sheaker')
     var statsToPreviousDate = moment().subtract(3, 'day').startOf('day');
 
     $scope.staffMember = [0, 0, 0, 0];
+    $scope.lastCheckins = [];
 
     User.query().$promise
     .then(function(usersList) {
@@ -37,6 +38,22 @@ angular.module('sheaker')
                 $scope.staffMember[user.userLevel] += 1;
             }
 
+            if (user.lastCheckins) {
+                user.lastCheckins.forEach(function (checkin) {
+                    var userObject = {
+                        user: {
+                            id: user.id,
+                            customId: user.customId,
+                            firstName: user.firstName,
+                            lastName: user.lastName
+                        }
+                    };
+
+                    checkin = angular.extend(checkin, userObject);
+                });
+
+                $scope.lastCheckins = $scope.lastCheckins.concat(user.lastCheckins);
+            }
         });
 
         $scope.usersList = usersList;
@@ -44,14 +61,5 @@ angular.module('sheaker')
     .catch(function(error) {
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
-    });
-
-    Checkin.query({limit:10, offset:0, sortBy:'created_at', order:'DESC'}).$promise
-    .then(function (checkin) {
-        $scope.checkin = checkin;
-    })
-    .catch(function(error) {
-        console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins.'});
     });
 });

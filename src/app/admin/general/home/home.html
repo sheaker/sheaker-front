@@ -86,7 +86,7 @@
                     <div class="content-box reduce-paddin-box">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="ci in checkin">
+                                <tr ng-repeat="ci in lastCheckins | orderBy: 'createdAt':true | limitTo: 10">
                                     <td width="40%">{{ ci.user.firstName }}</td>
                                     <td width="40%">{{ ci.user.lastName }}</td>
                                     <td width="20%">{{ ci.user.customId || ci.user.id }}</td>
