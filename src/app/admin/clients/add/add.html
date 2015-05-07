@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <label for="InputBirthdate">Birthdate</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1950-01-01'" max-date="dt" datepicker-popup="yyyy-MM-dd" is-open="opened" disabled>
+                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" datepicker-popup="dd MMM yyyy" is-open="birthdateCal.isOpen" disabled>
                                 <span class="input-group-btn">
-                                    <button type="button" class="form-control btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="birthdateCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -122,13 +122,13 @@
                         <div class="content-box">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="exampleInputAmount">Access level</label>
+                                    <label for="exampleInputAmount" access="Admin">Access level</label>
                                     <select class="form-control" ng-model="formDatas.userLevel" access="Admin">
                                         <option value="0">Client</option>
-                                        <option value="1">Moderator</option>
-                                        <option value="2">Administrator</option>
+                                        <option value="1">User</option>
+                                        <option value="2">Moderator</option>
+                                        <option value="3">Administrator</option>
                                     </select>
-                                    <p access="Modo">You can't do that</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>

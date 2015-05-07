@@ -24,6 +24,13 @@ angular.module('sheaker')
         $scope.hasCustomId = user.customId ? true : false;
         $scope.formDatas = user;
 
+        if ($scope.formDatas.birthdate === '0000-00-00') {
+            $scope.formDatas.birthdate = null;
+        }
+        if ($scope.formDatas.userLevel === null) {
+            $scope.formDatas.userLevel = 0;
+        }
+
         var snapshotCanvas = $window.document.querySelector('#snapshot');
         if (snapshotCanvas) {
             snapshotCanvas.width = 320;
@@ -36,7 +43,10 @@ angular.module('sheaker')
                 ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
             };
 
-            imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+            imageObj.src = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+            if ($scope.formDatas.photo) {
+                imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+            }
         }
     }, function(error) {
         console.log(error);
@@ -45,20 +55,14 @@ angular.module('sheaker')
     });
 
     // Birthdate Calendar
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.opened = true;
-    };
-    $scope.toggleDropdown = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
-    };
-    $scope.dt = new Date();
-    $scope.status = {
-      isopen: false
+    $scope.birthdateCal = {
+        today: new Date(),
+        isOpen: false,
+        openCal: function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.birthdateCal.isOpen = true;
+        }
     };
 
     var webcam = null,

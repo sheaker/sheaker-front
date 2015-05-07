@@ -17,6 +17,10 @@
     border-bottom: 1px solid #dbdbdb;
 }
 
+.navbar-shadow {
+    box-shadow: -4px 2px 4px rgba(0,0,0,0.15);    
+}
+
 .navbar-inverse-size {
     width: 200px;
 }

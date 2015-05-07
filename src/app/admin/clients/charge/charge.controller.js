@@ -11,6 +11,8 @@ angular.module('sheaker')
     }
 
     $scope.formDatas = {};
+    $scope.beenCustomDays = false;
+    $scope.formDatas.days = 31;
 
     // Available payment methods
     $scope.availablePaymentMethods = [
@@ -22,7 +24,10 @@ angular.module('sheaker')
     // Load user
     User.get({id: $routeParams.id}).$promise
     .then(function(user) {
-        user.photo = GYM_API_URL + '/' + user.photo;
+        user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+        if ($scope.formDatas.photo) {
+            user.photo = GYM_API_URL + '/' + user.photo;
+        }
 
         Payment.query({user: user.id}).$promise
         .then(function(payments) {
@@ -40,32 +45,38 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations.'});
     });
 
-    // Calculate ending date
-    $scope.calculateEndDate = function () {
-        $scope.formDatas.endDate = moment($scope.formDatas.startDate).add($scope.formDatas.days , 'days').format("DD-MMM-YYYY");
+    $scope.setNumberDaysInput = function () {
+        if (!$scope.beenCustomDays) {
+            $scope.formDatas.days = 31;
+        }
+        else {
+            $scope.formDatas.days = null;
+        }
     };
 
-    // Starting date calendar
-    $scope.dt = new Date();
-    $scope.status = {
-        isopen: false
-    };
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
+    // Payment calendar
+    $scope.paymentCal = {
+        isOpen: false,
+        openCal: function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.paymentCal.isOpen = true;
+        },
+        calculateEndingDate: function() {
+            if (!$scope.formDatas.startDate || !$scope.formDatas.days) {
+                return;
+            }
 
-        $scope.opened = true;
-    };
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.status.isopen = !$scope.status.isopen;
+            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
+        }
     };
 
     $scope.chargeUser = function () {
         $scope.formDatas.user = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
+
+        $scope.formDatas.startDate = moment($scope.formDatas.startDate).startOf('day').format();
+        $scope.formDatas.endDate = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
         Payment.save($scope.formDatas).$promise
         .then(function(payment) {

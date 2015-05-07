@@ -3,7 +3,7 @@
         <div class="col-lg-offset-3 col-lg-6" id="SheakerMembership">
             <div class="checkin-box text-center">
                 <span class="title">Welcome</span>
-                <div class="general-box">
+                <div class="general-box" ng-class="{'shadow-green': userCheckin && userCheckin.activeMembershipId, 'shadow-red': userCheckin && !userCheckin.activeMembershipId}">
                     <div class="content-box padding-top-general-box">
 
                         <alert ng-repeat="alert in alerts | limitTo: 2" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
@@ -20,6 +20,11 @@
                             <img ng-src="{{ userCheckin.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
                             <div class="client-infos">{{ userCheckin.firstName }} {{ userCheckin.lastName }}</div>
                         </div>
+                        <span ng-show="userCheckin.isBirthday">
+                            <div class="birthday-box color-yellow">
+                                <span class="fa fa-birthday-cake"></span><br>
+                        </div>
+                        </span>
                         <div class="col-lg-offset-3 col-lg-6 content-checkin text-center" ng-show="userCheckin">
                             <div ng-class="{'color-green': userCheckin.activeMembershipId, 'color-red': !userCheckin.activeMembershipId}">
                                 <div ng-class="{'fa fa-unlock-alt': userCheckin.activeMembershipId, 'fa fa-lock': !userCheckin.activeMembershipId}"></div>
@@ -32,5 +37,3 @@
             </div>
         </div>
     </div>
-
-<div ng-include="'app/components/footer/footer.html'"></div>

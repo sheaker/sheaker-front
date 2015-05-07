@@ -63,14 +63,16 @@ angular.module('sheaker', [
     })
     .when('/checkin', {
         templateUrl: 'app/checkin/checkin.html',
-        controller: 'CheckinCtrl'
+        permissionsRequired: ['user', 'modo', 'admin'],
+        controller: 'CheckinCtrl',
+        permissionType: 'atLeastOne'
     })
     .when('/admin/general/home', {
         templateUrl: 'app/admin/general/home/home.html',
         controller: 'HomeAdminCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['user', 'modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -79,7 +81,7 @@ angular.module('sheaker', [
         controller: 'SettingsCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -89,7 +91,7 @@ angular.module('sheaker', [
         reloadOnSearch : false,
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['user', 'modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -98,7 +100,7 @@ angular.module('sheaker', [
         controller: 'AddClientCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -107,7 +109,7 @@ angular.module('sheaker', [
         controller: 'EditClientCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -116,7 +118,7 @@ angular.module('sheaker', [
         controller: 'ChargeClientCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
@@ -125,7 +127,7 @@ angular.module('sheaker', [
         controller: 'ReviewClientCtrl',
         access: {
             loginRequired: true,
-            permissionsRequired: ['Modo', 'Admin'],
+            permissionsRequired: ['user', 'modo', 'admin'],
             permissionType: 'atLeastOne'
         }
     })
