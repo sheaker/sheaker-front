@@ -29,7 +29,7 @@ angular.module('sheaker', [
                             };
                         })
                         .catch(function(error) {
-                            if (error.status === 404) {
+                            if (error.status === 404 || error.status === 0) {
                                 $window.location.href = SHEAKER_URL + '/register/' + address[0];
                             }
                         });
