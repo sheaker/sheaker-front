@@ -172,7 +172,8 @@ body {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f9f9f9;
     font-weight: 600;
-    /*border-right: 1px solid #dbdbdb;*/
+    border-left: 1px solid #dbdbdb;
+    /*box-shadow: -3px 1px 4px rgba(0,0,0,0.15);*/
 }
 
 /* Sidebar navigation */
