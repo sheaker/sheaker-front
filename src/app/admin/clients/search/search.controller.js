@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sheaker')
-.controller('SearchClientCtrl', function ($rootScope, $scope, $location, User) {
+.controller('SearchClientCtrl', function ($rootScope, $scope, $location, $window, User) {
 
     if ($location.search().text) {
         $scope.searchText = $location.search().text;
@@ -46,4 +46,19 @@ angular.module('sheaker')
     };
 
     $scope.loadUsers();
+
+    $scope.deleteUser = function (user) {
+        var sure = $window.confirm('Are you sure you want to delete ' + user.firstName + ' ' + user.lastName + '?');
+
+        if (sure) {
+            User.delete({id: user.id}).$promise
+            .then(function(user) {
+                $rootScope.alerts.push({type: 'success', msg: user.firstName + ' ' + user.lastName + ' has been deleted.'});
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alerts.push({type: 'danger', msg: 'Error while deleting the user.'});
+            });
+        }
+    };
 });
