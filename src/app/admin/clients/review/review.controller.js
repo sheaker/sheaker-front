@@ -25,7 +25,6 @@ angular.module('sheaker')
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
         });
-        $scope.user = user;
 
         if (user.lastCheckins) {
             user.lastCheckins.forEach(function (checkin) {
@@ -41,6 +40,7 @@ angular.module('sheaker')
             });
             $scope.lastCheckins = $scope.lastCheckins.concat(user.lastCheckins);
         }
+        $scope.user = user;
 
     }, function(error) {
         console.log(error);
