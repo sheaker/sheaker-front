@@ -42,7 +42,7 @@
                         <td>
                             <a class="search-link" href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg"></span></a>
                             <a class="search-link" href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top" ng-hide="user.userLevel" access="modo, admin"><span class="fa fa-money fa-lg"></span></a>
-                            <a class="search-link" href="" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg"></span></a>
+                            <a class="search-link" href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg"></span></a>
                             <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin"><span class="fa fa-trash-o fa-lg color-red"></span></a>
                         </td>
                     </tr>
