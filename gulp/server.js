@@ -33,7 +33,7 @@ module.exports = function(options) {
       startPath: '/',
       server: server,
       browser: browser,
-      host: 'gymtest.sheaker.dev',
+      host: 'gymtest.sheaker.local',
       open: 'external'
     });
   }
