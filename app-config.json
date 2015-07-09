@@ -4,7 +4,7 @@
     "GYM_API_URL": "//api.sheaker.com"
   },
   "developement": {
-    "SHEAKER_URL": "//sheaker.local",
-    "GYM_API_URL": "//api.sheaker.local"
+    "SHEAKER_URL": "//sheaker.io",
+    "GYM_API_URL": "//api.sheaker.io"
   }
 }
