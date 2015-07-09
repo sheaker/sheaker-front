@@ -17,9 +17,14 @@ angular.module('sheaker')
             user.photo = GYM_API_URL + '/' + user.photo;
         }
 
+        $scope.totalPricePayments = 0;
+
         Payment.query({user: user.id}).$promise
         .then(function(payments) {
             user.payments = payments;
+            for(var i= 0; i < user.payments.length; i++) {
+                $scope.totalPricePayments+=user.payments[i].price;
+            }
         })
         Checkin.query({user: user.id, limit: 50}).$promise
         .then(function(checkins) {

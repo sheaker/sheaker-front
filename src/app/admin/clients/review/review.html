@@ -103,6 +103,7 @@
                                         <th>Folder N°</th>
                                         <th>Date</th>
                                         <th>Price</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody  ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
@@ -111,6 +112,7 @@
                                         <td>{{ p.id }}</td>
                                         <td>{{ p.paymentDate | date: 'd MMM y' }}</td>
                                         <td>{{ p.price | currency }}</td>
+                                        <td><span class="color-blue glyphicon glyphicon-search"></span></td>
                                     </tr>
                                     <tr ng-switch-when="true">
                                         <td colspan="5">
@@ -131,6 +133,7 @@
                                 </tbody>
                             </table>
                     </div>
+                    Total : {{ totalPricePayments | currency }}
                 </div>
             </div>
         </div>

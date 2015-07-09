@@ -13,9 +13,9 @@
 
         <div class="col-lg-4" id="SheakerMembership" access="modo, admin">
             <div class="general-box medium-box">
-                <div class="box-title">
-                    <span class="color-grey fa fa-users pull-right"></span>
-                    <div class="title-x-small color-grey">Total</div>
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-users pull-right"></span>
+                    <div class="title-x-small color-white">Total</div>
                 </div>
                 <div class="content-box reduce-paddin-box">
                     <div class="table-responsive">
@@ -57,9 +57,9 @@
         </div>
         <div class="col-lg-4" id="Birthdays">
             <div class="general-box medium-box">
-                <div class="box-title">
-                    <span class="color-grey fa fa-birthday-cake pull-right"></span>
-                    <div class="title-x-small color-grey">Incoming birthday</div>
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-birthday-cake pull-right"></span>
+                    <div class="title-x-small color-white">Incoming birthday</div>
                 </div>
                 <div class="content-box reduce-paddin-box">
                     <div class="table-responsive">
@@ -69,6 +69,7 @@
                                     <td width="37%">{{ user.firstName }}</td>
                                     <td width="38%">{{ user.lastName }}</td>
                                     <td width="25%">{{ user.birthdate | date: 'd MMM'}}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -78,9 +79,9 @@
         </div>  <!-- Birthday end -->
         <div class="col-lg-4" id="LastsEntry">
             <div class="general-box medium-box">
-                <div class="box-title">
-                    <span class="color-grey fa fa-street-view pull-right"></span>
-                    <div class="title-x-small color-grey">Last check-in</div>
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-street-view pull-right"></span>
+                    <div class="title-x-small color-white">Last check-in</div>
                 </div>
                 <div class="table-responsive">
                     <div class="content-box reduce-paddin-box">
@@ -90,6 +91,7 @@
                                     <td width="40%">{{ ci.user.firstName }}</td>
                                     <td width="40%">{{ ci.user.lastName }}</td>
                                     <td width="20%">{{ ci.user.customId || ci.user.id }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -99,9 +101,9 @@
         </div>  <!-- Lasts Entry end -->
         <div class="col-lg-4" id="NewClients" access="modo, admin">
             <div class="general-box medium-box">
-                <div class="box-title">
-                    <span class="color-grey fa fa-bookmark pull-right"></span>
-                    <div class="title-x-small color-grey">New clients</div>
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-bookmark pull-right"></span>
+                    <div class="title-x-small color-white">New clients</div>
                 </div>
                 <div class="content-box reduce-paddin-box">
                     <div class="table-responsive">
@@ -111,6 +113,7 @@
                                     <td width="40%">{{ user.firstName }}</td>
                                     <td width="40%">{{ user.lastName }}</td>
                                     <td width="20%">{{ user.customId || user.id }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -120,9 +123,9 @@
         </div>  <!-- Lasts Entry end -->
         <div class="col-lg-4" id="FinishedMemberships" access="modo, admin">
             <div class="general-box medium-box">
-                <div class="box-title">
-                    <span class="color-grey fa fa-frown-o pull-right"></span>
-                    <div class="title-x-small color-grey">Ending memberships</div>
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-frown-o pull-right"></span>
+                    <div class="title-x-small color-white">Ending memberships</div>
                 </div>
                 <div class="content-box reduce-paddin-box">
                     <div class="table-responsive">
@@ -132,6 +135,7 @@
                                     <td width="37%">{{ user.firstName }}</td>
                                     <td width="38%">{{ user.lastName }}</td>
                                     <td width="25%">{{ user.activeMembership.endDate | date: 'd MMM' }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -141,9 +145,9 @@
         </div>  <!--Finished memberships end -->
         <div class="col-lg-4" id="NewMemberships" access="modo, admin">
             <div class="general-box medium-box">
-                <div class="box-title">
-                <span class="color-grey fa fa-smile-o pull-right"></span>
-                <div class="title-x-small color-grey">New memberships</div>
+                <div class="box-title color-background-grey-dark">
+                <span class="color-white fa fa-smile-o pull-right"></span>
+                <div class="title-x-small color-white">New memberships</div>
             </div>
                 <div class="content-box reduce-paddin-box">
                     <div class="table-responsive">
@@ -153,6 +157,7 @@
                                     <td width="40%">{{ user.firstName }}</td>
                                     <td width="40%">{{ user.lastName }}</td>
                                     <td width="20%">{{ user.customId || user.id }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>

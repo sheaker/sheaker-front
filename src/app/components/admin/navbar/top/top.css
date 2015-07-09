@@ -26,11 +26,11 @@
 }
 
 .navbar-inverse .navbar-header > a {
-    color: #3a3a3a;
+    color: #757575;
 }
 .navbar-inverse .navbar-header > a:hover,
 .navbar-inverse .navbar-header > a:focus {
-    color: #5b5b5b;
+    color: #757575;
 }
 
 .navbar-inverse .navbar-nav {
@@ -38,11 +38,11 @@
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: #3a3a3a;
+    color: #757575;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover {
-    color: #5b5b5b;
+    color: #757575;
 }
 /*
 .right-menu {
