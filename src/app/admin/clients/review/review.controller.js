@@ -21,6 +21,10 @@ angular.module('sheaker')
         .then(function(payments) {
             user.payments = payments;
         })
+        Checkin.query({user: user.id, limit: 50}).$promise
+        .then(function(checkins) {
+            $scope.lastCheckins = $scope.lastCheckins.concat(checkins);
+        })
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
@@ -38,7 +42,6 @@ angular.module('sheaker')
                 };
                 checkin = angular.extend(checkin, userObject);
             });
-            $scope.lastCheckins = $scope.lastCheckins.concat(user.lastCheckins);
         }
         $scope.user = user;
 
@@ -47,5 +50,24 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
         $location.path('/admin/clients/search');
     });
+
+    /// Collapse Part
+    $scope.selIdx= -1;
+
+    $scope.selPayment=function(payment,idx){
+        if (idx===$scope.selIdx) {
+            $scope.selIdx=-1;
+            $scope.selectedPayment=false;
+        }
+        else {
+        $scope.selectedPayment=payment;
+        $scope.selIdx=idx;
+        }
+    }
+
+    $scope.isSelPayment=function(payment){
+        return $scope.selectedPayment===payment;
+    }
+    /// End of collapse
 
 });

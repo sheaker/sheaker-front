@@ -318,6 +318,22 @@ body {
     margin-right: 20px;
 }
 
+.without-border {
+    border:none;
+}
+
+.without-margin {
+    margin:none;
+}
+
+.sub-table {
+    margin-top: -10px;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
 /* Box css */
 
 .charge-photo{
@@ -329,7 +345,7 @@ body {
     font-size: 16px;
 
     color: #4b4b4b;
-    border: 1px solid #DDD;
+    border: 1px solid #9a8498;
     padding-bottom: 20px;
     margin-bottom: 30px;
     -webkit-border-radius: 5px;
@@ -439,7 +455,7 @@ body {
 .box-title {
     border-bottom: 1px solid #DDD;
     margin-bottom: -1px;
-    background-color: #fff;
+    background-color: #9a8498;
 }
 
 /* Check-in */
