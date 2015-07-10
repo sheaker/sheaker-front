@@ -1,20 +1,22 @@
-<nav class="navbar navbar-shadow navbar-static-top navbar-inverse navbar-inverse-size navbar-fixed-top" ng-controller="NavbarTopCtrl">
+<nav class="navbar navbar-shadow navbar-inverse navbar-inverse-size navbar-fixed-top" ng-controller="NavbarTopCtrl">
     <div class="navbar-header">
         <a class="navbar-brand" href="#/">
-            <img src="//static.sheaker.com/sheaker-gym/assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
+            <img src="/assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
         </a>
     </div>
-
-    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-        <ul class="nav navbar-nav">
-            <li ng-class="{active: isActive('/admin')}"><a href="#/admin">My account</a></li>
-            <li><a ng-href="#">About</a></li>
-            <li><a ng-href="#">Contact</a></li>
+        <ul class="nav nav-top pull-right">
+            <div class="btn-group" dropdown is-open="status.isopen">
+                <button class="btn btn-default dropdown-toggle dropdown-menu-left" type="button" dropdown-toggle>
+                    <span class="fa fa-user color-grey-dark"></span>
+                    <span class="caret color-grey-dark"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href class="not-active">Sign in as <b>{{ user.name }}</b></a></li>
+                    <div class="border-dropdown-menu"></div>
+                    <li><a href class="not-active">Profil</a></li>
+                    <li><a href="#/logout">Sign out</a></li>
+                </ul>
+            </div>
         </ul>
-
-        <ul class="nav navbar-nav navbar-right right-menu">
-            <li><a href="">Check-In <i class="fa fa-sign-in fa-fw"></i></a></li>
-            <li>{{ dt | date:'fullDate' }}</li>
-        </ul>
-    </div>-->
+    </div>
 </nav>

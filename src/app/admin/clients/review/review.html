@@ -9,7 +9,163 @@
             <span class="color-blue fa fa-bar-chart"></span>Review Client
         </div>
 
+        <div class="charge-photo text-center" id="userInfos">
+            <img ng-src="{{ user.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
+            <div class="client-infos">{{ user.customId || user.id }} - {{ user.firstName }} {{ user.lastName }}</div>
+        </div>
+
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
+        <div class="col-lg-offset-1 col-lg-5" id="ClientDatas">
+            <div class="general-box">
+                <span class="color-grey fa fa-list pull-right"></span>
+                <div class="title-small">Client Datas</div>
+                <div class="content-box">
+                    <div class="form-group">
+                        <label for="InputFirstName">First Name</label>
+                        <input type="text" class="form-control without-border" id="InputFirstName" name="firstName" ng-model="user.firstName" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputLastName">Last Name</label>
+                        <input type="text" class="form-control without-border" id="InputLastName" name="lastName" ng-model="user.lastName" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputPhoneNumber">Phone</label>
+                        <input type="text" class="form-control without-border" id="InputPhoneNumber" name="phone" ng-model="user.phone" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputEmail">Mail</label>
+                        <input type="email" class="form-control without-border" id="InputMail" name="mail" ng-model="user.mail" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputGender">Sex</label>
+                        <div class="form-inline">
+                            <label class="radio-inline">
+                                <input type="radio" class="without-border" id="InputGenderMale" name="genderRadios" ng-model="user.gender" value="0" disabled> Male
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" class="without-border" id="InputGenderFemale" name="genderRadios" ng-model="user.gender" value="1" disabled> Female
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputBirthdate">Birthdate</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control without-border" id="InputBirthdate" name="birthdate" ng-model="user.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" datepicker-popup="dd MMM yyyy" is-open="birthdateCal.isOpen" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Address</h3>
+                        <div class="form-group col-lg-12">
+                            <label for="InputAddressStreet">Street address</label>
+                            <input type="text" class="form-control field-address-street without-border" id="InputAddressStreet1" name="addressStreet1" ng-model="user.addressStreet1" disabled>
+                            <input type="text" class="form-control field-address-street without-border" id="InputAddressStreet2" name="addressStreet2" ng-model="user.addressStreet2" disabled>
+                        </div>
+                        <div class="form-group col-lg-8">
+                            <label for="InputAddressCity">City</label>
+                            <input type="text" class="form-control without-border" id="InputAddressCity " name="city" ng-model="user.city" disabled>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="InputAddressZipCode">Zip code</label>
+                            <input type="number" class="form-control without-border" id="InputAddressZipCode" min="1" name="zip" ng-model="user.zip" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputFirstName">Sponsor</label>
+                        <input type="number" class="form-control without-border" id="InputSponsor" min="0" name="sponsor" ng-model="user.sponsor" placeholder="Enter the id of the user who sponsored this person" disabled>
+                    </div>
+
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control without-border" id="InputComment" rows="10" name="comment" ng-model="user.comment" placeholder="If you have any comments to do..." disabled></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5" id="PaymentsHistory">
+            <div class="general-box">
+                <span class="color-grey fa fa-archive pull-right"></span>
+                <div class="title-small">Payment history</div>
+                <div class="content-box">
+                    <div class="table-responsive">
+                        <div class="text-center" ng-hide="user.payments.length">
+                            No previous payments.
+                        </div>
+                            <table class="table table-striped" ng-show="user.payments.length">
+                                <thead>
+                                    <tr>
+                                        <th>Folder N°</th>
+                                        <th>Date</th>
+                                        <th>Price</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody  ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
+                                    <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
+                                        <!--<td>{{ p.id }}</td>-->
+                                        <td>{{ p.id }}</td>
+                                        <td>{{ p.paymentDate | date: 'd MMM y' }}</td>
+                                        <td>{{ p.price | currency }}</td>
+                                        <td><span class="color-blue glyphicon glyphicon-search"></span></td>
+                                    </tr>
+                                    <tr ng-switch-when="true">
+                                        <td colspan="5">
+                                            <table class="table table-condensed sub-table color-blue">
+                                                <tr>
+                                                    <th width="30%">Days</th>
+                                                    <th width="35%">Start Date</th>
+                                                    <th width="35%">End Date</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ p.days }}</td>
+                                                    <td>{{ p.startDate | date: 'd MMM y' }}</td>
+                                                    <td>{{ p.endDate | date: 'd MMM y' }}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    Total : {{ totalPricePayments | currency }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5" id="CheckInHistory">
+            <div class="general-box">
+                <span class="color-grey fa fa-street-view pull-right"></span>
+                <div class="title-small">Check-in history</div>
+                <div class="content-box">
+                    <div class="table-responsive">
+                        <div class="content-box reduce-paddin-box">
+                            <div class="text-center" ng-hide="lastCheckins.length">
+                                No previous check-in.
+                            </div>
+                            <table class="table table-striped table-condensed" ng-show="lastCheckins.length">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Hour</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ci in lastCheckins | orderBy: 'createdAt':true | limitTo: 30">
+                                        <td width="40%">{{ ci.createdAt | date: 'd MMM y'  }}</td>
+                                        <td width="40%">{{ ci.createdAt | date: 'hh:mm' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

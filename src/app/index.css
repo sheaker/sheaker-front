@@ -5,15 +5,16 @@ body {
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
 }
 
 .main {
     padding-left: 220px;
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
 
     font-family: 'Lato', sans-serif;
     font-weight: 400;
+    margin-top: 70px;
 }
 
 /* Containers */
@@ -158,21 +159,23 @@ body {
 }
 
 .subsidebar {
-    width: 150px;
+    width: 130px;
     font-size: 18px;
     position: fixed;
-    top: 50px;
+    top: 0px;
+    padding-top: 70px;
     bottom: 0;
     left: 0;
     z-index: 1000;
     display: block;
-    margin-left: 50px;
+    margin-left: 70px;
     padding-left: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
     font-weight: 600;
-    /*border-right: 1px solid #dbdbdb;*/
+    border-left: 1px solid #dbdbdb;
+    /*box-shadow: -3px 1px 4px rgba(0,0,0,0.15);*/
 }
 
 /* Sidebar navigation */
@@ -192,7 +195,7 @@ body {
 .nav-subsidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
-    color: #484848;
+    color: #757575;
 }
 
 .nav-subsidebar > li > a:hover {
@@ -202,7 +205,7 @@ body {
 .nav-subsidebar > li > a,
 .nav-subsidebar > li > a:hover,
 .nav-subsidebar > li > a:focus {
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
 }
 
 
@@ -218,7 +221,7 @@ body {
 }
 
 .nav-home > li > a {
-    padding-top: 18px;
+    padding-top: 27px;
     font-weight: 400;
     color: #484848;
     display: inline-block;
@@ -255,34 +258,34 @@ body {
 /* Color set */
 
 .color-background-yellow {
-    background-color: #D2C22A;
+    background-color: #FFB300;
 }
 
 .color-yellow {
-    color: #D2C22A;
+    color: #FFB300;
 }
 
 .color-background-green {
-    background-color: #289A31;
+    background-color: #7CB342;
 }
 
 .color-green {
-    color: #289A31;
+    color: #7CB342;
 }
 
 .color-background-red {
-    background-color: #AC292B;
+    background-color: #E53935;
 }
 
 .color-red {
-    color: #AC292B;
+    color: #E53935;
 }
 
 .color-background-blue {
-    background-color: #2B88BB;
+    background-color: #1E88E5;
 }
 .color-blue {
-    color: #2B88BB;
+    color: #1E88E5;
 }
 
 .color-background-grey {
@@ -291,6 +294,22 @@ body {
 
 .color-grey {
     color: #DCDCDC;
+}
+
+.color-background-grey-dark {
+    background-color: #757575;
+}
+
+.color-grey-dark {
+    color: #919191;
+}
+
+.color-background-blue-grey {
+    background-color: #546E7A;
+}
+
+.color-blue-grey {
+    color: #546E7A;
 }
 
 .color-background-white {
@@ -317,6 +336,22 @@ body {
     margin-right: 20px;
 }
 
+.without-border {
+    border:none;
+}
+
+.without-margin {
+    margin:none;
+}
+
+.sub-table {
+    margin-top: -10px;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
 /* Box css */
 
 .charge-photo{
@@ -328,15 +363,19 @@ body {
     font-size: 16px;
 
     color: #4b4b4b;
-    border: 1px solid #DDD;
+    border: 2px solid #eff1f4;
     padding-bottom: 20px;
     margin-bottom: 30px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
     background-color: #fff;
     font-weight: 400;
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.15);
+    /*box-shadow: 0px 1px 2px rgba(0,0,0,0.15);*/
+
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .shadow-green {
@@ -438,7 +477,13 @@ body {
 .box-title {
     border-bottom: 1px solid #DDD;
     margin-bottom: -1px;
-    background-color: #fff;
+
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 /* Check-in */
@@ -467,4 +512,23 @@ td {
     margin-top: 0px;
 }
 
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
 /* End Box */
+
+.headroom {
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-70px);
+}
+
+.headroom--top {
+
+}

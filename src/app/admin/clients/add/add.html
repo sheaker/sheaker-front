@@ -17,7 +17,7 @@
                     <span class="color-grey fa fa-list pull-right"></span>
                     <div class="title-small">General Informations</div>
                     <div class="content-box">
-                        <div>
+                        <div class="pull-right">
                             <label for="InputCustomId">Custom ID ?</label>
                             <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
                         </div>
@@ -143,7 +143,7 @@
                 </div> <!-- Details informations end -->
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-12 btn btn-primary btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid || (hasCustomId && !formDatas.customId)">Add client</button>
+                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid || (hasCustomId && !formDatas.customId)">Add client</button>
             </div>
         </form>
     </div>

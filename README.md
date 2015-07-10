@@ -6,7 +6,7 @@ Install the project dependencies (in node_module directory)
 npm install
 ```
 
-Install the project web librairies (in bower_components directory)
+Install the project web libraries (in bower_components directory)
 
 ```shell
 bower install
