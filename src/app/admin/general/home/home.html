@@ -91,7 +91,7 @@
                                     <td width="40%">{{ ci.user.firstName }}</td>
                                     <td width="40%">{{ ci.user.lastName }}</td>
                                     <td width="20%">{{ ci.user.customId || ci.user.id }}</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ ci.user.customId || ci.user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
