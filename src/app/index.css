@@ -162,7 +162,8 @@ body {
     width: 130px;
     font-size: 18px;
     position: fixed;
-    top: 70px;
+    top: 0px;
+    padding-top: 70px;
     bottom: 0;
     left: 0;
     z-index: 1000;
@@ -204,7 +205,7 @@ body {
 .nav-subsidebar > li > a,
 .nav-subsidebar > li > a:hover,
 .nav-subsidebar > li > a:focus {
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
 }
 
 
