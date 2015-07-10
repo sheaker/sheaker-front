@@ -14,6 +14,7 @@ body {
 
     font-family: 'Lato', sans-serif;
     font-weight: 400;
+    margin-top: 70px;
 }
 
 /* Containers */
@@ -161,7 +162,7 @@ body {
     width: 130px;
     font-size: 18px;
     position: fixed;
-    top: 50px;
+    top: 70px;
     bottom: 0;
     left: 0;
     z-index: 1000;
@@ -510,4 +511,23 @@ td {
     margin-top: 0px;
 }
 
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
 /* End Box */
+
+.headroom {
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-70px);
+}
+
+.headroom--top {
+
+}

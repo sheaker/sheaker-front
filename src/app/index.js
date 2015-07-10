@@ -9,7 +9,8 @@ angular.module('sheaker', [
     'webcam',
     'ui.bootstrap.showErrors',
     'infinite-scroll',
-    'angular-spinkit'
+    'angular-spinkit',
+    'headroom'
 ])
 .config(function ($routeProvider, $httpProvider, jwtInterceptorProvider) {
 

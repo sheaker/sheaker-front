@@ -8,4 +8,8 @@ angular.module('sheaker')
          }
          return false;
     };
+  	/*$(".sidebar").headroom();*/
+$(window).scroll(function(){
+    $(".sidebar").css("top", Math.max(0, 70 - $(this).scrollTop()));
+	});
 });
