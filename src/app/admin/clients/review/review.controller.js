@@ -25,7 +25,8 @@ angular.module('sheaker')
             for(var i= 0; i < user.payments.length; i++) {
                 $scope.totalPricePayments+=user.payments[i].price;
             }
-        })
+        });
+
         Checkin.query({user: user.id, limit: 50}).$promise
         .then(function(checkins) {
             $scope.lastCheckins = $scope.lastCheckins.concat(checkins);
@@ -59,20 +60,20 @@ angular.module('sheaker')
     /// Collapse Part
     $scope.selIdx= -1;
 
-    $scope.selPayment=function(payment,idx){
-        if (idx===$scope.selIdx) {
-            $scope.selIdx=-1;
-            $scope.selectedPayment=false;
+    $scope.selPayment = function(payment, idx) {
+        if (idx === $scope.selIdx) {
+            $scope.selIdx = -1;
+            $scope.selectedPayment = false;
         }
         else {
-        $scope.selectedPayment=payment;
-        $scope.selIdx=idx;
+            $scope.selectedPayment = payment;
+            $scope.selIdx = idx;
         }
-    }
+    };
 
-    $scope.isSelPayment=function(payment){
-        return $scope.selectedPayment===payment;
-    }
+    $scope.isSelPayment = function(payment) {
+        return $scope.selectedPayment === payment;
+    };
     /// End of collapse
 
 });

@@ -25,8 +25,8 @@ angular.module('sheaker')
       $scope.status.isopen = false;
     });
 
-    $(".navbar-fixed-top").headroom({
-    "offset": 20,
-    "tolerance": 5
+    $('.navbar-fixed-top').headroom({
+        'offset': 20,
+        'tolerance': 5
     });
 });

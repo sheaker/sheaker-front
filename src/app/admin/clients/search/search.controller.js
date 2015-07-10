@@ -80,5 +80,5 @@ angular.module('sheaker')
                 }
             }
         });
-    }
+    };
 });

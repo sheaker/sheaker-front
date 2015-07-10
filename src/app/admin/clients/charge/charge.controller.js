@@ -97,18 +97,18 @@ angular.module('sheaker')
 
     $scope.selIdx= -1;
 
-    $scope.selPayment=function(payment,idx){
-        if (idx===$scope.selIdx) {
-            $scope.selIdx=-1;
-            $scope.selectedPayment=false;
+    $scope.selPayment = function(payment, idx) {
+        if (idx === $scope.selIdx) {
+            $scope.selIdx = -1;
+            $scope.selectedPayment = false;
         }
         else {
-        $scope.selectedPayment=payment;
-        $scope.selIdx=idx;
+            $scope.selectedPayment = payment;
+            $scope.selIdx = idx;
         }
-    }
+    };
 
-    $scope.isSelPayment=function(payment){
-        return $scope.selectedPayment===payment;
-    }
+    $scope.isSelPayment = function(payment) {
+        return $scope.selectedPayment === payment;
+    };
 });
