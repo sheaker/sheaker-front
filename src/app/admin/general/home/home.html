@@ -27,9 +27,9 @@
                                     <th width="30%">Inactive</th>
                                 </tr>
                                 <tr>
-                                    <td>{{ (usersList | filter:{userLevel: 'null'}).length }}</td>
-                                    <td><span class="color-green">{{ (usersList | filter:{activeMembershipId: '!null', userLevel: 'null'}).length }}</span></td>
-                                    <td><span class="color-red">{{ (usersList | filter:{activeMembershipId: 'null', userLevel: 'null'}).length }}</span></td>
+                                    <td>{{ (usersList | filter:{userLevel: undefined}).length }}</td>
+                                    <td><span class="color-green">{{ (usersList | filter:{activeMembershipId: '', userLevel: undefined}).length }}</span></td>
+                                    <td><span class="color-red">{{ (usersList | filter:{activeMembershipId: null, userLevel: undefined}).length }}</span></td>
                                 </tr>
                             </tbody>
                         </table>
