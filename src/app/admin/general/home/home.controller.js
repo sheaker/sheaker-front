@@ -10,7 +10,36 @@ angular.module('sheaker')
     var statsToPreviousDate = moment().subtract(3, 'day').startOf('day');
 
     $scope.staffMember = [0, 0, 0, 0];
-    $scope.lastCheckins = [];
+
+    // Count members
+    User.query().$promise
+    .then(function (clients) {
+        $scope.newClients = clients;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+    });
+
+    // Retrieve last checkins
+    Checkin.query({limit: 10, sortBy: 'created_at', order: 'desc'}).$promise
+    .then(function (checkins) {
+        $scope.lastCheckins = checkins;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the last checkins.'});
+    });
+
+    // Retrieve new clients
+    User.query({limit: 10, sortBy: 'created_at', order: 'desc'}).$promise
+    .then(function (clients) {
+        $scope.newClients = clients;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+    });
 
     User.query().$promise
     .then(function(usersList) {
@@ -37,23 +66,6 @@ angular.module('sheaker')
 
             if (user.userLevel !== 0) {
                 $scope.staffMember[user.userLevel] += 1;
-            }
-
-            if (user.lastCheckins) {
-                user.lastCheckins.forEach(function (checkin) {
-                    var userObject = {
-                        user: {
-                            id: user.id,
-                            customId: user.customId,
-                            firstName: user.firstName,
-                            lastName: user.lastName
-                        }
-                    };
-
-                    checkin = angular.extend(checkin, userObject);
-                });
-
-                $scope.lastCheckins = $scope.lastCheckins.concat(user.lastCheckins);
             }
         });
 
