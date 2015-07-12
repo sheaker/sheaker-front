@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .factory('Authorization', function ($rootScope) {
@@ -48,5 +49,6 @@ angular.module('sheaker')
     return {
         authorize: authorize
     };
-})
-;
+});
+
+})();

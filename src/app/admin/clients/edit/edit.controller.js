@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
@@ -137,3 +138,5 @@ angular.module('sheaker')
         });
     };
 });
+
+})();

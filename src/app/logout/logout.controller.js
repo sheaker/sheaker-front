@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('LogoutCtrl', function ($window, $location) {
@@ -6,3 +7,5 @@ angular.module('sheaker')
     $location.path('/');
     $window.location.reload();
 });
+
+})();

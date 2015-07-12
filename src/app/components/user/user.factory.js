@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .factory('User', function ($resource, GYM_API_URL) {
@@ -23,3 +24,5 @@ angular.module('sheaker')
     User = $resource(GYM_API_URL + '/users/:id', {id: '@id'}, actions);
     return User;
 });
+
+})();

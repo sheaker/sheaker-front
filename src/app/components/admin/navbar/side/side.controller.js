@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('NavbarSideCtrl', function ($scope, $location) {
@@ -9,3 +10,5 @@ angular.module('sheaker')
          return false;
     };
 });
+
+})();

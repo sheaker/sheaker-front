@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .directive('ngUnique', function($routeParams, User) {
@@ -36,3 +37,5 @@ angular.module('sheaker')
         }
     };
 });
+
+})();

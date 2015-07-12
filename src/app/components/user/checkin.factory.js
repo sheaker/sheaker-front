@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .factory('Checkin', function ($resource, GYM_API_URL) {
@@ -7,3 +8,5 @@ angular.module('sheaker')
     Checkin = $resource(GYM_API_URL + '/checkin/:id', {id: '@id'});
     return Checkin;
 });
+
+})();

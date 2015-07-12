@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('AddClientCtrl', function ($rootScope, $scope, $window, $location, $anchorScroll, User) {
@@ -94,3 +95,5 @@ angular.module('sheaker')
         });
     };
 });
+
+})();

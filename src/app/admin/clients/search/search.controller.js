@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('ModalInstanceCtrl', function ($rootScope, $scope, $modalInstance, user, User) {
@@ -82,3 +83,5 @@ angular.module('sheaker')
         });
     };
 });
+
+})();

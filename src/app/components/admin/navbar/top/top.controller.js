@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('NavbarTopCtrl', function ($window, $scope, $location) {
@@ -24,3 +25,5 @@ angular.module('sheaker')
         $scope.dropdown.isopen = false;
     });
 });
+
+})();

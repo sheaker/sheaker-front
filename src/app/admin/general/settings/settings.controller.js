@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('SettingsCtrl', function ($scope) {
@@ -47,3 +48,5 @@ angular.module('sheaker')
         $scope.mytime = null;
     };
 });
+
+})();

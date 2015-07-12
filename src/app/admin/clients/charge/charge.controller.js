@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment, GYM_API_URL) {
@@ -112,3 +113,5 @@ angular.module('sheaker')
         return $scope.selectedPayment === payment;
     };
 });
+
+})();

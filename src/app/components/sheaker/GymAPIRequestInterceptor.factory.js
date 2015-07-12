@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .factory('GymAPIRequestInterceptor', function ($rootScope, GYM_API_URL) {
@@ -15,3 +16,5 @@ angular.module('sheaker')
         }
     };
 });
+
+})();

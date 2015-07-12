@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Checkin) {
+.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User) {
 
     var now = moment();
     var today = moment().startOf('day');
@@ -63,3 +64,5 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
     });
 });
+
+})();

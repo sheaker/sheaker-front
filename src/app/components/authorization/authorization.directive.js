@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .directive('access', function ($rootScope, Authorization) {
@@ -34,3 +35,5 @@ angular.module('sheaker')
         link: linkFct
     };
 });
+
+})();

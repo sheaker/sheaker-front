@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('CheckinCtrl', function ($rootScope, $scope, $location, $timeout, User, Checkin, GYM_API_URL) {
@@ -38,3 +39,5 @@ angular.module('sheaker')
 
     };
 });
+
+})();

@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .controller('LoginCtrl', function ($rootScope, $scope, $location, $window, jwtHelper, User) {
@@ -28,3 +29,5 @@ angular.module('sheaker')
         });
     };
 });
+
+})();
