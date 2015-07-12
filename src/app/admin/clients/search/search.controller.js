@@ -69,7 +69,7 @@ angular.module('sheaker')
     $scope.loadUsers();
 
     $scope.openModal = function (user) {
-        var modalInstance = $modal.open({
+        $modal.open({
             animation: true,
             templateUrl: 'app/components/modal/deleteUser.template.html',
             controller: 'ModalInstanceCtrl',

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="subsidebar" ng-controller="NavbarSubSideGeneralCtrl">
-            <ul class="nav nav-subsidebar">
+        <div class="subsidebar" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"sidebarSlideDown", "unpinned":"sidebarSlideUp"}'>
+            <ul class="nav nav-subsidebar" ng-controller="NavbarSubSideGeneralCtrl">
                 <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home"><span class="fa fa-home"></span>Home</a></li>
                 <li ng-class="{active: isActive('/admin/general/settings')}"><a href="#/admin/general/settings" access="admin"><span class="fa fa-cog"></span>Settings</a></li>
             </ul>

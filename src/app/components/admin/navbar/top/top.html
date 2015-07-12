@@ -1,22 +1,25 @@
-<nav class="navbar navbar-shadow navbar-inverse navbar-inverse-size navbar-fixed-top" ng-controller="NavbarTopCtrl">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#/">
-            <img src="/assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
-        </a>
-    </div>
-        <ul class="nav nav-top pull-right">
-            <div class="btn-group" dropdown is-open="status.isopen">
-                <button class="btn btn-default dropdown-toggle dropdown-menu-left" type="button" dropdown-toggle>
-                    <span class="fa fa-user color-grey-dark"></span>
-                    <span class="caret color-grey-dark"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href class="not-active">Sign in as <b>{{ user.name }}</b></a></li>
-                    <div class="border-dropdown-menu"></div>
-                    <li><a href class="not-active">Profil</a></li>
-                    <li><a href="#/logout">Sign out</a></li>
-                </ul>
-            </div>
-        </ul>
+<nav class="navbar navbar-shadow navbar-inverse navbar-inverse-size navbar-fixed-top" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"topbarSlideDown", "unpinned":"topbarSlideUp"}'>
+    <div ng-controller="NavbarTopCtrl">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">
+                <img src="/assets/images/logo.png" alt="Sheaker logo"> {{ client.name }}
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav nav-top pull-right">
+                <div class="btn-group" dropdown is-open="dropdown.isopen">
+                    <button class="btn btn-default dropdown-toggle dropdown-menu-left" type="button" dropdown-toggle>
+                        <span class="fa fa-user color-grey-dark"></span>
+                        <span class="caret color-grey-dark"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href class="not-active">Sign in as <b>{{ user.name }}</b></a></li>
+                        <div class="border-dropdown-menu"></div>
+                        <li><a href class="not-active">Profil</a></li>
+                        <li><a href="#/logout">Sign out</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
     </div>
 </nav>
