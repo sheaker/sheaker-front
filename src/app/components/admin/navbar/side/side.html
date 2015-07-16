@@ -2,11 +2,11 @@
     <div class="row">
         <div class="sidebar" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"sidebarSlideDown", "unpinned":"sidebarSlideUp"}'>
             <ul class="nav nav-sidebar" ng-controller="NavbarSideCtrl">
-                <li ng-class="{active: isActive('/admin/general')}"><a href="#/admin/general/home"><span class="color-green fa fa-home"></span></a></li>
-                <li ng-class="{active: isActive('/admin/clients')}"><a href="#/admin/clients/search"><span class="color-blue fa fa-users"></span></a></li>
-                <li ng-class="{active: isActive('/admin/schedule')}"><a href=""><span class="color-red fa fa-calendar"></span></a></li>
-                <li ng-class="{active: isActive('/admin/stats')}"><a href=""><span class="color-yellow fa fa-area-chart"></span></a></li>
-                <li class="independant-button"><a href="#/checkin" target="_blank"><span class="color-green fa fa-street-view"></span></a></li>
+                <li ng-class="{active: isActive('/admin/general')}"><a href="#/admin/general/home"><span class="color-green fa fa-home fa-fw"></span></a></li>
+                <li ng-class="{active: isActive('/admin/clients')}"><a href="#/admin/clients/search"><span class="color-blue fa fa-users fa-fw"></span></a></li>
+                <li ng-class="{active: isActive('/admin/schedule')}"><a href="#/admin/schedule"><span class="color-red fa fa-calendar fa-fw"></span></a></li>
+                <li ng-class="{active: isActive('/admin/statistics')}"><a href="#/admin/statistics/home"><span class="color-yellow fa fa-area-chart fa-fw"></span></a></li>
+                <li class="independant-button"><a href="#/checkin" target="_blank"><span class="color-green fa fa-street-view fa-fw"></span></a></li>
             </ul>
         </div>
     </div>

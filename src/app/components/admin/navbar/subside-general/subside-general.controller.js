@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('NavbarSubSideGeneralCtrl', function ($scope, $location) {
+.controller('NavbarSubsideGeneralCtrl', function ($scope, $location) {
     $scope.isActive = function(path) {
         if ($location.path() === path) {
             return true;

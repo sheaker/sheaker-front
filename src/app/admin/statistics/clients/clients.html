@@ -1,0 +1,14 @@
+<div class="container-fluid">
+
+    <div ng-include="'app/components/admin/navbar/top/top.html'"></div>
+    <div ng-include="'app/components/admin/navbar/side/side.html'"></div>
+    <div ng-include="'app/components/admin/navbar/subside-statistics/subside-statistics.html'"></div>
+
+    <div class="col-lg-12 main">
+        <div class="title">
+            <span class="color-blue fa fa-area-chart"></span>Statistics
+        </div>
+
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+    </div>
+</div>

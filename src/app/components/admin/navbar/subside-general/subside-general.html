@@ -1,22 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="subsidebar" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"sidebarSlideDown", "unpinned":"sidebarSlideUp"}'>
-            <ul class="nav nav-subsidebar" ng-controller="NavbarSubSideGeneralCtrl">
-                <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home"><span class="fa fa-home"></span>Home</a></li>
-                <li ng-class="{active: isActive('/admin/general/settings')}"><a href="#/admin/general/settings" access="admin"><span class="fa fa-cog"></span>Settings</a></li>
+            <ul class="nav nav-subsidebar" ng-controller="NavbarSubsideGeneralCtrl">
+                <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home"><span class="fa fa-home fa-fw"></span>Home</a></li>
+                <li ng-class="{active: isActive('/admin/general/settings')}"><a href="#/admin/general/settings" access="admin"><span class="fa fa-cog fa-fw"></span>Settings</a></li>
             </ul>
-            <!--<ul class="nav nav-subsidebar">
-                <li ng-class="{active: isActive('/admin/clients')}"><a href="#/admin/clients"><span class="fa fa-users"></span> Clients</a></li>
-                <li><a href="#/admin/clients"><span class="fa fa-thumbs-o-up"></span> Coach</a></li>
-            </ul>
-            <ul class="nav nav-subsidebar">
-                <li><a href="#/admin/clients"><span class="fa fa-calendar"></span>  Schedule</a></li>
-                <li><a href="#/admin/clients"><span class="fa fa-area-chart"></span>  General Stats</a></li>
-                <li><a href="#/admin/clients"><span class="fa fa-bullhorn"></span>  Notice</a></li>
-            </ul>
-            <a class="navbar-brand" href="#/">
-                <span class="glyphicon glyphicon-share-alt"></span> Sheaker Website
-            </a>-->
         </div>
     </div>
 </div>

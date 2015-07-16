@@ -121,6 +121,42 @@ angular.module('sheaker')
             permissionType: 'atLeastOne'
         }
     })
+    .when('/admin/schedule', {
+        templateUrl: 'app/admin/schedule/schedule.html',
+        controller: 'ScheduleCtrl',
+        access: {
+            loginRequired: true,
+            permissionsRequired: ['user', 'modo', 'admin'],
+            permissionType: 'atLeastOne'
+        }
+    })
+    .when('/admin/statistics/home', {
+        templateUrl: 'app/admin/statistics/home/home.html',
+        controller: 'HomeStatisticsCtrl',
+        access: {
+            loginRequired: true,
+            permissionsRequired: ['user', 'modo', 'admin'],
+            permissionType: 'atLeastOne'
+        }
+    })
+    .when('/admin/statistics/gym', {
+        templateUrl: 'app/admin/statistics/gym/gym.html',
+        controller: 'GymStatisticsCtrl',
+        access: {
+            loginRequired: true,
+            permissionsRequired: ['user', 'modo', 'admin'],
+            permissionType: 'atLeastOne'
+        }
+    })
+    .when('/admin/statistics/clients', {
+        templateUrl: 'app/admin/statistics/clients/clients.html',
+        controller: 'ClientsStatisticsCtrl',
+        access: {
+            loginRequired: true,
+            permissionsRequired: ['user', 'modo', 'admin'],
+            permissionType: 'atLeastOne'
+        }
+    })
     .otherwise({
         redirectTo: '/'
     });
