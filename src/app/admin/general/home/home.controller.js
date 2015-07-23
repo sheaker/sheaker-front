@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User) {
+.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Payment, Checkin) {
 
     var now = moment();
     var today = moment().startOf('day');
@@ -11,10 +11,10 @@ angular.module('sheaker')
 
     $scope.staffMember = [0, 0, 0, 0];
 
-    // Count members
-    User.query().$promise
-    .then(function (clients) {
-        $scope.newClients = clients;
+    // Retrieve members stats
+    User.stats().$promise
+    .then(function (stats) {
+        $scope.stats = stats;
     })
     .catch(function(error) {
         console.log(error);
@@ -22,7 +22,7 @@ angular.module('sheaker')
     });
 
     // Retrieve last checkins
-    Checkin.query({limit: 10, sortBy: 'created_at', order: 'desc'}).$promise
+    Checkin.statsNew().$promise
     .then(function (checkins) {
         $scope.lastCheckins = checkins;
     })
@@ -32,7 +32,7 @@ angular.module('sheaker')
     });
 
     // Retrieve new clients
-    User.query({limit: 10, sortBy: 'created_at', order: 'desc'}).$promise
+    User.statsNew().$promise
     .then(function (clients) {
         $scope.newClients = clients;
     })
@@ -41,6 +41,17 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
     });
 
+    // Retrieve new memberships
+    Payment.statsNew().$promise
+    .then(function (memberships) {
+        $scope.newMemberships = memberships;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+    });
+
+    /*
     User.query().$promise
     .then(function(usersList) {
         usersList.forEach(function (user) {
@@ -75,6 +86,7 @@ angular.module('sheaker')
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
     });
+    */
 });
 
 })();

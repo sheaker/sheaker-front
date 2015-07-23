@@ -3,9 +3,17 @@
 
 angular.module('sheaker')
 .factory('Payment', function ($resource, GYM_API_URL) {
-    var Payment;
+    var Payment, actions;
 
-    Payment = $resource(GYM_API_URL + '/payments/:id', {id: '@id'});
+    actions = {
+        statsNew: {
+            method: 'GET',
+            url: GYM_API_URL + '/payments/stats/new',
+            isArray: true
+        }
+    };
+
+    Payment = $resource(GYM_API_URL + '/payments/:id', {id: '@id'}, actions);
     return Payment;
 });
 

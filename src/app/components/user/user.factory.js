@@ -18,7 +18,21 @@ angular.module('sheaker')
         },
         update: {
             method:'PUT'
-        }
+        },
+        stats: {
+            method: 'GET',
+            url: GYM_API_URL + '/users/stats'
+        },
+        statsNew: {
+            method: 'GET',
+            url: GYM_API_URL + '/users/stats/new',
+            isArray: true
+        },
+        statsIncBirthday: {
+            method: 'GET',
+            url: GYM_API_URL + '/users/stats/incbirthday',
+            isArray: true
+        },
     };
 
     User = $resource(GYM_API_URL + '/users/:id', {id: '@id'}, actions);
