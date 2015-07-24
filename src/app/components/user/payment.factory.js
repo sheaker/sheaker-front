@@ -10,6 +10,11 @@ angular.module('sheaker')
             method: 'GET',
             url: GYM_API_URL + '/payments/stats/new',
             isArray: true
+        },
+        statsEnding: {
+            method: 'GET',
+            url: GYM_API_URL + '/payments/stats/ending',
+            isArray: true
         }
     };
 

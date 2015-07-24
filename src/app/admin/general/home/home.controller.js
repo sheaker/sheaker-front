@@ -18,7 +18,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the stats.'});
     });
 
     // Retrieve last checkins
@@ -41,6 +41,16 @@ angular.module('sheaker')
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
     });
 
+    // Retrieve ending memberships
+    Payment.statsEnding().$promise
+    .then(function (memberships) {
+        $scope.endingMemberships = memberships;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the ending memberships.'});
+    });
+
     // Retrieve new memberships
     Payment.statsNew().$promise
     .then(function (memberships) {
@@ -48,7 +58,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new memberships.'});
     });
 
     /*

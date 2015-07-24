@@ -66,9 +66,9 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="user in usersList | filter: {hasBirthdayInc: true} | limitTo: 10 | orderBy: 'furtherBirthdate'">
-                                    <td width="37%">{{ user.firstName }}</td>
-                                    <td width="38%">{{ user.lastName }}</td>
-                                    <td width="25%">{{ user.birthdate | date: 'd MMM'}}</td>
+                                    <td width="40%">{{ user.firstName }}</td>
+                                    <td width="40%">{{ user.lastName }}</td>
+                                    <td width="20%">{{ user.birthdate | date: 'd MMM'}}</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
@@ -88,9 +88,8 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="ci in lastCheckins">
-                                    <td width="40%">{{ ci._source.first_name }}</td>
-                                    <td width="40%">{{ ci._source.last_name }}</td>
-                                    <td width="20%">{{ ci._source.custom_id || ci._id }}</td>
+                                    <td width="45%">{{ ci._source.first_name }}</td>
+                                    <td width="45%">{{ ci._source.last_name }}</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ ci._source.custom_id || ci._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
@@ -110,9 +109,8 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="nc in newClients">
-                                    <td width="40%">{{ nc._source.first_name }}</td>
-                                    <td width="40%">{{ nc._source.last_name }}</td>
-                                    <td width="20%">{{ nc._source.custom_id || nc._id }}</td>
+                                    <td width="45%">{{ nc._source.first_name }}</td>
+                                    <td width="45%">{{ nc._source.last_name }}</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ nc._source.custom_id || nc._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
@@ -131,11 +129,11 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-condensed">
                             <tbody>
-                                <tr ng-repeat="user in usersList | filter: {hasInactiveMembershipInc: true} | limitTo: 10 | orderBy: 'lastName'">
-                                    <td width="37%">{{ user.firstName }}</td>
-                                    <td width="38%">{{ user.lastName }}</td>
-                                    <td width="25%">{{ user.activeMembership.endDate | date: 'd MMM' }}</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                <tr ng-repeat="em in endingMemberships">
+                                    <td width="40%">{{ em._source.first_name }}</td>
+                                    <td width="40%">{{ em._source.last_name }}</td>
+                                    <td width="20%">{{ (em._source.payments | last).end_date | date: 'd MMM'}}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ em._source.custom_id || em._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -156,7 +154,7 @@
                                 <tr ng-repeat="nm in newMemberships">
                                     <td width="40%">{{ nm._source.first_name }}</td>
                                     <td width="40%">{{ nm._source.last_name }}</td>
-                                    <td width="20%">{{ nm._source.custom_id || nm._id }}</td>
+                                    <td width="20%">{{ (nm._source.payments | last).days }} d</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ nm._source.customId || nm._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
