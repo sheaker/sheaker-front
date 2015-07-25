@@ -21,7 +21,7 @@ angular.module('sheaker')
         wantNewPhoto: false
     };
 
-    User.get({id: $routeParams.id}, function(user) {
+    User.get({user_id: $routeParams.id}, function(user) {
         $scope.hasCustomId = user.customId ? true : false;
         $scope.formDatas = user;
 

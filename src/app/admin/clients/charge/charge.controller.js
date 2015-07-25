@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment, GYM_API_URL) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -23,14 +23,14 @@ angular.module('sheaker')
     ];
 
     // Load user
-    User.get({id: $routeParams.id}).$promise
+    User.get({user_id: $routeParams.id}).$promise
     .then(function(user) {
         user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
         if ($scope.formDatas.photo) {
             user.photo = GYM_API_URL + '/' + user.photo;
         }
 
-        Payment.query({user: user.id}).$promise
+        User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
             user.payments = payments;
         })
@@ -73,13 +73,13 @@ angular.module('sheaker')
     };
 
     $scope.chargeUser = function () {
-        $scope.formDatas.user = $scope.user.id;
+        $scope.formDatas.user_id = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
 
         $scope.formDatas.startDate = moment($scope.formDatas.startDate).startOf('day').format();
         $scope.formDatas.endDate = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
-        Payment.save($scope.formDatas).$promise
+        User.savePayment($scope.formDatas).$promise
         .then(function(payment) {
             $scope.user.payments.push(payment);
 

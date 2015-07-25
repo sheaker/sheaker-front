@@ -8,17 +8,17 @@ angular.module('sheaker')
     actions = {
         statsNew: {
             method: 'GET',
-            url: GYM_API_URL + '/payments/stats/new',
+            url:     GYM_API_URL + '/payments/stats/new',
             isArray: true
         },
         statsEnding: {
             method: 'GET',
-            url: GYM_API_URL + '/payments/stats/ending',
+            url:     GYM_API_URL + '/payments/stats/ending',
             isArray: true
         }
     };
 
-    Payment = $resource(GYM_API_URL + '/payments/:id', {id: '@id'}, actions);
+    Payment = $resource(GYM_API_URL + '/payments/:payment_id', {payment_id: '@payment_id'}, actions);
     return Payment;
 });
 

@@ -8,12 +8,12 @@ angular.module('sheaker')
     actions = {
         statsNew: {
             method: 'GET',
-            url: GYM_API_URL + '/checkins/stats/new',
+            url:     GYM_API_URL + '/checkins/stats/new',
             isArray: true
         }
     };
 
-    Checkin = $resource(GYM_API_URL + '/checkins/:id', {id: '@id'}, actions);
+    Checkin = $resource(GYM_API_URL + '/checkins/:checkin_id', {checkin_id: '@checkin_id'}, actions);
     return Checkin;
 });
 

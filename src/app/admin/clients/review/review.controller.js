@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, User, Payment, Checkin, GYM_API_URL) {
+.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, GYM_API_URL, User) {
 
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to review before going to this page.'});
@@ -12,7 +12,7 @@ angular.module('sheaker')
     $scope.formDatas = {};
     $scope.lastCheckins = [];
 
-    User.get({id: $routeParams.id}, function(user) {
+    User.get({user_id: $routeParams.id}, function(user) {
         user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
         if ($scope.formDatas.photo) {
             user.photo = GYM_API_URL + '/' + user.photo;
@@ -20,21 +20,25 @@ angular.module('sheaker')
 
         $scope.totalPricePayments = 0;
 
-        Payment.query({user: user.id}).$promise
+        User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
             user.payments = payments;
             for(var i= 0; i < user.payments.length; i++) {
                 $scope.totalPricePayments+=user.payments[i].price;
             }
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
         });
 
-        Checkin.query({user: user.id, limit: 50}).$promise
+        User.queryCheckins({user_id: user.id, limit: 50}).$promise
         .then(function(checkins) {
             $scope.lastCheckins = $scope.lastCheckins.concat(checkins);
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user checkins.'});
         });
 
         if (user.lastCheckins) {
