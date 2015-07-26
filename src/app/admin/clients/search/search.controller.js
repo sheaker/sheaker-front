@@ -13,9 +13,9 @@ angular.module('sheaker')
     $scope.deleteUser = function () {
         $modalInstance.close();
 
-        User.delete({id: user.id}).$promise
+        User.delete({user_id: user.id}).$promise
         .then(function(user) {
-            $rootScope.alerts.push({type: 'success', msg: user.firstName + ' ' + user.lastName + ' has been deleted.'});
+            $rootScope.alerts.push({type: 'success', msg: user.first_name + ' ' + user.last_name + ' has been deleted.'});
         })
         .catch(function(error) {
             console.log(error);
@@ -36,7 +36,7 @@ angular.module('sheaker')
     $scope.usersList = {
         users: [],
         busy: false,
-        limit: 50,
+        limit: 25,
         offset: 0,
         noMoreApi: false
     };
@@ -48,7 +48,7 @@ angular.module('sheaker')
 
         $scope.usersList.busy = true;
 
-        User.query({limit:$scope.usersList.limit, offset:$scope.usersList.offset, sortBy:'created_at', order:'DESC'}).$promise
+        User.query({limit:$scope.usersList.limit, offset:$scope.usersList.offset, sortBy:'created_at', order:'desc'}).$promise
         .then(function(usersList) {
             $scope.usersList.busy = false;
 

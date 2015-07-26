@@ -31,18 +31,18 @@
                 </thead>
                 <tbody class= "color-background-white">
                     <tr ng-repeat="user in usersList.users | filter: searchText">
-                        <td>{{ user.customId || user.id }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.custom_id || user.id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
                         <td>
-                            <i class="fa fa-star fa-lg color-yellow" ng-show="user.userLevel"></i>
-                            <i class="fa fa-check fa-lg color-green" ng-show="user.activeMembershipId && !user.userLevel"></i>
-                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId && !user.userLevel"></i>
+                            <i class="fa fa-star fa-lg color-yellow" ng-show="user.user_level"></i>
+                            <i class="fa fa-check fa-lg color-green" ng-show="user.activeMembershipId && !user.user_level"></i>
+                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId && !user.user_level"></i>
                         </td>
                         <td>
-                            <a class="search-link" href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top" ng-hide="user.userLevel" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/edit/{{ user.custom_id || user.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/charge/{{ user.custom_id || user.id }}" tooltip="Charge" tooltip-placement="top" ng-hide="user.userLevel" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/review/{{ user.custom_id || user.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg color-blue"></span></a>
                             <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(user)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
                         </td>
                     </tr>

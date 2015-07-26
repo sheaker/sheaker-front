@@ -4,8 +4,8 @@
 angular.module('sheaker')
 .run(function ($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization) {
     $rootScope.client = {
-            id: -1,
-            name: ''
+        id: -1,
+        name: ''
     };
 
     $rootScope.authVars = {
@@ -20,10 +20,10 @@ angular.module('sheaker')
         }
     };
 
-    if ($window.localStorage.getItem('token') && !$rootScope.user) {
+    if ($window.localStorage.getItem('token') && !$rootScope.connectedUser) {
         // If the user refresh the page with F5, redecode again the token.
         var decodedToken = jwtHelper.decodeToken($window.localStorage.getItem('token'));
-        $rootScope.user = decodedToken.user;
+        $rootScope.connectedUser = decodedToken.user;
     }
 
     var routeChangeRequiredAfterLogin = false;
@@ -48,7 +48,7 @@ angular.module('sheaker')
         }
 
         // Avoid a connected user to go to login and register pages
-        if ($rootScope.user && next.originalPath === '/login') {
+        if ($rootScope.connectedUseruser && next.originalPath === '/login') {
             $location.path(previous ? previous.originalPath : '/').replace();
         }
     });

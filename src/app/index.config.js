@@ -15,7 +15,7 @@ angular.module('sheaker')
             .then(function (response) {
                 $window.localStorage.setItem('token', response.token);
                 var decodedToken = jwtHelper.decodeToken(response.token);
-                $rootScope.user = decodedToken.user;
+                $rootScope.connectedUser = decodedToken.user;
                 return response.token;
             })
             .catch(function (error) {
