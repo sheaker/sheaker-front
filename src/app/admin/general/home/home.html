@@ -88,9 +88,9 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="ci in lastCheckins">
-                                    <td width="45%">{{ ci._source.first_name }}</td>
-                                    <td width="45%">{{ ci._source.last_name }}</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ ci._source.custom_id || ci._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                    <td width="45%">{{ ci.first_name }}</td>
+                                    <td width="45%">{{ ci.last_name }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ ci.custom_id || ci.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -109,9 +109,9 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="nc in newClients">
-                                    <td width="45%">{{ nc._source.first_name }}</td>
-                                    <td width="45%">{{ nc._source.last_name }}</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ nc._source.custom_id || nc._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                    <td width="45%">{{ nc.first_name }}</td>
+                                    <td width="45%">{{ nc.last_name }}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ nc.custom_id || nc.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -130,10 +130,10 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="em in endingMemberships">
-                                    <td width="40%">{{ em._source.first_name }}</td>
-                                    <td width="40%">{{ em._source.last_name }}</td>
-                                    <td width="20%">{{ (em._source.payments | last).end_date | date: 'd MMM'}}</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ em._source.custom_id || em._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                    <td width="40%">{{ em.first_name }}</td>
+                                    <td width="40%">{{ em.last_name }}</td>
+                                    <td width="20%">{{ (em.payments | last).end_date | date: 'd MMM'}}</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ em.custom_id || em.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -152,10 +152,10 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                                 <tr ng-repeat="nm in newMemberships">
-                                    <td width="40%">{{ nm._source.first_name }}</td>
-                                    <td width="40%">{{ nm._source.last_name }}</td>
-                                    <td width="20%">{{ (nm._source.payments | last).days }} d</td>
-                                    <td width="10%"> <a href="#/admin/clients/review/{{ nm._source.customId || nm._id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
+                                    <td width="40%">{{ nm.first_name }}</td>
+                                    <td width="40%">{{ nm.last_name }}</td>
+                                    <td width="20%">{{ (nm.payments | last).days }} d</td>
+                                    <td width="10%"> <a href="#/admin/clients/review/{{ nm.customId || nm.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>

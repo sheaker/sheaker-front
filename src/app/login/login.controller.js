@@ -10,9 +10,9 @@ angular.module('sheaker')
                 $window.localStorage.setItem('token', response.token);
 
                 var decodedToken = jwtHelper.decodeToken(response.token);
-                $rootScope.user = decodedToken.user;
+                $rootScope.connectedUser = decodedToken.user;
 
-                if ($rootScope.user.permissions.length) {
+                if ($rootScope.connectedUser.permissions.length) {
                     $location.path('/admin/general/home');
                 }
                 else {

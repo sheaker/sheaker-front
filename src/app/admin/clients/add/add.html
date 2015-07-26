@@ -22,16 +22,16 @@
                             <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
                         </div>
                         <div class="form-group" ng-show="hasCustomId">
-                            <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-model="formDatas.customId" ng-unique="id" placeholder="Enter the Id you want, if it's available">
+                            <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-model="formDatas.custom_id" ng-unique="id" placeholder="Enter the Id you want, if it's available">
                         </div>
                         <div class="form-group" show-errors>
                             <label for="InputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.firstName" required>
+                            <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.first_name" required>
                         </div>
 
                         <div class="form-group" show-errors>
                             <label for="InputLastName">Last Name</label>
-                            <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.lastName" required>
+                            <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.last_name" required>
                         </div>
 
                         <div class="form-group" show-errors>
@@ -70,8 +70,8 @@
                             <h3>Address</h3>
                             <div class="form-group col-lg-12">
                                 <label for="InputAddressStreet">Street address</label>
-                                <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.addressStreet1">
-                                <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.addressStreet2">
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.address_street_1">
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.address_street_2">
                             </div>
                             <div class="form-group col-lg-8">
                                 <label for="InputAddressCity">City</label>
@@ -123,7 +123,7 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="exampleInputAmount" access="Admin">Access level</label>
-                                    <select class="form-control" ng-model="formDatas.userLevel" access="Admin">
+                                    <select class="form-control" ng-model="formDatas.user_level" access="Admin">
                                         <option value="0">Client</option>
                                         <option value="1">User</option>
                                         <option value="2">Moderator</option>
@@ -143,7 +143,7 @@
                 </div> <!-- Details informations end -->
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid || (hasCustomId && !formDatas.customId)">Add client</button>
+                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid || (hasCustomId && !formDatas.custom_id)">Add client</button>
             </div>
         </form>
     </div>

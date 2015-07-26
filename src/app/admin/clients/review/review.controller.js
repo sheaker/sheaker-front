@@ -22,38 +22,26 @@ angular.module('sheaker')
 
         User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
-            user.payments = payments;
-            for(var i= 0; i < user.payments.length; i++) {
-                $scope.totalPricePayments+=user.payments[i].price;
-            }
+            angular.forEach(payments, function(payment, key) {
+                $scope.totalPricePayments += payment.price;
+            });
+
+            $scope.user.payments = payments;
         })
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
         });
 
-        User.queryCheckins({user_id: user.id, limit: 50}).$promise
+        User.queryCheckins({user_id: user.id}).$promise
         .then(function(checkins) {
-            $scope.lastCheckins = $scope.lastCheckins.concat(checkins);
+            $scope.user.checkins = checkins;
         })
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user checkins.'});
         });
 
-        if (user.lastCheckins) {
-            user.lastCheckins.forEach(function (checkin) {
-                var userObject = {
-                    user: {
-                        id: user.id,
-                        customId: user.customId,
-                        firstName: user.firstName,
-                        lastName: user.lastName
-                    }
-                };
-                checkin = angular.extend(checkin, userObject);
-            });
-        }
         $scope.user = user;
 
     }, function(error) {
@@ -63,7 +51,7 @@ angular.module('sheaker')
     });
 
     /// Collapse Part
-    $scope.selIdx= -1;
+    $scope.selIdx = -1;
 
     $scope.selPayment = function(payment, idx) {
         if (idx === $scope.selIdx) {

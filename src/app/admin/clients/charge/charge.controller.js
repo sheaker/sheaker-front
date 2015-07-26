@@ -64,22 +64,21 @@ angular.module('sheaker')
             $scope.paymentCal.isOpen = true;
         },
         calculateEndingDate: function() {
-            if (!$scope.formDatas.startDate || !$scope.formDatas.days) {
+            if (!$scope.formDatas.start_date || !$scope.formDatas.days) {
                 return;
             }
-
-            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
+            console.log(typeof $scope.formDatas.days);
+            $scope.calculatedEndingDate = moment($scope.formDatas.start_date).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
         }
     };
 
     $scope.chargeUser = function () {
-        $scope.formDatas.user_id = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
 
-        $scope.formDatas.startDate = moment($scope.formDatas.startDate).startOf('day').format();
-        $scope.formDatas.endDate = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
+        $scope.formDatas.start_date = moment($scope.formDatas.start_date).startOf('day').format();
+        $scope.formDatas.end_date = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
-        User.savePayment($scope.formDatas).$promise
+        User.savePayment({user_id: $scope.user.id}, $scope.formDatas).$promise
         .then(function(payment) {
             $scope.user.payments.push(payment);
 

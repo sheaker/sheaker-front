@@ -22,14 +22,14 @@ angular.module('sheaker')
     };
 
     User.get({user_id: $routeParams.id}, function(user) {
-        $scope.hasCustomId = user.customId ? true : false;
+        $scope.hasCustomId = user.custom_id ? true : false;
         $scope.formDatas = user;
 
         if ($scope.formDatas.birthdate === '0000-00-00') {
             $scope.formDatas.birthdate = null;
         }
-        if ($scope.formDatas.userLevel === null) {
-            $scope.formDatas.userLevel = 0;
+        if ($scope.formDatas.user_level === null) {
+            $scope.formDatas.user_level = 0;
         }
 
         var snapshotCanvas = $window.document.querySelector('#snapshot');
@@ -118,12 +118,12 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.editUser = function () {
-        if ($scope.hasCustomId === false && $scope.formDatas.customId) {
-            $scope.formDatas.customId = 0;
+        if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
+            $scope.formDatas.custom_id = 0;
         }
         $scope.isButtonSaveDisabled = true;
 
-        User.update($scope.formDatas).$promise
+        User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
         .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
             $scope.isButtonSaveDisabled = false;

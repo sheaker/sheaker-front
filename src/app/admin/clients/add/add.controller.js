@@ -8,7 +8,7 @@ angular.module('sheaker')
     $scope.isButtonSaveDisabled = false;
     $scope.hasCustomId = false;
 
-    $scope.formDatas.userLevel = 0;
+    $scope.formDatas.user_level = 0;
 
     $scope.birthdateCal = {
         today: new Date(),
@@ -73,14 +73,14 @@ angular.module('sheaker')
 
     // Submit new user to API
     $scope.addUser = function () {
-        if ($scope.hasCustomId === false && $scope.formDatas.customId) {
+        if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
             $scope.formDatas.customId = 0;
         }
         $scope.isButtonSaveDisabled = true;
 
         User.save($scope.formDatas).$promise
         .then(function(user) {
-            $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.customId || user.id) + '.'});
+            $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.custom_id || user.id) + '.'});
             $scope.formDatas = {};
             $scope.hasCustomId = false;
             $scope.isButtonSaveDisabled = false;
