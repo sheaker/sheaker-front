@@ -11,9 +11,10 @@ angular.module('sheaker')
         $location.path('/admin/clients/search');
     }
 
-    $scope.formDatas = {};
+    $scope.formDatas = {
+        days: 31
+    };
     $scope.beenCustomDays = false;
-    $scope.formDatas.days = 31;
 
     // Available payment methods
     $scope.availablePaymentMethods = [
@@ -67,7 +68,6 @@ angular.module('sheaker')
             if (!$scope.formDatas.start_date || !$scope.formDatas.days) {
                 return;
             }
-            console.log(typeof $scope.formDatas.days);
             $scope.calculatedEndingDate = moment($scope.formDatas.start_date).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
         }
     };
