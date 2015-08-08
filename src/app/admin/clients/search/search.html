@@ -36,8 +36,8 @@
                         <td>{{ user.last_name }}</td>
                         <td>
                             <i class="fa fa-star fa-lg color-yellow" ng-show="user.user_level"></i>
-                            <i class="fa fa-check fa-lg color-green" ng-show="user.activeMembershipId && !user.user_level"></i>
-                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId && !user.user_level"></i>
+                            <i class="fa fa-check fa-lg color-green" ng-show="user.active_membership_id && !user.user_level"></i>
+                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.active_membership_id && !user.user_level"></i>
                         </td>
                         <td>
                             <a class="search-link" href="#/admin/clients/edit/{{ user.custom_id || user.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
