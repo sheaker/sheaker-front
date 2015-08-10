@@ -25,14 +25,6 @@ angular.module('sheaker')
 })
 .controller('SearchClientCtrl', function ($rootScope, $scope, $location, $window, $modal, User) {
 
-    if ($location.search().text) {
-        $scope.searchText = $location.search().text;
-    }
-
-    $scope.$watch('searchText', function(newValue) {
-        $location.search('text', newValue);
-    });
-
     $scope.usersList = {
         users: [],
         busy: false,
@@ -40,6 +32,36 @@ angular.module('sheaker')
         offset: 0,
         noMoreApi: false
     };
+
+    $scope.search = function () {
+
+        if ($scope.query === '') {
+            $scope.usersList.noMoreApi = false;
+            $scope.usersList.users = [];
+            $scope.usersList.limit = 25;
+            $scope.usersList.offset = 0;
+            $scope.loadUsers();
+        }
+
+        User.search({query: $scope.query}).$promise
+        .then(function (users) {
+            $scope.usersList.users = users;
+            $scope.usersList.noMoreApi = true;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
+        });
+    };
+
+    if ($location.search().text) {
+        $scope.query = $location.search().query;
+        $scope.search();
+    }
+
+    $scope.$watch('query', function(newValue) {
+        $location.search('query', newValue);
+    });
 
     $scope.loadUsers = function () {
         if ($scope.usersList.busy || $scope.usersList.noMoreApi) {
@@ -66,8 +88,6 @@ angular.module('sheaker')
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
         });
     };
-
-    $scope.loadUsers();
 
     $scope.openModal = function (user) {
         $modal.open({

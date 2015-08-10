@@ -15,7 +15,7 @@
             <div class="form-group has-feedback">
                 <span ng-hide="searchText.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
                 <!-- <span ng-show="searchText.length"  class="glyphicon glyphicon-trash form-control-feedback"></span>-->
-                <input type="text" class="form-control search-field" ng-model="searchText" placeholder="Search...">
+                <input type="text" class="form-control search-field" ng-model="query" ng-change="search()" placeholder="Search...">
             </div>
         </div>
         <div class="table-responsive" infinite-scroll="loadUsers()" infinite-scroll-disabled="usersList.busy" infinite-scroll-distance="1">
@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody class= "color-background-white">
-                    <tr ng-repeat="user in usersList.users | filter: searchText">
+                    <tr ng-repeat="user in usersList.users">
                         <td>{{ user.custom_id || user.id }}</td>
                         <td>{{ user.first_name }}</td>
                         <td>{{ user.last_name }}</td>

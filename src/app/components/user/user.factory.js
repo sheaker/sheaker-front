@@ -19,6 +19,11 @@ angular.module('sheaker')
         update: {
             method: 'PUT'
         },
+        search: {
+            method:  'GET',
+            url:     GYM_API_URL + '/users/search',
+            isArray: true
+        },
         queryPayments: {
             method: 'GET',
             url:     GYM_API_URL + '/users/:user_id/payments',
