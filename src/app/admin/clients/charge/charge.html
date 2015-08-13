@@ -93,39 +93,51 @@
                             <div class="text-center" ng-hide="user.payments.length">
                                 No previous payments.
                             </div>
-                            <table class="table table-striped" ng-show="user.payments.length">
-                                <thead>
-                                    <tr>
-                                        <th>Folder N°</th>
-                                        <th>Date</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody  ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
-                                    <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
-                                        <!--<td>{{ p.id }}</td>-->
-                                        <td>{{ p.id }}</td>
-                                        <td>{{ p.paymentDate | date: 'd MMM y' }}</td>
-                                        <td>{{ p.price | currency }}</td>
-                                    </tr>
-                                    <tr ng-switch-when="true">
-                                        <td colspan="5">
-                                            <table class="table table-condensed sub-table color-blue">
-                                                <tr>
-                                                    <th width="30%">Days</th>
-                                                    <th width="35%">Start Date</th>
-                                                    <th width="35%">End Date</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ p.days }}</td>
-                                                    <td>{{ p.startDate | date: 'd MMM y' }}</td>
-                                                    <td>{{ p.endDate | date: 'd MMM y' }}</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <table class="table table-striped" ng-show="user.payments.length">
+                                    <thead>
+                                        <tr>
+                                            <th>Folder N°</th>
+                                            <th>Date</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
+                                        <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
+                                            <td>{{ p.id }}</td>
+                                            <td>{{ p.created_at | date: 'd MMM y' }}</td>
+                                            <td>{{ p.price | currency }}</td>
+                                            <td><span class="color-blue glyphicon glyphicon-search"></span></td>
+                                        </tr>
+                                        <tr ng-switch-when="true">
+                                            <td colspan="5">
+                                                <table class="table table-condensed sub-table color-blue">
+                                                    <tr>
+                                                        <th width="30%">Days</th>
+                                                        <th width="35%">Start Date</th>
+                                                        <th width="35%">End Date</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ p.days }}</td>
+                                                        <td>{{ p.start_date | date: 'd MMM y' }}</td>
+                                                        <td>{{ p.end_date | date: 'd MMM y' }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr ng-switch-when="true" ng-show="p.comment.length">
+                                            <td colspan="5">
+                                                <table class="table table-condensed sub-table color-blue">
+                                                    <tr>
+                                                        <td>{{ p.comment }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            Total : {{ totalPricePayments | currency }}
                         </div>
                     </div>
                 </div>

@@ -30,10 +30,15 @@ angular.module('sheaker')
         if ($scope.formDatas.photo) {
             user.photo = GYM_API_URL + '/' + user.photo;
         }
+        $scope.totalPricePayments = 0;
 
         User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
-            user.payments = payments;
+            angular.forEach(payments, function(payment, key) {
+                $scope.totalPricePayments += payment.price;
+            });
+
+            $scope.user.payments = payments;
         })
         .catch(function(error) {
             console.log(error);
