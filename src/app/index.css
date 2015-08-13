@@ -211,7 +211,7 @@ body {
 
 /* NavBar */
 .navbar {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
@@ -534,4 +534,9 @@ td {
      -moz-animation-fill-mode: both;
        -o-animation-fill-mode: both;
           animation-fill-mode: both;
+}
+
+.canvas-pos {
+    position: relative;
+    display: block;
 }

@@ -11,6 +11,14 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+        <div class="col-lg-6" id="LastsEntry">
+            <div class="general-box">
+                <div class="box-title color-background-grey-dark">
+                    <span class="color-white fa fa-user-plus pull-right"></span>
+                    <div class="title-x-small color-white">New clients</div>
+                </div>
+                <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+            </div>
+        </div>
     </div>
 </div>
