@@ -55,6 +55,10 @@ angular.module('sheaker')
             method: 'GET',
             url:     GYM_API_URL + '/users/stats/incbirthday',
             isArray: true
+        },
+        graphNew: {
+            method: 'GET',
+            url:     GYM_API_URL + '/users/graph/new'
         }
     };
 

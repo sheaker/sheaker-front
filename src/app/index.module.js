@@ -11,7 +11,8 @@ angular.module('sheaker', [
     'ui.bootstrap.showErrors',
     'infinite-scroll',
     'angular-spinkit',
-    'headroom'
+    'headroom',
+    'chart.js'
 ]);
 
 })();
