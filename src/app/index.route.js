@@ -122,7 +122,7 @@ angular.module('sheaker')
         }
     })
     .when('/admin/schedule', {
-        templateUrl: 'app/admin/schedule/schedule.html',
+        templateUrl: 'app/admin/schedule/home/schedule.html',
         controller: 'ScheduleCtrl',
         access: {
             loginRequired: true,
