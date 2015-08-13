@@ -59,6 +59,10 @@ angular.module('sheaker')
         graphNew: {
             method: 'GET',
             url:     GYM_API_URL + '/users/graph/new'
+        },
+        graphSex: {
+            method: 'GET',
+            url:     GYM_API_URL + '/users/graph/sex'
         }
     };
 
