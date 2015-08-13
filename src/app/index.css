@@ -220,6 +220,10 @@ body {
     margin-bottom: 20px;
 }
 
+.nav-home > li {
+    display: inline-block;
+}
+
 .nav-home > li > a {
     padding-top: 27px;
     font-weight: 400;
