@@ -29,11 +29,12 @@
 .nav-sidebar > li > a {
     width: 60px;
     padding-top:-20px;
-    padding-left: 15px;
+    padding-left: 10px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     margin-bottom:5px;
+    margin-left: 5px;
 }
 
 .nav-sidebar > .active > a,
