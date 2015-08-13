@@ -6,7 +6,7 @@
 
     <div class="col-lg-12 main">
         <div class="title">
-            <span class="color-blue fa fa-bar-chart"></span>Review Client
+            <span class="color-yellow fa fa-bar-chart"></span>Review Client
         </div>
 
         <!-- Center photo -->
@@ -19,8 +19,8 @@
 
         <div class="col-lg-12" id="ClientDatas">
             <div class="general-box">
-                <span class="color-grey fa fa-list pull-right"></span>
-                <div class="title-small client-datas">ID : {{ user.custom_id || user.id }}</div>
+                <span class="color-grey fa fa-folder-open pull-right"></span>
+                <div class="title-small client-datas">{{ user.custom_id || user.id }} - {{ user.first_name }} {{ user.last_name }}</div>
                 <div class="content-box">
                     <div class="col-lg-4">
                         <div class="charge-photo" id="userInfos">

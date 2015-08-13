@@ -6,7 +6,7 @@
     font-size: 30px;
     position: fixed;
     top: 70px;
-    bottom: 0;
+    bottom: -70px; /* To show the border with the top navabar offeset */
     left: 0;
     z-index: 1000;
     display: block;
@@ -43,6 +43,10 @@
     background-color: #DCDCDC;
 }
 
+.independant-button {
+    border-top: 1px solid #dbdbdb;
+    padding-top:5px;
+}
 /* End SideBar */
 
 
