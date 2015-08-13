@@ -168,7 +168,7 @@
                                 <tbody>
                                     <tr ng-repeat="ci in user.checkins | orderBy: 'createdAt':true | limitTo: 30">
                                         <td width="40%">{{ ci.created_at | date: 'd MMM y'  }}</td>
-                                        <td width="40%">{{ ci.created_at | date: 'hh:mm' }}</td>
+                                        <td width="40%">{{ ci.created_at | date: 'hh:mm a' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
