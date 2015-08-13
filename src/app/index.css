@@ -507,6 +507,13 @@ body {
     margin-bottom: 30px;
 }
 
+button.button-submit:focus,
+button.button-submit:hover {
+    text-decoration: none;
+    font-weight: 800;
+    color: #fff;
+}
+
 .table-condensed {
     table-layout:fixed;
     white-space: nowrap;
