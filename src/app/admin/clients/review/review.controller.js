@@ -43,6 +43,9 @@ angular.module('sheaker')
         });
 
         $scope.user = user;
+        if ($scope.user.birthdate) {
+        $scope.birthdateFormat = moment($scope.user.birthdate).format('DD MMM YYYY');
+        }
 
     }, function(error) {
         console.log(error);
@@ -52,7 +55,6 @@ angular.module('sheaker')
 
     /// Collapse Part
     $scope.selIdx = -1;
-
     $scope.selPayment = function(payment, idx) {
         if (idx === $scope.selIdx) {
             $scope.selIdx = -1;

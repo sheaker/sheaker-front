@@ -354,6 +354,12 @@ body {
 
 /* Box css */
 
+.client-datas{
+    color: #1E88E5;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
 .charge-photo{
     font-size: 35px;
     margin-bottom: 20px;
