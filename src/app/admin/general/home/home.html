@@ -131,8 +131,7 @@
                             <tbody>
                                 <tr ng-repeat="em in endingMemberships">
                                     <td width="40%">{{ em.first_name }}</td>
-                                    <td width="40%">{{ em.last_name }}</td>
-                                    <td width="20%">{{ (em.payments | last).end_date | date: 'd MMM'}}</td>
+                                    <td width="50%">{{ em.last_name }}</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ em.custom_id || em.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
@@ -154,7 +153,7 @@
                                 <tr ng-repeat="nm in newMemberships">
                                     <td width="40%">{{ nm.first_name }}</td>
                                     <td width="40%">{{ nm.last_name }}</td>
-                                    <td width="20%">{{ (nm.payments | last).days }} d</td>
+                                    <td width="20%">{{ nm.days }} d</td>
                                     <td width="10%"> <a href="#/admin/clients/review/{{ nm.customId || nm.id }}" tooltip="Review" tooltip-placement="top"><span class="color-grey glyphicon glyphicon-expand fa-lg"></span></a></td>
                                 </tr>
                             </tbody>
