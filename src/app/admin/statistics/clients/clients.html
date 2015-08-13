@@ -17,7 +17,9 @@
                     <span class="color-white fa fa-user-plus pull-right"></span>
                     <div class="title-x-small color-white">New clients</div>
                 </div>
-                <canvas id="line" class="chart chart-line" data="newclients.data" labels="newclients.labels" legend="false" series="newclients.series" click="newclients.onClick"></canvas>
+                <div class="padding-top-general-box">
+                    <canvas id="line" class="chart chart-line" data="newclients.data" labels="newclients.labels" legend="false" series="newclients.series" click="newclients.onClick"></canvas>
+                </div>
             </div>
         </div>
 
@@ -27,7 +29,9 @@
                     <span class="color-white fa fa-transgender pull-right"></span>
                     <div class="title-x-small color-white">Gender repartition</div>
                 </div>
-                <canvas id="pie" class="chart chart-pie" data="genderRep.data" labels="genderRep.labels"></canvas>
+                <div class="padding-top-general-box">
+                    <canvas id="pie" class="chart chart-pie" data="genderRep.data" labels="genderRep.labels"></canvas>
+                </div>
             </div>
         </div>
     </div>
