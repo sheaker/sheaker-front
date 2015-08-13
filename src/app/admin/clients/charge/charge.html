@@ -9,6 +9,8 @@
             <span class="color-red fa fa-money"></span>Charge Client
         </div>
 
+        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
         <div class="col-lg-offset-1 col-lg-10">
             <div class="general-box">
                 <span class="color-grey fa fa-camera pull-right"></span>
@@ -20,7 +22,6 @@
                 </div>
             </div>
         </div>
-        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <form name="chargeForm" ng-submit="chargeUser()">
             <div class="col-lg-offset-1 col-lg-5" id="PaymentInformation">
