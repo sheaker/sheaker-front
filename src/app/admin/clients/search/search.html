@@ -12,9 +12,9 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <div class="panel-heading">
-            <div class="btn-group">
+            <div class="btn-group col-lg-12">
                 <input type="search" class="form-control search-field" ng-model="searchParams.query" ng-change="search()" placeholder="type something...">
-                <span ng-show="searchParams.query" class="search-icon fa fa-fw fa-trash-o" ng-click="clearQuery()"></span>
+                <span ng-show="searchParams.query" class="search-icon fa fa-fw fa-times" ng-click="clearQuery()"></span>
                 <span ng-hide="searchParams.query" class="search-icon fa fa-fw fa-search"></span>
             </div>
         </div>
