@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
+.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -44,9 +44,9 @@ angular.module('sheaker')
                 ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
             };
 
-            imageObj.src = '//static.sheaker.com/sheaker-front/assets/images/user_unknow.png';
+            imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
             if ($scope.formDatas.photo) {
-                imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+                imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
             }
         }
     }, function(error) {

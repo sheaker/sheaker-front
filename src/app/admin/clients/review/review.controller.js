@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, GYM_API_URL, User) {
+.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, STATIC_URL, User) {
 
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to review before going to this page.'});
@@ -13,9 +13,9 @@ angular.module('sheaker')
     $scope.lastCheckins = [];
 
     User.get({user_id: $routeParams.id}, function(user) {
-        user.photo = '//static.sheaker.com/sheaker-front/assets/images/user_unknow.png';
+        user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
         if ($scope.formDatas.photo) {
-            user.photo = GYM_API_URL + '/' + user.photo;
+            user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
         }
 
         $scope.totalPricePayments = 0;

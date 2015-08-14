@@ -2,13 +2,16 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('CheckinCtrl', function ($rootScope, $scope, $location, $timeout, User, Payment, GYM_API_URL) {
+.controller('CheckinCtrl', function ($rootScope, $scope, $location, $timeout, User, Payment, STATIC_URL) {
 
     var today = moment();
 
     $scope.checkin = function (userId) {
         User.get({user_id: userId}, function(user) {
-            user.photo = GYM_API_URL + '/' + user.photo;
+            user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
+            if (user.photo) {
+                user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
+            }
 
             user.isBirthday = moment(user.birthdate).month() === today.month() && moment(user.birthdate).date() === today.date();
 

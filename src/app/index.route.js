@@ -4,7 +4,7 @@
 angular.module('sheaker')
 .config(function ($routeProvider) {
     var universalResolves = {
-        config: /*@ngInject*/ function($rootScope, $location, $window, SHEAKER_URL, SheakerClient, SheakerInfos) {
+        config: /*@ngInject*/ function($rootScope, $location, $window, FRONTEND_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
@@ -20,7 +20,7 @@ angular.module('sheaker')
                         })
                         .catch(function(error) {
                             if (error.status === 404 || error.status === 0) {
-                                $window.location.href = SHEAKER_URL + '/register/' + address[0];
+                                $window.location.href = FRONTEND_URL + '/register/' + address[0];
                             }
                         });
                     }

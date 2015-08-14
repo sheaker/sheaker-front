@@ -2,18 +2,18 @@
     'use strict';
 
 angular.module('sheaker')
-.factory('User', function ($resource, GYM_API_URL) {
+.factory('User', function ($resource, BACKEND_URL) {
     var User, actions;
 
     actions = {
         login: {
             method: 'POST',
-            url:     GYM_API_URL + '/users/login',
+            url:     BACKEND_URL + '/users/login',
             skipAuthorization: true
         },
         renewToken: {
             method: 'POST',
-            url:    GYM_API_URL + '/users/renew_token',
+            url:    BACKEND_URL + '/users/renew_token',
             skipAuthorization: true
         },
         update: {
@@ -21,52 +21,52 @@ angular.module('sheaker')
         },
         search: {
             method:  'GET',
-            url:     GYM_API_URL + '/users/search',
+            url:     BACKEND_URL + '/users/search',
             isArray: true
         },
         queryPayments: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/:user_id/payments',
+            url:     BACKEND_URL + '/users/:user_id/payments',
             isArray: true
         },
         savePayment: {
             method: 'POST',
-            url:     GYM_API_URL + '/users/:user_id/payments'
+            url:     BACKEND_URL + '/users/:user_id/payments'
         },
         queryCheckins: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/:user_id/checkins',
+            url:     BACKEND_URL + '/users/:user_id/checkins',
             isArray: true
         },
         saveCheckin: {
             method: 'POST',
-            url:     GYM_API_URL + '/users/:user_id/checkins'
+            url:     BACKEND_URL + '/users/:user_id/checkins'
         },
         stats: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/stats'
+            url:     BACKEND_URL + '/users/stats'
         },
         statsNew: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/stats/new',
+            url:     BACKEND_URL + '/users/stats/new',
             isArray: true
         },
         statsIncBirthday: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/stats/incbirthday',
+            url:     BACKEND_URL + '/users/stats/incbirthday',
             isArray: true
         },
         graphNew: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/graph/new'
+            url:     BACKEND_URL + '/users/graph/new'
         },
         graphSex: {
             method: 'GET',
-            url:     GYM_API_URL + '/users/graph/sex'
+            url:     BACKEND_URL + '/users/graph/sex'
         }
     };
 
-    User = $resource(GYM_API_URL + '/users/:user_id', {user_id: '@user_id'}, actions);
+    User = $resource(BACKEND_URL + '/users/:user_id', {user_id: '@user_id'}, actions);
     return User;
 });
 

@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -26,9 +26,9 @@ angular.module('sheaker')
     // Load user
     User.get({user_id: $routeParams.id}).$promise
     .then(function(user) {
-        user.photo = '//static.sheaker.com/sheaker-front/assets/images/user_unknow.png';
+        user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
         if ($scope.formDatas.photo) {
-            user.photo = GYM_API_URL + '/' + user.photo;
+            user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
         }
         $scope.totalPricePayments = 0;
 
