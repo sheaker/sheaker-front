@@ -152,7 +152,7 @@ body {
 }
 /* End Form */
 
-/* Begin SubSideBar */
+/* Begin SubsideBar */
 /* Hide for mobile, show later */
 .subsidebar {
     display: none;
@@ -164,7 +164,7 @@ body {
     position: fixed;
     top: 0px;
     padding-top: 70px;
-    bottom: 0;
+    bottom: -70px; /* To show the border with the top navabar offeset */
     left: 0;
     z-index: 1000;
     display: block;
@@ -211,13 +211,17 @@ body {
 
 /* NavBar */
 .navbar {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
 .homebar {
     margin-top: -13px;
     margin-bottom: 20px;
+}
+
+.nav-home > li {
+    display: inline-block;
 }
 
 .nav-home > li > a {
@@ -354,9 +358,36 @@ body {
 
 /* Box css */
 
+.client-datas{
+    color: #1E88E5;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
 .charge-photo{
     font-size: 35px;
     margin-bottom: 20px;
+    height: 240px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius:15px;
+}
+
+.charge-photo img{
+    border-radius:15px;
+    border: 10px solid #eff1f4;
+}
+
+.charge-photo-checkin{
+    font-size: 35px;
+    margin-bottom: 20px;
+    border-radius:15px;
+}
+
+.charge-photo-checkin img{
+    border-radius:15px;
+    border: 10px solid #eff1f4;
 }
 
 .general-box {
@@ -497,6 +528,13 @@ body {
     margin-bottom: 30px;
 }
 
+button.button-submit:focus,
+button.button-submit:hover {
+    text-decoration: none;
+    font-weight: 800;
+    color: #fff;
+}
+
 .table-condensed {
     table-layout:fixed;
     white-space: nowrap;
@@ -519,16 +557,18 @@ td {
 
 /* End Box */
 
-.headroom {
-    transition: transform 200ms linear;
-}
-.headroom--pinned {
-    transform: translateY(0%);
-}
-.headroom--unpinned {
-    transform: translateY(-70px);
+.animated {
+  -webkit-animation-duration: 0.5s;
+     -moz-animation-duration: 0.5s;
+       -o-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+     -moz-animation-fill-mode: both;
+       -o-animation-fill-mode: both;
+          animation-fill-mode: both;
 }
 
-.headroom--top {
-
+.canvas-pos {
+    position: relative;
+    display: block;
 }

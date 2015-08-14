@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="subsidebar" ng-controller="NavbarSubSideClientCtrl">
-            <ul class="nav nav-subsidebar">
-                <li ng-class="{active: isActive('/admin/clients/search')}"><a href="#/admin/clients/search"><span class="fa fa-search"></span>Search</a></li>
-                <li ng-class="{active: isActive('/admin/clients/add')}"><a href="#/admin/clients/add" access="modo, admin"><span class="fa fa-user-plus"></span>Add</a></li>
+        <div class="subsidebar" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"sidebarSlideDown", "unpinned":"sidebarSlideUp"}'>
+            <ul class="nav nav-subsidebar" ng-controller="NavbarSubsideClientCtrl">
+                <li ng-class="{active: isActive('/admin/clients/search')}"><a href="#/admin/clients/search"><span class="fa fa-search fa-fw"></span>Search</a></li>
+                <li ng-class="{active: isActive('/admin/clients/add')}"><a href="#/admin/clients/add" access="modo, admin"><span class="fa fa-user-plus fa-fw"></span>Add</a></li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="subsidebar" headroom offset=0 tolerance=3 classes='{"initial":"animated", "pinned":"sidebarSlideDown", "unpinned":"sidebarSlideUp"}'>
+            <ul class="nav nav-subsidebar" ng-controller="NavbarSubsideStatisticsCtrl">
+                <li ng-class="{active: isActive('/admin/statistics/home')}"><a href="#/admin/statistics/home"><span class="fa fa-pie-chart fa-fw"></span>Home</a></li>
+                <li ng-class="{active: isActive('/admin/statistics/gym')}"><a href="#/admin/statistics/gym" access="admin"><span class="fa fa-child fa-fw"></span>Gym</a></li>
+                <li ng-class="{active: isActive('/admin/statistics/clients')}"><a href="#/admin/statistics/clients" access="admin"><span class="fa fa-users fa-fw"></span>Clients</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

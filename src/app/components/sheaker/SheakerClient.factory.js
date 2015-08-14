@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.factory('SheakerClient', function ($resource, GYM_API_URL) {
+.factory('SheakerClient', function ($resource, BACKEND_URL) {
     var SheakerClient, actions;
 
     actions = {
@@ -10,6 +11,8 @@ angular.module('sheaker')
         }
     };
 
-    SheakerClient = $resource(GYM_API_URL + '/clients', {subdomain: '@subdomain'}, actions);
+    SheakerClient = $resource(BACKEND_URL + '/clients', {subdomain: '@subdomain'}, actions);
     return SheakerClient;
 });
+
+})();

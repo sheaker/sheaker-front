@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, User, Payment, GYM_API_URL) {
+.controller('ChargeClientCtrl', function ($rootScope, $scope, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -10,9 +11,10 @@ angular.module('sheaker')
         $location.path('/admin/clients/search');
     }
 
-    $scope.formDatas = {};
+    $scope.formDatas = {
+        days: 31
+    };
     $scope.beenCustomDays = false;
-    $scope.formDatas.days = 31;
 
     // Available payment methods
     $scope.availablePaymentMethods = [
@@ -22,16 +24,24 @@ angular.module('sheaker')
     ];
 
     // Load user
-    User.get({id: $routeParams.id}).$promise
+    User.get({user_id: $routeParams.id}).$promise
     .then(function(user) {
-        user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
-        if ($scope.formDatas.photo) {
-            user.photo = GYM_API_URL + '/' + user.photo;
+        if (user.photo) {
+            user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
+        }
+        else {
+            user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
         }
 
-        Payment.query({user: user.id}).$promise
+        $scope.totalPricePayments = 0;
+
+        User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
-            user.payments = payments;
+            angular.forEach(payments, function(payment, key) {
+                $scope.totalPricePayments += payment.price;
+            });
+
+            $scope.user.payments = payments;
         })
         .catch(function(error) {
             console.log(error);
@@ -63,22 +73,20 @@ angular.module('sheaker')
             $scope.paymentCal.isOpen = true;
         },
         calculateEndingDate: function() {
-            if (!$scope.formDatas.startDate || !$scope.formDatas.days) {
+            if (!$scope.formDatas.start_date || !$scope.formDatas.days) {
                 return;
             }
-
-            $scope.calculatedEndingDate = moment($scope.formDatas.startDate).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
+            $scope.calculatedEndingDate = moment($scope.formDatas.start_date).add($scope.formDatas.days - 1, 'days').format('DD MMM YYYY');
         }
     };
 
     $scope.chargeUser = function () {
-        $scope.formDatas.user = $scope.user.id;
         $scope.isButtonSaveDisabled = true;
 
-        $scope.formDatas.startDate = moment($scope.formDatas.startDate).startOf('day').format();
-        $scope.formDatas.endDate = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
+        $scope.formDatas.start_date = moment($scope.formDatas.start_date).startOf('day').format();
+        $scope.formDatas.end_date = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
-        Payment.save($scope.formDatas).$promise
+        User.savePayment({user_id: $scope.user.id}, $scope.formDatas).$promise
         .then(function(payment) {
             $scope.user.payments.push(payment);
 
@@ -112,3 +120,5 @@ angular.module('sheaker')
         return $scope.selectedPayment === payment;
     };
 });
+
+})();

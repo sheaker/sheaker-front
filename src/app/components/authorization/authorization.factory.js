@@ -1,10 +1,11 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .factory('Authorization', function ($rootScope) {
     var authorize = function (loginRequired, permissionsRequired, permissionType) {
         var result = $rootScope.authVars.authorised.authorised,
-        user = $rootScope.user,
+        user = $rootScope.connectedUser,
         userPermissions = [],
         hasPermission = true,
         permission, i;
@@ -48,5 +49,6 @@ angular.module('sheaker')
     return {
         authorize: authorize
     };
-})
-;
+});
+
+})();

@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, User, Payment, Checkin, GYM_API_URL) {
+.controller('ReviewClientCtrl', function ($rootScope, $scope, $routeParams, $location, STATIC_URL, User) {
 
     if (typeof $routeParams.id === 'undefined') {
         $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to review before going to this page.'});
@@ -11,45 +12,42 @@ angular.module('sheaker')
     $scope.formDatas = {};
     $scope.lastCheckins = [];
 
-    User.get({id: $routeParams.id}, function(user) {
-        user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
-        if ($scope.formDatas.photo) {
-            user.photo = GYM_API_URL + '/' + user.photo;
+    User.get({user_id: $routeParams.id}, function(user) {
+        if (user.photo) {
+            user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
+        }
+        else {
+            user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
         }
 
         $scope.totalPricePayments = 0;
 
-        Payment.query({user: user.id}).$promise
+        User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
-            user.payments = payments;
-            for(var i= 0; i < user.payments.length; i++) {
-                $scope.totalPricePayments+=user.payments[i].price;
-            }
-        });
+            angular.forEach(payments, function(payment, key) {
+                $scope.totalPricePayments += payment.price;
+            });
 
-        Checkin.query({user: user.id, limit: 50}).$promise
-        .then(function(checkins) {
-            $scope.lastCheckins = $scope.lastCheckins.concat(checkins);
+            $scope.user.payments = payments;
         })
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
         });
 
-        if (user.lastCheckins) {
-            user.lastCheckins.forEach(function (checkin) {
-                var userObject = {
-                    user: {
-                        id: user.id,
-                        customId: user.customId,
-                        firstName: user.firstName,
-                        lastName: user.lastName
-                    }
-                };
-                checkin = angular.extend(checkin, userObject);
-            });
-        }
+        User.queryCheckins({user_id: user.id}).$promise
+        .then(function(checkins) {
+            $scope.user.checkins = checkins;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user checkins.'});
+        });
+
         $scope.user = user;
+        if ($scope.user.birthdate) {
+        $scope.birthdateFormat = moment($scope.user.birthdate).format('DD MMM YYYY');
+        }
 
     }, function(error) {
         console.log(error);
@@ -58,8 +56,7 @@ angular.module('sheaker')
     });
 
     /// Collapse Part
-    $scope.selIdx= -1;
-
+    $scope.selIdx = -1;
     $scope.selPayment = function(payment, idx) {
         if (idx === $scope.selIdx) {
             $scope.selIdx = -1;
@@ -75,5 +72,6 @@ angular.module('sheaker')
         return $scope.selectedPayment === payment;
     };
     /// End of collapse
-
 });
+
+})();

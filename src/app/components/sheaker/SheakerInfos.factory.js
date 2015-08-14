@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.factory('SheakerInfos', function ($resource, GYM_API_URL) {
+.factory('SheakerInfos', function ($resource, BACKEND_URL) {
     var SheakerInfos, actions;
 
     actions = {
@@ -10,6 +11,8 @@ angular.module('sheaker')
         }
     };
 
-    SheakerInfos = $resource(GYM_API_URL + '/infos', null, actions);
+    SheakerInfos = $resource(BACKEND_URL + '/infos', null, actions);
     return SheakerInfos;
 });
+
+})();

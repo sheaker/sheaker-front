@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, GYM_API_URL, User) {
+.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
     $scope.isButtonSaveDisabled = false;
 
@@ -20,15 +21,15 @@ angular.module('sheaker')
         wantNewPhoto: false
     };
 
-    User.get({id: $routeParams.id}, function(user) {
-        $scope.hasCustomId = user.customId ? true : false;
+    User.get({user_id: $routeParams.id}, function(user) {
+        $scope.hasCustomId = user.custom_id ? true : false;
         $scope.formDatas = user;
 
         if ($scope.formDatas.birthdate === '0000-00-00') {
             $scope.formDatas.birthdate = null;
         }
-        if ($scope.formDatas.userLevel === null) {
-            $scope.formDatas.userLevel = 0;
+        if ($scope.formDatas.user_level === null) {
+            $scope.formDatas.user_level = 0;
         }
 
         var snapshotCanvas = $window.document.querySelector('#snapshot');
@@ -43,9 +44,9 @@ angular.module('sheaker')
                 ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
             };
 
-            imageObj.src = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+            imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
             if ($scope.formDatas.photo) {
-                imageObj.src = GYM_API_URL + '/' + $scope.formDatas.photo;
+                imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
             }
         }
     }, function(error) {
@@ -110,19 +111,19 @@ angular.module('sheaker')
                 var ctxSnapshot = snapshotCanvas.getContext('2d');
                 ctxSnapshot.putImageData(imgData, 0, 0);
 
-                $scope.formDatas.photo = snapshotCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                $scope.formDatas.photo = snapshotCanvas.toDataURL('image/jpeg', 0.5);
             }
         }
     };
 
     // Submit new user to API
     $scope.editUser = function () {
-        if ($scope.hasCustomId === false && $scope.formDatas.customId) {
-            $scope.formDatas.customId = 0;
+        if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
+            $scope.formDatas.custom_id = 0;
         }
         $scope.isButtonSaveDisabled = true;
 
-        User.update($scope.formDatas).$promise
+        User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
         .then(function(/*user*/) {
             $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
             $scope.isButtonSaveDisabled = false;
@@ -137,3 +138,5 @@ angular.module('sheaker')
         });
     };
 });
+
+})();

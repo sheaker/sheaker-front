@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('NavbarSubSideClientCtrl', function ($scope, $location) {
+.controller('NavbarSubsideClientCtrl', function ($scope, $location) {
     $scope.isActive = function(path) {
         if ($location.path() === path) {
             return true;
@@ -9,3 +10,5 @@ angular.module('sheaker')
         return false;
     };
 });
+
+})();

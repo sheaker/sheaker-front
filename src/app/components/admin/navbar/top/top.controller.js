@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('NavbarTopCtrl', function ($scope, $location) {
+.controller('NavbarTopCtrl', function ($window, $scope, $location) {
     $scope.isActive = function(path) {
         if ($location.path() === path) {
             return true;
@@ -9,24 +10,20 @@ angular.module('sheaker')
         return false;
     };
 
-    $scope.dt = new Date();
-
-    $scope.status = {
-      isopen: false
+    $scope.dropdown = {
+        isopen: false
     };
 
     $scope.toggleDropdown = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.dropdown.isopen = !$scope.dropdown.isopen;
     };
 
-    $(window).scroll(function(){
-      $scope.status.isopen = false;
-    });
-
-    $('.navbar-fixed-top').headroom({
-        'offset': 20,
-        'tolerance': 5
+    // Close dropdown when scrolling
+    angular.element($window).bind('scroll', function(){
+        $scope.dropdown.isopen = false;
     });
 });
+
+})();

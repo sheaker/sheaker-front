@@ -1,9 +1,20 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.factory('Checkin', function ($resource, GYM_API_URL) {
-    var Checkin;
+.factory('Checkin', function ($resource, BACKEND_URL) {
+    var Checkin, actions;
 
-    Checkin = $resource(GYM_API_URL + '/checkin/:id', {id: '@id'});
+    actions = {
+        statsNew: {
+            method: 'GET',
+            url:     BACKEND_URL + '/checkins/stats/new',
+            isArray: true
+        }
+    };
+
+    Checkin = $resource(BACKEND_URL + '/checkins/:checkin_id', {checkin_id: '@checkin_id'}, actions);
     return Checkin;
 });
+
+})();

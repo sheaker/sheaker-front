@@ -3,32 +3,35 @@
         <div class="col-lg-offset-3 col-lg-6" id="SheakerMembership">
             <div class="checkin-box text-center">
                 <span class="title">Welcome</span>
-                <div class="general-box" ng-class="{'shadow-green': userCheckin && userCheckin.activeMembershipId, 'shadow-red': userCheckin && !userCheckin.activeMembershipId}">
+                <div class="general-box" ng-class="{'shadow-green': checkedUser && checkedUser.active_membership_id, 'shadow-red': checkedUser && !userCheckin.active_membership_id}">
                     <div class="content-box padding-top-general-box">
 
                         <alert ng-repeat="alert in alerts | limitTo: 2" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-                        <form ng-submit="checkin(userCheckinId)">
+                        <form ng-submit="checkin(checkedUserId)">
                             <div class="col-lg-offset-3 col-lg-6">
                                 <div class="form-group has-feedback">
                                     <span ng-hide="userCheckinId.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
-                                    <input type="text" class="form-control search-field" ng-model="userCheckinId" placeholder="Id" ng-disabled="userCheckin" autofocus>
+                                    <input type="text" class="form-control search-field" ng-model="checkedUserId" placeholder="Id" ng-disabled="userCheckin" autofocus>
                                 </div>
                             </div>
                         </form>
-                        <div class="charge-photo text-center padding-top-general-box" id="userInfos" ng-show="userCheckin">
-                            <img ng-src="{{ userCheckin.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
-                            <div class="client-infos">{{ userCheckin.firstName }} {{ userCheckin.lastName }}</div>
+
+                        <div class="charge-photo-checkin text-center padding-top-general-box" id="userInfos" ng-show="checkedUser">
+                            <img ng-src="{{ checkedUser.photo }}" height="240" width="320">
+                            <div class="client-infos">{{ checkedUser.first_name }} {{ checkedUser.last_name }}</div>
                         </div>
-                        <span ng-show="userCheckin.isBirthday">
+
+                        <span ng-show="checkedUser.isBirthday">
                             <div class="birthday-box color-yellow">
                                 <span class="fa fa-birthday-cake"></span><br>
-                        </div>
+                            </div>
                         </span>
-                        <div class="col-lg-offset-3 col-lg-6 content-checkin text-center" ng-show="userCheckin">
-                            <div ng-class="{'color-green': userCheckin.activeMembershipId, 'color-red': !userCheckin.activeMembershipId}">
-                                <div ng-class="{'fa fa-unlock-alt': userCheckin.activeMembershipId, 'fa fa-lock': !userCheckin.activeMembershipId}"></div>
-                                 {{ userCheckin.remainingDays }} days
+
+                        <div class="col-lg-offset-3 col-lg-6 content-checkin text-center" ng-show="checkedUser">
+                            <div ng-class="{'color-green': checkedUser.active_membership_id, 'color-red': !checkedUser.active_membership_id}">
+                                <div ng-class="{'fa fa-unlock-alt': checkedUser.active_membership_id, 'fa fa-lock': !checkedUser.active_membership_id}"></div>
+                                 {{ checkedUser.remainingDays }} days
                             </div>
                         </div>
 

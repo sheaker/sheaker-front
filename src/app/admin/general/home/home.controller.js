@@ -1,7 +1,8 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
-.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Checkin) {
+.controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Payment, Checkin) {
 
     var now = moment();
     var today = moment().startOf('day');
@@ -9,57 +10,67 @@ angular.module('sheaker')
     var statsToPreviousDate = moment().subtract(3, 'day').startOf('day');
 
     $scope.staffMember = [0, 0, 0, 0];
-    $scope.lastCheckins = [];
 
-    User.query().$promise
-    .then(function(usersList) {
-        usersList.forEach(function (user) {
-            // Calculate if his birthday is in 3 days
-            // Add years between birthdate and now to calculate next anniversary
-            var furtherBirthdate = moment(user.birthdate).add(today.diff(user.birthdate, 'years') + 1, 'years');
-            user.hasBirthdayInc = furtherBirthdate.isBetween(today, statsToFurtherDate, 'second');
-            if (user.hasBirthdayInc) {
-                user.furtherBirthdate = furtherBirthdate;
-            }
-
-            // Calculate if his membership (for users which have one) will expire in 3 days
-            user.hasInactiveMembershipInc = false;
-            if (user.activeMembershipId) {
-                user.hasInactiveMembershipInc = moment(user.activeMembership.endDate).isBetween(today, statsToFurtherDate, 'second');
-            }
-
-            // Calculate if it's a recent membership (for users which have one)
-            user.hasNewActiveMembership = false;
-            if (user.activeMembershipId) {
-                user.hasNewActiveMembership = moment(user.activeMembership.paymentDate).isBetween(statsToPreviousDate, now, 'second');
-            }
-
-            if (user.userLevel !== 0) {
-                $scope.staffMember[user.userLevel] += 1;
-            }
-
-            if (user.lastCheckins) {
-                user.lastCheckins.forEach(function (checkin) {
-                    var userObject = {
-                        user: {
-                            id: user.id,
-                            customId: user.customId,
-                            firstName: user.firstName,
-                            lastName: user.lastName
-                        }
-                    };
-
-                    checkin = angular.extend(checkin, userObject);
-                });
-
-                $scope.lastCheckins = $scope.lastCheckins.concat(user.lastCheckins);
-            }
-        });
-
-        $scope.usersList = usersList;
+    // Retrieve members stats
+    User.stats().$promise
+    .then(function (stats) {
+        $scope.stats = stats;
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the gym.'});
+    });
+
+    // Retrieve last checkins
+    Checkin.statsNew().$promise
+    .then(function (checkins) {
+        $scope.lastCheckins = checkins;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the last checkins.'});
+    });
+
+    // Retrieve new clients
+    User.statsNew().$promise
+    .then(function (clients) {
+        $scope.newClients = clients;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of new clients.'});
+    });
+
+    // Retrieve ending memberships
+    Payment.statsEnding().$promise
+    .then(function (memberships) {
+        $scope.endingMemberships = memberships;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the ending memberships.'});
+    });
+
+    // Retrieve new memberships
+    Payment.statsNew().$promise
+    .then(function (memberships) {
+        memberships.forEach(function (user) {
+            Payment.get({payment_id: user.active_membership_id}).$promise
+            .then(function(payment) {
+                user.days = payment.days;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment for new memberships stats.', exp: 5000});
+            });
+        });
+
+        $scope.newMemberships = memberships;
+    })
+    .catch(function(error) {
+        console.log(error);
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the new memberships.'});
     });
 });
+
+})();

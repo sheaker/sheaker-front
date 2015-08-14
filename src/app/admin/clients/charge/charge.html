@@ -9,12 +9,19 @@
             <span class="color-red fa fa-money"></span>Charge Client
         </div>
 
-        <div class="charge-photo text-center" id="userInfos">
-            <img ng-src="{{ user.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
-            <div class="client-infos">{{ user.customId || user.id }} - {{ user.firstName }} {{ user.lastName }}</div>
-        </div>
-
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="general-box">
+                <span class="color-grey fa fa-camera pull-right"></span>
+                <div class="title-small client-datas">{{ user.custom_id || user.id }} - {{ user.first_name }} {{ user.last_name }}</div>
+                <div class="content-box">
+                    <div class="charge-photo text-center" id="userInfos">
+                        <img ng-src="{{ user.photo }}" height="240" width="320" style="border-radius:15px;"">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <form name="chargeForm" ng-submit="chargeUser()">
             <div class="col-lg-offset-1 col-lg-5" id="PaymentInformation">
@@ -28,7 +35,7 @@
                                 <input type="checkbox" ng-checked="beenCustomDays" ng-click="beenCustomDays = !beenCustomDays; setNumberDaysInput();">
                             </div>
                             <div class="form-group" ng-hide="beenCustomDays">
-                                <select class="form-control" id="InputDays" ng-model="formDatas.days" ng-change="paymentCal.calculateEndDate()">
+                                <select class="form-control" id="InputDays" ng-model="formDatas.days" convert-to-number ng-change="paymentCal.calculateEndDate()">
                                     <option value="1">Visit</option>
                                     <option value="7">1 Week</option>
                                     <option value="31">1 Month</option>
@@ -44,7 +51,7 @@
                         <div class="form-group col-lg-6 remove-margin-padding">
                             <label for="InputStartDate">Start date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.startDate" ng-change="paymentCal.calculateEndingDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd MMM yyyy" is-open="paymentCal.isOpen" disabled required>
+                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.start_date" ng-change="paymentCal.calculateEndingDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd MMM yyyy" is-open="paymentCal.isOpen" disabled required>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="paymentCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -87,45 +94,57 @@
                             <div class="text-center" ng-hide="user.payments.length">
                                 No previous payments.
                             </div>
-                            <table class="table table-striped" ng-show="user.payments.length">
-                                <thead>
-                                    <tr>
-                                        <th>Folder N°</th>
-                                        <th>Date</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody  ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
-                                    <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
-                                        <!--<td>{{ p.id }}</td>-->
-                                        <td>{{ p.id }}</td>
-                                        <td>{{ p.paymentDate | date: 'd MMM y' }}</td>
-                                        <td>{{ p.price | currency }}</td>
-                                    </tr>
-                                    <tr ng-switch-when="true">
-                                        <td colspan="5">
-                                            <table class="table table-condensed sub-table color-blue">
-                                                <tr>
-                                                    <th width="30%">Days</th>
-                                                    <th width="35%">Start Date</th>
-                                                    <th width="35%">End Date</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ p.days }}</td>
-                                                    <td>{{ p.startDate | date: 'd MMM y' }}</td>
-                                                    <td>{{ p.endDate | date: 'd MMM y' }}</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <table class="table table-striped" ng-show="user.payments.length">
+                                    <thead>
+                                        <tr>
+                                            <th>Folder N°</th>
+                                            <th>Date</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
+                                        <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
+                                            <td>{{ p.id }}</td>
+                                            <td>{{ p.created_at | date: 'd MMM y' }}</td>
+                                            <td>{{ p.price | currency }}</td>
+                                            <td><span class="color-blue glyphicon glyphicon-search"></span></td>
+                                        </tr>
+                                        <tr ng-switch-when="true">
+                                            <td colspan="5">
+                                                <table class="table table-condensed sub-table color-blue">
+                                                    <tr>
+                                                        <th width="30%">Days</th>
+                                                        <th width="35%">Start Date</th>
+                                                        <th width="35%">End Date</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ p.days }}</td>
+                                                        <td>{{ p.start_date | date: 'd MMM y' }}</td>
+                                                        <td>{{ p.end_date | date: 'd MMM y' }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr ng-switch-when="true" ng-show="p.comment.length">
+                                            <td colspan="5">
+                                                <table class="table table-condensed sub-table color-blue">
+                                                    <tr>
+                                                        <td>{{ p.comment }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            Total : {{ totalPricePayments | currency }}
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
-                <button type="submit" class="btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled  || chargeForm.$invalid || !formDatas.days">Charge client</button>
+                <div class="col-lg-offset-1 col-lg-10" id="ButtonPayment">
+                    <button type="submit" class="btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled  || chargeForm.$invalid || !formDatas.days">Charge client</button>
+                </div>
             </div>
         </form>
     </div>

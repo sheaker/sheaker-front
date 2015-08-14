@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+    'use strict';
 
 angular.module('sheaker')
 .directive('routeLoadingIndicator', function($rootScope) {
@@ -25,3 +26,5 @@ angular.module('sheaker')
         }
     };
 });
+
+})();

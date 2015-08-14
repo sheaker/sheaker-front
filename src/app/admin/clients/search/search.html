@@ -12,13 +12,13 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <div class="panel-heading">
-            <div class="form-group has-feedback">
-                <span ng-hide="searchText.length" class="color-grey glyphicon glyphicon-search form-control-feedback"></span>
-                <!-- <span ng-show="searchText.length"  class="glyphicon glyphicon-trash form-control-feedback"></span>-->
-                <input type="text" class="form-control search-field" ng-model="searchText" placeholder="Search...">
+            <div class="btn-group col-lg-12">
+                <input type="search" class="form-control search-field" ng-model="searchParams.query" ng-change="search()" placeholder="type something...">
+                <span ng-show="searchParams.query" class="search-icon fa fa-fw fa-times" ng-click="clearQuery()"></span>
+                <span ng-hide="searchParams.query" class="search-icon fa fa-fw fa-search"></span>
             </div>
         </div>
-        <div class="table-responsive" infinite-scroll="loadUsers()" infinite-scroll-disabled="usersList.busy" infinite-scroll-distance="1">
+        <div class="table-responsive" infinite-scroll="loadUsers()" infinite-scroll-disabled="searchParams.busy" infinite-scroll-distance="1">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -30,26 +30,26 @@
                     </tr>
                 </thead>
                 <tbody class= "color-background-white">
-                    <tr ng-repeat="user in usersList.users | filter: searchText">
-                        <td>{{ user.customId || user.id }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.lastName }}</td>
+                    <tr ng-repeat="u in users">
+                        <td>{{ u.custom_id || u.id }}</td>
+                        <td>{{ u.first_name }}</td>
+                        <td>{{ u.last_name }}</td>
                         <td>
-                            <i class="fa fa-star fa-lg color-yellow" ng-show="user.userLevel"></i>
-                            <i class="fa fa-check fa-lg color-green" ng-show="user.activeMembershipId && !user.userLevel"></i>
-                            <i class="fa fa-remove fa-lg color-red" ng-show="!user.activeMembershipId && !user.userLevel"></i>
+                            <i class="fa fa-star fa-lg color-yellow" ng-show="u.user_level"></i>
+                            <i class="fa fa-check fa-lg color-green" ng-show="u.active_membership_id && !u.user_level"></i>
+                            <i class="fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && !u.user_level"></i>
                         </td>
                         <td>
-                            <a class="search-link" href="#/admin/clients/edit/{{ user.customId || user.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/charge/{{ user.customId || user.id }}" tooltip="Charge" tooltip-placement="top" ng-hide="user.userLevel" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/review/{{ user.customId || user.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg color-blue"></span></a>
-                            <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(user)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
+                            <a class="search-link" href="#/admin/clients/edit/{{ u.custom_id || u.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/charge/{{ u.custom_id || u.id }}" tooltip="Charge" tooltip-placement="top" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/review/{{ u.custom_id || u.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg color-blue"></span></a>
+                            <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(u)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div style="clear: both;"></div>
         </div>
-        <div class="text-center" ng-show="usersList.busy && !usersList.noMoreApi"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
+        <div class="text-center" ng-show="searchParams.busy && !searchParams.noMoreApi"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
     </div>
 </div>

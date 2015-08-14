@@ -6,7 +6,7 @@
     font-size: 30px;
     position: fixed;
     top: 70px;
-    bottom: 0;
+    bottom: -70px; /* To show the border with the top navabar offeset */
     left: 0;
     z-index: 1000;
     display: block;
@@ -26,21 +26,15 @@
     border-bottom: 0 solid #dbdbdb;
 }
 
-.independant-button
-{
-    border-top: 2px solid #dbdbdb;
-    padding-top: 5px;
-}
-
 .nav-sidebar > li > a {
-    margin-left: 5px;
     width: 60px;
     padding-top:-20px;
-    padding-left: 15px;
+    padding-left: 10px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     margin-bottom:5px;
+    margin-left: 5px;
 }
 
 .nav-sidebar > .active > a,
@@ -49,4 +43,100 @@
     background-color: #DCDCDC;
 }
 
+.independant-button {
+    border-top: 1px solid #dbdbdb;
+    padding-top:5px;
+}
 /* End SideBar */
+
+
+@-webkit-keyframes sidebarSlideDown {
+  0% {
+    -webkit-transform: translateY(-71px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-moz-keyframes sidebarSlideDown {
+  0% {
+    -moz-transform: translateY(-71px);
+  }
+
+  100% {
+    -moz-transform: translateY(0);
+  }
+}
+
+@-o-keyframes sidebarSlideDown {
+  0% {
+    -o-transform: translateY(-71px);
+  }
+
+  100% {
+    -o-transform: translateY(0);
+  }
+}
+
+@keyframes sidebarSlideDown {
+  0% {
+    transform: translateY(-71px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animated.sidebarSlideDown {
+  -webkit-animation-name: sidebarSlideDown;
+  -moz-animation-name: sidebarSlideDown;
+  -o-animation-name: sidebarSlideDown;
+  animation-name: sidebarSlideDown;
+}
+
+@-webkit-keyframes sidebarSlideUp {
+  0% {
+    -webkit-transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(-71px);
+  }
+}
+@-moz-keyframes sidebarSlideUp {
+  0% {
+    -moz-transform: translateY(0);
+  }
+
+  100% {
+    -moz-transform: translateY(-71px);
+  }
+}
+@-o-keyframes sidebarSlideUp {
+  0% {
+    -o-transform: translateY(0);
+  }
+
+  100% {
+    -o-transform: translateY(-71px);
+  }
+}
+@keyframes sidebarSlideUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-71px);
+  }
+}
+
+.animated.sidebarSlideUp {
+  -webkit-animation-name: sidebarSlideUp;
+  -moz-animation-name: sidebarSlideUp;
+  -o-animation-name: sidebarSlideUp;
+  animation-name: sidebarSlideUp;
+}
