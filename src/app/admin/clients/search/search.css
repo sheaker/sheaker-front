@@ -17,3 +17,14 @@
 .search-link {
     margin-right: 7px;
 }
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    color: #ccc;
+}

@@ -25,8 +25,9 @@ angular.module('sheaker')
 })
 .controller('SearchClientCtrl', function ($rootScope, $scope, $location, $window, $modal, User) {
 
-    $scope.usersList = {
-        users: [],
+    $scope.users = [];
+    $scope.searchParams = {
+        query: '',
         busy: false,
         limit: 25,
         offset: 0,
@@ -35,18 +36,60 @@ angular.module('sheaker')
 
     $scope.search = function () {
 
-        if ($scope.query === '') {
-            $scope.usersList.noMoreApi = false;
-            $scope.usersList.users = [];
-            $scope.usersList.limit = 25;
-            $scope.usersList.offset = 0;
+        if ($scope.searchParams.query === '') {
+            $scope.users = [];
+            $scope.searchParams.limit = 25;
+            $scope.searchParams.offset = 0;
+            $scope.searchParams.noMoreApi = false;
+
             $scope.loadUsers();
+            return;
         }
 
-        User.search({query: $scope.query}).$promise
+        User.search({query: $scope.searchParams.query}).$promise
         .then(function (users) {
-            $scope.usersList.users = users;
-            $scope.usersList.noMoreApi = true;
+            $scope.users = users;
+            $scope.searchParams.noMoreApi = true;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving queried the users.'});
+        });
+    };
+
+    if ($location.search().query) {
+        $scope.searchParams.query = $location.search().query;
+        $scope.search();
+    }
+
+    $scope.$watch('searchParams.query', function(newValue) {
+        $location.search('query', newValue);
+    });
+
+    $scope.loadUsers = function () {
+        if ($scope.searchParams.busy || $scope.searchParams.noMoreApi || $scope.searchParams.query) {
+            return;
+        }
+
+        $scope.searchParams.busy = true;
+
+        User.query({
+            limit: $scope.searchParams.limit,
+            offset: $scope.searchParams.offset,
+            sortBy: 'created_at',
+            order: 'desc'
+        }).$promise
+        .then(function(users) {
+            if (users.length === 0) {
+                $scope.searchParams.noMoreApi = true;
+                return;
+            }
+
+            $scope.users = $scope.users.concat(users);
+
+            $scope.searchParams.limit *= 2;
+            $scope.searchParams.offset += users.length;
+            $scope.searchParams.busy = false;
         })
         .catch(function(error) {
             console.log(error);
@@ -54,39 +97,9 @@ angular.module('sheaker')
         });
     };
 
-    if ($location.search().text) {
-        $scope.query = $location.search().query;
+    $scope.clearQuery = function () {
+        $scope.searchParams.query = '';
         $scope.search();
-    }
-
-    $scope.$watch('query', function(newValue) {
-        $location.search('query', newValue);
-    });
-
-    $scope.loadUsers = function () {
-        if ($scope.usersList.busy || $scope.usersList.noMoreApi) {
-            return;
-        }
-
-        $scope.usersList.busy = true;
-
-        User.query({limit:$scope.usersList.limit, offset:$scope.usersList.offset, sortBy:'created_at', order:'desc'}).$promise
-        .then(function(usersList) {
-            $scope.usersList.busy = false;
-
-            if (usersList.length === 0) {
-                $scope.usersList.noMoreApi = true;
-                return;
-            }
-
-            $scope.usersList.users = $scope.usersList.users.concat(usersList);
-            $scope.usersList.limit *= 2;
-            $scope.usersList.offset += usersList.length;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
-        });
     };
 
     $scope.openModal = function (user) {
