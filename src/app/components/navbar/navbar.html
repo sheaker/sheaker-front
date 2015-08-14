@@ -5,7 +5,7 @@
         </a>
     </div>
     <ul class="nav nav-home">
-        <li ng-hide="user" ng-class="{active: isActive('/login')}"><a href="#/login">Login</a></li>
+        <li ng-hide="connectedUser" ng-class="{active: isActive('/login')}"><a href="#/login">Login</a></li>
         <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">Profile</a></li>
         <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
     </ul>

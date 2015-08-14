@@ -16,15 +16,18 @@
                                 </div>
                             </div>
                         </form>
+
                         <div class="charge-photo text-center padding-top-general-box" id="userInfos" ng-show="checkedUser">
                             <img ng-src="{{ checkedUser.photo || '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png' }}" height="240" width="320">
                             <div class="client-infos">{{ checkedUser.first_name }} {{ checkedUser.last_name }}</div>
                         </div>
+
                         <span ng-show="checkedUser.isBirthday">
                             <div class="birthday-box color-yellow">
                                 <span class="fa fa-birthday-cake"></span><br>
-                        </div>
+                            </div>
                         </span>
+
                         <div class="col-lg-offset-3 col-lg-6 content-checkin text-center" ng-show="checkedUser">
                             <div ng-class="{'color-green': checkedUser.active_membership_id, 'color-red': !checkedUser.active_membership_id}">
                                 <div ng-class="{'fa fa-unlock-alt': checkedUser.active_membership_id, 'fa fa-lock': !checkedUser.active_membership_id}"></div>

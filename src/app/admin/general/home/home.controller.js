@@ -18,7 +18,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the stats.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the gym.'});
     });
 
     // Retrieve last checkins
@@ -28,7 +28,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the last checkins.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the last checkins.'});
     });
 
     // Retrieve new clients
@@ -38,7 +38,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new clients.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of new clients.'});
     });
 
     // Retrieve ending memberships
@@ -48,7 +48,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the ending memberships.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the ending memberships.'});
     });
 
     // Retrieve new memberships
@@ -61,7 +61,7 @@ angular.module('sheaker')
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment.', exp: 5000});
+                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment for new memberships stats.', exp: 5000});
             });
         });
 
@@ -69,7 +69,7 @@ angular.module('sheaker')
     })
     .catch(function(error) {
         console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the new memberships.'});
+        $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the new memberships.'});
     });
 });
 
