@@ -4,11 +4,6 @@
 angular.module('sheaker')
 .controller('HomeAdminCtrl', function ($rootScope, $scope, $location, User, Payment, Checkin) {
 
-    var now = moment();
-    var today = moment().startOf('day');
-    var statsToFurtherDate = moment().add(3, 'day').endOf('day');
-    var statsToPreviousDate = moment().subtract(3, 'day').startOf('day');
-
     $scope.staffMember = [0, 0, 0, 0];
 
     // Retrieve members stats

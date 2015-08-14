@@ -37,7 +37,7 @@ angular.module('sheaker')
 
         User.queryPayments({user_id: user.id}).$promise
         .then(function(payments) {
-            angular.forEach(payments, function(payment, key) {
+            angular.forEach(payments, function(payment) {
                 $scope.totalPricePayments += payment.price;
             });
 

@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('ClientsStatisticsCtrl', function ($scope, User) {
+.controller('ClientsStatisticsCtrl', function ($rootScope, $scope, User) {
 
     $scope.newclients = {
         labels: {},
@@ -23,7 +23,7 @@ angular.module('sheaker')
         $scope.newclients.labels = response.labels;
         $scope.newclients.data = response.data;
     })
-    .catch(function() {
+    .catch(function(error) {
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the graphs.'});
     });
@@ -33,7 +33,7 @@ angular.module('sheaker')
         $scope.genderRep.labels = response.labels;
         $scope.genderRep.data = response.data;
     })
-    .catch(function() {
+    .catch(function(error) {
         console.log(error);
         $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the graphs.'});
     });
