@@ -8,9 +8,11 @@ angular.module('sheaker')
 
     $scope.checkin = function (userId) {
         User.get({user_id: userId}, function(user) {
-            user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
             if (user.photo) {
                 user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
+            }
+            else {
+                user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
             }
 
             user.isBirthday = moment(user.birthdate).month() === today.month() && moment(user.birthdate).date() === today.date();

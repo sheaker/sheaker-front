@@ -13,9 +13,11 @@ angular.module('sheaker')
     $scope.lastCheckins = [];
 
     User.get({user_id: $routeParams.id}, function(user) {
-        user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
-        if ($scope.formDatas.photo) {
+        if (user.photo) {
             user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
+        }
+        else {
+            user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
         }
 
         $scope.totalPricePayments = 0;
