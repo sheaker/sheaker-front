@@ -13,7 +13,7 @@ angular.module('sheaker')
     $scope.lastCheckins = [];
 
     User.get({user_id: $routeParams.id}, function(user) {
-        user.photo = '//static.sheaker.com/sheaker-gym/assets/images/user_unknow.png';
+        user.photo = '//static.sheaker.com/sheaker-front/assets/images/user_unknow.png';
         if ($scope.formDatas.photo) {
             user.photo = GYM_API_URL + '/' + user.photo;
         }
