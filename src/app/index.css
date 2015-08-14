@@ -367,16 +367,27 @@ body {
 .charge-photo{
     font-size: 35px;
     margin-bottom: 20px;
-    border: 10px solid #eff1f4;
     height: 240px;
     width: 320px;
     margin-left: auto;
     margin-right: auto;
+    border-radius:15px;
+}
+
+.charge-photo img{
+    border-radius:15px;
+    border: 10px solid #eff1f4;
 }
 
 .charge-photo-checkin{
     font-size: 35px;
     margin-bottom: 20px;
+    border-radius:15px;
+}
+
+.charge-photo-checkin img{
+    border-radius:15px;
+    border: 10px solid #eff1f4;
 }
 
 .general-box {
