@@ -367,6 +367,12 @@ body {
 .charge-photo{
     font-size: 35px;
     margin-bottom: 20px;
+    border: 10px solid #eff1f4;
+    height: 240px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .general-box {
