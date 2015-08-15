@@ -2,7 +2,7 @@
     'use strict';
 
 angular.module('sheaker')
-.controller('HomeStatisticsCtrl', function ($scope) {
+.controller('HomeStatisticsCtrl', function () {
 
 });
 

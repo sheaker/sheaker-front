@@ -4,9 +4,15 @@
 angular.module('sheaker')
 .controller('CheckinCtrl', function ($rootScope, $scope, $location, $timeout, User, Payment, STATIC_URL) {
 
-    var today = moment();
+    var today = moment(),
+        timeoutPromise = null;
 
     $scope.checkin = function (userId) {
+        if (timeoutPromise) {
+            $timeout.cancel(timeoutPromise);
+            $scope.checkedUser = null;
+        }
+
         User.get({user_id: userId}, function(user) {
             if (user.photo) {
                 user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
@@ -37,10 +43,10 @@ angular.module('sheaker')
 
             $scope.checkedUser = user;
 
-            $timeout(function() {
+            timeoutPromise = $timeout(function() {
                 $scope.checkedUser = null;
                 $scope.checkedUserId = null;
-            }, 5000);
+            }, 7000);
         }, function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'This user doesn\'t exist.', exp: 5000});
