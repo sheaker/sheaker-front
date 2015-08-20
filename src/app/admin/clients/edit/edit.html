@@ -17,7 +17,12 @@
                 <div class="title-small">General Informations</div>
                 <div class="content-box">
                     <div class="form-group">
-                        <label for="InputId">Id:</label> <label for="InputCustomId">Custom Id ?</label> <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
+                        <label for="InputId">Id:</label>
+                        <div class="pull-right">
+                            <label for="InputCustomId">Custom ID ?</label>
+                            <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
+                            <i popover-template="helpPopoverCustomID.templateUrl" popover-title="{{helpPopoverCustomID.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                        </div>
                         <input type="number" class="form-control" id="InputId" name="id" ng-hide="hasCustomId" ng-model="formDatas.id" disabled>
                         <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-show="hasCustomId" ng-model="formDatas.custom_id" ng-unique="id" placeholder="Enter the Id you want, if it's available">
                     </div>
@@ -120,6 +125,9 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="exampleInputAmount" access="Admin">Access level</label>
+                                    <div class="pull-right" access="Admin">
+                                        <i popover-template="helpPopoverAccessLevel.templateUrl" popover-title="{{helpPopoverAccessLevel.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                    </div>
                                     <select class="form-control" ng-model="formDatas.user_level" access="Admin">
                                         <option value="0">Client</option>
                                         <option value="1">User</option>
@@ -129,6 +137,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>
+                                    <div class="pull-right">
+                                        <i popover-template="helpPopoverSponsor.templateUrl" popover-title="{{helpPopoverSponsor.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                    </div>
                                     <input type="number" class="form-control" id="InputSponsor" min="0" name="sponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                                 </div>
 

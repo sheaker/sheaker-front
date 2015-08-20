@@ -32,6 +32,8 @@ angular.module('sheaker')
             $scope.formDatas.user_level = 0;
         }
 
+        $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
+
         var snapshotCanvas = $window.document.querySelector('#snapshot');
         if (snapshotCanvas) {
             snapshotCanvas.width = 320;
@@ -136,6 +138,21 @@ angular.module('sheaker')
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
             $scope.isButtonSaveDisabled = false;
         });
+    };
+
+    $scope.helpPopoverCustomID = {
+        templateUrl: 'app/components/modal/help-popover-customID.template.html',
+        title: 'Custom ID'
+    };
+
+    $scope.helpPopoverAccessLevel = {
+        templateUrl: 'app/components/modal/help-popover-accessLevel.template.html',
+        title: 'Access level'
+    };
+
+    $scope.helpPopoverCustomDays = {
+        templateUrl: 'app/components/modal/help-popover-customDays.template.html',
+        title: 'Sponsor'
     };
 });
 

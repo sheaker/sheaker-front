@@ -33,6 +33,7 @@
                             <label for="InputDays">Days</label>
                             <div class="pull-right"><label for="InputCustomId">Custom Days?</label>
                                 <input type="checkbox" ng-checked="beenCustomDays" ng-click="beenCustomDays = !beenCustomDays; setNumberDaysInput();">
+                                <i popover-template="helpPopoverCustomDays.templateUrl" popover-title="{{helpPopoverCustomDays.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
                             </div>
                             <div class="form-group" ng-hide="beenCustomDays">
                                 <select class="form-control" id="InputDays" ng-model="formDatas.days" convert-to-number ng-change="paymentCal.calculateEndDate()">

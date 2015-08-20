@@ -9,6 +9,7 @@ angular.module('sheaker')
     $scope.hasCustomId = false;
 
     $scope.formDatas.user_level = 0;
+    $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
 
     $scope.birthdateCal = {
         today: new Date(),
@@ -93,6 +94,21 @@ angular.module('sheaker')
             $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
             $scope.isButtonSaveDisabled = false;
         });
+    };
+
+    $scope.helpPopoverCustomID = {
+        templateUrl: 'app/components/modal/help-popover-customID.template.html',
+        title: 'Custom ID'
+    };
+
+    $scope.helpPopoverAccessLevel = {
+        templateUrl: 'app/components/modal/help-popover-accessLevel.template.html',
+        title: 'Access level'
+    };
+
+    $scope.helpPopoverSponsor = {
+        templateUrl: 'app/components/modal/help-popover-sponsor.template.html',
+        title: 'Sponsor'
     };
 });
 

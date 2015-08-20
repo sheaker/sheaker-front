@@ -119,6 +119,11 @@ angular.module('sheaker')
     $scope.isSelPayment = function(payment) {
         return $scope.selectedPayment === payment;
     };
+
+    $scope.helpPopoverCustomDays = {
+        templateUrl: 'app/components/modal/help-popover-customDays.template.html',
+        title: 'Custom Days'
+    };
 });
 
 })();

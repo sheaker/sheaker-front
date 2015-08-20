@@ -453,7 +453,7 @@ body {
 .general-box > .fa {
     padding-top: 20px;
     padding-right: 20px;
-    font-size: 50px;
+    font-size: 45px;
 }
 
 .box-title > .fa {
@@ -462,14 +462,23 @@ body {
     font-size: 50px;
 }
 
-.general-box .fa {
-    font-size: 40px;
-}
-
 .general-box .content-box {
     padding-left : 20px;
     padding-right : 20px;
     overflow-x: hidden;
+}
+
+.content-box .fa {
+    font-size: 25px;
+}
+
+.content-box .help {
+    margin-left: 10px;
+    margin-top: -8px;
+}
+
+.content-box .popover{
+    width: 100%; /* Max Width of the popover (depending on the container!) */
 }
 
 .general-box .reduce-paddin-box {
