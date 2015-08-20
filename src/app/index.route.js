@@ -20,7 +20,7 @@ angular.module('sheaker')
                         })
                         .catch(function(error) {
                             if (error.status === 404 || error.status === 0) {
-                                $window.location.href = FRONTEND_URL + '/register/' + address[0];
+                                $window.location.href = FRONTEND_URL + '#/create/' + address[0];
                             }
                         });
                     }
