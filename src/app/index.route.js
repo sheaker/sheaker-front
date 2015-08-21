@@ -10,6 +10,10 @@
             sheaker: getSheakerAuthorization
         };
 
+        var customRouteProvider = {
+            when: customWhen
+        };
+
         /*@ngInject*/
         function getSheakerAuthorization($rootScope, $location, $window, FRONTEND_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
@@ -19,32 +23,32 @@
                     .then(function (infos) {
                         if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
                             return SheakerClient.get({subdomain: address[0]}).$promise
-                                .then(function(client) {
-                                    $rootScope.client = {
-                                        id: client.id,
-                                        name: client.name
-                                    };
-                                })
-                                .catch(function(error) {
-                                    if (error.status === 404 || error.status === 0) {
-                                        $window.location.href = FRONTEND_URL + '#/create/' + address[0];
-                                    }
-                                });
                         }
-                });
+                    })
+                    .then(function(client) {
+                        $rootScope.client = {
+                            id: client.id,
+                            name: client.name
+                        };
+                    })
+                    .catch(function(error) {
+                        if (error.status === 404 || error.status === 0) {
+                            $window.location.href = FRONTEND_URL + '#/create/' + address[0];
+                        }
+                    });
             }
         }
 
-        var customRouteProvider = angular.extend({}, $routeProvider, {
-            when: function(path, route) {
-                route.resolve = (route.resolve) ? route.resolve : {};
-                angular.extend(route.resolve, customResolves);
-                $routeProvider.when(path, route);
-                return this;
-            }
-        });
+        function customWhen(path, route) {
+            route.resolve = (route.resolve) ? route.resolve : {};
+            angular.extend(route.resolve, customResolves);
+            $routeProvider.when(path, route);
+            return this;
+        }
 
-        customRouteProvider
+        var sheakerRouteProvider = angular.extend({}, $routeProvider, customRouteProvider);
+
+        sheakerRouteProvider
             .when('/', {
                 templateUrl: 'app/home/home.html',
                 controller: 'HomeCtrl'
