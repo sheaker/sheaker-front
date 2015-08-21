@@ -11,7 +11,6 @@
             'webcam',
             'ui.bootstrap.showErrors',
             'infinite-scroll',
-            'angular-spinkit',
             'headroom',
             'chart.js',
             'angular-loading-bar'

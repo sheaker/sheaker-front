@@ -13,7 +13,6 @@
     "webcam-directive": "~3.0.0",
     "angular-bootstrap-show-errors": "~2.3.0",
     "ngInfiniteScroll": "~1.2.0",
-    "angular-spinkit": "~0.3.3",
     "headroom.js": "~0.7.0",
     "angular-chart.js": "~0.7.3",
     "angular-touch": "~1.4.4",
