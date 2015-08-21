@@ -22,7 +22,7 @@
                 return SheakerInfos.get().$promise
                     .then(function (infos) {
                         if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
-                            return SheakerClient.get({subdomain: address[0]}).$promise
+                            return SheakerClient.get({subdomain: address[0]}).$promise;
                         }
                     })
                     .then(function(client) {

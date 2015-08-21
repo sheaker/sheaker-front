@@ -6,8 +6,15 @@
         .directive('access', access);
 
     function access($rootScope, Authorization) {
+        var directive = {
+            link:     linkFct,
+            restrict: 'A',
+        };
 
-        var linkFct = function (scope, element, attrs) {
+        return directive;
+        ////////////
+
+        function linkFct(scope, element, attrs) {
             var makeVisible = function () {
                 element.removeClass('hidden');
             },
@@ -28,15 +35,11 @@
                 }
             },
             roles = attrs.access.split(',');
+
             if (roles.length > 0) {
                 determineVisibility(true);
             }
-        };
-
-        return {
-            restrict: 'A',
-            link: linkFct
-        };
+        }
     }
 
 })();

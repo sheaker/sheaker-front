@@ -13,7 +13,8 @@
             'infinite-scroll',
             'angular-spinkit',
             'headroom',
-            'chart.js'
+            'chart.js',
+            'angular-loading-bar'
         ]);
 
 })();

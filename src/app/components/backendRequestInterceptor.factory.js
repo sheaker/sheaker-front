@@ -3,17 +3,17 @@
 
     angular
         .module('sheaker')
-        .factory('GymAPIRequestInterceptor', GymAPIRequestInterceptor);
+        .factory('backendRequestInterceptor', backendRequestInterceptor);
 
-    function GymAPIRequestInterceptor($rootScope, BACKEND_URL) {
+    function backendRequestInterceptor($rootScope, BACKEND_URL) {
         var service = {
-            request: request
+            request: appendIdClient
         };
 
         return service;
         ////////////
 
-        function request(req) {
+        function appendIdClient(req) {
             if (req.url && req.url.indexOf(BACKEND_URL) !== -1 &&
                 req.url.indexOf(BACKEND_URL + '/clients') === -1 &&
                 req.url.indexOf(BACKEND_URL + '/infos') === -1) {
