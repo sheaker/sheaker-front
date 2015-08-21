@@ -6,7 +6,7 @@
         .factory('Checkin', Checkin);
 
     function Checkin($resource, BACKEND_URL) {
-        var Checkin, actions;
+        var resource, actions;
 
         actions = {
             statsNew: {
@@ -16,8 +16,8 @@
             }
         };
 
-        Checkin = $resource(BACKEND_URL + '/checkins/:checkin_id', {checkin_id: '@checkin_id'}, actions);
-        return Checkin;
+        resource = $resource(BACKEND_URL + '/checkins/:checkin_id', {checkin_id: '@checkin_id'}, actions);
+        return resource;
     }
 
 })();

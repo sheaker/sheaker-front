@@ -6,7 +6,7 @@
         .factory('Payment', Payment);
 
     function Payment($resource, BACKEND_URL) {
-        var Payment, actions;
+        var resource, actions;
 
         actions = {
             statsNew: {
@@ -21,8 +21,8 @@
             }
         };
 
-        Payment = $resource(BACKEND_URL + '/payments/:payment_id', {payment_id: '@payment_id'}, actions);
-        return Payment;
+        resource = $resource(BACKEND_URL + '/payments/:payment_id', {payment_id: '@payment_id'}, actions);
+        return resource;
     }
 
 })();

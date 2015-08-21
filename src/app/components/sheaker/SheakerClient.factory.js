@@ -6,7 +6,7 @@
         .factory('SheakerClient', SheakerClient);
 
     function SheakerClient($resource, BACKEND_URL) {
-        var SheakerClient, actions;
+        var resource, actions;
 
         actions = {
             get: {
@@ -14,8 +14,8 @@
             }
         };
 
-        SheakerClient = $resource(BACKEND_URL + '/clients', {subdomain: '@subdomain'}, actions);
-        return SheakerClient;
+        resource = $resource(BACKEND_URL + '/clients', {subdomain: '@subdomain'}, actions);
+        return resource;
     }
 
 })();

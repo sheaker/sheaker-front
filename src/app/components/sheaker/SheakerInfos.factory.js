@@ -6,7 +6,7 @@
         .factory('SheakerInfos', SheakerInfos);
 
     function SheakerInfos($resource, BACKEND_URL) {
-        var SheakerInfos, actions;
+        var resource, actions;
 
         actions = {
             get: {
@@ -14,8 +14,8 @@
             }
         };
 
-        SheakerInfos = $resource(BACKEND_URL + '/infos', null, actions);
-        return SheakerInfos;
+        resource = $resource(BACKEND_URL + '/infos', null, actions);
+        return resource;
     }
 
 })();

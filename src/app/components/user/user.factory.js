@@ -6,7 +6,7 @@
         .factory('User', User);
 
     function User($resource, BACKEND_URL) {
-        var User, actions;
+        var resource, actions;
 
         actions = {
             login: {
@@ -69,8 +69,8 @@
             }
         };
 
-        User = $resource(BACKEND_URL + '/users/:user_id', {user_id: '@user_id'}, actions);
-        return User;
+        resource = $resource(BACKEND_URL + '/users/:user_id', {user_id: '@user_id'}, actions);
+        return resource;
     }
 
 })();
