@@ -1,9 +1,12 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.controller('HomeStatisticsCtrl', function () {
+    angular
+        .module('sheaker')
+        .controller('HomeStatisticsCtrl', HomeStatisticsCtrl);
 
-});
+    function HomeStatisticsCtrl() {
+
+    }
 
 })();

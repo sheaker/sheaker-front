@@ -1,18 +1,21 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.factory('SheakerInfos', function ($resource, BACKEND_URL) {
-    var SheakerInfos, actions;
+    angular
+        .module('sheaker')
+        .factory('SheakerInfos', SheakerInfos);
 
-    actions = {
-        get: {
-            skipAuthorization: true
-        }
-    };
+    function SheakerInfos($resource, BACKEND_URL) {
+        var SheakerInfos, actions;
 
-    SheakerInfos = $resource(BACKEND_URL + '/infos', null, actions);
-    return SheakerInfos;
-});
+        actions = {
+            get: {
+                skipAuthorization: true
+            }
+        };
+
+        SheakerInfos = $resource(BACKEND_URL + '/infos', null, actions);
+        return SheakerInfos;
+    }
 
 })();

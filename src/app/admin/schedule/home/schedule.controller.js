@@ -1,9 +1,12 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.controller('ScheduleCtrl', function () {
+    angular
+        .module('sheaker')
+        .controller('ScheduleCtrl', ScheduleCtrl);
 
-});
+    function ScheduleCtrl() {
+
+    }
 
 })();

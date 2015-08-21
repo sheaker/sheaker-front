@@ -1,159 +1,162 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.controller('EditClientCtrl', function ($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
+    angular
+        .module('sheaker')
+        .controller('EditClientCtrl', EditClientCtrl);
 
-    $scope.isButtonSaveDisabled = false;
+    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
-    if (typeof $routeParams.id === 'undefined') {
-        $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to edit before going to this page.'});
-        $location.path('/admin/clients/search');
-    }
+        $scope.isButtonSaveDisabled = false;
 
-    // Setup a channel to receive a video property
-    // with a reference to the video element
-    $scope.channel = {};
-
-    $scope.webcam = {
-        isLoading: true,
-        hasErrors: false,
-        wantNewPhoto: false
-    };
-
-    User.get({user_id: $routeParams.id}, function(user) {
-        $scope.hasCustomId = user.custom_id ? true : false;
-        $scope.formDatas = user;
-
-        if ($scope.formDatas.birthdate === '0000-00-00') {
-            $scope.formDatas.birthdate = null;
-        }
-        if ($scope.formDatas.user_level === null) {
-            $scope.formDatas.user_level = 0;
+        if (typeof $routeParams.id === 'undefined') {
+            $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to edit before going to this page.'});
+            $location.path('/admin/clients/search');
         }
 
-        $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
+        // Setup a channel to receive a video property
+        // with a reference to the video element
+        $scope.channel = {};
 
-        var snapshotCanvas = $window.document.querySelector('#snapshot');
-        if (snapshotCanvas) {
-            snapshotCanvas.width = 320;
-            snapshotCanvas.height = 240;
+        $scope.webcam = {
+            isLoading: true,
+            hasErrors: false,
+            wantNewPhoto: false
+        };
 
-            var ctxSnapshot = snapshotCanvas.getContext('2d');
-            var imageObj = new Image();
+        User.get({user_id: $routeParams.id}, function(user) {
+            $scope.hasCustomId = user.custom_id ? true : false;
+            $scope.formDatas = user;
 
-            imageObj.onload = function() {
-                ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
-            };
-
-            imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
-            if ($scope.formDatas.photo) {
-                imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
+            if ($scope.formDatas.birthdate === '0000-00-00') {
+                $scope.formDatas.birthdate = null;
             }
-        }
-    }, function(error) {
-        console.log(error);
-        $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
-        $location.path('/admin/clients/search');
-    });
+            if ($scope.formDatas.user_level === null) {
+                $scope.formDatas.user_level = 0;
+            }
 
-    // Birthdate Calendar
-    $scope.birthdateCal = {
-        today: new Date(),
-        isOpen: false,
-        openCal: function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $scope.birthdateCal.isOpen = true;
-        }
-    };
-
-    var webcam = null,
-        patOpts = {x: 0, y: 0, w: 25, h: 25};
-
-    $scope.onWebcamError = function(err) {
-        $scope.webcam.hasErrors = err;
-    };
-
-    $scope.onWebcamSuccess = function() {
-        $scope.webcam.isLoading = false;
-        webcam = $scope.channel.video;
-        patOpts.w = webcam.width;
-        patOpts.h = webcam.height;
-    };
-
-    var getImageFromVideo = function(x, y, w, h) {
-        var hiddenCanvas = $window.document.createElement('canvas');
-        hiddenCanvas.width = webcam.width;
-        hiddenCanvas.height = webcam.height;
-
-        var ctx = hiddenCanvas.getContext('2d');
-        ctx.drawImage(webcam, 0, 0, webcam.width, webcam.height);
-        return ctx.getImageData(x, y, w, h);
-    };
-
-    $scope.takeSnapshot = function() {
-        if (webcam) {
-            $scope.webcam.wantNewPhoto = false;
+            $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
 
             var snapshotCanvas = $window.document.querySelector('#snapshot');
             if (snapshotCanvas) {
-                // Delete the previous canvas and recreate another
-                var parent = snapshotCanvas.parentNode;
-                var newElement = $window.document.createElement('canvas');
-                newElement.id = 'snapshotActual';
-                parent.insertBefore(newElement, snapshotCanvas);
-                parent.removeChild(snapshotCanvas);
+                snapshotCanvas.width = 320;
+                snapshotCanvas.height = 240;
 
-                snapshotCanvas = newElement;
-                snapshotCanvas.width = webcam.width;
-                snapshotCanvas.height = webcam.height;
-
-                var imgData = getImageFromVideo(patOpts.x, patOpts.y, patOpts.w, patOpts.h);
                 var ctxSnapshot = snapshotCanvas.getContext('2d');
-                ctxSnapshot.putImageData(imgData, 0, 0);
+                var imageObj = new Image();
 
-                $scope.formDatas.photo = snapshotCanvas.toDataURL('image/jpeg', 0.5);
+                imageObj.onload = function() {
+                    ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+                };
+
+                imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
+                if ($scope.formDatas.photo) {
+                    imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
+                }
             }
-        }
-    };
-
-    // Submit new user to API
-    $scope.editUser = function () {
-        if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
-            $scope.formDatas.custom_id = 0;
-        }
-        $scope.isButtonSaveDisabled = true;
-
-        User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
-        .then(function(/*user*/) {
-            $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
-            $scope.isButtonSaveDisabled = false;
-            $location.hash('top');
-            $anchorScroll();
-            $location.hash('');
-        })
-        .catch(function(error) {
+        }, function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
-            $scope.isButtonSaveDisabled = false;
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
+            $location.path('/admin/clients/search');
         });
-    };
 
-    $scope.helpPopoverCustomID = {
-        templateUrl: 'app/components/modal/help-popover-customID.template.html',
-        title: 'Custom ID'
-    };
+        // Birthdate Calendar
+        $scope.birthdateCal = {
+            today: new Date(),
+            isOpen: false,
+            openCal: function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.birthdateCal.isOpen = true;
+            }
+        };
 
-    $scope.helpPopoverAccessLevel = {
-        templateUrl: 'app/components/modal/help-popover-accessLevel.template.html',
-        title: 'Access level'
-    };
+        var webcam = null,
+            patOpts = {x: 0, y: 0, w: 25, h: 25};
 
-    $scope.helpPopoverCustomDays = {
-        templateUrl: 'app/components/modal/help-popover-customDays.template.html',
-        title: 'Sponsor'
-    };
-});
+        $scope.onWebcamError = function(err) {
+            $scope.webcam.hasErrors = err;
+        };
+
+        $scope.onWebcamSuccess = function() {
+            $scope.webcam.isLoading = false;
+            webcam = $scope.channel.video;
+            patOpts.w = webcam.width;
+            patOpts.h = webcam.height;
+        };
+
+        var getImageFromVideo = function(x, y, w, h) {
+            var hiddenCanvas = $window.document.createElement('canvas');
+            hiddenCanvas.width = webcam.width;
+            hiddenCanvas.height = webcam.height;
+
+            var ctx = hiddenCanvas.getContext('2d');
+            ctx.drawImage(webcam, 0, 0, webcam.width, webcam.height);
+            return ctx.getImageData(x, y, w, h);
+        };
+
+        $scope.takeSnapshot = function() {
+            if (webcam) {
+                $scope.webcam.wantNewPhoto = false;
+
+                var snapshotCanvas = $window.document.querySelector('#snapshot');
+                if (snapshotCanvas) {
+                    // Delete the previous canvas and recreate another
+                    var parent = snapshotCanvas.parentNode;
+                    var newElement = $window.document.createElement('canvas');
+                    newElement.id = 'snapshotActual';
+                    parent.insertBefore(newElement, snapshotCanvas);
+                    parent.removeChild(snapshotCanvas);
+
+                    snapshotCanvas = newElement;
+                    snapshotCanvas.width = webcam.width;
+                    snapshotCanvas.height = webcam.height;
+
+                    var imgData = getImageFromVideo(patOpts.x, patOpts.y, patOpts.w, patOpts.h);
+                    var ctxSnapshot = snapshotCanvas.getContext('2d');
+                    ctxSnapshot.putImageData(imgData, 0, 0);
+
+                    $scope.formDatas.photo = snapshotCanvas.toDataURL('image/jpeg', 0.5);
+                }
+            }
+        };
+
+        // Submit new user to API
+        $scope.editUser = function () {
+            if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
+                $scope.formDatas.custom_id = 0;
+            }
+            $scope.isButtonSaveDisabled = true;
+
+            User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
+            .then(function(/*user*/) {
+                $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
+                $scope.isButtonSaveDisabled = false;
+                $location.hash('top');
+                $anchorScroll();
+                $location.hash('');
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
+                $scope.isButtonSaveDisabled = false;
+            });
+        };
+
+        $scope.helpPopoverCustomID = {
+            templateUrl: 'app/components/modal/help-popover-customID.template.html',
+            title: 'Custom ID'
+        };
+
+        $scope.helpPopoverAccessLevel = {
+            templateUrl: 'app/components/modal/help-popover-accessLevel.template.html',
+            title: 'Access level'
+        };
+
+        $scope.helpPopoverCustomDays = {
+            templateUrl: 'app/components/modal/help-popover-customDays.template.html',
+            title: 'Sponsor'
+        };
+    }
 
 })();

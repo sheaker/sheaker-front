@@ -1,39 +1,42 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.directive('access', function ($rootScope, Authorization) {
+    angular
+        .module('sheaker')
+        .directive('access', access);
 
-    var linkFct = function (scope, element, attrs) {
-        var makeVisible = function () {
-            element.removeClass('hidden');
-        },
-        makeHidden = function () {
-            element.addClass('hidden');
-        },
-        determineVisibility = function (resetFirst) {
-            var result;
-            if (resetFirst) {
-                makeVisible();
+    function access($rootScope, Authorization) {
+
+        var linkFct = function (scope, element, attrs) {
+            var makeVisible = function () {
+                element.removeClass('hidden');
+            },
+            makeHidden = function () {
+                element.addClass('hidden');
+            },
+            determineVisibility = function (resetFirst) {
+                var result;
+                if (resetFirst) {
+                    makeVisible();
+                }
+
+                result = Authorization.authorize(true, roles, attrs.accessPermissionType);
+                if (result === $rootScope.authVars.authorised.authorised) {
+                    makeVisible();
+                } else {
+                    makeHidden();
+                }
+            },
+            roles = attrs.access.split(',');
+            if (roles.length > 0) {
+                determineVisibility(true);
             }
+        };
 
-            result = Authorization.authorize(true, roles, attrs.accessPermissionType);
-            if (result === $rootScope.authVars.authorised.authorised) {
-                makeVisible();
-            } else {
-                makeHidden();
-            }
-        },
-        roles = attrs.access.split(',');
-        if (roles.length > 0) {
-            determineVisibility(true);
-        }
-    };
-
-    return {
-        restrict: 'A',
-        link: linkFct
-    };
-});
+        return {
+            restrict: 'A',
+            link: linkFct
+        };
+    }
 
 })();
