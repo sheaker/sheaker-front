@@ -144,17 +144,17 @@
         };
 
         $scope.helpPopoverCustomID = {
-            templateUrl: 'app/components/modal/help-popover-customID.template.html',
+            templateUrl: 'app/components/admin/modal/help-popover-customID.template.html',
             title: 'Custom ID'
         };
 
         $scope.helpPopoverAccessLevel = {
-            templateUrl: 'app/components/modal/help-popover-accessLevel.template.html',
+            templateUrl: 'app/components/admin/modal/help-popover-accessLevel.template.html',
             title: 'Access level'
         };
 
         $scope.helpPopoverCustomDays = {
-            templateUrl: 'app/components/modal/help-popover-customDays.template.html',
+            templateUrl: 'app/components/admin/modal/help-popover-customDays.template.html',
             title: 'Sponsor'
         };
     }

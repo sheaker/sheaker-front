@@ -110,7 +110,7 @@
         $scope.openModal = function (user) {
             $modal.open({
                 animation: true,
-                templateUrl: 'app/components/modal/deleteUser.template.html',
+                templateUrl: 'app/components/admin/modal/deleteUser.template.html',
                 controller: 'ModalInstanceCtrl',
                 size: 'md',
                 resolve: {

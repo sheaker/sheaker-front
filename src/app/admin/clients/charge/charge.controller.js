@@ -124,7 +124,7 @@
         };
 
         $scope.helpPopoverCustomDays = {
-            templateUrl: 'app/components/modal/help-popover-customDays.template.html',
+            templateUrl: 'app/components/admin/modal/help-popover-customDays.template.html',
             title: 'Custom Days'
         };
     }
