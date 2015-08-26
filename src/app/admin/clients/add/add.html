@@ -17,14 +17,6 @@
                     <span class="color-grey fa fa-list pull-right"></span>
                     <div class="title-small">General Informations</div>
                     <div class="content-box">
-                        <div class="pull-right">
-                            <label for="InputCustomId">Custom ID ?</label>
-                            <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
-                            <i popover-template="helpPopoverCustomID.templateUrl" popover-title="{{helpPopoverCustomID.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
-                        </div>
-                        <div class="form-group" ng-show="hasCustomId">
-                            <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-model="formDatas.custom_id" ng-unique="id" placeholder="Enter the Id you want, if it's available">
-                        </div>
                         <div class="form-group" show-errors>
                             <label for="InputFirstName">First Name</label>
                             <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.first_name" required>
@@ -150,7 +142,7 @@
                 </div> <!-- Details informations end -->
             </div>
             <div class="col-lg-offset-1 col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid || (hasCustomId && !formDatas.custom_id)">Add client</button>
+                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || addForm.$invalid">Add client</button>
             </div>
         </form>
     </div>

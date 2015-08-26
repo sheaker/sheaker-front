@@ -25,7 +25,6 @@
         };
 
         User.get({user_id: $routeParams.id}, function(user) {
-            $scope.hasCustomId = user.custom_id ? true : false;
             $scope.formDatas = user;
 
             if ($scope.formDatas.birthdate === '0000-00-00') {
@@ -123,9 +122,6 @@
 
         // Submit new user to API
         $scope.editUser = function () {
-            if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
-                $scope.formDatas.custom_id = 0;
-            }
             $scope.isButtonSaveDisabled = true;
 
             User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
@@ -141,11 +137,6 @@
                 $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
                 $scope.isButtonSaveDisabled = false;
             });
-        };
-
-        $scope.helpPopoverCustomID = {
-            templateUrl: 'app/components/admin/modal/help-popover-customID.template.html',
-            title: 'Custom ID'
         };
 
         $scope.helpPopoverAccessLevel = {

@@ -9,7 +9,6 @@
         $scope.formDatas = {};
 
         $scope.isButtonSaveDisabled = false;
-        $scope.hasCustomId = false;
 
         $scope.formDatas.user_level = 0;
         $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
@@ -77,16 +76,12 @@
 
         // Submit new user to API
         $scope.addUser = function () {
-            if ($scope.hasCustomId === false && $scope.formDatas.custom_id) {
-                $scope.formDatas.customId = 0;
-            }
             $scope.isButtonSaveDisabled = true;
 
             User.save($scope.formDatas).$promise
             .then(function(user) {
-                $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + (user.custom_id || user.id) + '.'});
+                $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + user.id + '.'});
                 $scope.formDatas = {};
-                $scope.hasCustomId = false;
                 $scope.isButtonSaveDisabled = false;
                 $location.hash('top');
                 $anchorScroll();
@@ -97,11 +92,6 @@
                 $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
                 $scope.isButtonSaveDisabled = false;
             });
-        };
-
-        $scope.helpPopoverCustomID = {
-            templateUrl: 'app/components/admin/modal/help-popover-customID.template.html',
-            title: 'Custom ID'
         };
 
         $scope.helpPopoverAccessLevel = {
