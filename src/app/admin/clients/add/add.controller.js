@@ -5,7 +5,7 @@
         .module('sheaker')
         .controller('AddClientCtrl', AddClientCtrl);
 
-    function AddClientCtrl($rootScope, $scope, $window, $location, $anchorScroll, User) {
+    function AddClientCtrl($rootScope, $scope, $window, $location, $anchorScroll, $filter, User) {
         $scope.formDatas = {};
 
         $scope.isButtonSaveDisabled = false;
@@ -77,6 +77,8 @@
         // Submit new user to API
         $scope.addUser = function () {
             $scope.isButtonSaveDisabled = true;
+
+            $scope.formDatas.birthdate = $filter('date')($scope.formDatas.birthdate, 'yyyy-MM-dd');
 
             User.save($scope.formDatas).$promise
             .then(function(user) {

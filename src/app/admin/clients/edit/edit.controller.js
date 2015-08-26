@@ -5,7 +5,7 @@
         .module('sheaker')
         .controller('EditClientCtrl', EditClientCtrl);
 
-    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
+    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;
 
@@ -51,6 +51,8 @@
                 imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
                 if ($scope.formDatas.photo) {
                     imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
+                    // We just need the photo to be displayed, we refill that variable just in case of modifications
+                    $scope.formDatas.photo = '';
                 }
             }
         }, function(error) {
@@ -123,6 +125,8 @@
         // Submit new user to API
         $scope.editUser = function () {
             $scope.isButtonSaveDisabled = true;
+
+            $scope.formDatas.birthdate = $filter('date')($scope.formDatas.birthdate, 'yyyy-MM-dd');
 
             User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
             .then(function(/*user*/) {
