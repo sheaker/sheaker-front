@@ -1,52 +1,55 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.controller('SettingsCtrl', function ($scope) {
+    angular
+        .module('sheaker')
+        .controller('SettingsCtrl', SettingsCtrl);
 
-    $scope.isButtonSaveDisabled = false;
+    function SettingsCtrl($scope) {
 
-    $scope.formDatas = {};
+        $scope.isButtonSaveDisabled = false;
 
-    $scope.days = [
-        {id: 0, day: 'Monday'},
-        {id: 1, day: 'Tuesday'},
-        {id: 2, day: 'Wednesday'},
-        {id: 3, day: 'Thursday'},
-        {id: 4, day: 'Friday'},
-        {id: 5, day: 'Saturday'},
-        {id: 6, day: 'Sunday'},
-    ];
+        $scope.formDatas = {};
 
-    $scope.mytime = new Date();
+        $scope.days = [
+            {id: 0, day: 'Monday'},
+            {id: 1, day: 'Tuesday'},
+            {id: 2, day: 'Wednesday'},
+            {id: 3, day: 'Thursday'},
+            {id: 4, day: 'Friday'},
+            {id: 5, day: 'Saturday'},
+            {id: 6, day: 'Sunday'},
+        ];
 
-    $scope.hstep = 1;
-    $scope.mstep = 15;
+        $scope.mytime = new Date();
 
-    $scope.options = {
-        hstep: [1, 2, 3],
-        mstep: [1, 5, 10, 15, 25, 30]
-    };
+        $scope.hstep = 1;
+        $scope.mstep = 15;
 
-    $scope.ismeridian = true;
-    $scope.toggleMode = function() {
-        $scope.ismeridian = ! $scope.ismeridian;
-    };
+        $scope.options = {
+            hstep: [1, 2, 3],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
 
-    $scope.update = function() {
-        var d = new Date();
-        d.setHours( 14 );
-        d.setMinutes( 0 );
-        $scope.mytime = d;
-    };
+        $scope.ismeridian = true;
+        $scope.toggleMode = function() {
+            $scope.ismeridian = ! $scope.ismeridian;
+        };
 
-    $scope.changed = function () {
-        //$log.log('Time changed to: ' + $scope.mytime);
-    };
+        $scope.update = function() {
+            var d = new Date();
+            d.setHours( 14 );
+            d.setMinutes( 0 );
+            $scope.mytime = d;
+        };
 
-    $scope.clear = function() {
-        $scope.mytime = null;
-    };
-});
+        $scope.changed = function () {
+            //$log.log('Time changed to: ' + $scope.mytime);
+        };
+
+        $scope.clear = function() {
+            $scope.mytime = null;
+        };
+    }
 
 })();

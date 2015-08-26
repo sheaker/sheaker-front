@@ -1,24 +1,33 @@
 (function() {
     'use strict';
 
-angular.module('sheaker')
-.directive('ngUnique', function($routeParams, User) {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, element, attrs, ngModel) {
-            element.bind('change paste keyup', function () {
+    angular
+        .module('sheaker')
+        .directive('ngUnique', ngUnique);
+
+    function ngUnique($routeParams, User) {
+        var directive = {
+            link:     linkFct,
+            require:  'ngModel',
+            restrict: 'A'
+        };
+
+        return directive;
+        ////////////
+
+        function linkFct(scope, element, attrs, ngModel) {
+            element.bind('change paste keyup', onUpdate);
+
+            function onUpdate() {
                 if (!ngModel || !element.val()) {
                     element.parent().removeClass('has-success').addClass('has-error');
                     ngModel.$setValidity('unique', false);
                     return;
                 }
-                var resourceObj = {};
+
                 var currentValue = element.val();
 
-                resourceObj[attrs.ngUnique] = currentValue;
-
-                User.get(resourceObj).$promise
+                User.get({user_id: currentValue}).$promise
                 .then(function () {
                     //Ensure value that being checked hasn't changed
                     if (currentValue === element.val() && currentValue !== $routeParams.id) {
@@ -33,9 +42,8 @@ angular.module('sheaker')
                         element.parent().removeClass('has-error').addClass('has-success');
                     }
                 });
-            });
+            }
         }
-    };
-});
+    }
 
 })();

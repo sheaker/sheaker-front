@@ -17,9 +17,8 @@
                 <div class="title-small">General Informations</div>
                 <div class="content-box">
                     <div class="form-group">
-                        <label for="InputId">Id:</label> <label for="InputCustomId">Custom Id ?</label> <input type="checkbox" ng-checked="hasCustomId" ng-click="hasCustomId = !hasCustomId">
-                        <input type="number" class="form-control" id="InputId" name="id" ng-hide="hasCustomId" ng-model="formDatas.id" disabled>
-                        <input type="number" class="form-control" id="InputCustomId" name="customId" min="0" ng-show="hasCustomId" ng-model="formDatas.custom_id" ng-unique="id" placeholder="Enter the Id you want, if it's available">
+                        <label for="InputId">Id:</label>
+                        <input type="number" class="form-control" id="InputId" name="id" ng-model="formDatas.id" disabled>
                     </div>
 
                     <div class="form-group" show-errors>
@@ -120,6 +119,9 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="exampleInputAmount" access="Admin">Access level</label>
+                                    <div class="pull-right" access="Admin">
+                                        <i popover-template="helpPopoverAccessLevel.templateUrl" popover-title="{{helpPopoverAccessLevel.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                    </div>
                                     <select class="form-control" ng-model="formDatas.user_level" access="Admin">
                                         <option value="0">Client</option>
                                         <option value="1">User</option>
@@ -129,6 +131,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>
+                                    <div class="pull-right">
+                                        <i popover-template="helpPopoverSponsor.templateUrl" popover-title="{{helpPopoverSponsor.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                    </div>
                                     <input type="number" class="form-control" id="InputSponsor" min="0" name="sponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                                 </div>
 
@@ -140,7 +145,7 @@
                 </div>
             </div><!-- Details informations end -->
             <div class="col-lg-offset-1 col-lg-10" id="ButtonAdd">
-                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || editForm.$invalid || (hasCustomId && !formDatas.custom_id)">Edit client</button>
+                <button type="submit" class="col-lg-12 btn color-background-blue color-white btn-lg btn-block button-submit" ng-disabled="isButtonSaveDisabled || editForm.$invalid">Edit client</button>
             </div>
         </form>
 
