@@ -358,6 +358,37 @@ body {
 
 /* Box css */
 
+.box {
+    color: #2b3645;
+}
+
+.box-separator {
+    margin-top: 25px;
+}
+
+.box > .only-number {
+    text-align: center;
+}
+
+.box > .only-number > h1 {
+    font-size: 50px;
+    opacity: 0.6;
+}
+
+.box > .only-number > h2 {
+    margin-top: -5px;
+    font-size: 28px;
+    font-weight: 900;
+    opacity: 0.7;
+}
+
+.box > .only-number > h3 {
+    margin-top: -8px;
+    font-size: 17px;
+    font-weight: 900;
+    opacity: 0.3;
+}
+
 .client-datas{
     color: #1E88E5;
     font-weight: bold;
