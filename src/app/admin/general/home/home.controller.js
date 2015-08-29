@@ -9,65 +9,56 @@
 
         $scope.staffMember = [0, 0, 0, 0];
 
-        // Retrieve members stats
-        User.stats().$promise
-        .then(function (stats) {
-            $scope.stats = stats;
+        $scope.users = {
+            active: 0,
+            new:    0
+        };
+
+        $scope.gains = {
+            today:     0,
+            yesterday: 0,
+            week:      0,
+            month:     0
+        };
+
+        $scope.checkins = {
+            check: 0
+        };
+
+        Payment.getGainsFromDate({from_date: '24/08/2015', to_date: '24/08/2015'}).$promise
+        .then(function (gains) {
+            $scope.gains.today = gains.total.value;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the gym.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
         });
 
-        // Retrieve last checkins
-        Checkin.statsNew().$promise
-        .then(function (checkins) {
-            $scope.lastCheckins = checkins;
+        Payment.getGainsFromDate({from_date: '31/07/2015', to_date: '31/07/2015'}).$promise
+        .then(function (gains) {
+            $scope.gains.yesterday = gains.total.value;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the last checkins.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of yesterday.'});
         });
 
-        // Retrieve new clients
-        User.statsNew().$promise
-        .then(function (clients) {
-            $scope.newClients = clients;
+        Payment.getGainsFromDate({from_date: '25/07/2015', to_date: '01/08/2015'}).$promise
+        .then(function (gains) {
+            $scope.gains.week = gains.total.value;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of new clients.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this week.'});
         });
 
-        // Retrieve ending memberships
-        Payment.statsEnding().$promise
-        .then(function (memberships) {
-            $scope.endingMemberships = memberships;
+        Payment.getGainsFromDate({from_date: '01/07/2015', to_date: '31/08/2015'}).$promise
+        .then(function (gains) {
+            $scope.gains.month = gains.total.value;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the ending memberships.'});
-        });
-
-        // Retrieve new memberships
-        Payment.statsNew().$promise
-        .then(function (memberships) {
-            memberships.forEach(function (user) {
-                Payment.get({payment_id: user.active_membership_id}).$promise
-                .then(function(payment) {
-                    user.days = payment.days;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment for new memberships stats.', exp: 5000});
-                });
-            });
-
-            $scope.newMemberships = memberships;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the new memberships.'});
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this month.'});
         });
     }
 

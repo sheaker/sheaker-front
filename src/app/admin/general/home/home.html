@@ -12,25 +12,25 @@
         <div class="col-lg-12">
             <div class="col-lg-3 box">
                 <div class="only-number">
-                    <h1 class="color-blue">{{ "912" | currency : symbol : 0}}</h1>
+                    <h1 class="color-blue">{{ gains.today | currency : symbol : 0}}</h1>
                     <h3>Gain today</h3>
                 </div>
             </div>
             <div class="col-lg-3 box">
                 <div class="only-number">
-                    <h1 class="color-blue">{{ "2322" | currency : symbol : 0}}</h1>
+                    <h1 class="color-blue">{{ gains.yesterday | currency : symbol : 0}}</h1>
                     <h3>Gain yesterday</h3>
                 </div>
             </div>
             <div class="col-lg-3 box">
                 <div class="only-number">
-                    <h1 class="color-blue">{{ "5643" | currency : symbol : 0}}</h1>
+                    <h1 class="color-blue">{{ gains.week | currency : symbol : 0}}</h1>
                     <h3>Gain this week</h3>
                 </div>
             </div>
             <div class="col-lg-3 box">
                 <div class="only-number">
-                    <h1 class="color-blue">{{ "9845" | currency : symbol : 0}}</h1>
+                    <h1 class="color-blue">{{ gains.month | currency : symbol : 0}}</h1>
                     <h3>Gain this month</h3>
                 </div>
             </div>
@@ -42,21 +42,21 @@
             <div class="col-lg-6 box">
                 <div class="only-number">
                     <h1 class="color-yellow"><i class="fa fa-street-view"></i></h1>
-                    <h2>567</h2>
+                    <h2>{{ checkins.check }}</h2>
                     <h3>check-in</h3>
                 </div>
             </div>
             <div class="col-lg-6 box">
                 <div class="only-number">
                     <h1 class="color-yellow"><i class="fa fa-users"></i></h1>
-                    <h2>135</h2>
+                    <h2>{{ users.active }}</h2>
                     <h3>total actif users</h3>
                 </div>
             </div>
             <div class="col-lg-6 box">
                 <div class="only-number">
                     <h1 class="color-yellow"><i class="fa fa-user-plus"></i></h1>
-                    <h2>+13</h2>
+                    <h2>{{ users.new }}</h2>
                     <h3>new clients</h3>
                 </div>
             </div>
