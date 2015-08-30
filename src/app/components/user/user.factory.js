@@ -49,6 +49,10 @@
                 method: 'GET',
                 url:     BACKEND_URL + '/users/stats/active'
             },
+            getNewUsersFromDate: {
+                method: 'GET',
+                url:     BACKEND_URL + '/users/stats/new'
+            },
             graphNew: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/new'

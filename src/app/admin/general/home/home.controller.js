@@ -28,6 +28,24 @@
             check: 0
         };
 
+        User.getActiveUsers().$promise
+        .then(function (res) {
+            $scope.users.active = res.total;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
+        });
+
+        User.getNewUsersFromDate({from_date: startOfWeekDate}).$promise
+        .then(function (res) {
+            $scope.users.new = res.total;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving new users of this week.'});
+        });
+
         Payment.getGainsFromDate({from_date: todayDate}).$promise
         .then(function (gains) {
             $scope.gains.today = gains.total.value;
@@ -62,6 +80,15 @@
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this month.'});
+        });
+
+        Checkin.getCheckinsFromDate({from_date: startOfWeekDate}).$promise
+        .then(function (res) {
+            $scope.checkins.check = res.total;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins of this week.'});
         });
     }
 
