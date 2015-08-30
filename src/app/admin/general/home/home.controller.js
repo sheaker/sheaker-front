@@ -9,7 +9,7 @@
 
         var todayDate        = moment().format('DD/MM/YYYY'),
             yesterdayDate    = moment().subtract(1, 'day').format('DD/MM/YYYY'),
-            startOfWeekDate  = moment().startOf('week').format('DD/MM/YYYY'),
+            startOfWeekDate  = moment().startOf('isoweek').format('DD/MM/YYYY'),
             startOfMonthDate = moment().startOf('month').format('DD/MM/YYYY');
 
         $scope.users = {
