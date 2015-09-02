@@ -15,21 +15,35 @@
         };
 
         /*@ngInject*/
-        function getSheakerAuthorization($rootScope, $location, $window, FRONTEND_URL, SheakerClient, SheakerInfos) {
+        function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, User) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
                 return SheakerInfos.get().$promise
                     .then(function (infos) {
                         if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
-                            return SheakerClient.get({subdomain: address[0]}).$promise;
+                            return SheakerClient.get({subdomain: address[0]}).$promise
+                                .then(function (client) {
+                                    $rootScope.client = {
+                                        id: client.id,
+                                        name: client.name
+                                    };
+
+                                    var token = $window.localStorage.getItem('token');
+                                    if (token && jwtHelper.isTokenExpired(token)) {
+                                        return User.renewToken({oldToken: token}).$promise;
+                                    }
+                                });
                         }
                     })
-                    .then(function(client) {
-                        $rootScope.client = {
-                            id: client.id,
-                            name: client.name
-                        };
+                    .then(function(response) {
+                        if (!response) {
+                            return;
+                        }
+
+                        $window.localStorage.setItem('token', response.token);
+                        var decodedToken = jwtHelper.decodeToken(response.token);
+                        $rootScope.connectedUser = decodedToken.user;
                     })
                     .catch(function(error) {
                         if (error.status === 404 || error.status === 0) {
