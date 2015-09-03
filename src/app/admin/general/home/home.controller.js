@@ -11,7 +11,8 @@
             startOfYesterday = moment().subtract(1, 'day').startOf('day').format(),
             endOfYesterday   = moment().subtract(1, 'day').endOf('day').format(),
             startOfWeek      = moment().startOf('isoweek').format(),
-            startOfMonth     = moment().startOf('month').format();
+            startOfMonth     = moment().startOf('month').format(),
+            startOfYear      = moment().startOf('year').format();
 
         $scope.users = {
             active: 0,
@@ -27,6 +28,15 @@
 
         $scope.checkins = {
             check: 0
+        };
+
+        $scope.checkinByMonths = {
+            labels: {},
+            data: {},
+            series: ['Checkins by months'],
+            onClick: function (points, evt) {
+                console.log(points, evt);
+            }
         };
 
         User.getActiveUsers().$promise
@@ -90,6 +100,16 @@
         .catch(function(error) {
             console.log(error);
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins of this week.'});
+        });
+
+        Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'month'}).$promise
+        .then(function(response) {
+            $scope.checkinByMonths.labels = response.labels;
+            $scope.checkinByMonths.data = response.data;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins graphs.'});
         });
     }
 

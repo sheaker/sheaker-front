@@ -12,6 +12,10 @@
             getCheckinsFromDate: {
                 method: 'GET',
                 url:     BACKEND_URL + '/checkins/stats/new'
+            },
+            getCheckinsFromDateGraph: {
+                method: 'GET',
+                url:     BACKEND_URL + '/checkins/graph/new'
             }
         };
 
