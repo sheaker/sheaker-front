@@ -8,7 +8,9 @@
         <div class="title">
             <span class="color-green fa fa-home"></span>Home
         </div>
+
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+
         <!----- Exemple Gain ---->
         <div class="col-lg-12">
             <div class="col-lg-3 box">
@@ -56,7 +58,7 @@
                 <div class="only-number">
                     <h1 class="color-yellow"><i class="fa fa-users"></i></h1>
                     <h2>{{ users.active }}</h2>
-                    <h3>Actif users</h3>
+                    <h3>Active users</h3>
                 </div>
             </div>
             <div class="col-lg-6 box">
