@@ -7,10 +7,11 @@
 
     function HomeAdminCtrl($rootScope, $scope, $location, User, Payment, Checkin) {
 
-        var todayDate        = moment().format('DD/MM/YYYY'),
-            yesterdayDate    = moment().subtract(1, 'day').format('DD/MM/YYYY'),
-            startOfWeekDate  = moment().startOf('isoweek').format('DD/MM/YYYY'),
-            startOfMonthDate = moment().startOf('month').format('DD/MM/YYYY');
+        var today            = moment().startOf('day').format(),
+            startOfYesterday = moment().subtract(1, 'day').startOf('day').format(),
+            endOfYesterday   = moment().subtract(1, 'day').endOf('day').format(),
+            startOfWeek      = moment().startOf('isoweek').format(),
+            startOfMonth     = moment().startOf('month').format();
 
         $scope.users = {
             active: 0,
@@ -37,7 +38,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
         });
 
-        User.getNewUsersFromDate({from_date: startOfWeekDate}).$promise
+        User.getNewUsersFromDate({from_date: startOfWeek}).$promise
         .then(function (res) {
             $scope.users.new = res.total;
         })
@@ -46,7 +47,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving new users of this week.'});
         });
 
-        Payment.getGainsFromDate({from_date: todayDate}).$promise
+        Payment.getGainsFromDate({from_date: today}).$promise
         .then(function (gains) {
             $scope.gains.today = gains.total.value;
         })
@@ -55,7 +56,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
         });
 
-        Payment.getGainsFromDate({from_date: yesterdayDate, to_date: yesterdayDate}).$promise
+        Payment.getGainsFromDate({from_date: startOfYesterday, to_date: endOfYesterday}).$promise
         .then(function (gains) {
             $scope.gains.yesterday = gains.total.value;
         })
@@ -64,7 +65,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of yesterday.'});
         });
 
-        Payment.getGainsFromDate({from_date: startOfWeekDate}).$promise
+        Payment.getGainsFromDate({from_date: startOfWeek}).$promise
         .then(function (gains) {
             $scope.gains.week = gains.total.value;
         })
@@ -73,7 +74,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this week.'});
         });
 
-        Payment.getGainsFromDate({from_date: startOfMonthDate}).$promise
+        Payment.getGainsFromDate({from_date: startOfMonth}).$promise
         .then(function (gains) {
             $scope.gains.month = gains.total.value;
         })
@@ -82,7 +83,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this month.'});
         });
 
-        Checkin.getCheckinsFromDate({from_date: startOfWeekDate}).$promise
+        Checkin.getCheckinsFromDate({from_date: today}).$promise
         .then(function (res) {
             $scope.checkins.check = res.total;
         })
