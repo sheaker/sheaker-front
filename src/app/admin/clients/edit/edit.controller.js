@@ -148,8 +148,8 @@
             title: 'Access level'
         };
 
-        $scope.helpPopoverCustomDays = {
-            templateUrl: 'app/components/admin/modal/help-popover-customDays.template.html',
+        $scope.helpPopoverSponsor = {
+            templateUrl: 'app/components/admin/modal/help-popover-sponsor.template.html',
             title: 'Sponsor'
         };
     }
