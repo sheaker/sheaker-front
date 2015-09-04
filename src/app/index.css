@@ -384,6 +384,14 @@ td {
     padding-top: 10px;
 }
 
+.box .little-margin {
+    margin-top: 20px;
+}
+
+.box .big-margin {
+    margin-top: 140px;
+}
+
 .client-datas{
     color: #1E88E5;
     font-weight: bold;

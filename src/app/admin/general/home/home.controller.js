@@ -33,6 +33,10 @@
         $scope.checkinByMonths = {
             labels: {},
             data: {},
+            colours: [{
+                fillColor: 'rgba(229, 57, 53, 0.3)',
+                strokeColor: 'rgba(229, 57, 53, 0.6)',
+            }],
             series: ['Checkins by months'],
             onClick: function (points, evt) {
                 console.log(points, evt);
