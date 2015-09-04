@@ -7,31 +7,12 @@
 
     function ClientsStatisticsCtrl($rootScope, $scope, User) {
 
-        $scope.newclients = {
-            labels: {},
-            data: {},
-            series: ['New users by months'],
-            onClick: function (points, evt) {
-                console.log(points, evt);
-            }
-        };
-
         $scope.genderRep = {
             labels: {},
             data: {}
         };
 
-        User.graphNew().$promise
-        .then(function(response) {
-            $scope.newclients.labels = response.labels;
-            $scope.newclients.data = response.data;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the graphs.'});
-        });
-
-        User.graphSex().$promise
+        User.getGenderRepartition().$promise
         .then(function(response) {
             $scope.genderRep.labels = response.labels;
             $scope.genderRep.data = response.data;

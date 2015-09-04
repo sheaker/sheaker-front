@@ -53,11 +53,11 @@
                 method: 'GET',
                 url:     BACKEND_URL + '/users/stats/new'
             },
-            graphNew: {
+            getNewUsers: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/new'
             },
-            graphSex: {
+            getGenderRepartition: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/sex'
             }
