@@ -102,7 +102,7 @@
             $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins of this week.'});
         });
 
-        Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'month'}).$promise
+        Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'week'}).$promise
         .then(function(response) {
             $scope.checkinByMonths.labels = response.labels;
             $scope.checkinByMonths.data = response.data;
