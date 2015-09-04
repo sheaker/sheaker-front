@@ -24,9 +24,9 @@
             }
         };
 
-        if ($window.localStorage.getItem('token') && !$rootScope.connectedUser) {
-            // If the user refresh the page with F5, redecode again the token.
-            var decodedToken = jwtHelper.decodeToken($window.localStorage.getItem('token'));
+        var token = $window.localStorage.getItem('token');
+        if (token && !$rootScope.connectedUser) {
+            var decodedToken = jwtHelper.decodeToken(token);
             $rootScope.connectedUser = decodedToken.user;
         }
 
@@ -51,8 +51,15 @@
                 }
             }
 
+            var token = $window.localStorage.getItem('token');
+            if (token && jwtHelper.isTokenExpired(token)) {
+                delete $rootScope.connectedUser;
+                $window.localStorage.setItem('token', '');
+                $location.path('/login');
+            }
+
             // Avoid a connected user to go to login and register pages
-            if ($rootScope.connectedUseruser && next.originalPath === '/login') {
+            if ($rootScope.connectedUser && next.originalPath === '/login') {
                 $location.path(previous ? previous.originalPath : '/').replace();
             }
         });
