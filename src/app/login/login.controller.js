@@ -23,12 +23,12 @@
                     }
                 }
                 else {
-                    $rootScope.alerts.push({type: 'danger', msg: 'Username or password are wrong.'});
+                    $rootScope.alertsMsg.error('Username or password are wrong.');
                 }
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'Error while trying to connect.'});
+                $rootScope.alertsMsg.error('Error while trying to connect.');
             });
         };
     }

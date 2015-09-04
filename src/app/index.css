@@ -612,3 +612,32 @@ td {
     position: relative;
     display: block;
 }
+
+.chart {
+    opacity: 0.5;
+}
+
+.ui-notification {
+    opacity: 0.9;
+    width: 450px;
+}
+
+.ui-notification > .message {
+    font-size: 20px;
+}
+
+.ui-notification.success {
+    background-color: #7CB342;
+}
+
+.ui-notification.error {
+    background-color: #E53935;
+}
+
+.ui-notification.warning {
+    background-color: #FFB300;
+}
+
+.ui-notification.primary {
+    background-color: #1E88E5;
+}

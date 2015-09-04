@@ -19,11 +19,11 @@
 
             User.delete({user_id: user.id}).$promise
             .then(function(user) {
-                $rootScope.alerts.push({type: 'success', msg: user.first_name + ' ' + user.last_name + ' has been deleted.'});
+                $rootScope.alertsMsg.success(user.first_name + ' ' + user.last_name + ' has been deleted.');
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'Error while deleting the user.'});
+                $rootScope.alertsMsg.error('Error while deleting the user.');
             });
         };
     }
@@ -58,7 +58,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving queried the users.'});
+                $rootScope.alertsMsg.error('Error while retrieving queried the users.');
             });
         };
 
@@ -98,7 +98,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the users.'});
+                $rootScope.alertsMsg.error('Error while retrieving the users.');
             });
         };
 

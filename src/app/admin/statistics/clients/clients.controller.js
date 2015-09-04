@@ -19,7 +19,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving the graphs.'});
+            $rootScope.alertsMsg.error('Error while retrieving the graphs.');
         });
     }
 

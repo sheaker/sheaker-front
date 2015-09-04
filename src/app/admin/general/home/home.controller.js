@@ -30,12 +30,18 @@
             check: 0
         };
 
+        $scope.chartOptions = {
+        scaleShowVerticalLines: false,
+        scaleShowHorizontalLines: false,
+        };
+
         $scope.checkinByMonths = {
             labels: {},
             data: {},
             colours: [{
                 fillColor: 'rgba(229, 57, 53, 0.3)',
-                strokeColor: 'rgba(229, 57, 53, 0.6)',
+                strokeColor: 'rgba(229, 57, 53, 0.8)',
+                pointColor: "rgba(229, 57, 53,0.8)"
             }],
             series: ['Checkins by months'],
             onClick: function (points, evt) {
@@ -49,7 +55,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
+            $rootScope.alertsMsg.error('Error while retrieving gains of today.');
         });
 
         User.getNewUsersFromDate({from_date: startOfWeek}).$promise
@@ -58,7 +64,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving new users of this week.'});
+            $rootScope.alertsMsg.error('Error while retrieving new users of this week.');
         });
 
         Payment.getGainsFromDate({from_date: today}).$promise
@@ -67,7 +73,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of today.'});
+            $rootScope.alertsMsg.error('Error while retrieving gains of today.');
         });
 
         Payment.getGainsFromDate({from_date: startOfYesterday, to_date: endOfYesterday}).$promise
@@ -76,7 +82,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of yesterday.'});
+            $rootScope.alertsMsg.error('Error while retrieving gains of today.');
         });
 
         Payment.getGainsFromDate({from_date: startOfWeek}).$promise
@@ -85,7 +91,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this week.'});
+            $rootScope.alertsMsg.error('Error while retrieving gains of this week.');
         });
 
         Payment.getGainsFromDate({from_date: startOfMonth}).$promise
@@ -94,7 +100,7 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving gains of this month.'});
+            $rootScope.alertsMsg.error('Error while retrieving gains of this month.');
         });
 
         Checkin.getCheckinsFromDate({from_date: today}).$promise
@@ -103,17 +109,21 @@
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins of this week.'});
+            $rootScope.alertsMsg.error('Error while retrieving checkins of this week.');
         });
 
         Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'week'}).$promise
         .then(function(response) {
-            $scope.checkinByMonths.labels = response.labels;
+            var newLabels=[];
+            for(var i=0;i<response.labels.length;i++){
+                newLabels.push('');
+            }
+            $scope.checkinByMonths.labels=newLabels;
             $scope.checkinByMonths.data = response.data;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving checkins graphs.'});
+            $rootScope.alertsMsg.error('Error while retrieving checkins graphs.');
         });
     }
 

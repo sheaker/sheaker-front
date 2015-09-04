@@ -82,7 +82,7 @@
 
             User.save($scope.formDatas).$promise
             .then(function(user) {
-                $rootScope.alerts.push({type: 'success', msg: 'The new user has been created with id: ' + user.id + '.'});
+                $rootScope.alertsMsg.success('The new user has been created with id: ' + user.id + '.');
                 $scope.formDatas = {};
                 $scope.isButtonSaveDisabled = false;
                 $location.hash('top');
@@ -91,7 +91,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
+                $rootScope.alertsMsg.error('An error happen while submitting new user.');
                 $scope.isButtonSaveDisabled = false;
             });
         };

@@ -10,7 +10,7 @@
         $scope.isButtonSaveDisabled = false;
 
         if (typeof $routeParams.id === 'undefined') {
-            $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to charge before going to this page.'});
+            $rootScope.alertsMsg.warning('Please search a user to charge before going to this page.');
             $location.path('/admin/clients/search');
         }
 
@@ -48,14 +48,14 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
+                $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
             });
 
             $scope.user = user;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user informations.'});
+            $rootScope.alertsMsg.error('An error happen while retrieving user informations.');
         });
 
         $scope.setNumberDaysInput = function () {
@@ -93,7 +93,7 @@
             .then(function(payment) {
                 $scope.user.payments.push(payment);
 
-                $rootScope.alerts.push({type: 'success', msg: 'The user has been charged.'});
+                $rootScope.alertsMsg.success('The user has been charged.');
                 $location.hash('top');
                 $anchorScroll();
                 $location.hash('');
@@ -101,7 +101,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new charge.'});
+                $rootScope.alertsMsg.error('An error happen while submitting new charge.');
                 $scope.isButtonSaveDisabled = false;
             });
         };
