@@ -12,6 +12,10 @@
             getGainsFromDate: {
                 method: 'GET',
                 url:     BACKEND_URL + '/payments/stats/gains'
+            },
+            getGainsGraph: {
+                method: 'GET',
+                url:     BACKEND_URL + '/payments/graph/gains'
             }
         };
 
