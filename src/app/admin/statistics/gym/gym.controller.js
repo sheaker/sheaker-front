@@ -6,17 +6,14 @@
         .controller('GymStatisticsCtrl', GymStatisticsCtrl);
 
     function GymStatisticsCtrl($rootScope, $scope, User) {
+        var startOfYear = moment().startOf('year').format();
 
         $scope.newUsers = {
             labels: {},
-            data: {},
-            series: ['New users by months'],
-            onClick: function (points, evt) {
-                console.log(points, evt);
-            }
+            data: {}
         };
 
-        User.getNewUsers().$promise
+        User.getNewUsers({interval: 'month', from_date: startOfYear}).$promise
         .then(function(response) {
             $scope.newUsers.labels = response.labels;
             $scope.newUsers.data = response.data;
