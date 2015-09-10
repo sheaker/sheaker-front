@@ -12,7 +12,7 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <!----- Exemple Gain ---->
-        <div class="col-lg-12">
+        <div class="col-lg-12" access="Admin">
             <div class="col-lg-3 box">
                 <div class="only-number">
                     <h1 class="color-blue">{{ gains.today | currency : symbol : 0}}</h1>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <!-- End Exemple Gain --->
-        <div class="col-lg-12 box-separator"></div>
+        <div class="col-lg-12 box-separator" access="Admin"></div>
         <!-- Exemple clients -->
         <div class="col-lg-4">
             <div class="col-lg-6 box">
