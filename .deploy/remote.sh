@@ -1,12 +1,11 @@
 APP_NAME=sheaker-front
 
-TEMP_DIR=/tmp/$APP_NAME
+TEMP_DIR=/tmp/$APP_NAME/dist
 PROD_DIR=/var/www/sheaker.com/$APP_NAME
 PROD_NAME=$(date +%s)
 
 chown ubuntu:www-data $TEMP_DIR
 
-mkdir $PROD_DIR/$PROD_NAME
 cp -pr $TEMP_DIR $PROD_DIR/$PROD_NAME
 
 cd $PROD_DIR

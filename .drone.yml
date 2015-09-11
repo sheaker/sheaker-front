@@ -10,8 +10,8 @@ deploy:
   ssh:
     target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front
     artifacts:
-      - dist
-    cmd: cd /tmp/sheaker-front; .deploy/remote.sh
+      - GITARCHIVE
+    cmd: cd /tmp; tar -zxf sheaker-front.tar.gz; cd sheaker-front; .deploy/remote.sh
     when:
       branch: master
 
