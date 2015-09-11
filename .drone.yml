@@ -11,7 +11,7 @@ deploy:
     target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front
     artifacts:
       - dist
-    cmd: .deploy/remote.sh
+    cmd: cd /tmp/sheaker-front; .deploy/remote.sh
     when:
       branch: master
 
