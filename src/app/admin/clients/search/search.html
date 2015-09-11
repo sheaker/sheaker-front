@@ -29,20 +29,20 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody class= "color-background-white">
+                <tbody class="color-background-white">
                     <tr ng-repeat="u in users">
                         <td>{{ u.id }}</td>
                         <td>{{ u.first_name }}</td>
                         <td>{{ u.last_name }}</td>
                         <td>
-                            <i class="fa fa-star fa-lg color-yellow" ng-show="u.user_level"></i>
-                            <i class="fa fa-check fa-lg color-green" ng-show="u.active_membership_id && !u.user_level"></i>
-                            <i class="fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && !u.user_level"></i>
+                            <i class="center-membership-icone fa fa-star fa-lg color-yellow" ng-show="u.user_level"></i>
+                            <i class="center-membership-icone fa fa-check fa-lg color-green" ng-show="u.active_membership_id && !u.user_level"></i>
+                            <i class="center-membership-icone fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && !u.user_level"></i>
                         </td>
                         <td>
-                            <a class="search-link" href="#/admin/clients/edit/{{ u.id }}" tooltip="Edit" tooltip-placement="left" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/review/{{ u.id }}" tooltip="Review" tooltip-placement="left"><span class="fa fa-user fa-lg color-blue"></span></a>
                             <a class="search-link" href="#/admin/clients/charge/{{ u.id }}" tooltip="Charge" tooltip-placement="top" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/review/{{ u.id }}" tooltip="Review" tooltip-placement="top"><span class="fa fa-user fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/edit/{{ u.id }}" tooltip="Edit" tooltip-placement="top" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
                             <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(u)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
                         </td>
                     </tr>

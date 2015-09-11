@@ -15,7 +15,7 @@
         };
 
         /*@ngInject*/
-        function getSheakerAuthorization($rootScope, $location, $window, FRONTEND_URL, SheakerClient, SheakerInfos) {
+        function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
@@ -25,7 +25,7 @@
                             return SheakerClient.get({subdomain: address[0]}).$promise;
                         }
                     })
-                    .then(function(client) {
+                    .then(function (client) {
                         $rootScope.client = {
                             id: client.id,
                             name: client.name

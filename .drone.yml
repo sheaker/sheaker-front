@@ -1,0 +1,23 @@
+image: node0.10
+
+script:
+  - npm install -g bower gulp
+  - npm install
+  - bower install
+  - gulp
+
+deploy:
+  ssh:
+    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front
+    artifacts:
+      - dist
+    cmd: cd /tmp/sheaker-front; .deploy/remote.sh
+    when:
+      branch: master
+
+notify:
+  slack:
+    webhook_url: 'https://hooks.slack.com/services/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'
+    on_started: false
+    on_success: true
+    on_failure: true

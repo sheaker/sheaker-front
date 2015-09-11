@@ -15,10 +15,10 @@
             <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
                 <div class="general-box">
                     <span class="color-grey fa fa-list pull-right"></span>
-                    <div class="title-small">General Informations</div>
+                    <h1>General Informations</h1>
                     <div class="content-box">
                         <div class="form-group" show-errors>
-                            <label for="InputFirstName">First Name</label>
+                            <label  for="InputFirstName">First Name</label>
                             <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.first_name" required>
                         </div>
 
@@ -59,21 +59,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row row-padding">
-                            <h3>Address</h3>
-                            <div class="form-group col-lg-12">
-                                <label for="InputAddressStreet">Street address</label>
-                                <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.address_street_1">
-                                <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.address_street_2">
-                            </div>
-                            <div class="form-group col-lg-8">
-                                <label for="InputAddressCity">City</label>
-                                <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label for="InputAddressZipCode">Zip code</label>
-                                <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
-                            </div>
+                        <h1>Address</h1>
+                        <div class="form-group col-lg-12">
+                            <label for="InputAddressStreet">Street address</label>
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.address_street_1">
+                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.address_street_2">
+                        </div>
+                        <div class="form-group col-lg-8">
+                            <label for="InputAddressCity">City</label>
+                            <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="InputAddressZipCode">Zip code</label>
+                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
                         </div>
                     </div>
                 </div>
@@ -82,7 +80,7 @@
             <div class="col-lg-5" id="Camera">
                 <div class="general-box">
                     <span class="color-grey fa fa-camera pull-right"></span>
-                    <div class="title-small">Photo</div>
+                    <h1>Photo</h1>
                     <div class="content-box">
                         <div class="webcam-loading text-center" ng-show="webcam.isLoading && !webcam.hasErrors">
                             <i class="fa fa-spinner fa-pulse"></i>
@@ -110,8 +108,8 @@
             <div class="col-lg-5" id="DetailsInformations">
                 <div class="general-box">
                     <span class="color-grey fa fa-paperclip pull-right"></span>
+                    <h1>Extra Informations</h1>
                     <div class="caption">
-                        <div class="title-small">Extra Informations</div>
                         <div class="content-box">
                             <div class="form-group">
                                 <div class="form-group">

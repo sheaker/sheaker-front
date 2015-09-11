@@ -12,71 +12,73 @@
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <form name="editForm" ng-submit="editUser()">
-            <div class="general-box col-lg-offset-1 col-lg-5" id="GeneralInformations">
-                <span class="color-grey fa fa-list pull-right"></span>
-                <div class="title-small">General Informations</div>
-                <div class="content-box">
-                    <div class="form-group">
-                        <label for="InputId">Id:</label>
-                        <input type="number" class="form-control" id="InputId" name="id" ng-model="formDatas.id" disabled>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.first_name" required>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.last_name" required>
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputPhoneNumber">Phone</label>
-                        <input type="text" class="form-control" id="InputPhoneNumber" name="phone" ng-model="formDatas.phone">
-                    </div>
-
-                    <div class="form-group" show-errors>
-                        <label for="InputEmail">Mail</label>
-                        <input type="email" class="form-control" id="InputMail" name="mail" ng-model="formDatas.mail">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="InputGender">Sex</label>
-                        <div class="form-inline">
-                            <label class="radio-inline">
-                                <input type="radio" id="InputGenderMale" name="genderRadios" ng-model="formDatas.gender" value="0"> Male
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="InputGenderFemale" name="genderRadios" ng-model="formDatas.gender" value="1"> Female
-                            </label>
+            <div class="col-lg-offset-1 col-lg-5" id="GeneralInformations">
+                <div class="general-box">
+                    <span class="color-grey fa fa-list pull-right"></span>
+                    <h1>General Informations</h1>
+                    <div class="content-box">
+                        <div class="form-group">
+                            <label for="InputId">Id:</label>
+                            <input type="number" class="form-control" id="InputId" name="id" ng-model="formDatas.id" disabled>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="InputBirthdate">Birthdate</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" datepicker-popup="dd MMM yyyy" is-open="birthdateCal.isOpen" disabled>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="birthdateCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
+                        <div class="form-group" show-errors>
+                            <label for="InputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="InputFirstName" name="firstName" ng-model="formDatas.first_name" required>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <h3>Address</h3>
-                        <div class="form-group col-lg-12">
-                            <label for="InputAddressStreet">Street address</label>
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.address_street_1">
-                            <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.address_street_2">
+                        <div class="form-group" show-errors>
+                            <label for="InputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="InputLastName" name="lastName" ng-model="formDatas.last_name" required>
                         </div>
-                        <div class="form-group col-lg-8">
-                            <label for="InputAddressCity">City</label>
-                            <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
+
+                        <div class="form-group" show-errors>
+                            <label for="InputPhoneNumber">Phone</label>
+                            <input type="text" class="form-control" id="InputPhoneNumber" name="phone" ng-model="formDatas.phone">
                         </div>
-                        <div class="form-group col-lg-4">
-                            <label for="InputAddressZipCode">Zip code</label>
-                            <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
+
+                        <div class="form-group" show-errors>
+                            <label for="InputEmail">Mail</label>
+                            <input type="email" class="form-control" id="InputMail" name="mail" ng-model="formDatas.mail">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputGender">Sex</label>
+                            <div class="form-inline">
+                                <label class="radio-inline">
+                                    <input type="radio" id="InputGenderMale" name="genderRadios" ng-model="formDatas.gender" value="0"> Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="InputGenderFemale" name="genderRadios" ng-model="formDatas.gender" value="1"> Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputBirthdate">Birthdate</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" datepicker-popup="dd MMM yyyy" is-open="birthdateCal.isOpen" disabled>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="birthdateCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <h1>Address</h1>
+                        <div class="form-group">
+                            <div class="form-group col-lg-12">
+                                <label for="InputAddressStreet">Street address</label>
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet1" name="addressStreet1" ng-model="formDatas.address_street_1">
+                                <input type="text" class="form-control field-address-street" id="InputAddressStreet2" name="addressStreet2" ng-model="formDatas.address_street_2">
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label for="InputAddressCity">City</label>
+                                <input type="text" class="form-control" id="InputAddressCity" name="city" ng-model="formDatas.city">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="InputAddressZipCode">Zip code</label>
+                                <input type="number" class="form-control" id="InputAddressZipCode" min="1" name="zip" ng-model="formDatas.zip">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
             <div class="col-lg-5" id="Camera">
                 <div class="general-box">
                     <span class="color-grey fa fa-camera pull-right"></span>
-                    <div class="title-small">Photo</div>
+                    <h1>Photo</h1>
                     <div class="content-box">
                         <div class="webcaminfos" ng-if="webcam.wantNewPhoto">
                             <div class="webcam-loading text-center" ng-show="webcam.isLoading && !webcam.hasErrors">
@@ -113,8 +115,8 @@
             <div class="col-lg-5" id="DetailsInformations">
                 <div class="general-box">
                     <span class="color-grey fa fa-paperclip pull-right"></span>
+                    <h1>Extra Informations</h1>
                     <div class="caption">
-                        <div class="title-small">Extra Informations</div>
                         <div class="content-box">
                             <div class="form-group">
                                 <div class="form-group">

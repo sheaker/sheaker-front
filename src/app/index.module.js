@@ -13,7 +13,8 @@
             'infinite-scroll',
             'headroom',
             'chart.js',
-            'angular-loading-bar'
+            'angular-loading-bar',
+            'ui-notification'
         ]);
 
 })();

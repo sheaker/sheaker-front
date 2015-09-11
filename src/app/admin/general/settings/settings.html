@@ -9,7 +9,17 @@
             <span class="color-blue fa fa-cog"></span>Settings
         </div>
 
-        <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+        <div class="container">
+            <div class="col-lg-offset-4 col-lg-4" id="SheakerMembership">
+                <div class="general-box">
+                    <div class="title-medium"><span class="fa fa-paint-brush"></span></div>
+                    <div class="content-box">
+                        <h1>We are working on this, please come back soon :)</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
         <div class="col-lg-offset-1 col-lg-5" id="General">
             <div class="general-box">
@@ -77,6 +87,6 @@
                 </div>
             </div>
             <button class="col-lg-12 btn btn-lg btn-primary pull-left button-submit" type="submit" ng-disabled="isButtonSaveDisabled">Save Settings</button>
-        </div>
+        </div>-->
     </div>
 </div>

@@ -8,7 +8,7 @@
     function ReviewClientCtrl($rootScope, $scope, $routeParams, $location, STATIC_URL, User) {
 
         if (typeof $routeParams.id === 'undefined') {
-            $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to review before going to this page.'});
+            $rootScope.alertsMsg.warning('Please search a user to review before going to this page.');
             $location.path('/admin/clients/search');
         }
 
@@ -35,7 +35,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user payments.'});
+                $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
             });
 
             User.queryCheckins({user_id: user.id}).$promise
@@ -44,7 +44,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving user checkins.'});
+                $rootScope.alertsMsg.error('An error happen while retrieving user checkins.');
             });
 
             $scope.user = user;
@@ -54,7 +54,7 @@
 
         }, function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
+            $rootScope.alertsMsg.error('Error while retriving the user informations.');
             $location.path('/admin/clients/search');
         });
 

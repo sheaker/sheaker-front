@@ -6,7 +6,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization) {
+    function runBlock($rootScope, $window, $location, $timeout, $interval, jwtHelper, Authorization, Notification) {
         $rootScope.client = {
             id: -1,
             name: ''
@@ -24,9 +24,9 @@
             }
         };
 
-        if ($window.localStorage.getItem('token') && !$rootScope.connectedUser) {
-            // If the user refresh the page with F5, redecode again the token.
-            var decodedToken = jwtHelper.decodeToken($window.localStorage.getItem('token'));
+        var token = $window.localStorage.getItem('token');
+        if (token && !$rootScope.connectedUser) {
+            var decodedToken = jwtHelper.decodeToken(token);
             $rootScope.connectedUser = decodedToken.user;
         }
 
@@ -51,30 +51,33 @@
                 }
             }
 
+            var token = $window.localStorage.getItem('token');
+            if (token && jwtHelper.isTokenExpired(token)) {
+                delete $rootScope.connectedUser;
+                $window.localStorage.setItem('token', '');
+                $location.path('/login');
+            }
+
             // Avoid a connected user to go to login and register pages
-            if ($rootScope.connectedUseruser && next.originalPath === '/login') {
+            if ($rootScope.connectedUser && next.originalPath === '/login') {
                 $location.path(previous ? previous.originalPath : '/').replace();
             }
         });
 
-        $rootScope.alerts = [];
-        $rootScope.closeAlert = function(index) {
-            $rootScope.alerts.splice(index, 1);
+        $rootScope.alertsMsg = {
+            success: function(alertMsg) {
+                Notification.success({message: alertMsg, positionY: 'bottom', positionX: 'right', delay: 6000});
+            },
+            error: function(alertMsg) {
+                Notification.error({message: alertMsg, positionY: 'bottom', positionX: 'right', delay: 5000});
+            },
+            primary: function(alertMsg) {
+                Notification.primary({message: alertMsg, positionY: 'bottom', positionX: 'right', delay: 6000});
+            },
+            warning: function(alertMsg) {
+                Notification.warning({message: alertMsg, positionY: 'bottom', positionX: 'right', delay: 5000});
+            }
         };
-        // Check every second if there is alerts to remove
-        // Alert expiration can be override by adding a 'exp' key with value in ms in the alert obj
-        $interval(function() {
-            $rootScope.alerts.forEach(function (element, index) {
-                var exp = 10000; // Default timeout
-                if (element.exp) {
-                    exp = element.exp;
-                }
-
-                $timeout(function() {
-                    $rootScope.closeAlert(index);
-                }, exp);
-            });
-        }, 1000);
     }
 
 })();

@@ -20,7 +20,7 @@
         <div class="col-lg-12" id="ClientDatas">
             <div class="general-box">
                 <span class="color-grey fa fa-folder-open pull-right"></span>
-                <div class="title-small client-datas">{{ user.id }} - {{ user.first_name }} {{ user.last_name }}</div>
+                <h1 class="client-datas">{{ user.id }} - {{ user.first_name }} {{ user.last_name }}</h1>
                 <div class="content-box">
                     <div class="col-lg-4">
                         <div class="charge-photo" id="userInfos">
@@ -93,7 +93,7 @@
         <div class="col-lg-6" id="PaymentsHistory">
             <div class="general-box">
                 <span class="color-grey fa fa-archive pull-right"></span>
-                <div class="title-small">Payment history</div>
+                <h1>Payment history</h1>
                 <div class="content-box">
                     <div class="table-responsive">
                         <div class="text-center" ng-hide="user.payments.length">
@@ -108,11 +108,11 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
+                                <tbody class="color-background-white" ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
                                     <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
                                         <td>{{ p.id }}</td>
                                         <td>{{ p.created_at | date: 'd MMM y' }}</td>
-                                        <td>{{ p.price | currency }}</td>
+                                        <td>{{ p.price | currency : symbol : 0 }}</td>
                                         <td><span class="color-blue glyphicon glyphicon-search"></span></td>
                                     </tr>
                                     <tr ng-switch-when="true">
@@ -143,7 +143,7 @@
                                 </tbody>
                             </table>
                     </div>
-                    Total : {{ totalPricePayments | currency }}
+                    <h3>Total : {{ totalPricePayments | currency : symbol : 0 }}</h3>
                 </div>
             </div>
         </div>
@@ -151,7 +151,7 @@
         <div class="col-lg-6" id="CheckInHistory">
             <div class="general-box">
                 <span class="color-grey fa fa-street-view pull-right"></span>
-                <div class="title-small">Check-in history</div>
+                <h1>Check-in history</h1>
                 <div class="content-box">
                     <div class="table-responsive">
                         <div class="content-box reduce-paddin-box">
@@ -165,7 +165,7 @@
                                         <th>Hour</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="color-background-white">
                                     <tr ng-repeat="ci in user.checkins | orderBy: 'createdAt':true | limitTo: 30">
                                         <td width="40%">{{ ci.created_at | date: 'd MMM y'  }}</td>
                                         <td width="40%">{{ ci.created_at | date: 'hh:mm a' }}</td>

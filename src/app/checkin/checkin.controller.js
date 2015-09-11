@@ -33,13 +33,13 @@
                     })
                     .catch(function(error) {
                         console.log(error);
-                        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment.', exp: 5000});
+                        $rootScope.alertsMsg.error('An error happen while retrieving payment.');
                     });
 
                     User.saveCheckin({user_id: user.id}).$promise
                     .catch(function(error) {
                         console.log(error);
-                        $rootScope.alerts.push({type: 'danger', msg: 'An error happen while checked in the user.', exp: 5000});
+                        $rootScope.alertsMsg.error('An error happen while checked in the user.');
                     });
                 }
 
@@ -51,7 +51,7 @@
                 }, 7000);
             }, function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'This user doesn\'t exist.', exp: 5000});
+                $rootScope.alertsMsg.error('This user doesn\'t exist.');
             });
 
         };

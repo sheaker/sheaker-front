@@ -5,69 +5,142 @@
         .module('sheaker')
         .controller('HomeAdminCtrl', HomeAdminCtrl);
 
-    function HomeAdminCtrl($rootScope, $scope, $location, User, Payment, Checkin) {
+    function HomeAdminCtrl($rootScope, $scope, $location, User, Payment, Checkin, Authorization) {
 
-        $scope.staffMember = [0, 0, 0, 0];
+        var today            = moment().startOf('day').format(),
+            startOfYesterday = moment().subtract(1, 'day').startOf('day').format(),
+            endOfYesterday   = moment().subtract(1, 'day').endOf('day').format(),
+            startOfWeek      = moment().startOf('isoweek').format(),
+            startOfMonth     = moment().startOf('month').format(),
+            startOfYear      = moment().startOf('year').format();
 
-        // Retrieve members stats
-        User.stats().$promise
-        .then(function (stats) {
-            $scope.stats = stats;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the gym.'});
-        });
+        var adminAutorization = false;
 
-        // Retrieve last checkins
-        Checkin.statsNew().$promise
-        .then(function (checkins) {
-            $scope.lastCheckins = checkins;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the last checkins.'});
-        });
+        if (Authorization.authorize(true, ['admin'], 'atLeastOne') === $rootScope.authVars.authorised.authorised) {
+            adminAutorization = true;
+        }
 
-        // Retrieve new clients
-        User.statsNew().$promise
-        .then(function (clients) {
-            $scope.newClients = clients;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of new clients.'});
-        });
 
-        // Retrieve ending memberships
-        Payment.statsEnding().$promise
-        .then(function (memberships) {
-            $scope.endingMemberships = memberships;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the ending memberships.'});
-        });
+        $scope.users = {
+            active: 0,
+            new:    0
+        };
 
-        // Retrieve new memberships
-        Payment.statsNew().$promise
-        .then(function (memberships) {
-            memberships.forEach(function (user) {
-                Payment.get({payment_id: user.active_membership_id}).$promise
-                .then(function(payment) {
-                    user.days = payment.days;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alerts.push({type: 'danger', msg: 'An error happen while retrieving payment for new memberships stats.', exp: 5000});
-                });
+        $scope.gains = {
+            today:     0,
+            yesterday: 0,
+            week:      0,
+            month:     0
+        };
+
+        $scope.checkins = {
+            check: 0
+        };
+
+        $scope.chartOptions = {
+        scaleShowVerticalLines: false,
+        scaleShowHorizontalLines: false,
+        };
+
+        $scope.checkinByMonths = {
+            labels: {},
+            data: {},
+            colours: [{
+                fillColor: 'rgba(229, 57, 53, 0.3)',
+                strokeColor: 'rgba(229, 57, 53, 0.8)',
+                pointColor: "rgba(229, 57, 53,0.8)"
+            }],
+            series: ['Checkins by months'],
+            onClick: function (points, evt) {
+                console.log(points, evt);
+            }
+        };
+
+        if (adminAutorization) {
+            User.getActiveUsers().$promise
+            .then(function (res) {
+                $scope.users.active = res.total;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alertsMsg.error('Error while retrieving gains of today.');
             });
+        }
 
-            $scope.newMemberships = memberships;
+        User.getNewUsersFromDate({from_date: startOfWeek}).$promise
+        .then(function (res) {
+            $scope.users.new = res.total;
         })
         .catch(function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retrieving stats of the new memberships.'});
+            $rootScope.alertsMsg.error('Error while retrieving new users of this week.');
+        });
+
+        if (adminAutorization) {
+            Payment.getGainsFromDate({from_date: today}).$promise
+            .then(function (gains) {
+                $scope.gains.today = gains.total.value;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alertsMsg.error('Error while retrieving gains of today 2.');
+            });
+        }
+
+        if (adminAutorization) {
+            Payment.getGainsFromDate({from_date: startOfYesterday, to_date: endOfYesterday}).$promise
+            .then(function (gains) {
+                $scope.gains.yesterday = gains.total.value;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alertsMsg.error('Error while retrieving gains of today.');
+            });
+        }
+
+        if (adminAutorization) {
+            Payment.getGainsFromDate({from_date: startOfWeek}).$promise
+            .then(function (gains) {
+                $scope.gains.week = gains.total.value;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alertsMsg.error('Error while retrieving gains of this week.');
+            });
+        }
+
+        if (adminAutorization) {
+            Payment.getGainsFromDate({from_date: startOfMonth}).$promise
+            .then(function (gains) {
+                $scope.gains.month = gains.total.value;
+            })
+            .catch(function(error) {
+                console.log(error);
+                $rootScope.alertsMsg.error('Error while retrieving gains of this month.');
+            });
+        }
+
+        Checkin.getCheckinsFromDate({from_date: today}).$promise
+        .then(function (res) {
+            $scope.checkins.check = res.total;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alertsMsg.error('Error while retrieving checkins of this week.');
+        });
+
+        Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'week'}).$promise
+        .then(function(response) {
+            var newLabels=[];
+            for(var i=0;i<response.labels.length;i++){
+                newLabels.push('');
+            }
+            $scope.checkinByMonths.labels=newLabels;
+            $scope.checkinByMonths.data = response.data;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alertsMsg.error('Error while retrieving checkins graphs.');
         });
     }
 

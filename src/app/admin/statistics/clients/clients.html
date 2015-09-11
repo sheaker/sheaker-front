@@ -11,26 +11,13 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <div class="col-lg-6" id="LastsEntry">
-            <div class="general-box">
-                <div class="box-title color-background-grey-dark">
-                    <span class="color-white fa fa-user-plus pull-right"></span>
-                    <div class="title-x-small color-white">New clients</div>
-                </div>
-                <div class="padding-top-general-box">
-                    <canvas id="line" class="chart chart-line" data="newclients.data" labels="newclients.labels" legend="false" series="newclients.series" click="newclients.onClick"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6" id="LastsEntry">
-            <div class="general-box">
-                <div class="box-title color-background-grey-dark">
-                    <span class="color-white fa fa-transgender pull-right"></span>
-                    <div class="title-x-small color-white">Gender repartion</div>
-                </div>
-                <div class="padding-top-general-box">
-                    <canvas id="pie" class="chart chart-pie" data="genderRep.data" labels="genderRep.labels"></canvas>
+        <div class="col-lg-12">
+            <div class="col-lg-6 box">
+                <div class="stats">
+                    <h1>Gender</h1>
+                    <div class="graph">
+                        <canvas id="doughnut" class="chart chart-doughnut" data="genderRep.data" labels="genderRep.labels"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

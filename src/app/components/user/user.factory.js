@@ -6,9 +6,9 @@
         .factory('User', User);
 
     function User($resource, BACKEND_URL) {
-        var resource, actions;
+        var resource, customActions;
 
-        actions = {
+        customActions = {
             login: {
                 method: 'POST',
                 url:     BACKEND_URL + '/users/login',
@@ -45,31 +45,26 @@
                 method: 'POST',
                 url:     BACKEND_URL + '/users/:user_id/checkins'
             },
-            stats: {
+            getActiveUsers: {
                 method: 'GET',
-                url:     BACKEND_URL + '/users/stats'
+                url:     BACKEND_URL + '/users/stats/active'
             },
-            statsNew: {
+            getNewUsersFromDate: {
                 method: 'GET',
-                url:     BACKEND_URL + '/users/stats/new',
-                isArray: true
+                url:     BACKEND_URL + '/users/stats/new'
             },
-            statsIncBirthday: {
-                method: 'GET',
-                url:     BACKEND_URL + '/users/stats/incbirthday',
-                isArray: true
-            },
-            graphNew: {
+            getNewUsers: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/new'
             },
-            graphSex: {
+            getGenderRepartition: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/sex'
             }
         };
 
-        resource = $resource(BACKEND_URL + '/users/:user_id', {user_id: '@user_id'}, actions);
+        resource = $resource(BACKEND_URL + '/users/:user_id', { user_id: '@user_id' }, customActions);
+
         return resource;
     }
 

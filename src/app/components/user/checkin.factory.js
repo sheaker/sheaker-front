@@ -6,17 +6,21 @@
         .factory('Checkin', Checkin);
 
     function Checkin($resource, BACKEND_URL) {
-        var resource, actions;
+        var resource, customActions;
 
-        actions = {
-            statsNew: {
+        customActions = {
+            getCheckinsFromDate: {
                 method: 'GET',
-                url:     BACKEND_URL + '/checkins/stats/new',
-                isArray: true
+                url:     BACKEND_URL + '/checkins/stats/new'
+            },
+            getCheckinsFromDateGraph: {
+                method: 'GET',
+                url:     BACKEND_URL + '/checkins/graph/new'
             }
         };
 
-        resource = $resource(BACKEND_URL + '/checkins/:checkin_id', {checkin_id: '@checkin_id'}, actions);
+        resource = $resource(BACKEND_URL + '/checkins/:checkin_id', { checkin_id: '@checkin_id' }, customActions);
+
         return resource;
     }
 

@@ -10,7 +10,7 @@
         $scope.isButtonSaveDisabled = false;
 
         if (typeof $routeParams.id === 'undefined') {
-            $rootScope.alerts.push({type: 'warning', msg: 'Please search a user to edit before going to this page.'});
+            $rootScope.alertsMsg.warning('Please search a user to edit before going to this page.');
             $location.path('/admin/clients/search');
         }
 
@@ -57,7 +57,7 @@
             }
         }, function(error) {
             console.log(error);
-            $rootScope.alerts.push({type: 'danger', msg: 'Error while retriving the user informations.'});
+            $rootScope.alertsMsg.error('Error while retriving the user informations.');
             $location.path('/admin/clients/search');
         });
 
@@ -130,7 +130,7 @@
 
             User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
             .then(function(/*user*/) {
-                $rootScope.alerts.push({type: 'success', msg: 'The new user informations has been saved.'});
+                $rootScope.alertsMsg.success('The new user informations has been saved.');
                 $scope.isButtonSaveDisabled = false;
                 $location.hash('top');
                 $anchorScroll();
@@ -138,7 +138,7 @@
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alerts.push({type: 'danger', msg: 'An error happen while submitting new user.'});
+                $rootScope.alertsMsg.error( 'An error happen while submitting new user.');
                 $scope.isButtonSaveDisabled = false;
             });
         };
@@ -148,8 +148,8 @@
             title: 'Access level'
         };
 
-        $scope.helpPopoverCustomDays = {
-            templateUrl: 'app/components/admin/modal/help-popover-customDays.template.html',
+        $scope.helpPopoverSponsor = {
+            templateUrl: 'app/components/admin/modal/help-popover-sponsor.template.html',
             title: 'Sponsor'
         };
     }

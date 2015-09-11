@@ -14,28 +14,13 @@
         cfpLoadingBarProvider.includeSpinner = false;
 
         /*@ngInject*/
-        function getToken(jwtHelper, config, $rootScope, $window, User) {
+        function getToken(config, $window) {
             // Skip authentication for any requests ending in .html
             if (config.url.substr(config.url.length - 5) === '.html') {
                 return null;
             }
 
-            var token = $window.localStorage.getItem('token');
-            if (token && jwtHelper.isTokenExpired(token)) {
-                User.renewToken({oldToken: token}).$promise
-                    .then(function(response) {
-                        $window.localStorage.setItem('token', response.token);
-                        var decodedToken = jwtHelper.decodeToken(response.token);
-                        $rootScope.connectedUser = decodedToken.user;
-                        return response.token;
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                        return null;
-                    });
-            } else {
-                return token;
-            }
+            return $window.localStorage.getItem('token');
         }
     }
 
