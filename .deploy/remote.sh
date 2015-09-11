@@ -1,14 +1,15 @@
 APP_NAME=sheaker-front
 
-TEMP_DIR=/tmp/$APP_NAME/dist
+TEMP_FILE=/tmp/$APP_NAME.tar
+TEMP_DIR=/tmp/$APP_NAME
 PROD_DIR=/var/www/sheaker.com/$APP_NAME
 PROD_NAME=$(date +%s)
 
-chown ubuntu:www-data $TEMP_DIR
-
-cp -pr $TEMP_DIR $PROD_DIR/$PROD_NAME
+cp -pr $TEMP_DIR/dist $PROD_DIR/$PROD_NAME
 
 cd $PROD_DIR
+
+chown ubuntu:www-data $PROD_NAME
 
 #sudo /etc/init.d/nginx stop
 
@@ -18,3 +19,4 @@ cd $PROD_DIR
 #sudo /etc/init.d/nginx start
 
 rm -rf $TEMP_DIR
+rm -rf $TEMP_FILE

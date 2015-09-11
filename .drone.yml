@@ -7,11 +7,11 @@ script:
 
 deploy:
   ssh:
-    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front
+    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front.tar
     artifacts:
       - dist
       - .deploy
-    cmd: cd /tmp/sheaker-front; .deploy/remote.sh
+    cmd: cd /tmp/; mkdir sheaker-front; tar -xf sheaker-front.tar -C sheaker-front; cd sheaker-front; .deploy/remote.sh
     when:
       branch: master
 
