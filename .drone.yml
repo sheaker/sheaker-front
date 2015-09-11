@@ -1,4 +1,4 @@
-image: dockerfile/nodejs-bower-gulp
+image: neo9polska/nodejs-bower-gulp
 
 script:
   - npm install
