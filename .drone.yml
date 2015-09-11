@@ -2,7 +2,7 @@ image: neo9polska/nodejs-bower-gulp
 
 script:
   - npm install
-  - bower install
+  - bower install --allow-root
   - gulp
 
 deploy:
