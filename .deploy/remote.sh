@@ -9,7 +9,7 @@ cp -pr $TEMP_DIR/dist $PROD_DIR/$PROD_NAME
 
 cd $PROD_DIR
 
-chown ubuntu:www-data $PROD_NAME
+sudo chown ubuntu:www-data $PROD_NAME
 
 #sudo /etc/init.d/nginx stop
 
