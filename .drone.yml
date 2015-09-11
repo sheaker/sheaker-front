@@ -1,7 +1,6 @@
-image: node0.10
+image: dockerfile/nodejs-bower-gulp
 
 script:
-  - npm install -g bower gulp
   - npm install
   - bower install
   - gulp
