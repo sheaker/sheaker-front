@@ -11,12 +11,12 @@ cd $PROD_DIR
 
 sudo chown ubuntu:www-data $PROD_NAME
 
-#sudo /etc/init.d/nginx stop
+sudo /etc/init.d/nginx stop
 
-#unlink $PROD_DIR/current
-#ln -s $PROD_NAME current
+unlink $PROD_DIR/current
+ln -s $PROD_NAME current
 
-#sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx start
 
 rm -rf $TEMP_DIR
 rm -rf $TEMP_FILE
