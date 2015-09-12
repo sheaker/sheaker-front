@@ -15,6 +15,7 @@ deploy:
     when:
       branch: master
 
+
 notify:
   slack:
     webhook_url: 'https://hooks.slack.com/services/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'
