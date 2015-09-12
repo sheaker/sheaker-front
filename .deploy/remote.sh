@@ -1,15 +1,16 @@
 APP_NAME=sheaker-front
 
-TEMP_FILE=/tmp/$APP_NAME.tar
-TEMP_DIR=/tmp/$APP_NAME
+TEMP_FILE=~/$APP_NAME.tar
+TEMP_DIR=~/$APP_NAME
 PROD_DIR=/var/www/sheaker.com/$APP_NAME
 PROD_NAME=$(date +%s)
+
+# Put correct rights
+sudo chown -R ubuntu:www-data $TEMP_DIR
 
 cp -pr $TEMP_DIR/dist $PROD_DIR/$PROD_NAME
 
 cd $PROD_DIR
-
-sudo chown ubuntu:www-data $PROD_NAME
 
 sudo /etc/init.d/nginx stop
 
