@@ -1,17 +1,17 @@
-image: neo9polska/nodejs-bower-gulp
+image: tuxity/drone-gulp-bower
 
 script:
-  - npm install
+  - npm install -q
   - bower install --allow-root
   - gulp
 
 deploy:
   ssh:
-    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:/tmp/sheaker-front.tar
+    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:~/sheaker-front.tar
     artifacts:
       - dist
       - .deploy
-    cmd: cd /tmp/; mkdir sheaker-front; tar -xf sheaker-front.tar -C sheaker-front; cd sheaker-front; .deploy/remote.sh
+    cmd: mkdir sheaker-front; tar -xf sheaker-front.tar -C sheaker-front; cd sheaker-front; .deploy/remote.sh
     when:
       branch: master
 
