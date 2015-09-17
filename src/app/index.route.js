@@ -15,21 +15,25 @@
         };
 
         /*@ngInject*/
-        function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos) {
+        function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, ClientFlags) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
                 return SheakerInfos.get().$promise
                     .then(function (infos) {
                         if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
-                            return SheakerClient.get({subdomain: address[0]}).$promise;
+                            return SheakerClient.get({subdomain: address[0]}).$promise
+                                .then(function (client) {
+                                    $rootScope.client = {
+                                        id: client.id,
+                                        name: client.name
+                                    };
+
+                                    if (client.flags & ClientFlags.INDEX_ELASTICSEARCH) {
+                                        return SheakerClient.index({id_client: client.id}).$promise
+                                    }
+                                });
                         }
-                    })
-                    .then(function (client) {
-                        $rootScope.client = {
-                            id: client.id,
-                            name: client.name
-                        };
                     })
                     .catch(function(error) {
                         if (error.status === 404 || error.status === 0) {
