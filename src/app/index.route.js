@@ -35,6 +35,11 @@
                                 });
                         }
                     })
+                    .then(function(response) {
+                        if (response.errors) {
+                            $rootScope.alertsMsg.error('An error happen while updating application');
+                        }
+                    })
                     .catch(function(error) {
                         if (error.status === 404 || error.status === 0) {
                             $window.location.href = FRONTEND_URL + '#/create/' + address[0];
