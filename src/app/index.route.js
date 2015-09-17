@@ -36,7 +36,7 @@
                         }
                     })
                     .then(function(response) {
-                        if (response.errors) {
+                        if (response && response.errors) {
                             $rootScope.alertsMsg.error('An error happen while updating application');
                         }
                     })
