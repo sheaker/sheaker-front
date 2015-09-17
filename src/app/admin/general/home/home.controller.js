@@ -15,11 +15,9 @@
             startOfYear      = moment().startOf('year').format();
 
         var adminAutorization = false;
-
         if (Authorization.authorize(true, ['admin'], 'atLeastOne') === $rootScope.authVars.authorised.authorised) {
             adminAutorization = true;
         }
-
 
         $scope.users = {
             active: 0,
@@ -37,11 +35,6 @@
             check: 0
         };
 
-        $scope.chartOptions = {
-        scaleShowVerticalLines: false,
-        scaleShowHorizontalLines: false,
-        };
-
         $scope.checkinByMonths = {
             labels: {},
             data: {},
@@ -50,9 +43,10 @@
                 strokeColor: 'rgba(229, 57, 53, 0.8)',
                 pointColor: "rgba(229, 57, 53,0.8)"
             }],
-            series: ['Checkins by months'],
-            onClick: function (points, evt) {
-                console.log(points, evt);
+            chartOptions: {
+                scaleShowVerticalLines: false,
+                scaleShowHorizontalLines: false,
+                scaleShowLabels : false
             }
         };
 
@@ -131,11 +125,7 @@
 
         Checkin.getCheckinsFromDateGraph({from_date: startOfYear, interval: 'week'}).$promise
         .then(function(response) {
-            var newLabels=[];
-            for(var i=0;i<response.labels.length;i++){
-                newLabels.push('');
-            }
-            $scope.checkinByMonths.labels=newLabels;
+            $scope.checkinByMonths.labels = response.labels;
             $scope.checkinByMonths.data = response.data;
         })
         .catch(function(error) {
