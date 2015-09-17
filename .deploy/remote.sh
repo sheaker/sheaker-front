@@ -5,12 +5,12 @@ TEMP_DIR=~/$APP_NAME
 PROD_DIR=/var/www/sheaker.com/$APP_NAME
 PROD_NAME=$(date +%s)
 
-# Put correct rights
-sudo chown -R ubuntu:www-data $TEMP_DIR
-
 cp -pr $TEMP_DIR/dist $PROD_DIR/$PROD_NAME
 
 cd $PROD_DIR
+
+# Put correct rights
+sudo chown -R ubuntu:www-data $PROD_NAME
 
 sudo /etc/init.d/nginx stop
 

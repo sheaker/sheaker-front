@@ -11,10 +11,14 @@
         actions = {
             get: {
                 skipAuthorization: true
+            },
+            index: {
+                method: 'PUT',
+                url:     BACKEND_URL + '/clients/index'
             }
         };
 
-        resource = $resource(BACKEND_URL + '/clients', {subdomain: '@subdomain'}, actions);
+        resource = $resource(BACKEND_URL + '/clients', {subdomain: '@subdomain', id_client: '@id_client'}, actions);
         return resource;
     }
 
