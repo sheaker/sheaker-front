@@ -16,10 +16,7 @@
         $scope.lastCheckins = [];
 
         User.get({user_id: $routeParams.id}, function(user) {
-            if (user.photo) {
-                user.photo = STATIC_URL + '/sheaker-back/' + user.photo;
-            }
-            else {
+            if (!user.photo) {
                 user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
             }
 

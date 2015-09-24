@@ -50,7 +50,7 @@
 
                 imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
                 if ($scope.formDatas.photo) {
-                    imageObj.src = STATIC_URL + '/sheaker-back/' + $scope.formDatas.photo;
+                    imageObj.src = $scope.formDatas.photo;
                     // We just need the photo to be displayed, we refill that variable just in case of modifications
                     $scope.formDatas.photo = '';
                 }
