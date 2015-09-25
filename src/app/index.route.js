@@ -30,7 +30,7 @@
                                     };
 
                                     if (client.flags & ClientFlags.INDEX_ELASTICSEARCH) {
-                                        return SheakerClient.index({id_client: client.id}).$promise
+                                        return SheakerClient.index({id_client: client.id}).$promise;
                                     }
                                 });
                         }

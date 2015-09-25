@@ -8,12 +8,14 @@ var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
-var gulpNgConfig = require('gulp-ng-config');
+var ngConfig = require('gulp-ng-config');
 
 gulp.task('scripts', function () {
-  gulp.src('app-config.json')
-  .pipe(gulpNgConfig('sheaker.config', {
-    environment: conf.options.mode
+  gulp.src(conf.paths.src + '/config/index.constants-env.json')
+  .pipe(ngConfig('sheaker', {
+    environment: conf.options.mode,
+    createModule: false,
+    wrap: '(function () {\n    \'use strict\';\n\n<%= module %>\n})();'
   }))
   .pipe(gulp.dest(conf.paths.src + '/app/'));
 
