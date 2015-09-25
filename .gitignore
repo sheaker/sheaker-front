@@ -4,4 +4,4 @@ bower_components/
 .tmp/
 dist/
 .DS_Store
-src/app/app-config.js
+src/app/index.constants-env.js
