@@ -11,6 +11,8 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
+        <div graph-options></div>
+
         <div class="col-lg-12">
             <div class="col-lg-6 box">
                 <div class="stats">

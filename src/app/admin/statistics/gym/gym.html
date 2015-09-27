@@ -11,27 +11,7 @@
 
         <alert ng-repeat="alert in alerts | limitTo: 4" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
 
-        <div class="col-lg-12">
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="fromDate" datepicker-popup is-open="fromDateSelector.isOpen" max-date="fromDateSelector.endOfYesterday" datepicker-options="fromDateSelector.dateOptions" disabled>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="fromDateSelector.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="toDate" datepicker-popup is-open="toDateSelector.isOpen" max-date="toDateSelector.endOfYesterday" datepicker-options="toDateSelector.dateOptions" disabled>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="toDateSelector.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <select class="form-control" ng-model="interval" ng-options="interval for interval in availableIntervals"></select>
-            </div>
-        </div>
+        <div graph-options></div>
 
         <div class="col-lg-12">
             <div class="col-lg-6 box">
