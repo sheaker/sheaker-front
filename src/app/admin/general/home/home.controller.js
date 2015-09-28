@@ -73,7 +73,7 @@
         if (adminAutorization) {
             Payment.getGainsFromDate({from_date: today}).$promise
             .then(function (gains) {
-                $scope.gains.today = gains.total.value;
+                $scope.gains.today = gains.value;
             })
             .catch(function(error) {
                 console.log(error);
@@ -84,7 +84,7 @@
         if (adminAutorization) {
             Payment.getGainsFromDate({from_date: startOfYesterday, to_date: endOfYesterday}).$promise
             .then(function (gains) {
-                $scope.gains.yesterday = gains.total.value;
+                $scope.gains.yesterday = gains.value;
             })
             .catch(function(error) {
                 console.log(error);
@@ -95,7 +95,7 @@
         if (adminAutorization) {
             Payment.getGainsFromDate({from_date: startOfWeek}).$promise
             .then(function (gains) {
-                $scope.gains.week = gains.total.value;
+                $scope.gains.week = gains.value;
             })
             .catch(function(error) {
                 console.log(error);
@@ -106,7 +106,7 @@
         if (adminAutorization) {
             Payment.getGainsFromDate({from_date: startOfMonth}).$promise
             .then(function (gains) {
-                $scope.gains.month = gains.total.value;
+                $scope.gains.month = gains.value;
             })
             .catch(function(error) {
                 console.log(error);
