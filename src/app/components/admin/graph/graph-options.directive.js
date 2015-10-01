@@ -10,11 +10,15 @@
             restrict: 'AE',
             templateUrl: '/app/components/admin/graph/graph-options.template.html',
             replace: true,
+            controller : GraphOptionsCtrl,
             link: link
         };
 
         return directive;
         ////////////
+        function GraphOptionsCtrl($scope) {
+            $scope.isOpen = false;
+        }
 
         function link(scope) {
             scope.availableIntervals = ['year', 'quarter', 'month', 'week', 'day'];
