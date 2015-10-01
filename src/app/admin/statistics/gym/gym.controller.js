@@ -5,12 +5,16 @@
         .module('sheaker')
         .controller('GymStatisticsCtrl', GymStatisticsCtrl);
 
-    function GymStatisticsCtrl($rootScope, $scope, Payment, User) {
+    function GymStatisticsCtrl($rootScope, $scope, User, Payment, Checkin) {
         $scope.gains = {
             labels: {},
             data: {}
         };
         $scope.newUsers = {
+            labels: {},
+            data: {}
+        };
+        $scope.checkins = {
             labels: {},
             data: {}
         };
@@ -22,6 +26,7 @@
         $scope.$watchGroup(['fromDate','toDate', 'interval'], function() {
             getGains();
             getNewUsers();
+            getCheckins();
         });
 
         function getGains() {
@@ -45,6 +50,18 @@
                 .catch(function(error) {
                     console.log(error);
                     $rootScope.alertsMsg.error('Error while retrieving new clients graphs.');
+                });
+        }
+
+        function getCheckins() {
+            Checkin.getCheckinsFromDateGraph({from_date: $scope.fromDate, to_date: $scope.toDate, interval: $scope.interval}).$promise
+                .then(function(response) {
+                    $scope.checkins.labels = response.labels;
+                    $scope.checkins.data = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    $rootScope.alertsMsg.error('Error while retrieving checkins graphs.');
                 });
         }
     }
