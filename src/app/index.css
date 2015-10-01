@@ -402,7 +402,7 @@ td {
 
 .box-config .btn-settings {
     margin-top: -70px;
-    width: 70px;
+    width: 60px;
     font-size: 30px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -412,7 +412,7 @@ td {
     background-color: #DCDCDC;
     color: #757575;
     font-weight: 900;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 0.8;
 }
 
