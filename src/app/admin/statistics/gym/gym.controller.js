@@ -42,7 +42,7 @@
         }
 
         function getNewUsers() {
-            User.getNewUsers({from_date: $scope.fromDate, to_date: $scope.toDate, interval: $scope.interval}).$promise
+            User.getNewUsersGraph({from_date: $scope.fromDate, to_date: $scope.toDate, interval: $scope.interval}).$promise
                 .then(function(response) {
                     $scope.newUsers.labels = response.labels;
                     $scope.newUsers.data = response.data;
@@ -54,7 +54,7 @@
         }
 
         function getCheckins() {
-            Checkin.getCheckinsFromDateGraph({from_date: $scope.fromDate, to_date: $scope.toDate, interval: $scope.interval}).$promise
+            Checkin.getCheckinsGraph({from_date: $scope.fromDate, to_date: $scope.toDate, interval: $scope.interval}).$promise
                 .then(function(response) {
                     $scope.checkins.labels = response.labels;
                     $scope.checkins.data = response.data;

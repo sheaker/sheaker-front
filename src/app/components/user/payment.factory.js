@@ -9,7 +9,7 @@
         var resource, customActions;
 
         customActions = {
-            getGainsFromDate: {
+            getGains: {
                 method: 'GET',
                 url:     BACKEND_URL + '/payments/stats/gains'
             },
