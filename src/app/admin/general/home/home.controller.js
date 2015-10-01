@@ -50,16 +50,14 @@
             }
         };
 
-        if (adminAutorization) {
-            User.getActiveUsers().$promise
-            .then(function (res) {
-                $scope.users.active = res.total;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving gains of today.');
-            });
-        }
+        User.getActiveUsers().$promise
+        .then(function (res) {
+            $scope.users.active = res.total;
+        })
+        .catch(function(error) {
+            console.log(error);
+            $rootScope.alertsMsg.error('Error while retrieving actives users.');
+        });
 
         User.getNewUsersFromDate({from_date: startOfWeek}).$promise
         .then(function (res) {
