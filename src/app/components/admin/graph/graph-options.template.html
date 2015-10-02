@@ -4,7 +4,7 @@
     </button>
     <div ng-show="isOpen">
         <div class="col-lg-2">
-            <h3>Begin Date</h3>
+            <h3>From Date</h3>
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="fromDate" datepicker-popup is-open="fromDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
                 <span class="input-group-btn">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-lg-2">
-            <h3>End Date</h3>
+            <h3>To Date</h3>
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="toDate" datepicker-popup is-open="toDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
                 <span class="input-group-btn">
