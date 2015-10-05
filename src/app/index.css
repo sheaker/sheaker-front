@@ -392,6 +392,35 @@ td {
     margin-top: 140px;
 }
 
+/* Box config */
+
+.box-config h3 {
+    font-weight: 900;
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+.box-config .btn-settings {
+    margin-top: -70px;
+    width: 60px;
+    font-size: 30px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin-bottom:5px;
+    border: 0;
+    background-color: #DCDCDC;
+    color: #757575;
+    font-weight: 900;
+    font-size: 30px;
+    opacity: 0.8;
+}
+
+.box-config .btn-settings:focus {
+   outline: none;
+}
+/* End Box config */
+
 .client-datas{
     color: #1E88E5;
     font-weight: bold;

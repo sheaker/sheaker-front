@@ -49,11 +49,11 @@
                 method: 'GET',
                 url:     BACKEND_URL + '/users/stats/active'
             },
-            getNewUsersFromDate: {
+            getNewUsers: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/stats/new'
             },
-            getNewUsers: {
+            getNewUsersGraph: {
                 method: 'GET',
                 url:     BACKEND_URL + '/users/graph/new'
             },

@@ -9,11 +9,11 @@
         var resource, customActions;
 
         customActions = {
-            getCheckinsFromDate: {
+            getCheckins: {
                 method: 'GET',
                 url:     BACKEND_URL + '/checkins/stats/new'
             },
-            getCheckinsFromDateGraph: {
+            getCheckinsGraph: {
                 method: 'GET',
                 url:     BACKEND_URL + '/checkins/graph/new'
             }
