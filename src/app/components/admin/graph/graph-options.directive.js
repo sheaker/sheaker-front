@@ -8,7 +8,7 @@
     function graphOptions() {
         var directive = {
             restrict: 'AE',
-            templateUrl: '/app/components/admin/graph/graph-options.template.html',
+            templateUrl: 'app/components/admin/graph/graph-options.template.html',
             replace: true,
             controller : GraphOptionsCtrl,
             link: link
