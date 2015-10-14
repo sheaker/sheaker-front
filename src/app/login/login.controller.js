@@ -8,8 +8,7 @@
     function LoginCtrl($rootScope, $scope, $location, $window, jwtHelper, User) {
         $scope.login = function () {
             User.login($scope.loginForm).$promise
-            .then(function(response) {
-                if (response.token) {
+                .then(function(response) {
                     $window.localStorage.setItem('token', response.token);
 
                     var decodedToken = jwtHelper.decodeToken(response.token);
@@ -21,15 +20,11 @@
                     else {
                         $location.path('/');
                     }
-                }
-                else {
-                    $rootScope.alertsMsg.error('Username or password are wrong.');
-                }
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while trying to connect.');
-            });
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    $rootScope.alertsMsg.error('Your login information was incorrect.');
+                });
         };
     }
 
