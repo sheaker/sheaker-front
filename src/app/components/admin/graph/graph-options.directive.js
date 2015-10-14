@@ -16,6 +16,8 @@
 
         return directive;
         ////////////
+
+        /*@ngInject*/
         function GraphOptionsCtrl($scope) {
             $scope.isOpen = false;
         }
