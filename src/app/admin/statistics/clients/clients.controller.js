@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('ClientsStatisticsCtrl', ClientsStatisticsCtrl);
 
+    /** @ngInject */
     function ClientsStatisticsCtrl($rootScope, $scope, User) {
         $scope.genderRep = {
             labels: {},

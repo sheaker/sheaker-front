@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('HomeStatisticsCtrl', HomeStatisticsCtrl);
 
+    /** @ngInject */
     function HomeStatisticsCtrl() {
 
     }

@@ -6,6 +6,7 @@
         .controller('ModalInstanceCtrl', ModalInstanceCtrl)
         .controller('SearchClientCtrl', SearchClientCtrl);
 
+    /** @ngInject */
     function ModalInstanceCtrl($rootScope, $scope, $modalInstance, user, User) {
 
         $scope.user = user;
@@ -28,6 +29,7 @@
         };
     }
 
+    /** @ngInject */
     function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, User) {
 
         $scope.users = [];

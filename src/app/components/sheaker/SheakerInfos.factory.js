@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('SheakerInfos', SheakerInfos);
 
+    /** @ngInject */
     function SheakerInfos($resource, BACKEND_URL) {
         var resource, actions;
 

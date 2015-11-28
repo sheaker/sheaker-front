@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('AddClientCtrl', AddClientCtrl);
 
+    /** @ngInject */
     function AddClientCtrl($rootScope, $scope, $window, $location, $anchorScroll, $filter, User) {
         $scope.formDatas = {};
 

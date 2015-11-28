@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('NavbarTopCtrl', NavbarTopCtrl);
 
+    /** @ngInject */
     function NavbarTopCtrl($window, $scope, $location) {
         $scope.isActive = function(path) {
             if ($location.path() === path) {

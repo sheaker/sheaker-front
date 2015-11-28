@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('HomeCtrl', HomeCtrl);
 
+    /** @ngInject */
     function HomeCtrl() {
 
     }

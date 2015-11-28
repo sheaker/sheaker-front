@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('ReviewClientCtrl', ReviewClientCtrl);
 
+    /** @ngInject */
     function ReviewClientCtrl($rootScope, $scope, $routeParams, $location, STATIC_URL, User) {
 
         if (typeof $routeParams.id === 'undefined') {

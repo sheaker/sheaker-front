@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('GymStatisticsCtrl', GymStatisticsCtrl);
 
+    /** @ngInject */
     function GymStatisticsCtrl($rootScope, $scope, User, Payment, Checkin) {
         $scope.gains = {
             labels: {},

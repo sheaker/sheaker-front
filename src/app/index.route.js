@@ -5,6 +5,7 @@
         .module('sheaker')
         .config(routeConfig);
 
+    /** @ngInject */
     function routeConfig($routeProvider) {
         var customResolves = {
             sheaker: getSheakerAuthorization
@@ -14,7 +15,7 @@
             when: customWhen
         };
 
-        /*@ngInject*/
+        /** @ngInject */
         function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, ClientFlags) {
             var address = $location.host().split('.');
 

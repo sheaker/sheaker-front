@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('Checkin', Checkin);
 
+    /** @ngInject */
     function Checkin($resource, BACKEND_URL) {
         var resource, customActions;
 

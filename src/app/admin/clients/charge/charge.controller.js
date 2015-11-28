@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('ChargeClientCtrl', ChargeClientCtrl);
 
+    /** @ngInject */
     function ChargeClientCtrl($rootScope, $scope, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;

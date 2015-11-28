@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('HomeAdminCtrl', HomeAdminCtrl);
 
+    /** @ngInject */
     function HomeAdminCtrl($rootScope, $scope, $location, User, Payment, Checkin, Authorization) {
 
         var today            = moment().startOf('day').format(),

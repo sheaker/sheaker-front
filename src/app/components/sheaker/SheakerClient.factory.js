@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('SheakerClient', SheakerClient);
 
+    /** @ngInject */
     function SheakerClient($resource, BACKEND_URL) {
         var resource, actions;
 

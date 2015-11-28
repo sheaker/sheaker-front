@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('backendRequestInterceptor', backendRequestInterceptor);
 
+    /** @ngInject */
     function backendRequestInterceptor($rootScope, BACKEND_URL) {
         var service = {
             request: appendIdClient

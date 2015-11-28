@@ -5,6 +5,7 @@
         .module('sheaker')
         .directive('convertToNumber', convertToNumber);
 
+    /** @ngInject */
     function convertToNumber() {
         var directive = {
             link:    linkFct,

@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('EditClientCtrl', EditClientCtrl);
 
+    /** @ngInject */
     function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;

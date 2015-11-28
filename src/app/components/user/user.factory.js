@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('User', User);
 
+    /** @ngInject */
     function User($resource, BACKEND_URL) {
         var resource, customActions;
 

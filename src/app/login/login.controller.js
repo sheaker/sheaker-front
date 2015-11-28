@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('LoginCtrl', LoginCtrl);
 
+    /** @ngInject */
     function LoginCtrl($rootScope, $scope, $location, $window, jwtHelper, User) {
         $scope.login = function () {
             User.login($scope.loginForm).$promise

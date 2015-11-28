@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('CheckinCtrl', CheckinCtrl);
 
+    /** @ngInject */
     function CheckinCtrl($rootScope, $scope, $location, $timeout, User, Payment, STATIC_URL) {
         var today = moment(),
             timeoutPromise = null;
