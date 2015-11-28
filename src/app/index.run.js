@@ -39,6 +39,13 @@
             }
         };
 
+        // Re-set conectedUser when refreshing page while conencted
+        var token = $window.localStorage.getItem('token');
+        if (token && !$rootScope.connectedUser) {
+            var decodedToken = jwtHelper.decodeToken(token);
+            $rootScope.connectedUser = decodedToken.user;
+        }
+
         var routeChangeRequiredAfterLogin = false;
         var loginRedirectUrl;
 
