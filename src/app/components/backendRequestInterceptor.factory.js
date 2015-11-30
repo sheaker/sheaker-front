@@ -15,6 +15,8 @@
         ////////////
 
         function appendIdClient(req) {
+            // For some api calls we MUST add id_client= params to requests.
+            // Here we make sure is added to avoid fetch wrong infos from wrong client
             if (req.url && req.url.indexOf(BACKEND_URL) !== -1 &&
                 req.url.indexOf(BACKEND_URL + '/clients') === -1 &&
                 req.url.indexOf(BACKEND_URL + '/infos') === -1) {

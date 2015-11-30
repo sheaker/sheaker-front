@@ -10,7 +10,7 @@
         jwtInterceptorProvider.tokenGetter = getToken;
         $httpProvider.interceptors.push('jwtInterceptor');
         $httpProvider.interceptors.push('backendRequestInterceptor');
-        $httpProvider.interceptors.push('apiResponseInterceptor');
+        $httpProvider.interceptors.push('backendResponseInterceptor');
 
         cfpLoadingBarProvider.includeSpinner = false;
 

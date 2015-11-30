@@ -3,10 +3,10 @@
 
     angular
         .module('sheaker')
-        .factory('apiResponseInterceptor', apiResponseInterceptor);
+        .factory('backendResponseInterceptor', backendResponseInterceptor);
 
     /** @ngInject */
-    function apiResponseInterceptor(BACKEND_URL) {
+    function backendResponseInterceptor(BACKEND_URL) {
         var service = {
             response: removeDataField
         };
