@@ -35,9 +35,9 @@
                         <td>{{ u.first_name }}</td>
                         <td>{{ u.last_name }}</td>
                         <td>
-                            <i class="center-membership-icone fa fa-star fa-lg color-yellow" ng-show="u.user_level"></i>
-                            <i class="center-membership-icone fa fa-check fa-lg color-green" ng-show="u.active_membership_id && !u.user_level"></i>
-                            <i class="center-membership-icone fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && !u.user_level"></i>
+                            <i class="center-membership-icone fa fa-star fa-lg color-yellow" ng-show="u.user_level > '0'"></i>
+                            <i class="center-membership-icone fa fa-check fa-lg color-green" ng-show="u.active_membership_id && u.user_level == '0'"></i>
+                            <i class="center-membership-icone fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && u.user_level == '0'"></i>
                         </td>
                         <td>
                             <a class="search-link" href="#/admin/clients/review/{{ u.id }}" tooltip="Review" tooltip-placement="left"><span class="fa fa-user fa-lg color-blue"></span></a>
