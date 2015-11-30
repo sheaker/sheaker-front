@@ -1,7 +1,7 @@
 image: tuxity/drone-gulp-bower
 
 script:
-  - npm install -q --production
+  - npm install -q
   - bower install --allow-root --production
   - gulp
 
