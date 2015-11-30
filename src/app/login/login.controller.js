@@ -6,7 +6,7 @@
         .controller('LoginCtrl', LoginCtrl);
 
     /** @ngInject */
-    function LoginCtrl($rootScope, $scope, $location, $window, jwtHelper, User) {
+    function LoginCtrl($rootScope, $scope, $location, $window, $log, jwtHelper, User) {
         $scope.login = function () {
             User.login($scope.loginForm).$promise
                 .then(function(response) {
@@ -23,8 +23,17 @@
                     }
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Your login information was incorrect.');
+                    switch (error.status) {
+                        case 403:
+                            $rootScope.alertsMsg.error('Wrong password.');
+                            break;
+                        case 404:
+                            $rootScope.alertsMsg.error('User does not exist.');
+                            break;
+                        default:
+                            $log.error(error);
+                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    }
                 });
         };
     }

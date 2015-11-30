@@ -6,7 +6,7 @@
         .controller('GymStatisticsCtrl', GymStatisticsCtrl);
 
     /** @ngInject */
-    function GymStatisticsCtrl($rootScope, $scope, User, Payment, Checkin) {
+    function GymStatisticsCtrl($rootScope, $scope, $log, User, Payment, Checkin) {
         $scope.gains = {
             labels: {},
             data: {}
@@ -37,8 +37,8 @@
                     $scope.gains.data = response.data;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving gains graphs.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -49,8 +49,8 @@
                     $scope.newUsers.data = response.data;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving new clients graphs.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -61,8 +61,8 @@
                     $scope.checkins.data = response.data;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving checkins graphs.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
     }

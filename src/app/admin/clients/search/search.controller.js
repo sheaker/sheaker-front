@@ -7,7 +7,7 @@
         .controller('SearchClientCtrl', SearchClientCtrl);
 
     /** @ngInject */
-    function ModalInstanceCtrl($rootScope, $scope, $modalInstance, user, User) {
+    function ModalInstanceCtrl($rootScope, $scope, $modalInstance, $log, user, User) {
 
         $scope.user = user;
 
@@ -23,14 +23,14 @@
                     $rootScope.alertsMsg.success(user.first_name + ' ' + user.last_name + ' has been deleted.');
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while deleting the user.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         };
     }
 
     /** @ngInject */
-    function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, User) {
+    function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, $log, User) {
 
         $scope.users = [];
         $scope.searchParams = {
@@ -59,8 +59,8 @@
                     $scope.searchParams.noMoreApi = true;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving queried the users.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         };
 
@@ -94,8 +94,8 @@
                     $scope.searchParams.busy = false;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving the users.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         };
 

@@ -6,7 +6,7 @@
         .controller('ClientsStatisticsCtrl', ClientsStatisticsCtrl);
 
     /** @ngInject */
-    function ClientsStatisticsCtrl($rootScope, $scope, User) {
+    function ClientsStatisticsCtrl($rootScope, $scope, $log, User) {
         $scope.genderRep = {
             labels: {},
             data: {}
@@ -27,8 +27,8 @@
                     $scope.genderRep.data = response.data;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving the graphs.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
     }

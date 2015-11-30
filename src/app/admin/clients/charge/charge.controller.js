@@ -6,7 +6,7 @@
         .controller('ChargeClientCtrl', ChargeClientCtrl);
 
     /** @ngInject */
-    function ChargeClientCtrl($rootScope, $scope, $routeParams, $location, $anchorScroll, STATIC_URL, User) {
+    function ChargeClientCtrl($rootScope, $scope, $routeParams, $location, $anchorScroll, $log, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;
 
@@ -45,15 +45,16 @@
                         $scope.user.payments = payments;
                     })
                     .catch(function(error) {
-                        console.log(error);
-                        $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                        $log.error(error);
+                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     });
 
                 $scope.user = user;
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('An error happen while retrieving user informations.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $location.path('/admin/clients/search');
             });
 
         $scope.setNumberDaysInput = function () {
@@ -98,8 +99,8 @@
                     $scope.isButtonSaveDisabled = false;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('An error happen while submitting new charge.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     $scope.isButtonSaveDisabled = false;
                 });
         };

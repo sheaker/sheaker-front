@@ -6,7 +6,7 @@
         .controller('ReviewClientCtrl', ReviewClientCtrl);
 
     /** @ngInject */
-    function ReviewClientCtrl($rootScope, $scope, $routeParams, $location, STATIC_URL, User) {
+    function ReviewClientCtrl($rootScope, $scope, $routeParams, $location, $log, STATIC_URL, User) {
 
         if (typeof $routeParams.id === 'undefined') {
             $rootScope.alertsMsg.warning('Please search a user to review before going to this page.');
@@ -33,8 +33,8 @@
                         $scope.user.payments = payments;
                     })
                     .catch(function(error) {
-                        console.log(error);
-                        $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                        $log.error(error);
+                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     });
 
                 User.queryCheckins({user_id: user.id}).$promise
@@ -42,8 +42,8 @@
                         $scope.user.checkins = checkins;
                     })
                     .catch(function(error) {
-                        console.log(error);
-                        $rootScope.alertsMsg.error('An error happen while retrieving user checkins.');
+                        $log.error(error);
+                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     });
 
                 $scope.user = user;
@@ -53,8 +53,8 @@
 
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retriving the user informations.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 $location.path('/admin/clients/search');
             });
 

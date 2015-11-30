@@ -6,7 +6,7 @@
         .controller('CheckinCtrl', CheckinCtrl);
 
     /** @ngInject */
-    function CheckinCtrl($rootScope, $scope, $location, $timeout, User, Payment, STATIC_URL) {
+    function CheckinCtrl($rootScope, $scope, $location, $timeout, $log, User, Payment, STATIC_URL) {
         var today = moment(),
             timeoutPromise = null;
 
@@ -31,14 +31,14 @@
                                 user.remainingDays = moment.duration(moment(payment.end_date).diff(today)).asDays().toFixed();
                             })
                             .catch(function(error) {
-                                console.log(error);
-                                $rootScope.alertsMsg.error('An error happen while retrieving payment.');
+                                $log.error(error);
+                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
                             });
 
                         User.saveCheckin({user_id: user.id}).$promise
                             .catch(function(error) {
-                                console.log(error);
-                                $rootScope.alertsMsg.error('An error happen while checked in the user.');
+                                $log.error(error);
+                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
                             });
                     }
 
@@ -50,8 +50,14 @@
                     }, 7000);
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('This user doesn\'t exist.');
+                    switch (error.status) {
+                        case 404:
+                            $rootScope.alertsMsg.error('User does not exist.');
+                            break;
+                        default:
+                            $log.error(error);
+                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    }
                 });
 
         };

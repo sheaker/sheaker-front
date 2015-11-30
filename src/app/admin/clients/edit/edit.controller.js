@@ -6,7 +6,7 @@
         .controller('EditClientCtrl', EditClientCtrl);
 
     /** @ngInject */
-    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, STATIC_URL, User) {
+    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, $log, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;
 
@@ -59,8 +59,8 @@
                 }
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retriving the user informations.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 $location.path('/admin/clients/search');
             });
 
@@ -140,8 +140,8 @@
                     $location.hash('');
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error( 'An error happen while submitting new user.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     $scope.isButtonSaveDisabled = false;
                 });
         };

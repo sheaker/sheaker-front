@@ -6,7 +6,7 @@
         .controller('AddClientCtrl', AddClientCtrl);
 
     /** @ngInject */
-    function AddClientCtrl($rootScope, $scope, $window, $location, $anchorScroll, $filter, User) {
+    function AddClientCtrl($rootScope, $scope, $window, $location, $anchorScroll, $filter, $log, User) {
         $scope.formDatas = {};
 
         $scope.isButtonSaveDisabled = false;
@@ -91,8 +91,8 @@
                     $location.hash('');
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('An error happen while submitting new user.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                     $scope.isButtonSaveDisabled = false;
                 });
         };

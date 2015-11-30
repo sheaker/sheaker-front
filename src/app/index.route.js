@@ -16,7 +16,7 @@
         };
 
         /** @ngInject */
-        function getSheakerAuthorization($rootScope, $location, $window, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, ClientFlags) {
+        function getSheakerAuthorization($rootScope, $location, $window, $log, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, ClientFlags) {
             var address = $location.host().split('.');
 
             if ($rootScope.client.id === -1 && address.length === 3) {
@@ -36,14 +36,18 @@
                                 });
                         }
                     })
-                    .then(function(response) {
-                        if (response && response.errors) {
-                            $rootScope.alertsMsg.error('An error happen while updating application');
-                        }
+                    .catch(function(error) {
+                        $log.error(error);
+                        $rootScope.alertsMsg.error('An error happen while updating application.');
                     })
                     .catch(function(error) {
-                        if (error.status === 404 || error.status === 0) {
-                            $window.location.href = FRONTEND_URL + '#/create/' + address[0];
+                        $log.error(error);
+                        switch (error.status) {
+                            case 404:
+                                $window.location.href = FRONTEND_URL + '#/create/' + address[0];
+                                break;
+                            default:
+                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
                         }
                     });
             }
