@@ -16,45 +16,47 @@
         $scope.formDatas = {};
         $scope.lastCheckins = [];
 
-        User.get({user_id: $routeParams.id}, function(user) {
-            if (!user.photo) {
-                user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
-            }
+        User.get({user_id: $routeParams.id}).$promise
+            .then(function(user) {
+                if (!user.photo) {
+                    user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
+                }
 
-            $scope.totalPricePayments = 0;
+                $scope.totalPricePayments = 0;
 
-            User.queryPayments({user_id: user.id}).$promise
-            .then(function(payments) {
-                angular.forEach(payments, function(payment) {
-                    $scope.totalPricePayments += payment.price;
-                });
+                User.queryPayments({user_id: user.id}).$promise
+                    .then(function(payments) {
+                        angular.forEach(payments, function(payment) {
+                            $scope.totalPricePayments += payment.price;
+                        });
 
-                $scope.user.payments = payments;
+                        $scope.user.payments = payments;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                        $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                    });
+
+                User.queryCheckins({user_id: user.id}).$promise
+                    .then(function(checkins) {
+                        $scope.user.checkins = checkins;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                        $rootScope.alertsMsg.error('An error happen while retrieving user checkins.');
+                    });
+
+                $scope.user = user;
+                if ($scope.user.birthdate) {
+                    $scope.birthdateFormat = moment($scope.user.birthdate).format('DD MMM YYYY');
+                }
+
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                $rootScope.alertsMsg.error('Error while retriving the user informations.');
+                $location.path('/admin/clients/search');
             });
-
-            User.queryCheckins({user_id: user.id}).$promise
-            .then(function(checkins) {
-                $scope.user.checkins = checkins;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('An error happen while retrieving user checkins.');
-            });
-
-            $scope.user = user;
-            if ($scope.user.birthdate) {
-            $scope.birthdateFormat = moment($scope.user.birthdate).format('DD MMM YYYY');
-            }
-
-        }, function(error) {
-            console.log(error);
-            $rootScope.alertsMsg.error('Error while retriving the user informations.');
-            $location.path('/admin/clients/search');
-        });
 
         /// Collapse Part
         $scope.selIdx = -1;

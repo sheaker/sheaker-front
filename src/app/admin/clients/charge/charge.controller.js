@@ -29,32 +29,32 @@
 
         // Load user
         User.get({user_id: $routeParams.id}).$promise
-        .then(function(user) {
-            if (!user.photo) {
-                user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
-            }
+            .then(function(user) {
+                if (!user.photo) {
+                    user.photo = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
+                }
 
-            $scope.totalPricePayments = 0;
+                $scope.totalPricePayments = 0;
 
-            User.queryPayments({user_id: user.id}).$promise
-            .then(function(payments) {
-                angular.forEach(payments, function(payment) {
-                    $scope.totalPricePayments += payment.price;
-                });
+                User.queryPayments({user_id: user.id}).$promise
+                    .then(function(payments) {
+                        angular.forEach(payments, function(payment) {
+                            $scope.totalPricePayments += payment.price;
+                        });
 
-                $scope.user.payments = payments;
+                        $scope.user.payments = payments;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                        $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                    });
+
+                $scope.user = user;
             })
             .catch(function(error) {
                 console.log(error);
-                $rootScope.alertsMsg.error('An error happen while retrieving user payments.');
+                $rootScope.alertsMsg.error('An error happen while retrieving user informations.');
             });
-
-            $scope.user = user;
-        })
-        .catch(function(error) {
-            console.log(error);
-            $rootScope.alertsMsg.error('An error happen while retrieving user informations.');
-        });
 
         $scope.setNumberDaysInput = function () {
             if (!$scope.beenCustomDays) {
@@ -88,20 +88,20 @@
             $scope.formDatas.end_date = moment($scope.calculatedEndingDate, 'DD MMM YYYY').endOf('day').format();
 
             User.savePayment({user_id: $scope.user.id}, $scope.formDatas).$promise
-            .then(function(payment) {
-                $scope.user.payments.push(payment);
+                .then(function(payment) {
+                    $scope.user.payments.push(payment);
 
-                $rootScope.alertsMsg.success('The user has been charged.');
-                $location.hash('top');
-                $anchorScroll();
-                $location.hash('');
-                $scope.isButtonSaveDisabled = false;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('An error happen while submitting new charge.');
-                $scope.isButtonSaveDisabled = false;
-            });
+                    $rootScope.alertsMsg.success('The user has been charged.');
+                    $location.hash('top');
+                    $anchorScroll();
+                    $location.hash('');
+                    $scope.isButtonSaveDisabled = false;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    $rootScope.alertsMsg.error('An error happen while submitting new charge.');
+                    $scope.isButtonSaveDisabled = false;
+                });
         };
 
         $scope.selIdx= -1;

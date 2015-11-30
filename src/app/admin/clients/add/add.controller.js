@@ -82,19 +82,19 @@
             $scope.formDatas.birthdate = $filter('date')($scope.formDatas.birthdate, 'yyyy-MM-dd');
 
             User.save($scope.formDatas).$promise
-            .then(function(user) {
-                $rootScope.alertsMsg.success('The new user has been created with id: ' + user.id + '.');
-                $scope.formDatas = {};
-                $scope.isButtonSaveDisabled = false;
-                $location.hash('top');
-                $anchorScroll();
-                $location.hash('');
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('An error happen while submitting new user.');
-                $scope.isButtonSaveDisabled = false;
-            });
+                .then(function(user) {
+                    $rootScope.alertsMsg.success('The new user has been created with id: ' + user.id + '.');
+                    $scope.formDatas = {};
+                    $scope.isButtonSaveDisabled = false;
+                    $location.hash('top');
+                    $anchorScroll();
+                    $location.hash('');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    $rootScope.alertsMsg.error('An error happen while submitting new user.');
+                    $scope.isButtonSaveDisabled = false;
+                });
         };
 
         $scope.helpPopoverAccessLevel = {
