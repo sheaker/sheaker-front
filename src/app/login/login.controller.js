@@ -25,10 +25,8 @@
                 .catch(function(error) {
                     switch (error.status) {
                         case 403:
-                            $rootScope.alertsMsg.error('Wrong password.');
-                            break;
                         case 404:
-                            $rootScope.alertsMsg.error('User does not exist.');
+                            $rootScope.alertsMsg.error('Wrong credentials id or password.');
                             break;
                         default:
                             $log.error(error);
