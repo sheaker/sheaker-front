@@ -1,6 +1,12 @@
 {
   "name": "sheaker",
   "version": "0.0.1",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Hexagone/sheaker-front.git"
+  },
   "dependencies": {},
   "scripts": {
     "test": "gulp test"

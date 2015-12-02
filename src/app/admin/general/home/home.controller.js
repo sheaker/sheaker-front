@@ -5,7 +5,8 @@
         .module('sheaker')
         .controller('HomeAdminCtrl', HomeAdminCtrl);
 
-    function HomeAdminCtrl($rootScope, $scope, $location, User, Payment, Checkin, Authorization) {
+    /** @ngInject */
+    function HomeAdminCtrl($rootScope, $scope, $location, $log, User, Payment, Checkin, Authorization) {
 
         var today            = moment().startOf('day').format(),
             startOfYesterday = moment().subtract(1, 'day').startOf('day').format(),
@@ -55,8 +56,8 @@
                 $scope.users.active = res.total;
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving gains of today.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
             });
 
         User.getNewUsers({from_date: startOfWeek}).$promise
@@ -64,8 +65,8 @@
                 $scope.users.new = res.total;
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving new users of this week.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
             });
 
         if (adminAutorization) {
@@ -74,8 +75,8 @@
                     $scope.gains.today = gains.value;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving gains of today 2.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -85,8 +86,8 @@
                     $scope.gains.yesterday = gains.value;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving gains of today.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -96,8 +97,8 @@
                     $scope.gains.week = gains.value;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving gains of this week.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -107,8 +108,8 @@
                     $scope.gains.month = gains.value;
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Error while retrieving gains of this month.');
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
                 });
         }
 
@@ -117,8 +118,8 @@
                 $scope.checkins.check = res.total;
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving checkins of this week.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
             });
 
         Checkin.getCheckinsGraph({from_date: startOfYear, interval: 'week'}).$promise
@@ -127,8 +128,8 @@
                 $scope.checkinByMonths.data = response.data;
             })
             .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving checkins graphs.');
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
             });
     }
 

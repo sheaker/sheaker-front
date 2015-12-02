@@ -5,7 +5,8 @@
         .module('sheaker')
         .controller('EditClientCtrl', EditClientCtrl);
 
-    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, STATIC_URL, User) {
+    /** @ngInject */
+    function EditClientCtrl($rootScope, $scope, $window, $routeParams, $location, $anchorScroll, $filter, $log, STATIC_URL, User) {
 
         $scope.isButtonSaveDisabled = false;
 
@@ -24,42 +25,44 @@
             wantNewPhoto: false
         };
 
-        User.get({user_id: $routeParams.id}, function(user) {
-            $scope.formDatas = user;
+        User.get({user_id: $routeParams.id}).$promise
+            .then(function(user) {
+                $scope.formDatas = user;
 
-            if ($scope.formDatas.birthdate === '0000-00-00') {
-                $scope.formDatas.birthdate = null;
-            }
-            if ($scope.formDatas.user_level === null) {
-                $scope.formDatas.user_level = 0;
-            }
-
-            $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
-
-            var snapshotCanvas = $window.document.querySelector('#snapshot');
-            if (snapshotCanvas) {
-                snapshotCanvas.width = 320;
-                snapshotCanvas.height = 240;
-
-                var ctxSnapshot = snapshotCanvas.getContext('2d');
-                var imageObj = new Image();
-
-                imageObj.onload = function() {
-                    ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
-                };
-
-                imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
-                if ($scope.formDatas.photo) {
-                    imageObj.src = $scope.formDatas.photo;
-                    // We just need the photo to be displayed, we refill that variable just in case of modifications
-                    $scope.formDatas.photo = '';
+                if ($scope.formDatas.birthdate === '0000-00-00') {
+                    $scope.formDatas.birthdate = null;
                 }
-            }
-        }, function(error) {
-            console.log(error);
-            $rootScope.alertsMsg.error('Error while retriving the user informations.');
-            $location.path('/admin/clients/search');
-        });
+                if ($scope.formDatas.user_level === null) {
+                    $scope.formDatas.user_level = 0;
+                }
+
+                $scope.formDatas.user_level = $scope.formDatas.user_level.toString();
+
+                var snapshotCanvas = $window.document.querySelector('#snapshot');
+                if (snapshotCanvas) {
+                    snapshotCanvas.width = 320;
+                    snapshotCanvas.height = 240;
+
+                    var ctxSnapshot = snapshotCanvas.getContext('2d');
+                    var imageObj = new Image();
+
+                    imageObj.onload = function() {
+                        ctxSnapshot.drawImage(this, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+                    };
+
+                    imageObj.src = STATIC_URL + '/sheaker-front/assets/images/user_unknow.png';
+                    if ($scope.formDatas.photo) {
+                        imageObj.src = $scope.formDatas.photo;
+                        // We just need the photo to be displayed, we refill that variable just in case of modifications
+                        $scope.formDatas.photo = '';
+                    }
+                }
+            })
+            .catch(function(error) {
+                $log.error(error);
+                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $location.path('/admin/clients/search');
+            });
 
         // Birthdate Calendar
         $scope.birthdateCal = {
@@ -129,18 +132,18 @@
             $scope.formDatas.birthdate = $filter('date')($scope.formDatas.birthdate, 'yyyy-MM-dd');
 
             User.update({user_id: $scope.formDatas.id}, $scope.formDatas).$promise
-            .then(function(/*user*/) {
-                $rootScope.alertsMsg.success('The new user informations has been saved.');
-                $scope.isButtonSaveDisabled = false;
-                $location.hash('top');
-                $anchorScroll();
-                $location.hash('');
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error( 'An error happen while submitting new user.');
-                $scope.isButtonSaveDisabled = false;
-            });
+                .then(function(/*user*/) {
+                    $rootScope.alertsMsg.success('The new user informations has been saved.');
+                    $scope.isButtonSaveDisabled = false;
+                    $location.hash('top');
+                    $anchorScroll();
+                    $location.hash('');
+                })
+                .catch(function(error) {
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $scope.isButtonSaveDisabled = false;
+                });
         };
 
         $scope.helpPopoverAccessLevel = {

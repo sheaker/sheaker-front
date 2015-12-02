@@ -5,6 +5,7 @@
         .module('sheaker')
         .directive('ngUnique', ngUnique);
 
+    /** @ngInject */
     function ngUnique($routeParams, User) {
         var directive = {
             link:     linkFct,

@@ -5,6 +5,7 @@
         .module('sheaker')
         .directive('access', access);
 
+    /** @ngInject */
     function access($rootScope, Authorization) {
         var directive = {
             link:     linkFct,

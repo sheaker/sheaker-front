@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('Payment', Payment);
 
+    /** @ngInject */
     function Payment($resource, BACKEND_URL) {
         var resource, customActions;
 

@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('SettingsCtrl', SettingsCtrl);
 
+    /** @ngInject */
     function SettingsCtrl($scope) {
 
         $scope.isButtonSaveDisabled = false;

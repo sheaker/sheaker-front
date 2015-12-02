@@ -10,10 +10,11 @@
         jwtInterceptorProvider.tokenGetter = getToken;
         $httpProvider.interceptors.push('jwtInterceptor');
         $httpProvider.interceptors.push('backendRequestInterceptor');
+        $httpProvider.interceptors.push('backendResponseInterceptor');
 
         cfpLoadingBarProvider.includeSpinner = false;
 
-        /*@ngInject*/
+        /** @ngInject */
         function getToken(config, $window) {
             // Skip authentication for any requests ending in .html
             if (config.url.substr(config.url.length - 5) === '.html') {

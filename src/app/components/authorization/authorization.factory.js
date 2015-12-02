@@ -5,6 +5,7 @@
         .module('sheaker')
         .factory('Authorization', Authorization);
 
+    /** @ngInject */
     function Authorization($rootScope) {
         var service = {
             authorize: authorize

@@ -5,7 +5,8 @@
         .module('sheaker')
         .controller('LoginCtrl', LoginCtrl);
 
-    function LoginCtrl($rootScope, $scope, $location, $window, jwtHelper, User) {
+    /** @ngInject */
+    function LoginCtrl($rootScope, $scope, $location, $window, $log, jwtHelper, User) {
         $scope.login = function () {
             User.login($scope.loginForm).$promise
                 .then(function(response) {
@@ -22,8 +23,15 @@
                     }
                 })
                 .catch(function(error) {
-                    console.log(error);
-                    $rootScope.alertsMsg.error('Your login information was incorrect.');
+                    switch (error.status) {
+                        case 403:
+                        case 404:
+                            $rootScope.alertsMsg.error('Wrong credentials id or password.');
+                            break;
+                        default:
+                            $log.error(error);
+                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    }
                 });
         };
     }

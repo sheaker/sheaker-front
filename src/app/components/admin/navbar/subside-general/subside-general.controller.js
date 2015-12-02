@@ -5,6 +5,7 @@
         .module('sheaker')
         .controller('NavbarSubsideGeneralCtrl', NavbarSubsideGeneralCtrl);
 
+    /** @ngInject */
     function NavbarSubsideGeneralCtrl($scope, $location) {
         $scope.isActive = function(path) {
             if ($location.path() === path) {

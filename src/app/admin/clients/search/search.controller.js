@@ -6,7 +6,8 @@
         .controller('ModalInstanceCtrl', ModalInstanceCtrl)
         .controller('SearchClientCtrl', SearchClientCtrl);
 
-    function ModalInstanceCtrl($rootScope, $scope, $modalInstance, user, User) {
+    /** @ngInject */
+    function ModalInstanceCtrl($rootScope, $scope, $modalInstance, $log, user, User) {
 
         $scope.user = user;
 
@@ -18,17 +19,18 @@
             $modalInstance.close();
 
             User.delete({user_id: user.id}).$promise
-            .then(function(user) {
-                $rootScope.alertsMsg.success(user.first_name + ' ' + user.last_name + ' has been deleted.');
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while deleting the user.');
-            });
+                .then(function(user) {
+                    $rootScope.alertsMsg.success(user.first_name + ' ' + user.last_name + ' has been deleted.');
+                })
+                .catch(function(error) {
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                });
         };
     }
 
-    function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, User) {
+    /** @ngInject */
+    function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, $log, User) {
 
         $scope.users = [];
         $scope.searchParams = {
@@ -52,14 +54,14 @@
             }
 
             User.search({query: $scope.searchParams.query}).$promise
-            .then(function (users) {
-                $scope.users = users;
-                $scope.searchParams.noMoreApi = true;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving queried the users.');
-            });
+                .then(function (users) {
+                    $scope.users = users;
+                    $scope.searchParams.noMoreApi = true;
+                })
+                .catch(function(error) {
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                });
         };
 
         if ($location.search().query) {
@@ -78,28 +80,23 @@
 
             $scope.searchParams.busy = true;
 
-            User.query({
-                limit: $scope.searchParams.limit,
-                offset: $scope.searchParams.offset,
-                sortBy: 'created_at',
-                order: 'desc'
-            }).$promise
-            .then(function(users) {
-                if (users.length === 0) {
-                    $scope.searchParams.noMoreApi = true;
-                    return;
-                }
+            User.query({limit: $scope.searchParams.limit, offset: $scope.searchParams.offset, sortBy: 'created_at', order: 'desc'}).$promise
+                .then(function(users) {
+                    if (users.length === 0) {
+                        $scope.searchParams.noMoreApi = true;
+                        return;
+                    }
 
-                $scope.users = $scope.users.concat(users);
+                    $scope.users = $scope.users.concat(users);
 
-                $scope.searchParams.limit *= 2;
-                $scope.searchParams.offset += users.length;
-                $scope.searchParams.busy = false;
-            })
-            .catch(function(error) {
-                console.log(error);
-                $rootScope.alertsMsg.error('Error while retrieving the users.');
-            });
+                    $scope.searchParams.limit *= 2;
+                    $scope.searchParams.offset += users.length;
+                    $scope.searchParams.busy = false;
+                })
+                .catch(function(error) {
+                    $log.error(error);
+                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                });
         };
 
         $scope.clearQuery = function () {
