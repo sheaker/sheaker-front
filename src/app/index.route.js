@@ -8,50 +8,53 @@
     /** @ngInject */
     function routeConfig($routeProvider) {
         var customResolves = {
-            sheaker: getSheakerAuthorization
+            checkSubdomain: checkIfSubdomainExists,
+            checkUpdate: checkIfUpdateIsAvailable
         };
+
+        /** @ngInject */
+        function checkIfSubdomainExists($rootScope, $window, $location, $log, SheakerClient, FRONTEND_URL) {
+            var address = $location.host().split('.');
+
+            var promise = SheakerClient.get({subdomain: address[0]}).$promise;
+            promise
+                .then(function (client) {
+                    $rootScope.client = client;
+                })
+                .catch(function(error) {
+                    switch (error.status) {
+                        case 404:
+                            $window.location.href = FRONTEND_URL + '#/create/' + address[0];
+                            break;
+                        default:
+                            $log.error(error);
+                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    }
+                });
+
+            return promise;
+        }
+
+        /** @ngInject */
+        function checkIfUpdateIsAvailable($rootScope, $log, SheakerClient, ClientFlags) {
+            if ($rootScope.connectedUser && ($rootScope.client.flags & ClientFlags.INDEX_ELASTICSEARCH)) {
+                var promise = SheakerClient.index({id_client: $rootScope.client.id}).$promise;
+                promise
+                    .then(function() {
+                        $rootScope.client.flags &= ~ClientFlags.INDEX_ELASTICSEARCH;
+                    })
+                    .catch(function(error) {
+                        $log.error(error);
+                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    });
+
+                return promise;
+            }
+        }
 
         var customRouteProvider = {
             when: customWhen
         };
-
-        /** @ngInject */
-        function getSheakerAuthorization($rootScope, $location, $window, $log, jwtHelper, FRONTEND_URL, SheakerClient, SheakerInfos, ClientFlags) {
-            var address = $location.host().split('.');
-
-            if ($rootScope.client.id === -1 && address.length === 3) {
-                return SheakerInfos.get().$promise
-                    .then(function (infos) {
-                        if (infos.reservedSubdomains.indexOf(address[0].toLowerCase()) === -1) {
-                            return SheakerClient.get({subdomain: address[0]}).$promise
-                                .then(function (client) {
-                                    $rootScope.client = {
-                                        id: client.id,
-                                        name: client.name
-                                    };
-
-                                    if (client.flags & ClientFlags.INDEX_ELASTICSEARCH) {
-                                        return SheakerClient.index({id_client: client.id}).$promise;
-                                    }
-                                });
-                        }
-                    })
-                    .catch(function(error) {
-                        $log.error(error);
-                        $rootScope.alertsMsg.error('An error happen while updating application.');
-                    })
-                    .catch(function(error) {
-                        $log.error(error);
-                        switch (error.status) {
-                            case 404:
-                                $window.location.href = FRONTEND_URL + '#/create/' + address[0];
-                                break;
-                            default:
-                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
-                        }
-                    });
-            }
-        }
 
         function customWhen(path, route) {
             route.resolve = (route.resolve) ? route.resolve : {};
