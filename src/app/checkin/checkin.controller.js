@@ -32,13 +32,13 @@
                             })
                             .catch(function(error) {
                                 $log.error(error);
-                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                             });
 
                         User.saveCheckin({user_id: user.id}).$promise
                             .catch(function(error) {
                                 $log.error(error);
-                                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                             });
                     }
 
@@ -52,11 +52,11 @@
                 .catch(function(error) {
                     switch (error.status) {
                         case 404:
-                            $rootScope.alertsMsg.error('User does not exist.');
+                            $rootScope.alertsMsg.error('User does not exist (#' + error.data.errors[0].code + ')');
                             break;
                         default:
                             $log.error(error);
-                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                            $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     }
                 });
 

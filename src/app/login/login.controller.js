@@ -24,13 +24,12 @@
                 })
                 .catch(function(error) {
                     switch (error.status) {
-                        case 403:
-                        case 404:
-                            $rootScope.alertsMsg.error('Wrong credentials id or password.');
+                        case 401:
+                            $rootScope.alertsMsg.error('Wrong credentials id or password (#' + error.data.errors[0].code + ')');
                             break;
                         default:
                             $log.error(error);
-                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                            $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     }
                 });
         };

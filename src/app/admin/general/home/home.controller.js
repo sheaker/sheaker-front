@@ -57,7 +57,7 @@
             })
             .catch(function(error) {
                 $log.error(error);
-                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
             });
 
         User.getNewUsers({from_date: startOfWeek}).$promise
@@ -66,7 +66,7 @@
             })
             .catch(function(error) {
                 $log.error(error);
-                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
             });
 
         if (adminAutorization) {
@@ -76,7 +76,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         }
 
@@ -87,7 +87,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         }
 
@@ -98,7 +98,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         }
 
@@ -109,7 +109,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         }
 
@@ -119,7 +119,7 @@
             })
             .catch(function(error) {
                 $log.error(error);
-                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
             });
 
         Checkin.getCheckinsGraph({from_date: startOfYear, interval: 'week'}).$promise
@@ -129,7 +129,7 @@
             })
             .catch(function(error) {
                 $log.error(error);
-                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
             });
     }
 

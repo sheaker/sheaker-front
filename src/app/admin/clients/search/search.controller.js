@@ -24,7 +24,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
     }
@@ -60,7 +60,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
 
@@ -95,7 +95,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
 
