@@ -184,6 +184,15 @@
                     permissionType: 'atLeastOne'
                 }
             })
+            .when('/admin/logs', {
+                templateUrl: 'app/admin/logs/logs.html',
+                controller: 'LogsCtrl',
+                access: {
+                    loginRequired: true,
+                    permissionsRequired: ['user', 'modo', 'admin'],
+                    permissionType: 'atLeastOne'
+                }
+            })
             .otherwise({
                 redirectTo: '/'
         });
