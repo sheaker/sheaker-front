@@ -35,7 +35,7 @@
                             <div class="pull-right">
                                 <label for="InputCustomDays">Custom Days?</label>
                                 <input type="checkbox" ng-checked="beenCustomDays" ng-click="beenCustomDays = !beenCustomDays; setNumberDaysInput();">
-                                <i popover-template="helpPopoverCustomDays.templateUrl" popover-title="{{helpPopoverCustomDays.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                <i uib-popover-template="helpPopoverCustomDays.templateUrl" popover-title="{{helpPopoverCustomDays.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
                             </div>
                             <div class="form-group" ng-hide="beenCustomDays">
                                 <select class="form-control" id="InputDays" ng-model="formDatas.days" convert-to-number ng-change="paymentCal.calculateEndDate()">
@@ -56,7 +56,7 @@
                         <div class="form-group col-lg-6 remove-margin-padding">
                             <label for="InputStartDate">Start date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.start_date" ng-change="paymentCal.calculateEndingDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" datepicker-popup="dd MMM yyyy" is-open="paymentCal.isOpen" disabled required>
+                                <input type="text" class="form-control" id="InputStartDate" ng-model="formDatas.start_date" ng-change="paymentCal.calculateEndingDate()" datepicker-mode="year" min-date="'1920-01-01'" max-date="'2030-01-01'" uib-datepicker-popup="dd MMM yyyy" is-open="paymentCal.isOpen" disabled required>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="paymentCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
