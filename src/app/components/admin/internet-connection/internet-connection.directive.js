@@ -3,7 +3,8 @@
 
     angular
         .module('sheaker')
-        .directive('internetConnection', internetConnection);
+        .directive('internetConnection', internetConnection)
+        .run(checkConnection);
 
     /** @ngInject */
     function internetConnection() {
@@ -17,33 +18,38 @@
         return directive;
 
         /** @ngInject */
-        function InternetConnectionController($scope, $interval, $resource, BACKEND_URL) {
-            var updateIntervalInSec = 1,
-                baseBackendCallIntervalInSec = 5;
+        function InternetConnectionController() {}
+    }
 
-            $scope.isOffline = false;
-            $scope.nextBackendCallInSec = baseBackendCallIntervalInSec;
+    /** @ngInject */
+    function checkConnection($rootScope, $interval, $resource, BACKEND_URL) {
+        var updateIntervalInSec = 1,
+            baseBackendCallIntervalInSec = 5;
 
-            $interval(update, updateIntervalInSec * 1000);
+        $rootScope.app = {
+            isOffline: false,
+            nextBackendCallInSec: baseBackendCallIntervalInSec
+        };
 
-            function update() {
-                if ($scope.nextBackendCallInSec === 1) {
-                    $resource(BACKEND_URL)
-                        .get().$promise
-                        .then(function() {
-                            $scope.isOffline = false;
-                            baseBackendCallIntervalInSec = 5;
-                            $scope.nextBackendCallInSec = baseBackendCallIntervalInSec;
-                        })
-                        .catch(function() {
-                            $scope.isOffline = true;
-                            baseBackendCallIntervalInSec *= 2;
-                            $scope.nextBackendCallInSec = baseBackendCallIntervalInSec;
-                        });
-                }
-                else {
-                    $scope.nextBackendCallInSec -= updateIntervalInSec;
-                }
+        $interval(update, updateIntervalInSec * 1000);
+
+        function update() {
+            if ($rootScope.app.nextBackendCallInSec === 1) {
+                $resource(BACKEND_URL)
+                    .get().$promise
+                    .then(function() {
+                        $rootScope.app.isOffline = false;
+                        baseBackendCallIntervalInSec = 5;
+                        $rootScope.app.nextBackendCallInSec = baseBackendCallIntervalInSec;
+                    })
+                    .catch(function() {
+                        $rootScope.app.isOffline = true;
+                        baseBackendCallIntervalInSec *= 2;
+                        $rootScope.app.nextBackendCallInSec = baseBackendCallIntervalInSec;
+                    });
+            }
+            else {
+                $rootScope.app.nextBackendCallInSec -= updateIntervalInSec;
             }
         }
     }
