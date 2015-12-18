@@ -9,12 +9,12 @@
         <li ng-class="{active: isActive('/profil')}"><a href="#/profil" access="Client">profile</a></li>
         <li ng-class="{active: isActive('/admin/general/home')}"><a href="#/admin/general/home" access="Modo, Admin" access-permission-type="AtLeastOne">Administration</a></li>
         <ul class="nav-top pull-right" access="Modo, Admin" access-permission-type="AtLeastOne">
-            <div class="btn-group" dropdown is-open="dropdown.isopen">
-                <button class="btn btn-default dropdown-toggle dropdown-menu-left" type="button" dropdown-toggle>
+            <div class="btn-group" uib-dropdown is-open="dropdown.isopen">
+                <button class="btn btn-default dropdown-toggle dropdown-menu-left" type="button" uib-dropdown-toggle>
                     <span class="fa fa-user color-grey-dark"></span>
                     <span class="caret color-grey-dark"></span>
                 </button>
-                <ul class="dropdown-menu pull-right" role="menu">
+                <ul class="uib-dropdown-menu pull-right" role="menu">
                     <li><a href class="not-active">Sign in as <b>{{ connectedUser.name }}</b></a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href class="not-active">Profil</a></li>
