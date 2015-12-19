@@ -1,10 +1,11 @@
 <div class="container-fluid">
-
     <div ng-include="'app/components/admin/navbar/top/top.html'"></div>
     <div ng-include="'app/components/admin/navbar/side/side.html'"></div>
     <div ng-include="'app/components/admin/navbar/subside-general/subside-general.html'"></div>
 
     <div class="col-lg-12 main">
+        <internet-connection></internet-connection>
+
         <div class="title">
             <span class="color-green fa fa-home"></span>Home
         </div>
@@ -73,7 +74,7 @@
         <div class="col-lg-6 box">
             <div class="stats">
                 <div class="graph">
-                    <canvas id="line" class="chart chart-line" data="checkinByMonths.data" labels="checkinByMonths.labels" options="checkinByMonths.chartOptions" colours="checkinByMonths.colours" legend="false"></canvas>
+                    <canvas id="line" class="chart chart-line" chart-data="checkinByMonths.data" chart-labels="checkinByMonths.labels" chart-options="checkinByMonths.chartOptions" chart-colours="checkinByMonths.colours" chart-legend="false"></canvas>
                 </div>
             </div>
         </div>

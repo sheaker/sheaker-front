@@ -28,7 +28,7 @@
                             break;
                         default:
                             $log.error(error);
-                            $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                            $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     }
                 });
 
@@ -45,7 +45,7 @@
                     })
                     .catch(function(error) {
                         $log.error(error);
-                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                        $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     });
 
                 return promise;
@@ -178,6 +178,15 @@
             .when('/admin/statistics/clients', {
                 templateUrl: 'app/admin/statistics/clients/clients.html',
                 controller: 'ClientsStatisticsCtrl',
+                access: {
+                    loginRequired: true,
+                    permissionsRequired: ['user', 'modo', 'admin'],
+                    permissionType: 'atLeastOne'
+                }
+            })
+            .when('/admin/logs', {
+                templateUrl: 'app/admin/logs/logs.html',
+                controller: 'LogsCtrl',
                 access: {
                     loginRequired: true,
                     permissionsRequired: ['user', 'modo', 'admin'],

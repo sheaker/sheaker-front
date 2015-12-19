@@ -7,16 +7,16 @@
         .controller('SearchClientCtrl', SearchClientCtrl);
 
     /** @ngInject */
-    function ModalInstanceCtrl($rootScope, $scope, $modalInstance, $log, user, User) {
+    function ModalInstanceCtrl($rootScope, $scope, $uibModalInstance, $log, user, User) {
 
         $scope.user = user;
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
         $scope.deleteUser = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
 
             User.delete({user_id: user.id}).$promise
                 .then(function(user) {
@@ -24,13 +24,13 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
     }
 
     /** @ngInject */
-    function SearchClientCtrl($rootScope, $scope, $location, $window, $modal, $log, User) {
+    function SearchClientCtrl($rootScope, $scope, $location, $window, $uibModal, $log, User) {
 
         $scope.users = [];
         $scope.searchParams = {
@@ -60,7 +60,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
 
@@ -95,7 +95,7 @@
                 })
                 .catch(function(error) {
                     $log.error(error);
-                    $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                    $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 });
         };
 
@@ -105,7 +105,7 @@
         };
 
         $scope.openModal = function (user) {
-            $modal.open({
+            $uibModal.open({
                 animation: true,
                 templateUrl: 'app/components/admin/modal/deleteUser.template.html',
                 controller: 'ModalInstanceCtrl',

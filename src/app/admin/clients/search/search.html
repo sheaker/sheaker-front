@@ -1,10 +1,11 @@
 <div class="container-fluid">
-
     <div ng-include="'app/components/admin/navbar/top/top.html'"></div>
     <div ng-include="'app/components/admin/navbar/side/side.html'"></div>
     <div ng-include="'app/components/admin/navbar/subside-client/subside-client.html'"></div>
 
     <div class="col-lg-12 main">
+        <internet-connection></internet-connection>
+
         <div class="title">
             <span class="color-blue fa fa-search"></span>Search
         </div>
@@ -40,10 +41,10 @@
                             <i class="center-membership-icone fa fa-remove fa-lg color-red" ng-show="!u.active_membership_id && u.user_level == '0'"></i>
                         </td>
                         <td>
-                            <a class="search-link" href="#/admin/clients/review/{{ u.id }}" tooltip="Review" tooltip-placement="left"><span class="fa fa-user fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/charge/{{ u.id }}" tooltip="Charge" tooltip-placement="top" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
-                            <a class="search-link" href="#/admin/clients/edit/{{ u.id }}" tooltip="Edit" tooltip-placement="top" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
-                            <a class="search-link" href="" tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(u)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
+                            <a class="search-link" href="#/admin/clients/review/{{ u.id }}" uib-tooltip="Review" tooltip-placement="left"><span class="fa fa-user fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/charge/{{ u.id }}" uib-tooltip="Charge" tooltip-placement="top" access="modo, admin"><span class="fa fa-money fa-lg color-blue"></span></a>
+                            <a class="search-link" href="#/admin/clients/edit/{{ u.id }}" uib-tooltip="Edit" tooltip-placement="top" access="modo, admin"><span class="fa fa-pencil-square-o fa-lg color-blue"></span></a>
+                            <a class="search-link" href="" uib-tooltip="Delete" tooltip-placement="right" access="admin" ng-click="openModal(u)"><span class="fa fa-trash-o fa-lg color-red"></span></a>
                         </td>
                     </tr>
                 </tbody>

@@ -34,7 +34,7 @@
                     })
                     .catch(function(error) {
                         $log.error(error);
-                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                        $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     });
 
                 User.queryCheckins({user_id: user.id}).$promise
@@ -43,7 +43,7 @@
                     })
                     .catch(function(error) {
                         $log.error(error);
-                        $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                        $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                     });
 
                 $scope.user = user;
@@ -54,7 +54,7 @@
             })
             .catch(function(error) {
                 $log.error(error);
-                $rootScope.alertsMsg.error('Oops... Something went wrong.');
+                $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
                 $location.path('/admin/clients/search');
             });
 

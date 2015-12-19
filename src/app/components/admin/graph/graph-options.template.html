@@ -6,7 +6,7 @@
         <div class="col-lg-2">
             <h3>From Date</h3>
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="fromDate" datepicker-popup is-open="fromDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
+                <input type="text" class="form-control" ng-model="fromDate" uib-datepicker-popup is-open="fromDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="fromDateSelector.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
@@ -16,7 +16,7 @@
         <div class="col-lg-2">
             <h3>To Date</h3>
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="toDate" datepicker-popup is-open="toDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
+                <input type="text" class="form-control" ng-model="toDate" uib-datepicker-popup is-open="toDateSelector.isOpen" max-date="endOfYesterday" datepicker-options="dateSelectorsOptions" disabled>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="toDateSelector.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>

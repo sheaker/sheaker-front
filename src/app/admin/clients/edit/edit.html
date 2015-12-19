@@ -1,10 +1,11 @@
 <div class="container-fluid">
-
     <div ng-include="'app/components/admin/navbar/top/top.html'"></div>
     <div ng-include="'app/components/admin/navbar/side/side.html'"></div>
     <div ng-include="'app/components/admin/navbar/subside-client/subside-client.html'"></div>
 
     <div class="col-lg-12 main">
+        <internet-connection></internet-connection>
+
         <div class="title">
             <span class="color-yellow fa fa-pencil-square-o"></span>Edit Client
         </div>
@@ -57,7 +58,7 @@
                         <div class="form-group">
                             <label for="InputBirthdate">Birthdate</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" datepicker-popup="yyyy-MM-dd" is-open="birthdateCal.isOpen" disabled>
+                                <input type="text" class="form-control" id="InputBirthdate" name="birthdate" ng-model="formDatas.birthdate" datepicker-mode="year" min-date="'1920-01-01'" max-date="birthdateCal.today" uib-datepicker-popup="yyyy-MM-dd" is-open="birthdateCal.isOpen" disabled>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="birthdateCal.openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -122,7 +123,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputAmount" access="Admin">Access level</label>
                                     <div class="pull-right" access="Admin">
-                                        <i popover-template="helpPopoverAccessLevel.templateUrl" popover-title="{{helpPopoverAccessLevel.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                        <i uib-popover-template="helpPopoverAccessLevel.templateUrl" popover-title="{{helpPopoverAccessLevel.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
                                     </div>
                                     <select class="form-control" ng-model="formDatas.user_level" access="Admin">
                                         <option value="0">Client</option>
@@ -134,7 +135,7 @@
                                 <div class="form-group">
                                     <label for="InputFirstName">Sponsor</label>
                                     <div class="pull-right">
-                                        <i popover-template="helpPopoverSponsor.templateUrl" popover-title="{{helpPopoverSponsor.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
+                                        <i uib-popover-template="helpPopoverSponsor.templateUrl" popover-title="{{helpPopoverSponsor.title}}" popover-trigger="mouseenter" popover-placement="top" class="help color-blue fa fa-question-circle"></i>
                                     </div>
                                     <input type="number" class="form-control" id="InputSponsor" min="0" name="sponsor" ng-model="formDatas.sponsor" placeholder="Enter the id of the user who sponsored this person">
                                 </div>
