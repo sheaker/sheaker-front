@@ -35,7 +35,7 @@
 
         function update() {
             if ($rootScope.app.nextBackendCallInSec === 1) {
-                $resource(BACKEND_URL)
+                $resource(BACKEND_URL, null, {get: {ignoreLoadingBar: true}})
                     .get().$promise
                     .then(function() {
                         $rootScope.app.isOffline = false;
