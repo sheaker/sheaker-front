@@ -109,12 +109,15 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody class="color-background-white" ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)" ng-click="selPayment(p,$index)">
-                                    <tr class="clickableRow" ng-class="{sel:selIdx==$index}">
+                                <tbody class="color-background-white" ng-repeat="p in user.payments" ng-switch on="isSelPayment(p)">
+                                    <tr class="clickableRow" ng-class="{sel: selIdx == $index}">
                                         <td>{{ p.id }}</td>
                                         <td>{{ p.created_at | date: 'd MMM y' }}</td>
                                         <td>{{ p.price | currency : symbol : 0 }}</td>
-                                        <td><span class="color-blue glyphicon glyphicon-search"></span></td>
+                                        <td>
+                                            <span class="color-blue glyphicon glyphicon-search" ng-click="selPayment(p, $index)"></span>
+                                            <span class="color-blue glyphicon glyphicon-ban-circle"></span>
+                                        </td>
                                     </tr>
                                     <tr ng-switch-when="true">
                                         <td colspan="5">
