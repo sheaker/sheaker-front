@@ -39,7 +39,7 @@
                 User.queryPayments({user_id: user.id}).$promise
                     .then(function(payments) {
                         angular.forEach(payments, function(payment) {
-                            $scope.totalPricePayments += payment.price;
+                            $scope.totalPricePayments += parseInt(payment.price);
                         });
 
                         $scope.user.payments = payments;
