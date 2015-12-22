@@ -68,8 +68,8 @@
                         <div class="form-group">
                             <label for="InputGender">Sex</label>
                             <div class="form-inline">
-                                <div class="client-datas" ng-show="!user.gender"><span class="fa fa-mars"></span></div>
-                                <div class="client-datas" ng-show="user.gender"><span class="fa fa-venus"></span></div>
+                                <div class="client-datas" ng-show="user.gender === '0'"><span class="fa fa-mars color-blue"></span></div>
+                                <div class="client-datas" ng-show="user.gender === '1'"><span class="fa fa-venus color-pink"></span></div>
                             </div>
                         </div>
 
