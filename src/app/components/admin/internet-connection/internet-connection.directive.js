@@ -24,7 +24,7 @@
     /** @ngInject */
     function checkConnection($rootScope, $interval, $resource, BACKEND_URL) {
         var updateIntervalInSec = 1,
-            baseBackendCallIntervalInSec = 5;
+            baseBackendCallIntervalInSec = 10;
 
         $rootScope.app = {
             isOffline: false,
