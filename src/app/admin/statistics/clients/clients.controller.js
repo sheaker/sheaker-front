@@ -12,7 +12,7 @@
             data: {}
         };
 
-        $scope.fromDate = moment().startOf('year').format();
+        $scope.fromDate = moment().subtract(12, 'months').startOf('day').format();
         $scope.toDate = moment().format();
         $scope.interval = 'month';
 

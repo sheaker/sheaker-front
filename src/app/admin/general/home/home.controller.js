@@ -13,7 +13,7 @@
             endOfYesterday   = moment().subtract(1, 'day').endOf('day').format(),
             startOfWeek      = moment().startOf('isoweek').format(),
             startOfMonth     = moment().startOf('month').format(),
-            startOfYear      = moment().startOf('year').format();
+            lastXMonths      = moment().subtract(3, 'months').startOf('day').format();
 
         var adminAutorization = false;
         if (Authorization.authorize(true, ['admin'], 'atLeastOne') === $rootScope.authVars.authorised.authorised) {
@@ -122,7 +122,7 @@
                 $rootScope.alertsMsg.error('Oops... Something went wrong (#' + error.data.errors[0].code + ')');
             });
 
-        Checkin.getCheckinsGraph({from_date: startOfYear, interval: 'week'}).$promise
+        Checkin.getCheckinsGraph({from_date: lastXMonths, interval: 'week'}).$promise
             .then(function(response) {
                 $scope.checkinByMonths.labels = response.labels;
                 $scope.checkinByMonths.data = response.data;
