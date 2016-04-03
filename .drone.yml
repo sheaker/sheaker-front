@@ -1,23 +1,38 @@
-image: tuxity/drone-gulp-bower
+clone:
+  depth: 20
+  recursive: true
+  submodule_update_remote: true
 
-script:
-  - npm install -q
-  - bower install --allow-root --production
-  - gulp
+build:
+  image: tuxity/drone-gulp-bower
+  pull: true
+  commands:
+    - npm install -q
+    - bower install --allow-root --production
+    - gulp
 
 deploy:
-  ssh:
-    target: ubuntu@ec2-52-20-239-124.compute-1.amazonaws.com:~/sheaker-front.tar
-    artifacts:
+  sftp:
+    host: sheaker.com
+    username: ubuntu
+    destination_path: /tmp/sheaker-front
+    files:
       - dist
       - .deploy
-    cmd: mkdir sheaker-front; tar -xf sheaker-front.tar -C sheaker-front; cd sheaker-front; .deploy/remote.sh
+    when:
+      branch: master
+  ssh:
+    host: sheaker.com
+    user: ubuntu
+    commands:
+      - /tmp/sheaker-front/.deploy/remote.sh
     when:
       branch: master
 
 notify:
   slack:
-    webhook_url: 'https://hooks.slack.com/services/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'
-    on_started: false
-    on_success: true
-    on_failure: true
+    webhook_url: https://hooks.slack.com/services/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
+    channel: notifications
+    username: Drone
+    template: >
+      Build <https://drone.sheaker.com/{{ repo.full_name }}/{{ build.number }}|{{ repo.name }}#{{ truncate build.commit 7 }}> ({{ build.branch }}) by {{ build.author }} finished with a *{{ build.status }}* status in {{ duration build.started_at build.finished_at }}
